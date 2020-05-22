@@ -1,0 +1,17 @@
+.coverpic-headline{
+    background-image: url('../assets/industry.jpg');
+    min-height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.coverpic-headline h1{
+    color: white;
+    margin: 0;
+}
+
+.login-form{
+    max-width: 45%;
+    margin: auto;
+}

@@ -1,0 +1,270 @@
+head, body{
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: chapparel;
+    src: url(./../assets/font/ChaparralPro-Regular\ 400\ \(1\).otf);
+}
+
+@font-face {
+    font-family: futura;
+    src: url(./../assets/font/futura/Futura-Book-font.ttf);
+}
+
+*{
+    font-family: futura;
+}
+
+.coverpic-headline{
+    background-image: url('../assets/images/industry.jpg');
+    min-height: 150px;
+}
+
+.coverpic-headline p{
+    color: white;
+    font-size: 25px;
+    font-family: chapparel;
+    letter-spacing: 0.1em;
+    margin: 0;
+} 
+
+.registration p{
+    color: #0C4C8B;
+    font-family: chapparel;
+    letter-spacing: 0.1em;
+}
+.registration input{
+    border: 1px solid #BCD2E2;
+    border-radius: 2px !important;
+}
+
+.registration ::placeholder{
+    color: #0C4C8B !important;
+}
+
+.grid-captcha{
+    display: grid;
+    grid-template-columns: 1fr 0.5fr;
+    border: 1px solid #dddddd;
+    margin-left: 15px;
+    margin-right: 15px;
+    background-color: #F9F9F9;
+}
+
+.grid-captcha label{
+    font-size: 14px;
+}
+
+.grid-captcha p{
+    margin: 0;
+}
+
+.grid-captcha .logo{
+    text-align: center;
+}
+
+.grid-captcha .logo p{
+    font-size: 12px;
+    padding-top: 6px;
+}
+
+.grid-captcha .logo small{
+    font-size: 11px;
+}
+
+.grid-captcha .logo p, small{
+    color: #A1A4AB;
+}
+
+.captcha-checkbox{
+    align-self: center;
+}
+
+.form-check-label{
+    color: #0C4C8B !important;
+}
+
+.termsConditions{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.btn-danger{
+    background-color: #F01D2D !important;
+}
+
+.nav-grid{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    justify-content: center;
+    align-items: center;
+    padding: 18px;
+}
+
+.nav-grid .menu{
+    justify-self: center;
+}
+
+.nav-grid .company-logo, .login{
+    justify-self: center;
+}
+
+.nav-grid .menu a{
+    padding: 0 15px;
+    color: #242C42;
+}
+
+.nav-grid .login button:first-child{
+    border-radius: 25px;
+    background-color: #242C42;
+    color: white;
+    border: none;
+    padding: 7px 25px;
+    outline: none;
+    font-size: 11px;
+}
+
+.nav-grid .login button:last-child{
+    border-radius: 25px;
+    background-color: #0C4C8B;
+    color: white;
+    border: none;
+    padding: 7px 25px;
+    font-size: 11px;
+    outline: none;
+}
+
+@media only screen and (max-width: 1024px){
+    .nav-grid .menu a{
+        padding: 0 5px;
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .nav-grid{
+        grid-template-columns: 1fr;
+        grid-row-gap: 10px;
+    }
+}
+
+@media only screen and (max-width: 480px){
+    .nav-grid .menu{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.footer{
+    background-color: #181818;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    margin-top: 150px;
+}
+
+.mx-86{
+    max-width: 86%;
+    padding: 20px;
+}
+
+.footer-grid{
+    grid-template-columns: 1fr 1fr;
+    display: grid;
+    font-size: 12px;
+}
+
+.footer-menu{
+    display: flex;
+    justify-self: flex-end;
+}
+
+.footer-menu > div{
+    padding: 0 12px;
+}
+
+.footer-menu > div a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.copyright p{
+    margin: 0;
+}
+
+@media only screen and (max-width:670px){
+    .footer-grid{
+        grid-template-columns: 1fr;
+    }
+    .footer-menu{
+        justify-self: center;
+    }
+    .copyright{
+        justify-self: center;
+    }
+}
+
+/* Login Page Styling */
+
+.login-grid p{
+    color: #0C4C8B;
+    font-family: chapparel;
+    letter-spacing: 0.1em;
+}
+
+.login-grid input{
+    border: 1px solid #BCD2E2;
+    border-radius: 2px !important;
+}
+
+.login-grid ::placeholder{
+    color: #0C4C8B !important;
+}
+
+.align-self{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.recaptcha-48{
+    width: 48%;
+    margin-left: 15px;
+    border: 1px solid #dddddd;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #F9F9F9;
+}
+
+.recaptcha-48 .logo p{
+    font-size: 12px;
+    padding-top: 6px;
+}
+
+.recaptcha-48 .logo small{
+    font-size: 11px;
+}
+
+.recaptcha-48 .logo p, small{
+    color: #A1A4AB;
+}
+
+.btn-signup{
+    background-color: #0c4c8b !important;
+    color: #fff !important;
+}
+
+.hr-line-center p{
+    width: 40%; 
+   text-align: center; 
+   border-bottom: 1px solid rgb(155, 192, 218); 
+   line-height: 0.1em;
+   margin: 10px 0 20px; 
+}
+
+.hr-line-center span { 
+    background:#fff; 
+    padding:0 10px; 
+}
