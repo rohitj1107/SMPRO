@@ -46,7 +46,7 @@
                 <?php $name_data = [
                   'name' => 'companyName',
                   'value' => set_value('companyName'),
-                  'placeholder' => 'Company Name',
+                  'placeholder' => 'Company Name *',
                   'class' => 'form-control'
                 ]; ?>
 
@@ -124,7 +124,7 @@
                 <?php $name_data = [
                   'name' => 'emailId',
                   'value' => set_value('emailId'),
-                  'placeholder' => 'Official Contact Email ID',
+                  'placeholder' => 'Official Contact Email ID *',
                   'class' => 'form-control'
                 ]; ?>
 
