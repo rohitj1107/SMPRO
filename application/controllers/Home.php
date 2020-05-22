@@ -19,16 +19,27 @@ class Home extends CI_Controller{
   }
 
   public function register_create(){
-    $this->form_validation->set_rules('name','Username','trim|required|min_length[3]');
-    $this->form_validation->set_rules('email','Email','trim|required');
-    $this->form_validation->set_rules('password','Password','trim|required');
+    $this->form_validation->set_rules('companyName','Company Name','trim|required|min_length[3]');
+    $this->form_validation->set_rules('emailId','Email','trim|required');
 
     if($this->form_validation->run()){
       $data = [
-        'name' => $this->input->post('name'),
-        'email' => $this->input->post('email'),
-        'password' => md5($this->input->post('password'))
+        'u_companyName' => $this->input->post('companyName'),
+        'u_websiteUrl' => $this->input->post('websiteUrl'),
+        'u_country' => $this->input->post('country'),
+        'u_postalCode' => $this->input->post('postalCode'),
+        'u_companyType' => $this->input->post('companyType'),
+        'u_eou' => $this->input->post('eou'),
+        'u_emailId' => $this->input->post('emailId'),
+        'u_contactNumber' => $this->input->post('contactNumber'),
+        'u_contactNumber_one' => $this->input->post('contactNumber_one'),
+        'u_mobileNumber' => $this->input->post('mobileNumber'),
+        'u_gst' => $this->input->post('gst'),
+        'u_industry' => $this->input->post('industry'),
+        'u_comment' => $this->input->post('comment'),
+        'u_otp' => rand('1000','5000')
       ];
+
         if ($this->Home_model->create_user($data)) {
           $user_data = array('name'=>$username,'logged_in'=>true);
 
@@ -39,6 +50,12 @@ class Home extends CI_Controller{
           // $data['main_view'] = "admin_view";
           // $this->load->view('layouts/main',$data);
           return redirect('Dashbord');
+        } else {
+          $data =  array('errors' => validation_errors());
+
+          $this->session->set_flashdata($data);
+          return redirect('Home/register');
+        }
     } else {
       $data =  array('errors' => validation_errors());
 
@@ -46,7 +63,7 @@ class Home extends CI_Controller{
       return redirect('Home/register');
     }
   }
-}
+
 
   public function login(){
     $this->load->view('login_view');

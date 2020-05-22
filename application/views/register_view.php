@@ -150,10 +150,10 @@
             </div>
 
             <div class="col-md-6 pt-4">
-              <?php echo form_error('contactNumber'); ?>
+              <?php echo form_error('contactNumber_one'); ?>
                 <?php $name_data = [
-                  'name' => 'contactNumber',
-                  'value' => set_value('contactNumber'),
+                  'name' => 'contactNumber_one',
+                  'value' => set_value('contactNumber_one'),
                   'placeholder' => 'Contact Number',
                   'class' => 'form-control'
                 ]; ?>
@@ -222,7 +222,8 @@
             <div class="col-md-3 grid-captcha mt-4">
                 <div class="form-check captcha-checkbox">
                     <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" value="">I'm not a robot
+                    <input type="checkbox" class="form-check-input" value="">
+                    I'm not a robot
                     </label>
                 </div>
                 <div class="logo">
