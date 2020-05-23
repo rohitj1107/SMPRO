@@ -53,7 +53,7 @@
                   'class' => 'form-control',
                 ]; ?>
 
-                <?php echo form_input($name_data); ?>
+                <?php form_input($name_data); ?>
                 <!-- <textarea class="form-control" rows="3" placeholder="Remarks / Additional Info" id="comment"></textarea> -->
             </div>
 

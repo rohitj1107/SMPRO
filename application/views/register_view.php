@@ -72,14 +72,25 @@
             </div>
 
             <div class="col-md-6 pt-4">
-                <?php $name_data = [
-                  'name' => 'country',
-                  'value' => set_value('country'),
-                  'placeholder' => 'Country',
-                  'class' => 'form-control'
-                ]; ?>
+                <?php //$name_data = [
+                  // 'name' => 'country',
+                  // 'value' => set_value('country'),
+                  // 'placeholder' => 'Country',
+                  // 'class' => 'form-control'
+                // ]; ?>
 
-                <?php echo form_input($name_data); ?>
+                <?php //echo form_input($name_data); ?>
+
+                <select class="form-control" name="country">
+                  <option value="">Select Country</option>
+
+                  <?php foreach ($countries as $value) { ?>
+
+                    <option value=""><?php echo $value->country_name ?></option>
+
+                  <?php } ?>
+                </select>
+
                 <!-- <input type="text" class="form-control" id="email" placeholder="Country" name="country"> -->
             </div>
 
@@ -229,7 +240,7 @@
 
             <div class="col-md-12 mt-4 termsConditions">
                 <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" value="">I Agree To The <b>Terms And Conditions</b>
+                    <input type="checkbox" name="termsConditions" class="form-check-input" value="1">I Agree To The <b>Terms And Conditions</b>
                 </label>
             </div>
 

@@ -41,6 +41,16 @@ class Home_model extends CI_Model{
       return false;
     }
   }
+
+  public function select_countri(){
+    $sql = $this->db->select('country_name')->get('s_countries');
+    if ($sql->num_rows() > 0) {
+        return $sql->result();
+    } else {
+      return false;
+    }
+  }
+
 }
 
 ?>

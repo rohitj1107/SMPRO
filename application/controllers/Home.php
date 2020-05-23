@@ -15,14 +15,15 @@ class Home extends CI_Controller{
   }
 
   public function register(){
-
-
-    $this->load->view('register_view');
+    $data = $this->Home_model->select_countri();
+    $this->load->view('register_view',['countries'=>$data]);
   }
 
   public function register_create(){
     $this->form_validation->set_rules('companyName','Company Name','trim|required|min_length[3]');
-    $this->form_validation->set_rules('emailId','Email','trim|required');
+    $this->form_validation->set_rules('emailId','Email','trim|required|valid_email');
+    $this->form_validation->set_rules('termsConditions','Terms Conditions','required');
+    $this->form_validation->set_rules('websiteUrl','web Site Url','valid_url');
 
     if($this->form_validation->run()){
       $data = [
@@ -52,6 +53,26 @@ class Home extends CI_Controller{
           // $data['main_view'] = "admin_view";
           // $this->load->view('layouts/main',$data);
           // $this->u_emailId = $this->input->post('emailId');
+
+          $config = array(
+              'protocol' => 'smtp', // 'mail', 'sendmail', or 'smtp'
+              'smtp_host' => 'ssl://smtp.googlemail.com',
+              'smtp_port' => 465,
+              'smtp_user' => 'rohit.jadhavk1107@gmail.com',
+              'smtp_pass' => 'Rj@@@0403',
+              'mailtype' => 'html', //plaintext 'text' mails or 'html'
+              'charset' => 'iso-8859-1',
+              'wordwrap' => TRUE
+          );
+          $this->load->library('email',$config);
+
+          $this->email->from('rohit.jadhav0403@gmail.com', 'Rohit Jadhav');
+          $this->email->to('rohit.jadhavk1107@gmail.com','Admin');
+          $this->email->subject('OTP for register form');
+          $this->email->message('Please type your OTO'. $data['u_otp']);
+
+          $this->email->send();
+
           $url_data = base64_encode($this->input->post('emailId'));
           return redirect("otp/$url_data");
 
