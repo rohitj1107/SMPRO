@@ -1,7 +1,4 @@
-<?php if ($this->session->flashdata('errors')) {
-    echo $this->session->flashdata('errors');
-} ?>
-<?php echo validation_errors(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,12 +34,20 @@
     <div class="container mt-5 registration">
         <div class="row">
             <div class="col-md-12">
+
+              <?php if ($this->session->flashdata('errors')) { ?>
+                <div class="p-3 mb-2 bg-danger text-dark">
+                  <?php echo $this->session->flashdata('errors'); ?>
+                </div>
+              <?php } ?>
+
               <?php echo form_open('Home/register_create'); ?>
                 <p class="font-weight-bold m-0">Lorem Ipsum</p>
             </div>
+            <?php echo validation_errors(); ?>
 
             <div class="col-md-6 pt-4">
-              <?php echo form_error('companyName'); ?>
+
                 <?php $name_data = [
                   'name' => 'companyName',
                   'value' => set_value('companyName'),
@@ -55,7 +60,6 @@
             </div>
 
             <div class="col-md-6 pt-4">
-              <?php echo form_error('websiteUrl'); ?>
                 <?php $name_data = [
                   'name' => 'websiteUrl',
                   'value' => set_value('websiteUrl'),
@@ -68,7 +72,6 @@
             </div>
 
             <div class="col-md-6 pt-4">
-              <?php echo form_error('country'); ?>
                 <?php $name_data = [
                   'name' => 'country',
                   'value' => set_value('country'),
@@ -81,7 +84,6 @@
             </div>
 
             <div class="col-md-6 pt-4">
-              <?php echo form_error('postalCode'); ?>
                 <?php $name_data = [
                   'name' => 'postalCode',
                   'value' => set_value('postalCode'),
@@ -94,7 +96,6 @@
             </div>
 
             <div class="col-md-6 pt-4">
-              <?php echo form_error('companyType'); ?>
                 <?php $name_data = [
                   'name' => 'companyType',
                   'value' => set_value('companyType'),
@@ -107,7 +108,6 @@
             </div>
 
             <div class="col-md-6 pt-4">
-              <?php echo form_error('eou'); ?>
                 <?php $name_data = [
                   'name' => 'eou',
                   'value' => set_value('eou'),
@@ -137,7 +137,6 @@
             </div>
 
             <div class="col-md-6 pt-4">
-              <?php echo form_error('contactNumber'); ?>
                 <?php $name_data = [
                   'name' => 'contactNumber',
                   'value' => set_value('contactNumber'),
@@ -150,7 +149,6 @@
             </div>
 
             <div class="col-md-6 pt-4">
-              <?php echo form_error('contactNumber_one'); ?>
                 <?php $name_data = [
                   'name' => 'contactNumber_one',
                   'value' => set_value('contactNumber_one'),
@@ -163,7 +161,6 @@
             </div>
 
             <div class="col-md-6 pt-4">
-              <?php echo form_error('mobileNumber'); ?>
                 <?php $name_data = [
                   'name' => 'mobileNumber',
                   'value' => set_value('mobileNumber'),
@@ -180,7 +177,6 @@
             </div>
 
             <div class="col-md-6 pt-4">
-              <?php echo form_error('gst'); ?>
                 <?php $name_data = [
                   'name' => 'gst',
                   'value' => set_value('gst'),
@@ -193,7 +189,6 @@
             </div>
 
             <div class="col-md-6 pt-4">
-              <?php echo form_error('industry'); ?>
                 <?php $name_data = [
                   'name' => 'industry',
                   'value' => set_value('industry'),
@@ -206,7 +201,6 @@
             </div>
 
             <div class="col-md-12 pt-4">
-              <?php echo form_error('comment'); ?>
                 <?php $name_data = [
                   'name' => 'comment',
                   'value' => set_value('comment'),

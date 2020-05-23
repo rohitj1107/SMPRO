@@ -15,6 +15,4 @@ class Dashbord extends CI_Controller{
   }
 }
 
-
-
 ?>

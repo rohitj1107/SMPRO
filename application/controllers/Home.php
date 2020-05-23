@@ -15,6 +15,8 @@ class Home extends CI_Controller{
   }
 
   public function register(){
+
+
     $this->load->view('register_view');
   }
 
@@ -41,15 +43,18 @@ class Home extends CI_Controller{
       ];
 
         if ($this->Home_model->create_user($data)) {
-          $user_data = array('name'=>$username,'logged_in'=>true);
+          // $user_data = array('name'=>$username,'logged_in'=>true);
 
-          $this->session->set_userdata($user_data);
-          $this->session->set_flashdata('login_success','You are now logged in');
+          // $this->session->set_userdata($user_data);
+          // $this->session->set_flashdata('login_success','You are now logged in');
           // return redirect('Home/index');
 
           // $data['main_view'] = "admin_view";
           // $this->load->view('layouts/main',$data);
-          return redirect('Dashbord');
+          // $this->u_emailId = $this->input->post('emailId');
+          $url_data = base64_encode($this->input->post('emailId'));
+          return redirect("otp/$url_data");
+
         } else {
           $data =  array('errors' => validation_errors());
 
@@ -58,8 +63,8 @@ class Home extends CI_Controller{
         }
     } else {
       $data =  array('errors' => validation_errors());
-
       $this->session->set_flashdata($data);
+
       return redirect('Home/register');
     }
   }
@@ -97,6 +102,25 @@ class Home extends CI_Controller{
   public function logout(){
     $this->session->sess_destroy();
     return redirect('Home/index');
+  }
+
+  public function otp($segment){
+    $data = base64_decode($segment);
+    $this->load->view('otp_view',['segment'=>$data]);
+  }
+
+  public function check_otp(){
+    $otp = $this->input->post('otp');
+    $emailID = $this->input->post('emailId');
+    // echo $emailID;
+
+    if ($this->Home_model->check_otp_model($otp,$emailID)) {
+        return redirect('Dashbord');
+    } else {
+        $this->session->set_flashdata('errors','OTP is not match');
+        $url_data = base64_encode($this->input->post('emailId'));
+        return redirect("otp/$url_data");
+    }
   }
 
 }

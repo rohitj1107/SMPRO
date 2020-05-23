@@ -29,6 +29,18 @@ class Home_model extends CI_Model{
       return false;
     }
   }
+
+  public function check_otp_model($otp,$emailID){
+    $this->db->where('u_otp',$otp);
+    $this->db->where('u_emailId',$emailID);
+
+    $result = $this->db->get('s_user');
+    if ($result->num_rows() == 1) {
+        return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 ?>

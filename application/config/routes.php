@@ -50,5 +50,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'Home';
+$route['otp/(:any)'] = 'Home/otp/$1';
+$route['check_otp'] = 'Home/check_otp';
+$route['Dashbord'] = 'Dashbord';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
