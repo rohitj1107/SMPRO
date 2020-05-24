@@ -30,20 +30,20 @@
                 <img src="<?php echo base_url(); ?>assets/images/logo.png" width="150" class="img-fluid" alt="">
             </div>
             <div class="menu">
-                <a href="">Home</a>
-                <a href="">About Us</a>
-                <a href="">Product & Services</a>
-                <a href="">Partners</a>
+                <a href="<?php echo base_url('Home'); ?>">Home</a>
+                <a href="<?php echo base_url('about'); ?>">About Us</a>
+                <a href="<?php echo base_url('products'); ?>">Product & Services</a>
+                <a href="#">Partners</a>
                 <a href="">Contact Us</a>
             </div>
             <div class="login">
-                <a href="<?php echo base_url(); ?>Home/register"> <button>REGISTER</button> </a>
-                <a href="<?php echo base_url(); ?>Home/login"> <button>LOGIN</button> </a>
+                <a href="<?php echo base_url('login'); ?>"> <button>LOGIN</button> </a>
+                <a href="<?php echo base_url('enquiry'); ?>"> <button>ENQUIRY</button> </a>
             </div>
         </div>
     </div>
 </div>
 
-</body>
+<!-- </body> -->
 
-</html>
+<!-- </html> -->

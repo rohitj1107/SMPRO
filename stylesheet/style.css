@@ -30,6 +30,8 @@ head, body{
     margin: 0;
 } 
 
+/* Regsitration */
+
 .registration p{
     color: #0C4C8B;
     font-family: chapparel;
@@ -42,6 +44,13 @@ head, body{
 
 .registration ::placeholder{
     color: #0C4C8B !important;
+}
+
+.starMark{
+    position: absolute;
+    top: 35px;
+    left: 0px;
+    color: #0C4C8B;
 }
 
 .grid-captcha{
@@ -267,4 +276,368 @@ head, body{
 .hr-line-center span { 
     background:#fff; 
     padding:0 10px; 
+}
+
+/* Enquiry */
+
+.enquiry-custom-div{
+    max-width: 85%;
+    margin: 100px auto;
+}
+
+.enquiry p{
+    color: #0C4C8B;
+    font-family: chapparel;
+    letter-spacing: 0.1em;
+}
+.enquiry input{
+    border: 1px solid #BCD2E2;
+    border-radius: 2px !important;
+}
+
+.enquiry ::placeholder{
+    color: #0C4C8B !important;
+}
+
+.enquiry button{
+    background-color: #0C4C8B;
+}
+
+/* Home */
+
+.banner{
+    background-image: url('./../assets/images/engg.jpg');
+    height: 480px;
+    position: relative;
+    padding: 0 !important;
+}
+
+.overlay{
+    width: 100%;
+    height: 100%;
+    background-color: #a9d4ff;
+    opacity: 0.4;
+    margin: 0;
+    padding: 0;
+}
+
+.banner-content{
+    position: absolute;
+    top: 50%;
+    left: 15%;
+    transform: translate(0%, -50%);
+    width: 35%;
+}
+
+@media only screen and (max-width:950px){
+    .banner-content{
+        width: 60%;
+    }
+}
+
+@media only screen and (max-width:768px){
+    .banner-content{
+        text-align: center;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.pink{
+    background-color: #F71C52 !important;
+    font-size: 12px !important;
+    padding: 10px 30px !important;
+    font-weight: 600 !important;
+}
+
+.navy{
+    background-color: #242C42 !important;
+    border: 1px solid #242C42 !important;
+    font-size: 12px !important;
+    padding: 10px 30px !important;
+    font-weight: 600 !important;
+}
+
+.heading{
+    font-size: 34px;
+    font-weight: 600 !important;
+    margin: 0;
+}
+
+.sub-head{
+    margin: 0;
+    font-size: 19px;
+    color: #f71c52;
+    font-weight: 700;
+}
+
+.custom-card{
+    max-width: 80%;
+}
+
+.custom-card p:first-of-type{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.banner-col p{
+    color: #fff;
+    margin: 0;
+}
+
+.banner-col hr{
+    background-color: white;
+    width: 70%;
+    margin-left: 0;
+}
+
+.banner-col:nth-child(odd){
+    background-color: #0C4C8B;
+}
+
+.banner-col:nth-child(even){
+    background-color: #666666;
+}
+
+.about-container{
+    max-width: 75%;
+    margin: auto;
+}
+
+.about .about-head{
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.about .about-red-para{
+    color: #F01D2D;
+}
+
+.midline{
+    background-image: url('./../assets/images/mechanical.jpg');
+    height: 300px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.midline-content{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(-40%, -50%);
+}
+
+.midline-content p{
+    font-size: 30px;
+    font-weight: 600;
+}
+
+@media only screen and (max-width:900px){
+    .midline-content{
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+}
+
+.client-feedback{
+    padding: 60px 0;
+}
+
+.client-feedback-headline{
+    font-size: 30px;
+}
+
+.clr-grey{
+    color: #666666;
+}
+
+.card-dp{
+    height: 70px;
+    width: 70px;
+    background-color: #000000;
+    border: 4px solid white;
+}
+
+.below-div{
+    background-color: #0C4C8B;
+    position: relative;
+    color: white;
+    font-style: italic;
+}
+
+.card-dp{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.update-container{
+    background-color: #666666;
+}
+
+.update-content{
+    max-width: 50%;
+}
+
+.update-text h4{
+    color: #fff;
+}
+
+.update-input{
+    position: relative;
+}
+
+.update-input input[type=text]{
+    box-sizing: border-box;
+}
+
+.update-input button{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+@media only screen and (max-width:768px){
+    .update-content{
+        max-width: 80%;
+    }
+}
+
+.contact-inputs p{
+    font-weight: 600;
+    font-size: 25px;
+}
+
+.contact-inputs ::placeholder{
+    font-size: 11px;
+}
+
+.contact-info p:first-child{
+    font-weight: 600;
+    font-size: 25px;
+}
+
+.contact-row{
+    box-shadow: 0 0 20px #d3d3d3;
+    margin: 80px 0;
+}
+
+/* about */
+
+.aboutus-cards p:first-child{
+    font-size: 30px;
+}
+
+.card-details p:first-of-type{
+    color: #143763;
+}
+
+.card-details hr{
+    background-color: #F79421;
+    margin-right: 100px;
+    margin-left: 100px;
+}
+
+.video-container{
+    background-image: url('./../assets/images/mib.jpg');
+    background-position: center;
+    background-size: cover;
+    min-height: 550px;
+    position: relative;
+}
+
+.video-overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #a9d4ff;
+    opacity: 0.5;
+}
+
+.video-1-content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+}
+
+.video-1-content p:last-child{
+    font-size: 22px;
+}
+
+.video-2-content{
+    position: absolute;
+    top: 80%;
+    left: 5%;
+    color: #fff;
+}
+
+.video-2-content p:first-child{
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.details-container{
+    position: relative;
+    min-height: 550px;
+}
+
+.details-1-content{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #000;
+}
+
+.details-1-content p:last-child{
+    font-size: 22px;
+}
+
+.details-2-content{
+    position: absolute;
+    top: 80%;
+    left: 5%;
+    color: #000;
+}
+
+.details-2-content p:first-child{
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.clients p{
+    font-size: 30px;
+    color: #0872BA;
+}
+
+/* Producst & Services */
+
+.navyblue-container{
+    background-color: #242C42;
+}
+
+.levendor{
+    background-color: #554C86 !important;
+}
+
+.products-content p:first-child{
+    font-size: 20px;
+}
+
+.products-content hr{
+    background-color: #242C42;
+    margin-right: 300px;
+}
+
+.extra-padding{
+    margin: 150px 0;
 }

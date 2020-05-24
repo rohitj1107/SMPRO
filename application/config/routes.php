@@ -53,5 +53,12 @@ $route['default_controller'] = 'Home';
 $route['otp/(:any)'] = 'Home/otp/$1';
 $route['check_otp'] = 'Home/check_otp';
 $route['Dashbord'] = 'Dashbord';
+$route['about'] = 'Home/about';
+$route['enquiry'] = 'Home/enquiry';
+$route['products'] = 'Home/products';
+// $route['registration'] = 'Home/registration';
+$route['login'] = 'Home/login';
+$route['register'] = 'Home/register';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -14,6 +14,22 @@ class Home extends CI_Controller{
     $this->load->view('Home_view');
   }
 
+  public function about(){
+    $this->load->view('about_view');
+  }
+
+  public function enquiry(){
+    $this->load->view('enquiry_view');
+  }
+
+  public function products(){
+    $this->load->view('products_view');
+  }
+
+  // public function registration(){
+  //   $this->load->view('registration_view');
+  // }
+
   public function register(){
     $data = $this->Home_model->select_countri();
     $this->load->view('register_view',['countries'=>$data]);
@@ -58,16 +74,16 @@ class Home extends CI_Controller{
               'protocol' => 'smtp', // 'mail', 'sendmail', or 'smtp'
               'smtp_host' => 'ssl://smtp.googlemail.com',
               'smtp_port' => 465,
-              'smtp_user' => 'rohit.jadhavk1107@gmail.com',
-              'smtp_pass' => 'Rj@@@0403',
+              'smtp_user' => 'your_email@gmail.com',
+              'smtp_pass' => 'your_password',
               'mailtype' => 'html', //plaintext 'text' mails or 'html'
               'charset' => 'iso-8859-1',
               'wordwrap' => TRUE
           );
           $this->load->library('email',$config);
 
-          $this->email->from('rohit.jadhav0403@gmail.com', 'Rohit Jadhav');
-          $this->email->to('rohit.jadhavk1107@gmail.com','Admin');
+          $this->email->from('from_email', 'From Email');
+          $this->email->to('to_email','To Email');
           $this->email->subject('OTP for register form');
           $this->email->message('Please type your OTO'. $data['u_otp']);
 
