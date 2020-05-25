@@ -26,10 +26,6 @@ class Home extends CI_Controller{
     $this->load->view('products_view');
   }
 
-  // public function registration(){
-  //   $this->load->view('registration_view');
-  // }
-
   public function register(){
     $data = $this->Home_model->select_countri();
     $this->load->view('register_view',['countries'=>$data]);
@@ -96,49 +92,51 @@ class Home extends CI_Controller{
           $data =  array('errors' => validation_errors());
 
           $this->session->set_flashdata($data);
-          return redirect('Home/register');
+          return redirect('register');
         }
     } else {
       $data =  array('errors' => validation_errors());
       $this->session->set_flashdata($data);
 
-      return redirect('Home/register');
+      return redirect('register');
     }
   }
-
 
   public function login(){
     $this->load->view('login_view');
   }
 
   public function login_check(){
-    $this->form_validation->set_rules('name','User Name','trim|required|min_length[3]');
+    $this->form_validation->set_rules('name','CUSTOMER ID / Registered Email','trim|required|min_length[3]');
     $this->form_validation->set_rules('password','Password','trim|required');
 
     if ($this->form_validation->run()) {
         $name = $this->input->post('name');
-        $password = md5($this->input->post('password'));
+        // $password = md5($this->input->post('password'));
+        $password = $this->input->post('password');
 
         if ($this->Home_model->check_user($name,$password)) {
-            $user_data = array('name'=>$username,'logged_in'=>true);
+
+            $user_data = array('emailId'=>$username,'logged_in'=>true);
 
             $this->session->set_userdata($user_data);
             $this->session->set_flashdata('login_success','You are now logged in');
+
             return redirect('Dashbord');
         } else {
-            return redirect('Home/login');
+            $this->session->set_flashdata('login_faild','ID and Password not match');
+            return redirect('login');
         }
     } else {
       $data =  array('errors' => validation_errors());
-
       $this->session->set_flashdata($data);
-      return redirect('Home/login');
+      return redirect('login');
     }
   }
 
   public function logout(){
     $this->session->sess_destroy();
-    return redirect('Home/index');
+    return redirect('login');
   }
 
   public function otp($segment){
@@ -152,7 +150,7 @@ class Home extends CI_Controller{
     // echo $emailID;
 
     if ($this->Home_model->check_otp_model($otp,$emailID)) {
-        return redirect('Dashbord');
+        return redirect('login');
     } else {
         $this->session->set_flashdata('errors','OTP is not match');
         $url_data = base64_encode($this->input->post('emailId'));
@@ -161,8 +159,5 @@ class Home extends CI_Controller{
   }
 
 }
-
-
-
 
  ?>

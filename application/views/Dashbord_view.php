@@ -2,7 +2,7 @@
   echo '<h1>Logout</h1>';
   echo form_open('Home/logout');
   if ($this->session->userdata('logged_in')) {
-      echo '<p>You\'r logged in as '.$this->session->userdata('username').'</p>';
+      echo '<p>You\'r logged in as '.$this->session->userdata('emailId').'</p>';
   }
 
   $data = array('class' => 'btn btn-primary','name'=>'submit','value'=>'logout' );

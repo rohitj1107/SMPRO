@@ -53,12 +53,12 @@
                   'class' => 'form-control',
                 ]; ?>
 
-                <?php form_input($name_data); ?>
+                <?php echo form_input($name_data); ?>
                 <!-- <textarea class="form-control" rows="3" placeholder="Remarks / Additional Info" id="comment"></textarea> -->
             </div>
 
             <!-- <div class="col-md-6 pt-4"> -->
-                <?php echo $segment; ?>
+                <?php //echo $segment; ?>
                 <?php echo form_hidden('emailId',$segment); ?>
                 <!-- <textarea class="form-control" rows="3" placeholder="Remarks / Additional Info" id="comment"></textarea> -->
             <!-- </div> -->

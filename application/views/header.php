@@ -38,7 +38,7 @@
             </div>
             <div class="login">
                 <a href="<?php echo base_url('login'); ?>"> <button>LOGIN</button> </a>
-                <a href="<?php echo base_url('enquiry'); ?>"> <button>ENQUIRY</button> </a>
+                <a href="<?php echo base_url('register'); ?>"> <button>REGISTER</button> </a>
             </div>
         </div>
     </div>

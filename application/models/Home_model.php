@@ -19,12 +19,13 @@ class Home_model extends CI_Model{
   }
 
   public function check_user($name,$password){
-    $this->db->where('name',$name);
-    $this->db->where('password',$password);
+    $this->db->where('u_emailId',$name);
+    $this->db->where('u_password',$password);
 
-    $result = $this->db->get('s_user');
-    if ($result->num_rows() == 1) {
-        return $result->row(0)->id;
+    $sql = $this->db->get('s_user');
+    //exit;
+    if ($sql->num_rows() == 1) {
+      return true;
     } else {
       return false;
     }

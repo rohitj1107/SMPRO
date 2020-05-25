@@ -36,8 +36,10 @@
             <div class="col-md-12">
 
               <?php if ($this->session->flashdata('errors')) { ?>
-                <div class="p-3 mb-2 bg-danger text-dark">
+                <div class="text-white bg-danger text-center">
+
                   <?php echo $this->session->flashdata('errors'); ?>
+
                 </div>
               <?php } ?>
 
