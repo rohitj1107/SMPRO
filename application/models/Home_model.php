@@ -19,7 +19,7 @@ class Home_model extends CI_Model{
   }
 
   public function check_user($name,$password){
-    $where = "u_password='$password' AND (u_customerId='$name' OR u_emailId='$name')";
+    $where = "u_password='$password' AND u_action='1' AND (u_customerId='$name' OR u_emailId='$name')";
     $this->db->where($where);
     // $this->db->or_where('u_customerId',$name);
     // $this->db->where('u_password',$password);

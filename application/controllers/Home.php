@@ -8,6 +8,7 @@ class Home extends CI_Controller{
   function __construct(){
       parent::__construct();
       $this->load->model('Home_model');
+      $this->load->helper('security');
   }
 
   public function index(){
@@ -39,19 +40,19 @@ class Home extends CI_Controller{
 
     if($this->form_validation->run()){
       $data = [
-        'u_companyName' => $this->input->post('companyName'),
-        'u_websiteUrl' => $this->input->post('websiteUrl'),
-        'u_country' => $this->input->post('country'),
-        'u_postalCode' => $this->input->post('postalCode'),
-        'u_companyType' => $this->input->post('companyType'),
-        'u_eou' => $this->input->post('eou'),
-        'u_emailId' => $this->input->post('emailId'),
-        'u_contactNumber' => $this->input->post('contactNumber'),
-        'u_contactNumber_one' => $this->input->post('contactNumber_one'),
-        'u_mobileNumber' => $this->input->post('mobileNumber'),
-        'u_gst' => $this->input->post('gst'),
-        'u_industry' => $this->input->post('industry'),
-        'u_comment' => $this->input->post('comment'),
+        'u_companyName' => $this->security->xss_clean($this->input->post('companyName')),
+        'u_websiteUrl' => $this->security->xss_clean($this->input->post('websiteUrl')),
+        'u_country' => $this->security->xss_clean($this->input->post('country')),
+        'u_postalCode' => $this->security->xss_clean($this->input->post('postalCode')),
+        'u_companyType' => $this->security->xss_clean($this->input->post('companyType')),
+        'u_eou' => $this->security->xss_clean($this->input->post('eou')),
+        'u_emailId' => $this->security->xss_clean($this->input->post('emailId')),
+        'u_contactNumber' => $this->security->xss_clean($this->input->post('contactNumber')),
+        'u_contactNumber_one' => $this->security->xss_clean($this->input->post('contactNumber_one')),
+        'u_mobileNumber' => $this->security->xss_clean($this->input->post('mobileNumber')),
+        'u_gst' => $this->security->xss_clean($this->input->post('gst')),
+        'u_industry' => $this->security->xss_clean($this->input->post('industry')),
+        'u_comment' => $this->security->xss_clean($this->input->post('comment')),
         'u_otp' => rand('1000','5000')
       ];
 
@@ -111,9 +112,9 @@ class Home extends CI_Controller{
     $this->form_validation->set_rules('password','Password','trim|required');
 
     if ($this->form_validation->run()) {
-        $name = $this->input->post('name');
+        $name = $this->security->xss_clean($this->input->post('name'));
         // $password = md5($this->input->post('password'));
-        $password = $this->input->post('password');
+        $password = $this->security->xss_clean($this->input->post('password'));
 
         if ($this->Home_model->check_user($name,$password)) {
 
@@ -150,6 +151,7 @@ class Home extends CI_Controller{
     // echo $emailID;
 
     if ($this->Home_model->check_otp_model($otp,$emailID)) {
+        $this->session->set_flashdata('otp_success','OTP success fully create !');
         return redirect('login');
     } else {
         $this->session->set_flashdata('errors','OTP is not match');

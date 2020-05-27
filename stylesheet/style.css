@@ -46,6 +46,10 @@ head, body{
     color: #0C4C8B !important;
 }
 
+.mg-b-100px{
+    margin-bottom: 100px;
+}
+
 .starMark{
     position: absolute;
     top: 35px;
@@ -166,17 +170,71 @@ head, body{
     }
 }
 
+/* footer */
+
+/* grid */
+
 .footer{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    background-color: black;
+    color: white;
+    /* position: absolute; */
+    width: 100%;
+    /* bottom: 0; */
+    left: 0;
+}
+
+.footer p{
+    margin: 0;
+    padding: 15px;
+}
+
+.sub-menu{
+    display: flex;
+    justify-content: flex-end;
+    color: white;
+    padding: 15px;
+
+}
+
+.sub-menu > div a{
+    color: #fff;
+    padding: 0 15px;
+}
+
+@media only screen and (max-width:805px){
+    .footer{
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .sub-menu{
+        justify-content: center;
+    }
+}
+
+@media only screen and (max-width:536px){
+    .sub-menu{
+        flex-direction: column;
+    }
+}
+
+/*  */
+
+/* .footer{
     background-color: #181818;
     color: white;
     position: absolute;
     bottom: 0;
-    margin-top: 150px;
 }
 
 .mx-86{
     max-width: 86%;
     padding: 20px;
+    position: absolute;
+    margin-top: 150px;
+    background-color: #000;
+    color: white;
 }
 
 .footer-grid{
@@ -213,9 +271,14 @@ head, body{
     .copyright{
         justify-self: center;
     }
-}
+} */
 
 /* Login Page Styling */
+
+.min-height-95{
+    min-height: 95vh;
+    max-width: 50% !important;
+}
 
 .login-grid p{
     color: #0C4C8B;
@@ -239,12 +302,30 @@ head, body{
 }
 
 .recaptcha-48{
-    width: 48%;
+    width: 46% !important;
     margin-left: 15px;
     border: 1px solid #dddddd;
     padding-left: 15px;
     padding-right: 15px;
     background-color: #F9F9F9;
+}
+
+@media only screen and (max-width:768px){
+    .recaptcha-48{
+        width: 96% !important;
+    }
+    .min-height-95{
+        max-width: 90% !important;
+    }
+    .align-self{
+        justify-content: flex-start;
+    }
+}
+
+@media only screen and (max-width:571px){
+    .recaptcha-48{
+        width: 94% !important;
+    }
 }
 
 .recaptcha-48 .logo p{

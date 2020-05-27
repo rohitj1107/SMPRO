@@ -1,13 +1,66 @@
-<?php include('header.php'); ?>
+<?php //include('header.php');
+  // echo $this->data;
+ ?>
+
+
+ <!DOCTYPE html>
+ <html lang="en">
+
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <link rel="stylesheet" href="<?php echo base_url(); ?>stylesheet/style.css">
+
+     <!-- Latest compiled and minified CSS -->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+     <!-- jQuery library -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+     <!-- Popper JS -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+     <!-- Latest compiled JavaScript -->
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+ </head>
+
+ <body>
+
+ <div class="container-fluid">
+     <div class="row">
+         <div class="col-md-12 nav-grid">
+             <div class="company-logo">
+                 <img src="<?php echo base_url(); ?>assets/images/logo.png" width="150" class="img-fluid" alt="">
+             </div>
+             <div class="menu">
+                 <a href="<?php echo base_url('Home'); ?>">Home</a>
+                 <a href="<?php echo base_url('about'); ?>">About Us</a>
+                 <a href="<?php echo base_url('products'); ?>">Product & Services</a>
+                 <a href="#">Partners</a>
+                 <a href="">Contact Us</a>
+             </div>
+             <div class="login">
+                 <a href="<?php echo base_url('login'); ?>"> <button>LOGIN</button> </a>
+                 <a href="<?php echo base_url('register'); ?>"> <button>REGISTER</button> </a>
+             </div>
+         </div>
+     </div>
+ </div>
+
+ <!-- </body> -->
+
+ <!-- </html> -->
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 d-flex justify-content-center align-items-center coverpic-headline">
-                <p class="font-weight-bold">LOGIN</p>
+                <p class="font-weight-bold">Admin LOGIN</p>
             </div>
         </div>
     </div>
-
-    <?php echo form_open('Home/login_check','id="myform"') ?>
+<?php //echo md5('Admin'); ?>
+    <?php echo form_open('admin_login','id="myform"') ?>
 
     <div class="container w-50 mt-5">
         <div class="row login-grid">
@@ -19,22 +72,6 @@
 
                 </div>
               <?php } ?>
-              <?php if ($this->session->flashdata('otp_success')) { ?>
-                <div class="text-white bg-danger text-center">
-
-                  <?php echo $this->session->flashdata('otp_success'); ?>
-
-                </div>
-              <?php } ?>
-
-              <?php if ($this->session->flashdata('login_faild')) { ?>
-                <div class="text-white bg-danger text-center">
-
-                  <?php echo $this->session->flashdata('login_faild'); ?>
-
-                </div>
-              <?php } ?>
-
 
                 <p class="m-0 font-weight-bold">Lorem ipsum</p>
             </div>
@@ -43,8 +80,8 @@
               <?php echo form_error('name'); ?>
                 <?php $name_data = [
                   'name' => 'name',
-                  'value' => set_value('customerId'),
-                  'placeholder' => 'CUSTOMER ID / Registered Email',
+                  'value' => set_value('name'),
+                  'placeholder' => 'Admin ID ',
                   'class'=>'form-control'
                 ]; ?>
 
@@ -90,9 +127,6 @@
               <?php echo form_close(); ?>
 
                 <!-- <button class="w-100 btn btn-danger">LOGIN</button> -->
-                <p>
-    <a href="<?php echo base_url();?>login/fblogin">Login with Facebook</a>
-</p>
             </div>
             <div class="col-md-12 mt-5 hr-line-center">
                 <p class="m-auto"><span>Or</span></p>
@@ -104,6 +138,6 @@
     </div>
 
 </body>
-<?php include('footer.php'); ?>
+<?php //include('/footer.php'); ?>
 
 </html>

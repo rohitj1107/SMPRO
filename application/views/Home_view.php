@@ -213,4 +213,4 @@
 
 <!-- </html> -->
 
-<?php //echo include('footer.php'); ?>
+<?php include('footer.php'); ?>

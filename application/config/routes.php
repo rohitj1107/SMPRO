@@ -61,5 +61,10 @@ $route['otp/(:any)'] = 'Home/otp/$1';
 
 $route['Dashbord'] = 'Dashbord';
 
+$route['admin'] = 'Admin/login';
+$route['admin_login'] = 'Admin/check_login';
+$route['admin_approval/(:any)'] = 'Admin/admin_approval/$1';
+$route['admin_unapproval/(:any)'] = 'Admin/admin_unapproval/$1';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
