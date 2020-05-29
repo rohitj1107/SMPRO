@@ -24,6 +24,15 @@ class Admin_model extends CI_Model{
     }
   }
 
+  public function select_user($emailID){
+      $sql = $this->db->where('u_emailId',$emailID)->get('s_user');
+      if ($sql->num_rows() > 0) {
+          return $sql->row();
+      } else {
+          return false;
+      }
+  }
+
   public function user_table(){
     $sql = $this->db->get('s_user');
     if ($sql->num_rows() > 0) {
@@ -33,11 +42,9 @@ class Admin_model extends CI_Model{
     }
   }
 
-  public function admin_approval_model($u_Id,$u_password,$u_action,$u_customerId){
+  public function admin_approval_model($u_Id,$u_action){
     $data = array(
         'u_action' => $u_action,
-        'u_password' => $u_password,
-        'u_customerId' => $u_customerId
       );
 
       $this->db->where('u_Id', $u_Id);
@@ -58,6 +65,42 @@ class Admin_model extends CI_Model{
       $sql = $this->db->update('s_user', $data);
       if ($sql) {
           return true;
+      } else {
+          return false;
+      }
+  }
+
+  public function select_type(){
+      $sql = $this->db->get('s_type');
+      if ($sql->num_rows() > 0) {
+          return $sql->result();
+      } else {
+          return false;
+      }
+  }
+
+  public function insert_enquiry($data){
+      $sql = $this->db->insert('s_enquiry',$data);
+      if ($sql) {
+          return TRUE;
+      } else {
+          return false;
+      }
+  }
+
+  public function select_enquiry($enquiryID){
+      $sql = $this->db->where('e_customerID',$enquiryID)->get('s_enquiry');
+      if ($sql->num_rows() > 0) {
+          return $sql->result();
+      } else {
+          return false;
+      }
+  }
+
+  public function select_view_enquiry($custumerID,$enquiryID){
+      $sql = $this->db->where(['e_customerID'=>$custumerID,'e_enquiryId'=>$enquiryID])->get('s_enquiry');
+      if ($sql->num_rows() > 0) {
+          return $sql->row();
       } else {
           return false;
       }

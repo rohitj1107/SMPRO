@@ -19,15 +19,12 @@ class Home_model extends CI_Model{
   }
 
   public function check_user($name,$password){
-    $where = "u_password='$password' AND u_action='1' AND (u_customerId='$name' OR u_emailId='$name')";
-    $this->db->where($where);
-    // $this->db->or_where('u_customerId',$name);
-    // $this->db->where('u_password',$password);
+    $where = "u_password='$password' AND (u_customerId='$name' OR u_emailId='$name')";
+    $sql = $this->db->where($where)->get('s_user');
 
-    $sql = $this->db->get('s_user');
-    //exit;
-    if ($sql->num_rows() == 1) {
-      return true;
+    if ($sql->num_rows() > 0) {
+      $result = $sql->result();
+      return $result[0]->u_action;
     } else {
       return false;
     }

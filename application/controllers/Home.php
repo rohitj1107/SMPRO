@@ -37,8 +37,13 @@ class Home extends CI_Controller{
     $this->form_validation->set_rules('emailId','Email','trim|required|valid_email');
     $this->form_validation->set_rules('termsConditions','Terms Conditions','required');
     $this->form_validation->set_rules('websiteUrl','web Site Url','valid_url');
+    $this->form_validation->set_rules('password','Password','trim|required|md5');
+
 
     if($this->form_validation->run()){
+      $ran_cust = '0123456789abcdefghijklmnopqrstuvwxyz';
+      $ran_pass = '0123456789abcdefghijklmnopqrstuvwxyz';
+
       $data = [
         'u_companyName' => $this->security->xss_clean($this->input->post('companyName')),
         'u_websiteUrl' => $this->security->xss_clean($this->input->post('websiteUrl')),
@@ -53,6 +58,9 @@ class Home extends CI_Controller{
         'u_gst' => $this->security->xss_clean($this->input->post('gst')),
         'u_industry' => $this->security->xss_clean($this->input->post('industry')),
         'u_comment' => $this->security->xss_clean($this->input->post('comment')),
+        'u_customerId' => substr(str_shuffle($ran_cust), 0, 10),
+        'u_password' => $this->security->xss_clean($this->input->post('password')),
+
         'u_otp' => rand('1000','5000')
       ];
 
@@ -109,16 +117,18 @@ class Home extends CI_Controller{
 
   public function login_check(){
     $this->form_validation->set_rules('name','CUSTOMER ID / Registered Email','trim|required|min_length[3]');
-    $this->form_validation->set_rules('password','Password','trim|required');
+    $this->form_validation->set_rules('password','Password','trim|md5|required');
 
     if ($this->form_validation->run()) {
         $name = $this->security->xss_clean($this->input->post('name'));
         // $password = md5($this->input->post('password'));
-        $password = $this->security->xss_clean($this->input->post('password'));
+        $password = $this->input->post('password');
 
-        if ($this->Home_model->check_user($name,$password)) {
+        $result = $this->Home_model->check_user($name,$password);
 
-            $user_data = array('emailId'=>$username,'logged_in'=>true);
+        if ($result) {
+
+            $user_data = array('emailId'=>$name,'actionId'=>$result,'logged_in'=>true);
 
             $this->session->set_userdata($user_data);
             $this->session->set_flashdata('login_success','You are now logged in');

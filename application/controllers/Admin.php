@@ -17,8 +17,9 @@ class Admin extends CI_controller{
 
   public function Dashbord(){
     $data = $this->Admin_model->user_table();
+    $type = $this->Admin_model->select_type();
     // print_r($data);
-    $this->load->view('Admin/dashbord_view',['data'=>$data]);
+    $this->load->view('Admin/dashbord_view',['data'=>$data,'type'=>$type]);
   }
 
   public function check_login(){
@@ -51,22 +52,15 @@ class Admin extends CI_controller{
   }
 
   public function admin_approval($u_Id){
-      $ran_pass = '0123456789abcdefghijklmnopqrstuvwxyz';
-      $u_password = substr(str_shuffle($ran_pass), 0, 5);
-      $u_action = '1';
-      $ran_cust = '0123456789abcdefghijklmnopqrstuvwxyz';
-      $u_customerId = substr(str_shuffle($ran_cust), 0, 10);
+      $u_action = $this->input->post('type');
 
-      if ($this->Admin_model->admin_approval_model($u_Id,$u_password,$u_action,$u_customerId)) {
+      if ($this->Admin_model->admin_approval_model($u_Id,$u_action)) {
           $this->session->set_flashdata('approval','User Approval success fully !');
-          return redirect('Admin/Dashbord');
+          return redirect('Dashbord');
       } else {
           $this->session->set_flashdata('not_approval','User not Approval !');
-          return redirect('Admin/Dashbord');
+          return redirect('Dashbord');
       }
-
-
-
   }
 
   public function admin_unapproval($u_Id){
@@ -79,9 +73,6 @@ class Admin extends CI_controller{
           $this->session->set_flashdata('not_approval','User not An Approval !');
           return redirect('Admin/Dashbord');
       }
-
-
-
   }
 
 }

@@ -58,8 +58,14 @@ $route['login'] = 'Home/login';
 $route['register'] = 'Home/register';
 $route['check_otp'] = 'Home/check_otp';
 $route['otp/(:any)'] = 'Home/otp/$1';
+$route['logout'] = 'Home/logout';
 
 $route['Dashbord'] = 'Dashbord';
+$route['do_upload'] = 'Dashbord/do_upload';
+$route['enquiry_show'] = 'Dashbord/enquiry_show';
+$route['view_enquiry/(:any)/(:any)'] = 'Dashbord/view_enquiry/$1/$2';
+$route['edite_enquiry/(:any)/(:any)'] = 'Dashbord/edite_enquiry/$1/$2';
+$route['delete_enquiry/(:any)/(:any)'] = 'Dashbord/delete_enquiry/$1/$2';
 
 $route['admin'] = 'Admin/login';
 $route['admin_login'] = 'Admin/check_login';

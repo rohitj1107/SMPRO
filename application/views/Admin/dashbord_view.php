@@ -50,6 +50,7 @@
                 <th scope="col">Email</th>
                 <th scope="col">Mobile</th>
                 <th scope="col">eou</th>
+                <th></th>
                 <th scope="col">Action</th>
                 <th scope="col">Delete</th>
 
@@ -65,12 +66,19 @@
                 <td><?php echo $value->u_contactNumber; ?></td>
                 <td><?php echo $value->u_eou; ?></td>
                 <td>
-                  <?php if(!$value->u_action == 1){ ?>
-                    <a href="<?php echo base_url("admin_approval/$value->u_Id"); ?>"><button type="button" class="btn btn-success" name="button">Approval</button></a>
-                  <?php } else { ?>
-                    <a href="<?php echo base_url("admin_unapproval/$value->u_Id"); ?>"><button type="button" class="btn btn-warning" name="button">Un Approval</button></a>
-                  <?php  } ?>
+                  <?php echo form_open("admin_approval/$value->u_Id"); ?>
+                    <select class="form-control" name="type">
+                      <option value="0">Desabel</option>
+                      <?php foreach($type as $type_d){ ?>
+                          <option value="<?php echo $type_d->t_id; ?>"><?php echo $type_d->t_name; ?></option>
+                      <?php } ?>
+                    </select>
                 </td>
+                <td>
+                    <button type="submit" class="btn btn-success" name="button">Action</button>
+                    <?php echo form_close(); ?>
+                </td>
+
                 <td><a href="#"><button type="button" class="btn btn-danger" name="button">Delete</button></a></td>
 
               </tr>

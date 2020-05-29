@@ -7,11 +7,13 @@
         </div>
     </div>
 
-    <?php echo form_open('Home/login_check','id="myform"') ?>
 
     <div class="container w-50 mt-5">
         <div class="row login-grid">
             <div class="col-md-12 mt-4">
+              <?php echo form_open('Home/login_check','id="myform"') ?>
+              <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+
               <?php if ($this->session->flashdata('errors')) { ?>
                 <div class="text-white bg-danger text-center">
 
@@ -57,7 +59,7 @@
               <?php echo form_error('password'); ?>
                 <?php $password_data = [
                   'name' => 'password',
-                  'value' => '',
+                  'value' => set_value('password'),
                   'placeholder' => 'Type Password',
                   'class' => 'form-control'
                 ]; ?>
@@ -90,9 +92,7 @@
               <?php echo form_close(); ?>
 
                 <!-- <button class="w-100 btn btn-danger">LOGIN</button> -->
-                <p>
-    <a href="<?php echo base_url();?>login/fblogin">Login with Facebook</a>
-</p>
+
             </div>
             <div class="col-md-12 mt-5 hr-line-center">
                 <p class="m-auto"><span>Or</span></p>
@@ -104,6 +104,7 @@
     </div>
 
 </body>
+
 <?php include('footer.php'); ?>
 
 </html>

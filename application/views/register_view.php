@@ -47,7 +47,7 @@
                 <p class="font-weight-bold m-0">Lorem Ipsum</p>
             </div>
             <?php echo validation_errors(); ?>
-
+            <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
             <div class="col-md-6 pt-4">
 
                 <?php $name_data = [
@@ -146,7 +146,15 @@
             </div>
 
             <div class="col-md-6 pt-4">
+              <?php echo form_error('password'); ?>
+                <?php $name_data = [
+                  'name' => 'password',
+                  'value' => set_value('password'),
+                  'placeholder' => 'Type Password *',
+                  'class' => 'form-control'
+                ]; ?>
 
+                <?php echo form_input($name_data); ?>
             </div>
 
             <div class="col-md-6 pt-4">
