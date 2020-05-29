@@ -118,43 +118,36 @@
                               <li class="menu-title">Navigation</li>
                               <?php if($this->session->userdata('actionId') ==3 ){ ?>
                               <li>
-                                  <a href="index.html">
+                                  <a href="<?php echo base_url('Dashbord'); ?>">
                                       <i class="mdi mdi-view-dashboard"></i>
                                       <span> Dashboard </span>
                                   </a>
                               </li>
 
                               <li>
-                                  <a href="typography.html">
+                                  <a href="<?php echo base_url('Dashbord'); ?>">
                                       <i class="mdi mdi-format-font"></i>
                                       <span> Employee </span>
                                   </a>
                               </li>
 
                               <li>
-                                  <a href="javascript: void(0);">
+                                  <a href="<?php echo base_url('Dashbord'); ?>">
                                       <i class="mdi mdi-invert-colors"></i>
                                       <span> User List </span>
-                                      <span class="menu-arrow"></span>
                                   </a>
-                                  <ul class="nav-second-level" aria-expanded="false">
-                                      <!-- <li><a href="ui-buttons.html">Buttons</a></li>
-
-                                      <li><a href="ui-widgets.html">Widgets</a></li> -->
-                                  </ul>
                               </li>
 
                               <li>
                                   <a href="javascript: void(0);">
                                       <i class="mdi mdi-texture"></i>
-                                      <span class="badge badge-warning float-right">7</span>
-                                      <span> Enquiry Forms </span>
+                                      <span> Enquiry </span>
                                   </a>
                                   <ul class="nav-second-level" aria-expanded="false">
-                                      <!-- <li><a href="form-elements.html">General Elements</a></li> -->
+                                      <li><a href="<?php echo base_url('enquiry_show_admin'); ?>"> Enquiry List </a></li>
+                                      <li><a href="<?php echo base_url('enquiry_form_admin'); ?>"> Enquiry Form </a></li>
                                   </ul>
-                              </li>
-                            <?php } else {?>
+                              </li>                            <?php } else {?>
                               <li>
                                   <a href="<?php echo base_url('Dashbord'); ?>">
                                       <i class="mdi mdi-texture"></i>
@@ -166,7 +159,7 @@
                                   <a href="<?php echo base_url('enquiry_show'); ?>">
                                       <i class="mdi mdi-texture"></i>
                                       <!-- <span class="badge badge-warning float-right">7</span> -->
-                                       Show Forms
+                                      <span> Show Forms </span>
                                   </a>
                               </li>
                             <?php  } ?>

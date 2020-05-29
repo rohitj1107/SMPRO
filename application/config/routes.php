@@ -67,6 +67,11 @@ $route['view_enquiry/(:any)/(:any)'] = 'Dashbord/view_enquiry/$1/$2';
 $route['edite_enquiry/(:any)/(:any)'] = 'Dashbord/edite_enquiry/$1/$2';
 $route['delete_enquiry/(:any)/(:any)'] = 'Dashbord/delete_enquiry/$1/$2';
 
+$route['enquiry_show_admin'] = 'Dashbord/enquiry_show_admin';
+$route['view_enquiry_admin/(:any)/(:any)'] = 'Dashbord/view_enquiry_admin/$1/$2';
+$route['enquiry_form_admin'] = 'Dashbord/enquiry_form_admin';
+$route['do_upload_admin'] = 'Dashbord/do_upload_admin';
+
 $route['admin'] = 'Admin/login';
 $route['admin_login'] = 'Admin/check_login';
 $route['admin_approval/(:any)'] = 'Admin/admin_approval/$1';

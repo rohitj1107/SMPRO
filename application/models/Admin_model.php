@@ -105,6 +105,24 @@ class Admin_model extends CI_Model{
           return false;
       }
   }
+
+  public function select_enquiry_admin(){
+      $sql = $this->db->get('s_enquiry');
+      if ($sql->num_rows() > 0) {
+          return $sql->result();
+      } else {
+          return false;
+      }
+  }
+
+  public function customerId_admin(){
+      $sql = $this->db->select(['u_customerId','u_emailId'])->get('s_user');
+      if ($sql->num_rows() > 0) {
+          return $sql->result();
+      } else {
+          return false;
+      }
+  }
 }
 
 

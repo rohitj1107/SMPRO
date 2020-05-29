@@ -186,82 +186,54 @@
 
                     <!-- Start Content-->
                     <div class="container-fluid">
-
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="card-box task-detail">
-                                    <h4>Application</h4>
-                                    <p class="text-muted">
-                                        <?php print_r($view_enquiry->e_appliction); ?>
-                                    </p>
-                                    <div class="row task-dates mb-0 mt-2">
-                                        <div class="col-lg-4">
-                                            <h5 class="font-600 m-b-5">Customer ID</h5>
-                                            <p> <?php print_r($view_enquiry->e_customerID); ?></p>
-                                        </div>
+                            <div class="col-12">
+                                <div class="card-box table-responsive">
+                                    <h4 class="mt-0 header-title">Show Form</h4>
+                                    <table id="responsive-datatable" class="table table-bordered table-bordered dt-responsive nowrap">
+                                        <thead>
+                                        <tr>
+                                            <th>Enquiry Number</th>
+                                            <th>Appliction</th>
+                                            <th>Machine Model</th>
+                                            <th>Machine Make</th>
+                                            <th>Required Qty</th>
+                                            <th>Date Time</th>
+                                            <th>Action</th>
+                                            <!-- <th>Ed</th> -->
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                          <?php if ($enquiry) { ?>
+                                            <?php foreach($enquiry as $sw_enquiry){ ?>
+                                            <tr>
+                                                <td><?php echo $sw_enquiry->e_enquiryId; ?></td>
+                                                <td><?php echo $sw_enquiry->e_appliction; ?></td>
+                                                <td><?php echo $sw_enquiry->e_machine_model; ?></td>
+                                                <td><?php echo $sw_enquiry->e_machine_make; ?></td>
+                                                <td><?php echo $sw_enquiry->e_required_qty; ?></td>
+                                                <td><?php echo $sw_enquiry->e_date_time; ?></td>
+                                                <td>
+                                                  <a href="<?php echo base_url("view_enquiry_admin/$sw_enquiry->e_customerID/$sw_enquiry->e_enquiryId"); ?>"><button type="button" class="bg-success" name="button">View</button></a>
+                                                  <!-- <a href="<?php echo base_url('edite_enquiry'); ?>"><button type="button" class="bg-warning" name="button">Edit</button></a> -->
+                                                  <a href="<?php echo base_url('delete_enquiry_admin'); ?>"><button type="button" class="bg-danger" name="button">Delete</button></a>
+                                                </td>
 
-                                        <div class="col-lg-4">
-                                            <h5 class="font-600 m-b-5">Enquiry ID</h5>
-                                            <p> <?php print_r($view_enquiry->e_enquiryId); ?></p>
-                                        </div>
-
-                                        <div class="col-lg-4">
-                                            <h5 class="font-600 m-b-5">Date</h5>
-                                            <p> <?php print_r($view_enquiry->e_date_time); ?></p>
-                                        </div>
-                                    </div>
-
-                                    <div class="row task-dates mb-0 mt-2">
-                                        <div class="col-lg-4">
-                                            <h5 class="font-600 m-b-5">Machine Model</h5>
-                                            <p> <?php print_r($view_enquiry->e_machine_model); ?></p>
-                                        </div>
-
-                                        <div class="col-lg-4">
-                                            <h5 class="font-600 m-b-5">Required Qty</h5>
-                                            <p> <?php print_r($view_enquiry->e_required_qty); ?></p>
-                                        </div>
-                                    </div>
-
-                                    <div class="assign-team mt-4">
-                                        <h5>Required Description</h5>
-                                        <p><?php print_r($view_enquiry->e_required_description); ?></p>
-                                    </div>
-
-                                    <div class="assign-team mt-4">
-                                        <h5>Machine Make</h5>
-                                        <p><?php print_r($view_enquiry->e_machine_make); ?></p>
-                                    </div>
-
-                                    <div class="assign-team mt-4">
-                                        <h5>Special Remarks</h5>
-                                        <p><?php print_r($view_enquiry->e_special_remarks); ?></p>
-                                    </div>
-
-                                    <div class="row task-dates mb-0 mt-2">
-                                        <div class="col-lg-4">
-                                            <h5 class="font-600 m-b-5">Photo Of The Parts</h5>
-                                            <p> <?php print_r($view_enquiry->e_photo_of_the_parts_path); ?></p>
-                                        </div>
-
-                                        <div class="col-lg-4">
-                                            <h5 class="font-600 m-b-5">Drawing Of The Parts</h5>
-                                            <p> <?php print_r($view_enquiry->e_drawing_of_the_parts_path); ?></p>
-                                        </div>
-                                    </div>
-
-
+                                                <!-- <td>Ac</td> -->
+                                            </tr>
+                                          <?php } ?>
+                                        <?php }  ?>
+                                        </tbody>
+                                    </table>
                                 </div>
-                            </div><!-- end col -->
-
-                        </div>
-                        <!-- end row -->
-
+                            </div>
+                        </div> <!-- end row -->
                     </div> <!-- container-fluid -->
 
                 </div> <!-- content -->
 
                 <!-- Footer Start -->
+
                 <!-- end Footer -->
 
             </div>
@@ -377,8 +349,24 @@
         <!-- Vendor js -->
         <script src="<?php echo base_url(); ?>assets/admin/js/vendor.min.js"></script>
 
-        <!-- plugin -->
-        <script src="<?php echo base_url(); ?>assets/admin/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+        <!-- third party js -->
+        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/jquery.dataTables.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/dataTables.bootstrap4.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/dataTables.responsive.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/responsive.bootstrap4.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/dataTables.buttons.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/buttons.bootstrap4.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/buttons.html5.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/buttons.flash.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/buttons.print.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/dataTables.keyTable.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/dataTables.select.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/pdfmake/pdfmake.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/pdfmake/vfs_fonts.js"></script>
+        <!-- third party js ends -->
+
+        <!-- Datatables init -->
+        <script src="<?php echo base_url(); ?>assets/admin/js/pages/datatables.init.js"></script>
 
         <!-- App js -->
         <script src="<?php echo base_url(); ?>assets/admin/js/app.min.js"></script>
