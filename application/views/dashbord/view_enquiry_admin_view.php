@@ -600,8 +600,6 @@
 
         <!-- Vendor js -->
         <script src="<?php echo base_url(); ?>assets/admin/js/vendor.min.js"></script>
-        <!-- Vendor js -->
-        <script src="<?php echo base_url(); ?>assets/admin/js/vendor.min.js"></script>
 
         <!-- Plugins Js -->
         <script src="<?php echo base_url(); ?>assets/admin/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>

@@ -303,7 +303,7 @@
                                       <div class="form-group">
                                           <label class="text-danger">EXPIRY DATE OF LC</label>
                                           <input type="text" name="expiry_date_of_lc" class="form-control" placeholder="mm/dd/yyyy" id="datepicker-autoclose" value="">
-                                          
+
                                       </div>
                                     </div>
 
@@ -449,8 +449,6 @@
         <!-- Right bar overlay-->
         <div class="rightbar-overlay"></div>
 
-        <!-- Vendor js -->
-        <script src="<?php echo base_url(); ?>assets/admin/js/vendor.min.js"></script>
         <!-- Vendor js -->
         <script src="<?php echo base_url(); ?>assets/admin/js/vendor.min.js"></script>
 

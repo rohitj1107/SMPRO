@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SMPRO</title>
     <link rel="stylesheet" href="<?php echo base_url(); ?>stylesheet/style.css">
 
     <!-- Latest compiled and minified CSS -->
