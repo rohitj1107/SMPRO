@@ -1,32 +1,4 @@
-<?php if ($this->session->flashdata('errors')) {
-    echo $this->session->flashdata('errors');
-} ?>
-<?php echo validation_errors(); ?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="<?php echo base_url(); ?>stylesheet/style.css">
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-</head>
-
-<body>
-
+<?php include('header.php'); ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 d-flex justify-content-center align-items-center coverpic-headline">
@@ -35,14 +7,41 @@
         </div>
     </div>
 
+
     <div class="container w-50 mt-5">
         <div class="row login-grid">
             <div class="col-md-12 mt-4">
+              <?php echo form_open('Home/login_check','id="myform"') ?>
+              <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+
+              <?php if ($this->session->flashdata('errors')) { ?>
+                <div class="text-white bg-danger text-center">
+
+                  <?php echo $this->session->flashdata('errors'); ?>
+
+                </div>
+              <?php } ?>
+              <?php if ($this->session->flashdata('otp_success')) { ?>
+                <div class="text-white bg-danger text-center">
+
+                  <?php echo $this->session->flashdata('otp_success'); ?>
+
+                </div>
+              <?php } ?>
+
+              <?php if ($this->session->flashdata('login_faild')) { ?>
+                <div class="text-white bg-danger text-center">
+
+                  <?php echo $this->session->flashdata('login_faild'); ?>
+
+                </div>
+              <?php } ?>
+
+
                 <p class="m-0 font-weight-bold">Lorem ipsum</p>
             </div>
-            <!-- <?php echo form_open('Home/login_check','id="myform"') ?> -->
-            <div class="col-md-12 mt-4">
 
+            <div class="col-md-12 mt-4">
               <?php echo form_error('name'); ?>
                 <?php $name_data = [
                   'name' => 'name',
@@ -60,7 +59,7 @@
               <?php echo form_error('password'); ?>
                 <?php $password_data = [
                   'name' => 'password',
-                  'value' => '',
+                  'value' => set_value('password'),
                   'placeholder' => 'Type Password',
                   'class' => 'form-control'
                 ]; ?>
@@ -93,16 +92,19 @@
               <?php echo form_close(); ?>
 
                 <!-- <button class="w-100 btn btn-danger">LOGIN</button> -->
+
             </div>
             <div class="col-md-12 mt-5 hr-line-center">
                 <p class="m-auto"><span>Or</span></p>
             </div>
             <div class="col-md-12 mt-5">
-                <a href="<?php echo base_url(); ?>Home/register"> <button class="w-100 btn btn-signup">SIGN UP</button></a>
+                <a href="<?php echo base_url('register'); ?>"> <button class="w-100 btn btn-signup">SIGN UP</button></a>
             </div>
         </div>
     </div>
 
 </body>
+
+<?php include('footer.php'); ?>
 
 </html>

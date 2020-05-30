@@ -1,31 +1,28 @@
-<?php if ($this->session->flashdata('errors')) {
-    echo $this->session->flashdata('errors');
-} ?>
-<?php echo validation_errors(); ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="<?php echo base_url(); ?>stylesheet/style.css">
+<!-- <!DOCTYPE html> -->
+<!-- <html lang="en"> -->
+
+<!-- <head> -->
+    <!-- <meta charset="UTF-8"> -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- <title>Document</title> -->
+    <!-- <link rel="stylesheet" href="<?php echo base_url(); ?>stylesheet/style.css"> -->
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> -->
 
     <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 
     <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> -->
 
     <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-</head>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script> -->
+<!-- </head> -->
 
-<body>
-
+<!-- <body> -->
+<?php include('header.php'); ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 d-flex justify-content-center align-items-center coverpic-headline">
@@ -37,12 +34,22 @@
     <div class="container mt-5 registration">
         <div class="row">
             <div class="col-md-12">
+
+              <?php if ($this->session->flashdata('errors')) { ?>
+                <div class="text-white bg-danger text-center">
+
+                  <?php echo $this->session->flashdata('errors'); ?>
+
+                </div>
+              <?php } ?>
+
               <?php echo form_open('Home/register_create'); ?>
                 <p class="font-weight-bold m-0">Lorem Ipsum</p>
             </div>
-
+            <?php echo validation_errors(); ?>
+            <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
             <div class="col-md-6 pt-4">
-              <?php echo form_error('companyName'); ?>
+
                 <?php $name_data = [
                   'name' => 'companyName',
                   'value' => set_value('companyName'),
@@ -55,7 +62,6 @@
             </div>
 
             <div class="col-md-6 pt-4">
-              <?php echo form_error('websiteUrl'); ?>
                 <?php $name_data = [
                   'name' => 'websiteUrl',
                   'value' => set_value('websiteUrl'),
@@ -68,20 +74,29 @@
             </div>
 
             <div class="col-md-6 pt-4">
-              <?php echo form_error('country'); ?>
-                <?php $name_data = [
-                  'name' => 'country',
-                  'value' => set_value('country'),
-                  'placeholder' => 'Country',
-                  'class' => 'form-control'
-                ]; ?>
+                <?php //$name_data = [
+                  // 'name' => 'country',
+                  // 'value' => set_value('country'),
+                  // 'placeholder' => 'Country',
+                  // 'class' => 'form-control'
+                // ]; ?>
 
-                <?php echo form_input($name_data); ?>
+                <?php //echo form_input($name_data); ?>
+
+                <select class="form-control" name="country">
+                  <option value="">Select Country</option>
+
+                  <?php foreach ($countries as $value) { ?>
+
+                    <option value=""><?php echo $value->country_name ?></option>
+
+                  <?php } ?>
+                </select>
+
                 <!-- <input type="text" class="form-control" id="email" placeholder="Country" name="country"> -->
             </div>
 
             <div class="col-md-6 pt-4">
-              <?php echo form_error('postalCode'); ?>
                 <?php $name_data = [
                   'name' => 'postalCode',
                   'value' => set_value('postalCode'),
@@ -94,7 +109,6 @@
             </div>
 
             <div class="col-md-6 pt-4">
-              <?php echo form_error('companyType'); ?>
                 <?php $name_data = [
                   'name' => 'companyType',
                   'value' => set_value('companyType'),
@@ -107,7 +121,6 @@
             </div>
 
             <div class="col-md-6 pt-4">
-              <?php echo form_error('eou'); ?>
                 <?php $name_data = [
                   'name' => 'eou',
                   'value' => set_value('eou'),
@@ -133,11 +146,18 @@
             </div>
 
             <div class="col-md-6 pt-4">
+              <?php echo form_error('password'); ?>
+                <?php $name_data = [
+                  'name' => 'password',
+                  'value' => set_value('password'),
+                  'placeholder' => 'Type Password *',
+                  'class' => 'form-control'
+                ]; ?>
 
+                <?php echo form_input($name_data); ?>
             </div>
 
             <div class="col-md-6 pt-4">
-              <?php echo form_error('contactNumber'); ?>
                 <?php $name_data = [
                   'name' => 'contactNumber',
                   'value' => set_value('contactNumber'),
@@ -150,7 +170,6 @@
             </div>
 
             <div class="col-md-6 pt-4">
-              <?php echo form_error('contactNumber_one'); ?>
                 <?php $name_data = [
                   'name' => 'contactNumber_one',
                   'value' => set_value('contactNumber_one'),
@@ -163,7 +182,6 @@
             </div>
 
             <div class="col-md-6 pt-4">
-              <?php echo form_error('mobileNumber'); ?>
                 <?php $name_data = [
                   'name' => 'mobileNumber',
                   'value' => set_value('mobileNumber'),
@@ -180,7 +198,6 @@
             </div>
 
             <div class="col-md-6 pt-4">
-              <?php echo form_error('gst'); ?>
                 <?php $name_data = [
                   'name' => 'gst',
                   'value' => set_value('gst'),
@@ -193,7 +210,6 @@
             </div>
 
             <div class="col-md-6 pt-4">
-              <?php echo form_error('industry'); ?>
                 <?php $name_data = [
                   'name' => 'industry',
                   'value' => set_value('industry'),
@@ -206,7 +222,6 @@
             </div>
 
             <div class="col-md-12 pt-4">
-              <?php echo form_error('comment'); ?>
                 <?php $name_data = [
                   'name' => 'comment',
                   'value' => set_value('comment'),
@@ -235,7 +250,7 @@
 
             <div class="col-md-12 mt-4 termsConditions">
                 <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" value="">I Agree To The <b>Terms And Conditions</b>
+                    <input type="checkbox" name="termsConditions" class="form-check-input" value="1">I Agree To The <b>Terms And Conditions</b>
                 </label>
             </div>
 
@@ -248,5 +263,6 @@
     </div>
 
 </body>
+<?php include('footer.php'); ?>
 
 </html>
