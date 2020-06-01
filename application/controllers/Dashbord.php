@@ -211,7 +211,10 @@ class Dashbord extends CI_Controller{
       $data = $this->Admin_model->user_table();
       $type = $this->Admin_model->select_type();
       $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
-      $this->load->view('dashbord/view_quotation_to_po_view',['data'=>$data,'type'=>$type,'user'=>$user,'quatation'=>$quatation]);
+      $po_number_result = $this->Admin_model->select_po($q_quote_number);
+      $po_number_row = $this->Admin_model->select_po_row($q_quote_number);
+
+      $this->load->view('dashbord/view_quotation_to_po_view',['data'=>$data,'type'=>$type,'user'=>$user,'quatation'=>$quatation,'po_number_result'=>$po_number_result,'po_number_row'=>$po_number_row]);
   }
 
   public function insert_po(){

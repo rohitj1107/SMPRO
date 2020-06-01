@@ -309,13 +309,123 @@
 
                                     <input type="hidden" name="emailId" value="<?php echo $this->session->userdata('emailId'); ?>">
                                     <div class="col-md-12">
-                                        <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">Submit</button>
+                                      <?php if ($po_number_row) { ?>
+
+                                      <?php if (date('m/d/yy') > $po_number_row->po_expiry_date_of_lc) { ?>
+                                          <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">Submit</button>
+                                      <?php } else { ?>
+                                          <button class="btn btn-danger waves-effect waves-light mr-1" disabled type="submit">Submit</button>
+                                      <?php } ?>
+
+                                  <?php } else { ?>
+                                      <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">Submit</button>
+                                  <?php } ?>
                                     </div>
                                   </div>
                                   <?php echo form_close(); ?>
                                 </div>
                             </div><!-- end col -->
-
+                            <!-- start col -->
+                            <div class="col-md-4 scrollbar scrollbar-primary" style="height: 420px; overflow-y: scroll;">
+                                <div class="card-box task-detail">
+                                  <div class="row">
+                                    <!-- <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label>Customer ID</label>
+                                          <p><?php //echo $quatation->q_customer_ID; ?></p>
+                                          <input type="hidden" name="customer_ID" value="">
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label>Enquiry ID</label>
+                                          <p><?php //echo $quatation->q_enquiry_ID; ?></p>
+                                          <input type="hidden" name="enquiry_ID" value="">
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label>Quote Number</label>
+                                          <p><?php //echo $quatation->q_quote_number; ?></p>
+                                          <input type="hidden" name="quote_number" value="<?php //echo $quatation->q_quote_number; ?>">
+                                      </div>
+                                    </div> -->
+                                    <?php if ($po_number_result) { ?>
+                                    <?php foreach($po_number_result as $opnumber): ?>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label>PO Number</label>
+                                          <p><?php echo $opnumber->po_po_number; ?></p>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label>Date</label>
+                                          <p><?php echo $opnumber->po_date; ?></p>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label>Market Segment</label>
+                                          <p><?php echo $opnumber->po_market_segment; ?></p>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label>Delay Penalty</label>
+                                          <p><?php echo $opnumber->po_delay_penalty; ?></p>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label>Scope Text</label>
+                                          <p><?php echo $opnumber->po_scope_text; ?></p>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label class="text-danger">LC applicabl</label>
+                                          <p><?php echo $opnumber->po_lc_applicabl; ?></p>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label>Into terms</label>
+                                          <p><?php echo $opnumber->po_into_terms; ?></p>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label>Load time</label>
+                                          <p><?php echo $opnumber->po_load_time; ?></p>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label>Payment</label>
+                                          <p><?php echo $opnumber->po_payment; ?></p>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label class="text-danger">EXPIRY DATE OF LC</label>
+                                          <?php if (date('m/d/yy') > $opnumber->po_expiry_date_of_lc) { ?>
+                                            <p class="text-danger"><?php echo $opnumber->po_expiry_date_of_lc; ?></p>
+                                          <?php } else { ?>
+                                            <p class="text-success"><?php echo $opnumber->po_expiry_date_of_lc; ?></p>
+                                          <?php } ?>
+                                      </div>
+                                    </div>
+                                    <div class="bg-primary col-12">
+                                        <hr>
+                                    </div>
+                                  <?php endforeach; ?>
+                                <?php } else { ?>
+                                    <p class="text-warning">PO Is Not Add</p>
+                                <?php } ?>
+                                  </div>
+                                </div>
+                            </div><!-- end col -->
                         </div>
                         <!-- end row -->
 
@@ -325,9 +435,25 @@
                         <div class="row">
                             <div class="col-md-12">
                               <div class="card-box task-detail">
+                                  <div class="row">
+                                  <div class="col-md-4">
+                                      Pre Shipment
+                                      <p>Payment Status</p>
+                                      <p>Manufacturing Status</p>Started
+                                      <p>Expected</p>
+                                  </div>
+                                  <div class="col-md-4">
+                                      Shipment
+                                      <p>Shipment date Expected</p>
+                                      <p>Balance Payment status</p>
+                                      <p>Expected</p>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <p>Display</p>
+                                  </div>
+                                </div>
 
                               </div>
-
                               </div>
                             </div>
                         </div>
@@ -348,103 +474,6 @@
 
         </div>
         <!-- END wrapper -->
-
-        <!-- Right Sidebar -->
-        <div class="right-bar">
-            <div class="rightbar-title">
-                <a href="javascript:void(0);" class="right-bar-toggle float-right">
-                    <i class="dripicons-cross noti-icon"></i>
-                </a>
-                <h4 class="m-0 text-white">Settings</h4>
-            </div>
-            <div class="slimscroll-menu">
-                <!-- User box -->
-                <div class="user-box">
-                    <div class="user-img">
-                        <img src="<?php echo base_url(); ?>assets/admin/images/users/user-1.jpg" alt="user-img" title="Mat Helme" class="rounded-circle img-fluid">
-                        <a href="javascript:void(0);" class="user-edit"><i class="mdi mdi-pencil"></i></a>
-                    </div>
-
-                    <h5><a href="javascript: void(0);">Nowak Helme</a> </h5>
-                    <p class="text-muted mb-0"><small>Admin Head</small></p>
-                </div>
-
-                <!-- Settings -->
-                <hr class="mt-0" />
-                <h5 class="pl-3">Basic Settings</h5>
-                <hr class="mb-0" />
-
-                <div class="p-3">
-                    <div class="checkbox checkbox-primary mb-2">
-                        <input id="Rcheckbox1" type="checkbox" checked>
-                        <label for="Rcheckbox1">
-                            Notifications
-                        </label>
-                    </div>
-                    <div class="checkbox checkbox-primary mb-2">
-                        <input id="Rcheckbox2" type="checkbox" checked>
-                        <label for="Rcheckbox2">
-                            API Access
-                        </label>
-                    </div>
-                    <div class="checkbox checkbox-primary mb-2">
-                        <input id="Rcheckbox3" type="checkbox">
-                        <label for="Rcheckbox3">
-                            Auto Updates
-                        </label>
-                    </div>
-                    <div class="checkbox checkbox-primary mb-2">
-                        <input id="Rcheckbox4" type="checkbox" checked>
-                        <label for="Rcheckbox4">
-                            Online Status
-                        </label>
-                    </div>
-                    <div class="checkbox checkbox-primary mb-0">
-                        <input id="Rcheckbox5" type="checkbox" checked>
-                        <label for="Rcheckbox5">
-                            Auto Payout
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Timeline -->
-                <hr class="mt-0" />
-                <h5 class="pl-3 pr-3">Messages <span class="float-right badge badge-pill badge-danger">25</span></h5>
-                <hr class="mb-0" />
-                <div class="p-3">
-                    <div class="inbox-widget">
-                        <div class="inbox-item">
-                            <div class="inbox-item-img"><img src="<?php echo base_url(); ?>assets/admin/images/users/user-2.jpg" class="rounded-circle" alt=""></div>
-                            <p class="inbox-item-author"><a href="javascript: void(0);" class="text-dark">Tomaslau</a></p>
-                            <p class="inbox-item-text">I've finished it! See you so...</p>
-                        </div>
-                        <div class="inbox-item">
-                            <div class="inbox-item-img"><img src="<?php echo base_url(); ?>assets/admin/images/users/user-3.jpg" class="rounded-circle" alt=""></div>
-                            <p class="inbox-item-author"><a href="javascript: void(0);" class="text-dark">Stillnotdavid</a></p>
-                            <p class="inbox-item-text">This theme is awesome!</p>
-                        </div>
-                        <div class="inbox-item">
-                            <div class="inbox-item-img"><img src="<?php echo base_url(); ?>assets/admin/images/users/user-4.jpg" class="rounded-circle" alt=""></div>
-                            <p class="inbox-item-author"><a href="javascript: void(0);" class="text-dark">Kurafire</a></p>
-                            <p class="inbox-item-text">Nice to meet you</p>
-                        </div>
-
-                        <div class="inbox-item">
-                            <div class="inbox-item-img"><img src="<?php echo base_url(); ?>assets/admin/images/users/user-5.jpg" class="rounded-circle" alt=""></div>
-                            <p class="inbox-item-author"><a href="javascript: void(0);" class="text-dark">Shahedk</a></p>
-                            <p class="inbox-item-text">Hey! there I'm available...</p>
-                        </div>
-                        <div class="inbox-item">
-                            <div class="inbox-item-img"><img src="<?php echo base_url(); ?>assets/admin/images/users/user-6.jpg" class="rounded-circle" alt=""></div>
-                            <p class="inbox-item-author"><a href="javascript: void(0);" class="text-dark">Adhamdannaway</a></p>
-                            <p class="inbox-item-text">This theme is awesome!</p>
-                        </div>
-                    </div> <!-- end inbox-widget -->
-                </div> <!-- end .p-3-->
-
-            </div> <!-- end slimscroll-menu-->
-        </div>
-        <!-- /Right-bar -->
 
         <!-- Right bar overlay-->
         <div class="rightbar-overlay"></div>

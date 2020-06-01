@@ -159,6 +159,25 @@ class Admin_model extends CI_Model{
           return FALSE;
       }
   }
+
+  public function select_po($po_number){
+      $sql = $this->db->where('po_quote_number',$po_number)->order_by('po_expiry_date_of_lc desc')->get('s_po');
+      if ($sql->num_rows() > 0) {
+          return $sql->result();
+      } else {
+          return FALSE;
+      }
+  }
+
+  public function select_po_row($po_number){
+    $sql = $this->db->where('po_quote_number',$po_number)->order_by('po_expiry_date_of_lc desc')->get('s_po');
+    if ($sql->num_rows() > 0) {
+        return $sql->row();
+    } else {
+        return FALSE;
+    }
+  }
+
 }
 
 
