@@ -256,7 +256,12 @@
                                         <div class="col-lg-4">
                                             <h5 class="font-600 m-b-5">Photo Of The Parts</h5>
                                             <?php if ($view_enquiry->e_photo_of_the_parts_name): ?>
-                                              <a href="<?php echo base_url('uploads/').$view_enquiry->e_photo_of_the_parts_name; ?>" download>Download File</a>
+                                              <?php
+                                                  $name1 = (explode(' | ',$view_enquiry->e_photo_of_the_parts_name));
+                                                  for ($i=0; $i < count($name1); $i++) { ?>
+                                                    <a href="<?php echo base_url('uploads/').$name1[$i]; ?>" download><img src="<?php echo base_url('uploads/').$name1[$i]; ?> " alt="W3Schools" width="20" height="20">Download File</a><br>
+                                                  <?php } ?>
+
                                             <?php else: ?>
                                               <p>File Not Upload</p>
                                             <?php endif;?>
@@ -265,7 +270,12 @@
                                         <div class="col-lg-4">
                                             <h5 class="font-600 m-b-5">Drawing Of The Parts</h5>
                                             <?php if ($view_enquiry->e_drawing_of_the_parts_name): ?>
-                                              <a href="<?php echo base_url('uploads/').$view_enquiry->e_drawing_of_the_parts_name; ?>" download>Download File</a>
+                                              <?php
+                                                  $name = (explode(' | ',$view_enquiry->e_drawing_of_the_parts_name));
+                                                  for ($i=0; $i < count($name); $i++) { ?>
+                                                    <a href="<?php echo base_url('uploads/').$name[$i]; ?>" download><img src="<?php echo base_url('uploads/').$name[$i]; ?>" alt="W3Schools" width="20" height="20">Download File</a><br>
+                                                  <?php } ?>
+
                                             <?php else: ?>
                                               <p>File Not Upload</p>
                                             <?php endif;?>
@@ -435,7 +445,9 @@
                             <div class="col-md-12">
                               <div class="card-box task-detail">
                                 <td>
-                                    <?php foreach ($quatation as $q_value) { ?>
+                                    <?php
+                                    if($quatation):
+                                    foreach ($quatation as $q_value) { ?>
                                 </td>
                                 <!-- Row start -->
                                 <div class="row">
@@ -476,7 +488,11 @@
                               </div>
                               <hr>
                               <!-- Row end div -->
-                            <?php } ?>
+                            <?php }
+                          else:
+                            echo 'Not Add Quotation';
+                          endif;  
+                          ?>
 
                               </div>
                             </div>

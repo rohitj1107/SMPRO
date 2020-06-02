@@ -236,7 +236,7 @@
                                                 <div class="col-md-6 pt-4">
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <input type="file" class="form-control" placeholder="Photo Of The Parts" name="Photo_Of_The_Parts">
+                                                            <input type="file" class="form-control" multiple name="Photo_Of_The_Parts[]">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <button class="btn btn-info w-100">Browse</button>
@@ -246,7 +246,7 @@
                                                 <div class="col-md-6 pt-4">
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <input type="file" class="form-control" placeholder="Drawing Of The Parts" name="Drawing_Of_The_Parts">
+                                                            <input type="file" class="form-control" multiple name="Drawing_Of_The_Parts[]">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <button class="btn btn-info w-100">Browse</button>

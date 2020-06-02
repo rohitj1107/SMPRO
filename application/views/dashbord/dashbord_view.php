@@ -185,96 +185,63 @@
 
                       <!-- Start Content-->
                       <div class="container-fluid">
+
                         <?php if($this->session->userdata('actionId') ==3 ){ ?>
-
                           <div class="row">
-
                               <div class="col-xl-3 col-md-6">
-                                  <div class="card-box">
-                                      <h4 class="header-title mt-0 mb-4">User Count</h4>
-
-                                      <div class="widget-chart-1">
-                                          <div class="widget-chart-box-1 float-left" dir="ltr">
-                                              <input data-plugin="knob" data-width="80" data-height="80" data-fgColor="#f05050 "
-                                                     data-bgColor="#F9B9B9" value="58"
-                                                     data-skin="tron" data-angleOffset="180" data-readOnly=true
-                                                     data-thickness=".15"/>
-                                          </div>
-
-                                          <div class="widget-detail-1 text-right">
-                                              <h2 class="font-weight-normal pt-2 mb-1"> 256 </h2>
-                                              <p class="text-muted mb-1">*</p>
-                                          </div>
+                                  <div class="card-box widget-user">
+                                      <div class="text-center">
+                                          <h2 class="font-weight-normal text-primary" data-plugin="counterup"><?php echo $users_count; ?></h2>
+                                          <h5>Users</h5>
                                       </div>
                                   </div>
-
-                              </div><!-- end col -->
-
-                              <div class="col-xl-3 col-md-6">
-                                  <div class="card-box">
-                                      <h4 class="header-title mt-0 mb-3">Enquiry Count</h4>
-
-                                      <div class="widget-box-2">
-                                          <div class="widget-detail-2 text-right">
-                                              <span class="badge badge-success badge-pill float-left mt-3">32% <i class="mdi mdi-trending-up"></i> </span>
-                                              <h2 class="font-weight-normal mb-1"> 8451 </h2>
-                                              <p class="text-muted mb-3">*</p>
-                                          </div>
-                                          <div class="progress progress-bar-alt-success progress-sm">
-                                              <div class="progress-bar bg-success" role="progressbar"
-                                                      aria-valuenow="77" aria-valuemin="0" aria-valuemax="100"
-                                                      style="width: 77%;">
-                                                  <span class="sr-only">77% Complete</span>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-
-                              </div><!-- end col -->
+                              </div>
 
                               <div class="col-xl-3 col-md-6">
-                                  <div class="card-box">
-
-                                      <h4 class="header-title mt-0 mb-4">Supplier</h4>
-
-                                      <div class="widget-chart-1">
-                                          <div class="widget-chart-box-1 float-left" dir="ltr">
-                                              <input data-plugin="knob" data-width="80" data-height="80" data-fgColor="#ffbd4a"
-                                                      data-bgColor="#FFE6BA" value="80"
-                                                      data-skin="tron" data-angleOffset="180" data-readOnly=true
-                                                      data-thickness=".15"/>
-                                          </div>
-                                          <div class="widget-detail-1 text-right">
-                                              <h2 class="font-weight-normal pt-2 mb-1"> 4569 </h2>
-                                              <p class="text-muted mb-1">*</p>
-                                          </div>
+                                  <div class="card-box widget-user">
+                                      <div class="text-center">
+                                          <h2 class="font-weight-normal text-pink" data-plugin="counterup">
+                                            <?php if ($enquiry_count) {
+                                                    echo $enquiry_count;
+                                                } else {
+                                                    echo '0';
+                                                } ?></h2>
+                                          <h5>Enquiry</h5>
                                       </div>
                                   </div>
-
-                              </div><!-- end col -->
+                              </div>
 
                               <div class="col-xl-3 col-md-6">
-                                  <div class="card-box">
-
-                                      <h4 class="header-title mt-0 mb-3">OP</h4>
-
-                                      <div class="widget-box-2">
-                                          <div class="widget-detail-2 text-right">
-                                              <span class="badge badge-pink badge-pill float-left mt-3">32% <i class="mdi mdi-trending-up"></i> </span>
-                                              <h2 class="font-weight-normal mb-1"> 158 </h2>
-                                              <p class="text-muted mb-3">*</p>
-                                          </div>
-                                          <div class="progress progress-bar-alt-pink progress-sm">
-                                              <div class="progress-bar bg-pink" role="progressbar"
-                                                      aria-valuenow="77" aria-valuemin="0" aria-valuemax="100"
-                                                      style="width: 77%;">
-                                                  <span class="sr-only">77% Complete</span>
-                                              </div>
-                                          </div>
+                                  <div class="card-box widget-user">
+                                      <div class="text-center">
+                                          <h2 class="font-weight-normal text-warning" data-plugin="counterup">
+                                            <?php if ($quatation_count) {
+                                                    echo $quatation_count;
+                                                } else {
+                                                    echo '0';
+                                                } ?></h2>
+                                          </h2>
+                                          <h5>Quatation</h5>
                                       </div>
                                   </div>
+                              </div>
 
-                              </div><!-- end col -->
+                              <div class="col-xl-3 col-md-6">
+                                  <div class="card-box widget-user">
+                                      <div class="text-center">
+                                          <h2 class="font-weight-normal text-info" data-plugin="counterup">
+                                            <?php if ($po_count) {
+                                                    echo $po_count;
+                                                } else {
+                                                    echo '0';
+                                                } ?>
+                                          </h2>
+                                          <h5>PO</h5>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="row">
 
                           </div>
                         <?php } else {
@@ -403,7 +370,7 @@
                                                   <div class="col-md-6 pt-4">
                                                       <div class="row">
                                                           <div class="col-md-6">
-                                                              <input type="file" class="form-control" placeholder="Photo Of The Parts" name="Photo_Of_The_Parts">
+                                                              <input type="file" class="form-control" multiple name="Photo_Of_The_Parts[]">
                                                           </div>
                                                           <div class="col-md-6">
                                                               <button class="btn btn-info w-100">Browse</button>
@@ -413,7 +380,7 @@
                                                   <div class="col-md-6 pt-4">
                                                       <div class="row">
                                                           <div class="col-md-6">
-                                                              <input type="file" class="form-control" placeholder="Drawing Of The Parts" name="Drawing_Of_The_Parts">
+                                                              <input type="file" class="form-control" multiple name="Drawing_Of_The_Parts[]">
                                                           </div>
                                                           <div class="col-md-6">
                                                               <button class="btn btn-info w-100">Browse</button>

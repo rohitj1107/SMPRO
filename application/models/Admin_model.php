@@ -178,6 +178,40 @@ class Admin_model extends CI_Model{
     }
   }
 
+  public function users_count(){
+      $sql = $this->db->where('u_action','1')->get('s_user');
+      if ($sql->num_rows() > 0) {
+          return $sql->num_rows();
+      } else {
+          return false;
+      }
+  }
+
+  public function enquiry_count(){
+      $sql = $this->db->select('e_id')->get('s_enquiry');
+      if ($sql->num_rows() > 0) {
+          return $sql->num_rows();
+      } else {
+          return false;
+      }
+  }
+  public function quatation_count(){
+      $sql = $this->db->select('q_id')->get('s_quotation');
+      if ($sql->num_rows() > 0) {
+          return $sql->num_rows();
+      } else {
+          return false;
+      }
+  }
+  public function po_count(){
+      $sql = $this->db->select('po_id')->get('s_po');
+      if ($sql->num_rows() > 0) {
+          return $sql->num_rows();
+      } else {
+          return false;
+      }
+  }
+
 }
 
 
