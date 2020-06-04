@@ -212,6 +212,33 @@ class Admin_model extends CI_Model{
       }
   }
 
+  public function select_user_view($u_Id){
+      $sql = $this->db->where('u_Id',$u_Id)->get('s_user');
+      if ($sql->num_rows() > 0) {
+          return $sql->row();
+      } else {
+          return FALSE;
+      }
+  }
+
+  public function user_update($data,$u_Id){
+      $sql = $this->db->set($data)->where('u_Id',$u_Id)->update('s_user');
+      if ($sql) {
+          return TRUE;
+      } else {
+          return FALSE;
+      }
+  }
+
+  public function create_user($data){
+      $sql = $this->db->insert('s_user',$data);
+      if ($sql) {
+          return true;
+      } else {
+          return false;
+      }
+  }
+
 }
 
 

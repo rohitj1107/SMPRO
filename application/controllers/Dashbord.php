@@ -398,6 +398,14 @@ class Dashbord extends CI_Controller{
       }
 
   }
+
+  public function user_list(){
+      $data = $this->Admin_model->user_table();
+      $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
+      $type = $this->Admin_model->select_type();
+      $this->load->view('dashbord/user_list_view',['data'=>$data,'type'=>$type,'user'=>$user]);
+
+  }
 }
 
 ?>

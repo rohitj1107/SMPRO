@@ -132,7 +132,7 @@
                               </li>
 
                               <li>
-                                  <a href="<?php echo base_url('Dashbord'); ?>">
+                                  <a href="<?php echo base_url('Dashbord/user_list'); ?>">
                                       <i class="mdi mdi-invert-colors"></i>
                                       <span> User List </span>
                                   </a>
@@ -214,9 +214,9 @@
                                                 <td><?php echo $sw_enquiry->e_required_qty; ?></td>
                                                 <td><?php echo $sw_enquiry->e_date_time; ?></td>
                                                 <td>
-                                                  <a href="<?php echo base_url("view_enquiry_admin/$sw_enquiry->e_customerID/$sw_enquiry->e_enquiryId"); ?>"><button type="button" class="bg-success" name="button">View</button></a>
+                                                  <a href="<?php echo base_url("view_enquiry_admin/$sw_enquiry->e_customerID/$sw_enquiry->e_enquiryId"); ?>"><button type="button" class="bg-success mdi mdi-view-list" name="button"></button></a>
                                                   <!-- <a href="<?php echo base_url('edite_enquiry'); ?>"><button type="button" class="bg-warning" name="button">Edit</button></a> -->
-                                                  <a href="<?php echo base_url('delete_enquiry_admin'); ?>"><button type="button" class="bg-danger" name="button">Delete</button></a>
+                                                  <a href="<?php echo base_url('delete_enquiry_admin'); ?>"><button type="button" class="bg-danger mdi mdi-delete-sweep-outline" name="button"></button></a>
                                                 </td>
 
                                                 <!-- <td>Ac</td> -->

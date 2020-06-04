@@ -146,7 +146,7 @@
                               </li>
 
                               <li>
-                                  <a href="<?php echo base_url('Dashbord'); ?>">
+                                  <a href="<?php echo base_url('Dashbord/user_list'); ?>">
                                       <i class="mdi mdi-invert-colors"></i>
                                       <span> User List </span>
                                   </a>
@@ -491,7 +491,7 @@
                             <?php }
                           else:
                             echo 'Not Add Quotation';
-                          endif;  
+                          endif;
                           ?>
 
                               </div>

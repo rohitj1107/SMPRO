@@ -84,11 +84,11 @@
                 <?php //echo form_input($name_data); ?>
 
                 <select class="form-control" name="country">
-                  <option value="">Select Country</option>
+                  <option value="Not Select">Select Country</option>
 
                   <?php foreach ($countries as $value) { ?>
 
-                    <option value=""><?php echo $value->country_name ?></option>
+                    <option value="<?php echo $value->country_name ?>"><?php echo $value->country_name ?></option>
 
                   <?php } ?>
                 </select>

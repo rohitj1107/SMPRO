@@ -185,225 +185,227 @@
 
                       <!-- Start Content-->
                       <div class="container-fluid">
-
-                        <?php if($this->session->userdata('actionId') ==3 ){ ?>
                           <div class="row">
-                              <div class="col-xl-3 col-md-6">
-                                  <div class="card-box widget-user">
-                                      <div class="text-center">
-                                          <h2 class="font-weight-normal text-primary" data-plugin="counterup"><?php echo $users_count; ?></h2>
-                                          <h5>Users</h5>
+                            <div class="col-md-12">
+                              <div class="card-box">
+                                <?php if($this->session->userdata('actionId') ==3 ){ ?>
+
+                                  <h4 class="header-title mt-0 mb-3">User Edit </h4>
+
+
+                                  <div class="row">
+                                      <div class="col-md-12">
+                                        <?php if ($this->session->flashdata('seccess')) { ?>
+                                          <div class="text-white bg-success text-center">
+
+                                            <?php echo $this->session->flashdata('seccess'); ?>
+
+                                          </div>
+                                        <?php } ?>
+
+                                        <?php if ($this->session->flashdata('errors')) { ?>
+                                          <div class="text-white bg-danger text-center">
+
+                                            <?php echo $this->session->flashdata('errors'); ?>
+
+                                          </div>
+                                        <?php } ?>
+
+                                        <?php echo form_open("User/create_user_insert"); ?>
                                       </div>
+                                      <?php echo validation_errors(); ?>
+                                      <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+                                      <div class="col-md-6 pt-4">
+
+                                          <?php $name_data = [
+                                            'name' => 'companyName',
+                                            'value' => set_value('companyName'),
+                                            'placeholder' => 'Company Name *',
+                                            'class' => 'form-control'
+                                          ]; ?>
+
+                                          <?php echo form_input($name_data); ?>
+                                          <!-- <input type="text" class="form-control" id="email" placeholder="Company Name" name="companyName"> -->
+                                      </div>
+
+                                      <div class="col-md-6 pt-4">
+                                          <?php $name_data = [
+                                            'name' => 'websiteUrl',
+                                            'value' => set_value('websiteUrl'),
+                                            'placeholder' => 'Website URL',
+                                            'class' => 'form-control'
+                                          ]; ?>
+
+                                          <?php echo form_input($name_data); ?>
+                                          <!-- <input type="text" class="form-control" id="email" placeholder="Website URL" name="websiteUrl"> -->
+                                      </div>
+
+                                      <div class="col-md-6 pt-4">
+                                          <?php //$name_data = [
+                                            // 'name' => 'country',
+                                            // 'value' => set_value('country'),
+                                            // 'placeholder' => 'Country',
+                                            // 'class' => 'form-control'
+                                          // ]; ?>
+
+                                          <?php //echo form_input($name_data); ?>
+
+                                          <select class="form-control" name="country">
+                                            <option value="Not Select">Select</option>
+                                            <?php foreach ($countries as $value) { ?>
+
+                                              <option value="<?php echo $value->country_name ?>"><?php echo $value->country_name ?></option>
+
+                                            <?php } ?>
+                                          </select>
+
+                                          <!-- <input type="text" class="form-control" id="email" placeholder="Country" name="country"> -->
+                                      </div>
+
+                                      <div class="col-md-6 pt-4">
+                                          <?php $name_data = [
+                                            'name' => 'postalCode',
+                                            'value' => set_value('postalCode'),
+                                            'placeholder' => 'Postal Code',
+                                            'class' => 'form-control'
+                                          ]; ?>
+
+                                          <?php echo form_input($name_data); ?>
+                                          <!-- <input type="text" class="form-control" id="email" placeholder="Postal Code" name="postalCode"> -->
+                                      </div>
+
+                                      <div class="col-md-6 pt-4">
+                                          <?php $name_data = [
+                                            'name' => 'companyType',
+                                            'value' => set_value('companyType'),
+                                            'placeholder' => 'Company Type',
+                                            'class' => 'form-control'
+                                          ]; ?>
+
+                                          <?php echo form_input($name_data); ?>
+                                          <!-- <input type="text" class="form-control" id="email" placeholder="Company Type" name="companyType"> -->
+                                      </div>
+
+                                      <div class="col-md-6 pt-4">
+                                          <?php $name_data = [
+                                            'name' => 'eou',
+                                            'value' => set_value('eou'),
+                                            'placeholder' => 'EOU / SEZ / General',
+                                            'class' => 'form-control'
+                                          ]; ?>
+
+                                          <?php echo form_input($name_data); ?>
+                                          <!-- <input type="text" class="form-control" id="email" placeholder="EOU / SEZ / General" name="eou"> -->
+                                      </div>
+
+                                      <div class="col-md-6 pt-4">
+                                        <?php echo form_error('emailId'); ?>
+                                          <?php $name_data = [
+                                            'name' => 'emailId',
+                                            // 'readonly' => 'true',
+                                            'value' => set_value('emailId'),
+                                            'placeholder' => 'Official Contact Email ID *',
+                                            'class' => 'form-control'
+                                          ]; ?>
+
+                                          <?php echo form_input($name_data); ?>
+                                          <!-- <input type="text" class="form-control" id="email" placeholder="Official Contact Email ID" name="emailId"> -->
+                                      </div>
+
+                                      <div class="col-md-6 pt-4">
+                                      </div>
+
+                                      <div class="col-md-6 pt-4">
+                                          <?php $name_data = [
+                                            'name' => 'contactNumber',
+                                            'value' => set_value('contactNumber'),
+                                            'placeholder' => 'Contact Number',
+                                            'class' => 'form-control'
+                                          ]; ?>
+
+                                          <?php echo form_input($name_data); ?>
+                                          <!-- <input type="text" class="form-control" id="email" placeholder="Contact Number" name="contactNumber"> -->
+                                      </div>
+
+                                      <div class="col-md-6 pt-4">
+                                          <?php $name_data = [
+                                            'name' => 'contactNumber_one',
+                                            'value' => set_value('contactNumber_one'),
+                                            'placeholder' => 'Contact Number',
+                                            'class' => 'form-control'
+                                          ]; ?>
+
+                                          <?php echo form_input($name_data); ?>
+                                          <!-- <input type="text" class="form-control" id="email" placeholder="Contact Number" name="contactNumber"> -->
+                                      </div>
+
+                                      <div class="col-md-6 pt-4">
+                                          <?php $name_data = [
+                                            'name' => 'mobileNumber',
+                                            'value' => set_value('mobileNumber'),
+                                            'placeholder' => '+1 Mobile Number',
+                                            'class' => 'form-control'
+                                          ]; ?>
+
+                                          <?php echo form_input($name_data); ?>
+                                          <!-- <input type="text" class="form-control" id="email" placeholder="+1 Mobile Number" name="mobileNumber"> -->
+                                      </div>
+
+                                      <div class="col-md-6 pt-4">
+
+                                      </div>
+
+                                      <div class="col-md-6 pt-4">
+                                          <?php $name_data = [
+                                            'name' => 'gst',
+                                            'value' => set_value('gst'),
+                                            'placeholder' => 'Company GST / VAT Number',
+                                            'class' => 'form-control'
+                                          ]; ?>
+
+                                          <?php echo form_input($name_data); ?>
+                                          <!-- <input type="text" class="form-control" id="email" placeholder="Company GST / VAT Number" name="gst"> -->
+                                      </div>
+
+                                      <div class="col-md-6 pt-4">
+                                          <?php $name_data = [
+                                            'name' => 'industry',
+                                            'value' => set_value('industry'),
+                                            'placeholder' => 'Industry',
+                                            'class' => 'form-control'
+                                          ]; ?>
+
+                                          <?php echo form_input($name_data); ?>
+                                          <!-- <input type="text" class="form-control" id="email" placeholder="Industry" name="industry"> -->
+                                      </div>
+
+                                      <div class="col-md-12 pt-4">
+                                          <?php $name_data = [
+                                            'name' => 'comment',
+                                            'value' => set_value('comment'),
+                                            'placeholder' => 'Remarks / Additional Info',
+                                            'class' => 'form-control',
+                                            'rows' => '3'
+                                          ]; ?>
+
+                                          <?php echo form_textarea($name_data); ?>
+                                          <!-- <textarea class="form-control" rows="3" placeholder="Remarks / Additional Info" id="comment"></textarea> -->
+                                      </div>
+
+                                      <div class="col-md-6 mt-4">
+                                        <?php echo form_submit(['name'=>'mysubmit','value'=>'SUBMIT','class'=>'w-100 btn btn-success']); ?>
+                                        <?php echo form_close(); ?>
+                                      </div>
+
                                   </div>
+
+
                               </div>
+                            </div>
 
-                              <div class="col-xl-3 col-md-6">
-                                  <div class="card-box widget-user">
-                                      <div class="text-center">
-                                          <h2 class="font-weight-normal text-pink" data-plugin="counterup">
-                                            <?php if ($enquiry_count) {
-                                                    echo $enquiry_count;
-                                                } else {
-                                                    echo '0';
-                                                } ?></h2>
-                                          <h5>Enquiry</h5>
-                                      </div>
-                                  </div>
-                              </div>
-
-                              <div class="col-xl-3 col-md-6">
-                                  <div class="card-box widget-user">
-                                      <div class="text-center">
-                                          <h2 class="font-weight-normal text-warning" data-plugin="counterup">
-                                            <?php if ($quatation_count) {
-                                                    echo $quatation_count;
-                                                } else {
-                                                    echo '0';
-                                                } ?></h2>
-                                          </h2>
-                                          <h5>Quatation</h5>
-                                      </div>
-                                  </div>
-                              </div>
-
-                              <div class="col-xl-3 col-md-6">
-                                  <div class="card-box widget-user">
-                                      <div class="text-center">
-                                          <h2 class="font-weight-normal text-info" data-plugin="counterup">
-                                            <?php if ($po_count) {
-                                                    echo $po_count;
-                                                } else {
-                                                    echo '0';
-                                                } ?>
-                                          </h2>
-                                          <h5>PO</h5>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="row">
-
-                          </div>
-                        <?php } else {
-
-                        } ?>
-                          <!-- end row -->
-
-                          <div class="row">
-                              <div class="col-xl-12">
-                                  <div class="card-box">
-                                    <?php if($this->session->userdata('actionId') ==3 ){ ?>
-
-                                      <h4 class="header-title mt-0 mb-3">Latest User</h4>
-                                      <?php if ($this->session->flashdata('approval')) { ?>
-                                        <div class="text-white bg-success text-center">
-
-                                          <?php echo $this->session->flashdata('approval'); ?>
-
-                                        </div>
-                                      <?php } ?>
-
-                                      <?php if ($this->session->flashdata('not_approval')) { ?>
-                                        <div class="text-white bg-danger text-center">
-
-                                          <?php echo $this->session->flashdata('not_approval'); ?>
-
-                                        </div>
-                                      <?php } ?>
-
-                                      <div class="table-responsive">
-                                          <table class="table table-hover mb-0">
-                                              <thead>
-                                              <tr>
-                                                  <th>id</th>
-                                                  <th>Company Name</th>
-                                                  <th>Email</th>
-                                                  <th>Contact</th>
-                                                  <th>Eou</th>
-                                                  <th>Status</th>
-                                                  <th></th>
-                                                  <th></th>
-                                                  <th>Action</th>
-
-                                              </tr>
-                                              </thead>
-                                              <tbody>
-                                                      <?php foreach($data as $value){?>
-                                                    <tr>
-
-                                                      <th scope="row"><?php echo $value->u_Id; ?></th>
-                                                      <td><?php echo $value->u_companyName; ?></td>
-                                                      <td><?php echo $value->u_emailId; ?></td>
-                                                      <td><?php echo $value->u_contactNumber; ?></td>
-                                                      <td><?php echo $value->u_eou; ?></td>
-                                                      <td><?php echo $value->u_action; ?></td>
-                                                      <td>
-                                                        <?php echo form_open("admin_approval/$value->u_Id"); ?>
-                                                          <select class="form-control" name="type">
-                                                            <option value="0">Desabel</option>
-                                                            <?php foreach($type as $type_d){ ?>
-                                                                <option value="<?php echo $type_d->t_id; ?>"><?php echo $type_d->t_name; ?></option>
-                                                            <?php } ?>
-                                                          </select>
-                                                      </td>
-                                                      <td>
-                                                          <button type="submit" class="btn btn-success" name="button">Action</button>
-                                                          <?php echo form_close(); ?>
-                                                      </td>
-
-                                                      <td><a href="#"><button type="button" class="btn btn-danger" name="button">Delete</button></a></td>
-
-                                                    </tr>
-                                                    <?php } ?>
-
-                                              </tbody>
-                                          </table>
-                                      </div>
                                     <?php } else {?>
-                                      <div class="container-fluid">
-                                          <div class="row">
-                                              <div class="col-md-12 d-flex justify-content-center align-items-center coverpic-headline">
-                                                  <p class="font-weight-bold">Enquiry</p>
-                                              </div>
-                                          </div>
-                                      </div>
 
-                                      <div class="enquiry-custom-div">
-                                          <div class="container-fluid enquiry">
-                                              <div class="row">
-                                                  <div class="col-md-12 pt-4">
-                                                      <?php if ($this->session->flashdata('enquiry_success')) { ?>
-                                                        <div class="alert alert-success alert-dismissable">
-                                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                                        <?php echo $this->session->flashdata('enquiry_success'); ?>
-                                                      </div>
-                                                      <?php } ?>
-
-                                                      <?php if ($this->session->flashdata('enquiry_faile')) { ?>
-                                                        <div class="alert alert-danger alert-dismissable">
-                                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                                        <?php echo $this->session->flashdata('enquiry_faile'); ?>
-                                                      </div>
-                                                      <?php } ?>
-
-                                                  </div>
-                                                  <div class="col-md-6 pt-4">
-                                                    <?php echo form_open_multipart('Dashbord/do_upload');?>
-                                                      <label for="customerId">CUSTOMER ID</label>
-                                                      <input type="text" readonly class="form-control" value="<?php echo $user->u_customerId; ?>" name="customerId">
-                                                  </div>
-                                                  <div class="col-md-12 pt-4">
-                                                      <input type="text" class="form-control" placeholder="Application" name="application">
-                                                  </div>
-                                                  <div class="col-md-12 pt-4">
-                                                      <textarea class="form-control" rows="3" name="machine_model" placeholder="Machine Model / Specs"></textarea>
-                                                  </div>
-                                                  <div class="col-md-6 pt-4">
-                                                      <input type="text" class="form-control" name="machine_make" placeholder="Machine Make">
-                                                  </div>
-                                                  <div class="col-md-6 pt-4">
-                                                      <input type="text" class="form-control" name="required_qty" placeholder="Required Qty">
-                                                  </div>
-                                                  <div class="col-md-12 pt-4">
-                                                      <textarea class="form-control" rows="4" name="required_description" placeholder="Required Description"></textarea>
-                                                  </div>
-                                                  <div class="col-md-6 pt-4">
-                                                      <div class="row">
-                                                          <div class="col-md-6">
-                                                              <input type="file" class="form-control" multiple name="Photo_Of_The_Parts[]">
-                                                          </div>
-                                                          <div class="col-md-6">
-                                                              <button class="btn btn-info w-100">Browse</button>
-                                                          </div>
-                                                      </div>
-                                                  </div>
-                                                  <div class="col-md-6 pt-4">
-                                                      <div class="row">
-                                                          <div class="col-md-6">
-                                                              <input type="file" class="form-control" multiple name="Drawing_Of_The_Parts[]">
-                                                          </div>
-                                                          <div class="col-md-6">
-                                                              <button class="btn btn-info w-100">Browse</button>
-                                                          </div>
-                                                      </div>
-                                                  </div>
-                                                  <div class="col-md-12 pt-4">
-                                                      <textarea class="form-control" rows="3" name="special_remarks" placeholder="Special Remarks"></textarea>
-                                                  </div>
-
-                                                  <div class="col-md-6 mt-4">
-                                                      <button class="w-100 btn btn-danger">
-                                                          SUBMIT
-                                                      </button>
-                                                  </div>
-                                                  <?php echo "</form>"?>
-
-                                              </div>
-                                          </div>
-                                      </div>
                                     <?php } ?>
-                                  </div>
-                              </div><!-- end col -->
 
                           </div>
                           <!-- end row -->
@@ -526,15 +528,24 @@
           <!-- Vendor js -->
           <script src="<?php echo base_url(); ?>assets/admin/js/vendor.min.js"></script>
 
-          <!-- knob plugin -->
-          <script src="<?php echo base_url(); ?>assets/admin/libs/jquery-knob/jquery.knob.min.js"></script>
+          <!-- third party js -->
+          <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/jquery.dataTables.min.js"></script>
+          <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/dataTables.bootstrap4.js"></script>
+          <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/dataTables.responsive.min.js"></script>
+          <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/responsive.bootstrap4.min.js"></script>
+          <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/dataTables.buttons.min.js"></script>
+          <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/buttons.bootstrap4.min.js"></script>
+          <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/buttons.html5.min.js"></script>
+          <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/buttons.flash.min.js"></script>
+          <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/buttons.print.min.js"></script>
+          <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/dataTables.keyTable.min.js"></script>
+          <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/dataTables.select.min.js"></script>
+          <script src="<?php echo base_url(); ?>assets/admin/libs/pdfmake/pdfmake.min.js"></script>
+          <script src="<?php echo base_url(); ?>assets/admin/libs/pdfmake/vfs_fonts.js"></script>
+          <!-- third party js ends -->
 
-          <!--Morris Chart-->
-          <script src="<?php echo base_url(); ?>assets/admin/libs/morris-js/morris.min.js"></script>
-          <script src="<?php echo base_url(); ?>assets/admin/libs/raphael/raphael.min.js"></script>
-
-          <!-- Dashboard init js-->
-          <script src="<?php echo base_url(); ?>assets/admin/js/pages/dashboard.init.js"></script>
+          <!-- Datatables init -->
+          <script src="<?php echo base_url(); ?>assets/admin/js/pages/datatables.init.js"></script>
 
           <!-- App js -->
           <script src="<?php echo base_url(); ?>assets/admin/js/app.min.js"></script>

@@ -73,7 +73,13 @@ $route['enquiry_form_admin'] = 'Dashbord/enquiry_form_admin';
 $route['do_upload_admin'] = 'Dashbord/do_upload_admin';
 $route['insert_quotation'] = 'Dashbord/insert_quotation';
 $route['quotation_to_po/(:any)'] = 'Dashbord/quotation_to_po/$1';
-$route['insert_po'] = 'dashbord/insert_po';
+$route['insert_po'] = 'Dashbord/insert_po';
+$route['user_list'] = 'Dashbord/user_list';
+
+$route['view/(:any)'] = 'User/view/$1';
+$route['edite/(:any)'] = 'User/edite/$1';
+$route['register_update/(:any)'] = 'User/register_update/$1';
+$route['create_user'] = 'User/create_user';
 
 $route['admin'] = 'Admin/login';
 $route['admin_login'] = 'Admin/check_login';
