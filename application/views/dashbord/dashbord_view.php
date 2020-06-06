@@ -289,6 +289,7 @@
                                               </thead>
                                               <tbody>
                                                       <?php foreach($data as $value){?>
+                                                        <?php if ($this->session->userdata('emailId') != $value->u_emailId) { ?>
                                                     <tr>
 
                                                       <th scope="row"><?php echo $value->u_Id; ?></th>
@@ -314,6 +315,7 @@
                                                       <td><a href="#"><button type="button" class="btn btn-danger" name="button">Delete</button></a></td>
 
                                                     </tr>
+                                                  <?php } else {} ?>
                                                     <?php } ?>
 
                                               </tbody>
