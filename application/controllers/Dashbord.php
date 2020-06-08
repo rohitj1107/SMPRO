@@ -186,7 +186,8 @@ class Dashbord extends CI_Controller{
     $enquiry = $this->Admin_model->select_enquiry($user->u_customerId);
     $view_enquiry = $this->Admin_model->select_view_enquiry($customerID,$enquiryID);
     $quatation = $this->Admin_model->select_quatation_list($view_enquiry->e_customerID,$view_enquiry->e_enquiryId);
-    $this->load->view('dashbord/view_enquiry_admin_view',['data'=>$data,'type'=>$type,'user'=>$user,'enquiry'=>$enquiry,'view_enquiry'=>$view_enquiry,'quatation'=>$quatation]);
+    $follow_up = $this->Admin_model->select_follow_up($view_enquiry->e_enquiryId);
+    $this->load->view('dashbord/view_enquiry_admin_view',['data'=>$data,'type'=>$type,'user'=>$user,'enquiry'=>$enquiry,'view_enquiry'=>$view_enquiry,'quatation'=>$quatation,'follow_up'=>$follow_up]);
   }
 
   public function enquiry_form_admin(){
@@ -405,6 +406,27 @@ class Dashbord extends CI_Controller{
       $type = $this->Admin_model->select_type();
       $this->load->view('dashbord/user_list_view',['data'=>$data,'type'=>$type,'user'=>$user]);
 
+  }
+
+  public function follow_up(){
+    // print_r($this->input->post());
+    $data = [
+        'f_quote_number' => $this->input->post('quote_number'),
+        'f_status' => $this->input->post('status'),
+        'f_comment' => $this->input->post('comment'),
+        'f_select_date' => $this->input->post('select_date'),
+        'f_enquiry_id' => $this->input->post('enquiry_ID')
+    ];
+    $customerId = $this->input->post('customerId');
+    $enquiry_ID = $this->input->post('enquiry_ID');
+    // print_r($data);exit;
+      if ($this->Admin_model->insert_follow_up($data)) {
+          $this->session->set_flashdata('follow_up_success','Follow Up created success fully !');
+          return redirect('view_enquiry_admin/'.$customerId.'/'.$enquiry_ID);
+      } else {
+          $this->session->set_flashdata('follow_up_faild','Follow Up Not created !');
+          return redirect('view_enquiry_admin/'.$customerId.'/'.$enquiry_ID);
+      }
   }
 }
 

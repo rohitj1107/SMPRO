@@ -75,6 +75,7 @@ $route['insert_quotation'] = 'Dashbord/insert_quotation';
 $route['quotation_to_po/(:any)'] = 'Dashbord/quotation_to_po/$1';
 $route['insert_po'] = 'Dashbord/insert_po';
 $route['user_list'] = 'Dashbord/user_list';
+$route['follow_up'] = 'Dashbord/follow_up';
 
 $route['view/(:any)'] = 'User/view/$1';
 $route['edite/(:any)'] = 'User/edite/$1';

@@ -239,6 +239,24 @@ class Admin_model extends CI_Model{
       }
   }
 
+  public function insert_follow_up($data){
+    $sql = $this->db->insert('s_follow_up',$data);
+    if ($sql) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+  }
+
+  public function select_follow_up($e_enquiryId){
+      $sql = $this->db->where('f_enquiry_id',$e_enquiryId)->get('s_follow_up');
+      if ($sql->num_rows() > 0) {
+          return $sql->result();
+      } else {
+          return false;
+      }
+  }
+
 }
 
 
