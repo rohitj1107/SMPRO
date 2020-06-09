@@ -132,7 +132,7 @@
                               </li>
 
                               <li>
-                                  <a href="<?php echo base_url('Dashbord/user_list'); ?>">
+                                  <a href="<?php echo base_url('user_list'); ?>">
                                       <i class="mdi mdi-invert-colors"></i>
                                       <span> User List </span>
                                   </a>
@@ -147,7 +147,18 @@
                                       <li><a href="<?php echo base_url('enquiry_show_admin'); ?>"> Enquiry List </a></li>
                                       <li><a href="<?php echo base_url('enquiry_form_admin'); ?>"> Enquiry Form </a></li>
                                   </ul>
-                              </li>                            <?php } else {?>
+                              </li>
+                              <li>
+                                  <a href="javascript: void(0);">
+                                      <i class="mdi mdi-texture"></i>
+                                      <span> Supplier </span>
+                                  </a>
+                                  <ul class="nav-second-level" aria-expanded="false">
+                                      <li><a href="<?php echo base_url('supplier_show_admin'); ?>"> Supplier List </a></li>
+                                      <li><a href="<?php echo base_url('supplier_form_admin'); ?>"> Supplier Form </a></li>
+                                  </ul>
+                              </li>
+                                                        <?php } else {?>
                               <li>
                                   <a href="<?php echo base_url('Dashbord'); ?>">
                                       <i class="mdi mdi-texture"></i>
@@ -195,6 +206,7 @@
 
                                   <div class="row">
                                       <div class="col-md-12">
+                                        Customer Numere : <span class="text-danger"> <?php echo $user_view->u_customerId;?></span>
                                         <?php if ($this->session->flashdata('seccess')) { ?>
                                           <div class="text-white bg-success text-center">
 
@@ -203,23 +215,23 @@
                                           </div>
                                         <?php } ?>
 
-                                        <?php if ($this->session->flashdata('errors')) { ?>
+                                        <?php if ($this->session->flashdata('failed')) { ?>
                                           <div class="text-white bg-danger text-center">
 
-                                            <?php echo $this->session->flashdata('errors'); ?>
+                                            <?php echo $this->session->flashdata('failed'); ?>
 
                                           </div>
                                         <?php } ?>
 
-                                        <?php echo form_open("User/create_user_insert"); ?>
+                                        <?php echo form_open("User/register_update/".base64_encode($user_view->u_Id)); ?>
                                       </div>
                                       <?php echo validation_errors(); ?>
                                       <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
                                       <div class="col-md-6 pt-4">
-
+                                        <label for="">Company Name</label>
                                           <?php $name_data = [
                                             'name' => 'companyName',
-                                            'value' => set_value('companyName'),
+                                            'value' => $user_view->u_companyName,
                                             'placeholder' => 'Company Name *',
                                             'class' => 'form-control'
                                           ]; ?>
@@ -229,9 +241,10 @@
                                       </div>
 
                                       <div class="col-md-6 pt-4">
+                                        <label for="">Website Url</label>
                                           <?php $name_data = [
                                             'name' => 'websiteUrl',
-                                            'value' => set_value('websiteUrl'),
+                                            'value' => $user_view->u_websiteUrl,
                                             'placeholder' => 'Website URL',
                                             'class' => 'form-control'
                                           ]; ?>
@@ -241,6 +254,7 @@
                                       </div>
 
                                       <div class="col-md-6 pt-4">
+                                        <label for="">Country</label>
                                           <?php //$name_data = [
                                             // 'name' => 'country',
                                             // 'value' => set_value('country'),
@@ -251,7 +265,8 @@
                                           <?php //echo form_input($name_data); ?>
 
                                           <select class="form-control" name="country">
-                                            <option value="Not Select">Select</option>
+                                            <option value="<?php echo $user_view->u_country;?>"><?php echo 'Selected Country : '.$user_view->u_country; ?></option>
+
                                             <?php foreach ($countries as $value) { ?>
 
                                               <option value="<?php echo $value->country_name ?>"><?php echo $value->country_name ?></option>
@@ -263,9 +278,10 @@
                                       </div>
 
                                       <div class="col-md-6 pt-4">
+                                        <label for="">Postal Code</label>
                                           <?php $name_data = [
                                             'name' => 'postalCode',
-                                            'value' => set_value('postalCode'),
+                                            'value' => $user_view->u_postalCode,
                                             'placeholder' => 'Postal Code',
                                             'class' => 'form-control'
                                           ]; ?>
@@ -275,35 +291,51 @@
                                       </div>
 
                                       <div class="col-md-6 pt-4">
+                                        <label for="">Company Type</label>
                                           <?php $name_data = [
                                             'name' => 'companyType',
-                                            'value' => set_value('companyType'),
+                                            'value' => $user_view->u_companyType,
                                             'placeholder' => 'Company Type',
                                             'class' => 'form-control'
                                           ]; ?>
 
-                                          <?php echo form_input($name_data); ?>
+                                          <?php //echo form_input($name_data); ?>
+                                          <select class="form-control" name="companyType">
+                                              <option value="<?php echo $user_view->u_companyType; ?>"><?php echo 'Selected Company Type : '.$user_view->u_companyType; ?></option>
+                                              <option value="PVT LTD">PVT LTD</option>
+                                              <option value="Prop">Prop</option>
+                                              <option value="LLP">LLP</option>
+                                              <option value="LTD">LTD</option>
+                                          </select>
                                           <!-- <input type="text" class="form-control" id="email" placeholder="Company Type" name="companyType"> -->
                                       </div>
 
                                       <div class="col-md-6 pt-4">
+                                        <label for="">EOU</label>
                                           <?php $name_data = [
                                             'name' => 'eou',
-                                            'value' => set_value('eou'),
+                                            'value' => $user_view->u_eou,
                                             'placeholder' => 'EOU / SEZ / General',
                                             'class' => 'form-control'
                                           ]; ?>
 
-                                          <?php echo form_input($name_data); ?>
+                                          <?php //echo form_input($name_data); ?>
+                                          <select class="form-control" name="eou">
+                                              <option value="<?php echo $user_view->u_eou; ?>"><?php echo 'Selected EOU : '.$user_view->u_eou; ?></option>
+                                              <option value="EOU">EOU</option>
+                                              <option value="SEZ">SEZ</option>
+                                              <option value="General">General</option>
+                                          </select>
                                           <!-- <input type="text" class="form-control" id="email" placeholder="EOU / SEZ / General" name="eou"> -->
                                       </div>
 
                                       <div class="col-md-6 pt-4">
+                                        <label for="">Email ID</label>
                                         <?php echo form_error('emailId'); ?>
                                           <?php $name_data = [
                                             'name' => 'emailId',
-                                            // 'readonly' => 'true',
-                                            'value' => set_value('emailId'),
+                                            'readonly' => 'true',
+                                            'value' => $user_view->u_emailId,
                                             'placeholder' => 'Official Contact Email ID *',
                                             'class' => 'form-control'
                                           ]; ?>
@@ -316,9 +348,10 @@
                                       </div>
 
                                       <div class="col-md-6 pt-4">
+                                        <label for="">Contact Number</label>
                                           <?php $name_data = [
                                             'name' => 'contactNumber',
-                                            'value' => set_value('contactNumber'),
+                                            'value' => $user_view->u_contactNumber,
                                             'placeholder' => 'Contact Number',
                                             'class' => 'form-control'
                                           ]; ?>
@@ -326,11 +359,22 @@
                                           <?php echo form_input($name_data); ?>
                                           <!-- <input type="text" class="form-control" id="email" placeholder="Contact Number" name="contactNumber"> -->
                                       </div>
+                                          <?php $name_data = [
+                                            'name' => 'action',
+                                            'value' => $user_view->u_action,
+                                            'placeholder' => 'Action',
+                                            'class' => 'form-control',
+                                            'type' => 'hidden'
+                                          ]; ?>
+
+                                          <?php //echo form_input($name_data); ?>
+                                          <!-- <input type="text" class="form-control" id="email" placeholder="Contact Number" name="contactNumber"> -->
 
                                       <div class="col-md-6 pt-4">
+                                        <label for="">Contact Number</label>
                                           <?php $name_data = [
                                             'name' => 'contactNumber_one',
-                                            'value' => set_value('contactNumber_one'),
+                                            'value' => $user_view->u_contactNumber_one,
                                             'placeholder' => 'Contact Number',
                                             'class' => 'form-control'
                                           ]; ?>
@@ -340,9 +384,10 @@
                                       </div>
 
                                       <div class="col-md-6 pt-4">
+                                        <label for="">Mobile Number</label>
                                           <?php $name_data = [
                                             'name' => 'mobileNumber',
-                                            'value' => set_value('mobileNumber'),
+                                            'value' => $user_view->u_mobileNumber,
                                             'placeholder' => '+1 Mobile Number',
                                             'class' => 'form-control'
                                           ]; ?>
@@ -356,9 +401,10 @@
                                       </div>
 
                                       <div class="col-md-6 pt-4">
+                                        <label for="">GST</label>
                                           <?php $name_data = [
                                             'name' => 'gst',
-                                            'value' => set_value('gst'),
+                                            'value' => $user_view->u_gst,
                                             'placeholder' => 'Company GST / VAT Number',
                                             'class' => 'form-control'
                                           ]; ?>
@@ -368,9 +414,10 @@
                                       </div>
 
                                       <div class="col-md-6 pt-4">
+                                        <label for="">Industry</label>
                                           <?php $name_data = [
                                             'name' => 'industry',
-                                            'value' => set_value('industry'),
+                                            'value' => $user_view->u_industry,
                                             'placeholder' => 'Industry',
                                             'class' => 'form-control'
                                           ]; ?>
@@ -380,9 +427,10 @@
                                       </div>
 
                                       <div class="col-md-12 pt-4">
+                                        <label for="">Comment</label>
                                           <?php $name_data = [
                                             'name' => 'comment',
-                                            'value' => set_value('comment'),
+                                            'value' => $user_view->u_comment,
                                             'placeholder' => 'Remarks / Additional Info',
                                             'class' => 'form-control',
                                             'rows' => '3'

@@ -176,7 +176,7 @@ class Dashbord extends CI_Controller{
 
     // echo '<pre>';
     // print_r($quatation);
-    $this->load->view('dashbord/enquiry_show_admin_view',['data'=>$data,'type'=>$type,'user'=>$user,'enquiry'=>$enquiry]);
+    $this->load->view('dashbord/enquiry/enquiry_show_admin_view',['data'=>$data,'type'=>$type,'user'=>$user,'enquiry'=>$enquiry]);
   }
 
   public function view_enquiry_admin($customerID,$enquiryID){
@@ -369,14 +369,6 @@ class Dashbord extends CI_Controller{
           $this->session->set_flashdata('po_failed','PO NOT upload !');
           return redirect("quotation_to_po/".$this->input->post('quote_number'));
       }
-
-  }
-
-  public function user_list(){
-      $data = $this->Admin_model->user_table();
-      $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
-      $type = $this->Admin_model->select_type();
-      $this->load->view('dashbord/user_list_view',['data'=>$data,'type'=>$type,'user'=>$user]);
 
   }
 

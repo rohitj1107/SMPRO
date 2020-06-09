@@ -147,18 +147,7 @@
                                       <li><a href="<?php echo base_url('enquiry_show_admin'); ?>"> Enquiry List </a></li>
                                       <li><a href="<?php echo base_url('enquiry_form_admin'); ?>"> Enquiry Form </a></li>
                                   </ul>
-                              </li>
-                              <li>
-                                  <a href="javascript: void(0);">
-                                      <i class="mdi mdi-texture"></i>
-                                      <span> Supplier </span>
-                                  </a>
-                                  <ul class="nav-second-level" aria-expanded="false">
-                                      <li><a href="<?php echo base_url('supplier_show_admin'); ?>"> Supplier List </a></li>
-                                      <li><a href="<?php echo base_url('supplier_form_admin'); ?>"> Supplier Form </a></li>
-                                  </ul>
-                              </li>
-                                                        <?php } else {?>
+                              </li>                            <?php } else {?>
                               <li>
                                   <a href="<?php echo base_url('Dashbord'); ?>">
                                       <i class="mdi mdi-texture"></i>
@@ -198,80 +187,263 @@
                       <div class="container-fluid">
                           <div class="row">
                             <div class="col-md-12">
-                              <div class="card-box table-responsive">
+                              <div class="card-box">
                                 <?php if($this->session->userdata('actionId') ==3 ){ ?>
 
-                                  <h4 class="header-title mt-0 mb-3">Latest User</h4>
-                                  <?php if ($this->session->flashdata('approval')) { ?>
-                                    <div class="text-white bg-success text-center">
+                                  <h4 class="header-title mt-0 mb-3">User Edit </h4>
 
-                                      <?php echo $this->session->flashdata('approval'); ?>
 
-                                    </div>
-                                  <?php } ?>
+                                  <div class="row">
+                                      <div class="col-md-12">
+                                        <?php if ($this->session->flashdata('seccess')) { ?>
+                                          <div class="text-white bg-success text-center">
 
-                                  <?php if ($this->session->flashdata('not_approval')) { ?>
-                                    <div class="text-white bg-danger text-center">
+                                            <?php echo $this->session->flashdata('seccess'); ?>
 
-                                      <?php echo $this->session->flashdata('not_approval'); ?>
-
-                                    </div>
-                                  <?php } ?>
-                                  <p> <a href="<?php echo base_url('User/create_user'); ?>" class="btn btn-success">Create User</a></p>
-                                  <table id="responsive-datatable" class="table table-bordered table-bordered dt-responsive nowrap">
-                                      <thead>
-                                      <tr>
-                                        <th>id</th>
-                                        <th>Company Name</th>
-                                        <th>Email</th>
-                                        <th>Contact</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                      </tr>
-                                      </thead>
-                                      <tbody>
-                                        <?php if ($data) { ?>
-                                          <?php foreach($data as $us_list){ ?>
-                                              <?php if ($this->session->userdata('emailId') != $us_list->u_emailId) { ?>
-                                          <tr>
-
-                                            <th scope="row"><?php echo $us_list->u_Id; ?></th>
-                                            <td><?php echo $us_list->u_companyName; ?></td>
-                                            <td><?php echo $us_list->u_emailId; ?></td>
-                                            <td><?php echo $us_list->u_contactNumber; ?></td>
-
-                                            <td><?php
-                                            foreach ($type as $tvalue) {
-                                                if ($tvalue->t_id == $us_list->u_action) {
-                                                    echo $tvalue->t_name;
-                                                }
-                                            }
-                                          ?></td>
-
-                                            <td>
-                                                <a href='<?php echo base_url("view/".base64_encode($us_list->u_Id)); ?>' class="btn btn-success mdi mdi-view-list"></a>
-                                                <a href='<?php echo base_url("edite/".base64_encode($us_list->u_Id)); ?>' class="btn btn-warning mdi mdi-account-edit"></a>
-                                                <a href="#" class="btn btn-danger mdi mdi-delete-sweep-outline"></a>
-                                            </td>
-                                          </tr>
-                                        <?php }else{
-
-                                              } ?>
+                                          </div>
                                         <?php } ?>
-                                      <?php }  ?>
-                                      </tbody>
-                                  </table>
+
+                                        <?php if ($this->session->flashdata('errors')) { ?>
+                                          <div class="text-white bg-danger text-center">
+
+                                            <?php echo $this->session->flashdata('errors'); ?>
+
+                                          </div>
+                                        <?php } ?>
+
+                                        <?php echo form_open("User/create_user_insert"); ?>
+                                      </div>
+                                      <?php echo validation_errors(); ?>
+                                      <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+                                      <div class="col-md-6 pt-4">
+                                        <label for="">Company Name</label>
+                                          <?php $name_data = [
+                                            'name' => 'companyName',
+                                            'value' => set_value('companyName'),
+                                            'placeholder' => 'Company Name *',
+                                            'class' => 'form-control'
+                                          ]; ?>
+
+                                          <?php echo form_input($name_data); ?>
+                                          <!-- <input type="text" class="form-control" id="email" placeholder="Company Name" name="companyName"> -->
+                                      </div>
+
+                                      <div class="col-md-6 pt-4">
+                                        <label for="">Website Url</label>
+
+                                          <?php $name_data = [
+                                            'name' => 'websiteUrl',
+                                            'value' => set_value('websiteUrl'),
+                                            'placeholder' => 'Website URL',
+                                            'class' => 'form-control'
+                                          ]; ?>
+
+                                          <?php echo form_input($name_data); ?>
+                                          <!-- <input type="text" class="form-control" id="email" placeholder="Website URL" name="websiteUrl"> -->
+                                      </div>
+
+                                      <div class="col-md-6 pt-4">
+                                        <label for="">Country</label>
+
+                                          <?php //$name_data = [
+                                            // 'name' => 'country',
+                                            // 'value' => set_value('country'),
+                                            // 'placeholder' => 'Country',
+                                            // 'class' => 'form-control'
+                                          // ]; ?>
+
+                                          <?php //echo form_input($name_data); ?>
+
+                                          <select class="form-control" name="country">
+                                            <option value="Not Select">Select Country</option>
+                                            <?php foreach ($countries as $value) { ?>
+
+                                              <option value="<?php echo $value->country_name ?>"><?php echo $value->country_name ?></option>
+
+                                            <?php } ?>
+                                          </select>
+
+                                          <!-- <input type="text" class="form-control" id="email" placeholder="Country" name="country"> -->
+                                      </div>
+
+                                      <div class="col-md-6 pt-4">
+                                        <label for="">Postal Code</label>
+
+                                          <?php $name_data = [
+                                            'name' => 'postalCode',
+                                            'value' => set_value('postalCode'),
+                                            'placeholder' => 'Postal Code',
+                                            'class' => 'form-control'
+                                          ]; ?>
+
+                                          <?php echo form_input($name_data); ?>
+                                          <!-- <input type="text" class="form-control" id="email" placeholder="Postal Code" name="postalCode"> -->
+                                      </div>
+
+                                      <div class="col-md-6 pt-4">
+                                        <label for="">Company Type</label>
+
+                                          <?php $name_data = [
+                                            'name' => 'companyType',
+                                            'value' => set_value('companyType'),
+                                            'placeholder' => 'Company Type',
+                                            'class' => 'form-control'
+                                          ]; ?>
+
+                                          <?php //echo form_input($name_data); ?>
+                                          <select class="form-control" name="companyType">
+                                              <option value="0">Select Company Type</option>
+                                              <option value="PVT LTD">PVT LTD</option>
+                                              <option value="Prop">Prop</option>
+                                              <option value="LLP">LLP</option>
+                                              <option value="LTD">LTD</option>
+                                          </select>
+
+                                          <!-- <input type="text" class="form-control" id="email" placeholder="Company Type" name="companyType"> -->
+                                      </div>
+
+                                      <div class="col-md-6 pt-4">
+                                        <label for="">EOU</label>
+
+                                          <?php $name_data = [
+                                            'name' => 'eou',
+                                            'value' => set_value('eou'),
+                                            'placeholder' => 'EOU / SEZ / General',
+                                            'class' => 'form-control'
+                                          ]; ?>
+
+                                          <?php //echo form_input($name_data); ?>
+                                          <select class="form-control" name="eou">
+                                              <option value="0">Select EOU</option>
+                                              <option value="EOU">EOU</option>
+                                              <option value="SEZ">SEZ</option>
+                                              <option value="General">General</option>
+                                          </select>
+                                          <!-- <input type="text" class="form-control" id="email" placeholder="EOU / SEZ / General" name="eou"> -->
+                                      </div>
+
+                                      <div class="col-md-6 pt-4">
+                                        <label for="">Email ID</label>
+
+                                        <?php echo form_error('emailId'); ?>
+                                          <?php $name_data = [
+                                            'name' => 'emailId',
+                                            // 'readonly' => 'true',
+                                            'value' => set_value('emailId'),
+                                            'placeholder' => 'Official Contact Email ID *',
+                                            'class' => 'form-control'
+                                          ]; ?>
+
+                                          <?php echo form_input($name_data); ?>
+                                          <!-- <input type="text" class="form-control" id="email" placeholder="Official Contact Email ID" name="emailId"> -->
+                                      </div>
+
+                                      <div class="col-md-6 pt-4">
+                                      </div>
+
+                                      <div class="col-md-6 pt-4">
+                                        <label for="">Contact Number</label>
+
+                                          <?php $name_data = [
+                                            'name' => 'contactNumber',
+                                            'value' => set_value('contactNumber'),
+                                            'placeholder' => 'Contact Number',
+                                            'class' => 'form-control'
+                                          ]; ?>
+
+                                          <?php echo form_input($name_data); ?>
+                                          <!-- <input type="text" class="form-control" id="email" placeholder="Contact Number" name="contactNumber"> -->
+                                      </div>
+
+                                      <div class="col-md-6 pt-4">
+                                        <label for="">Contact Number</label>
+
+                                          <?php $name_data = [
+                                            'name' => 'contactNumber_one',
+                                            'value' => set_value('contactNumber_one'),
+                                            'placeholder' => 'Contact Number',
+                                            'class' => 'form-control'
+                                          ]; ?>
+
+                                          <?php echo form_input($name_data); ?>
+                                          <!-- <input type="text" class="form-control" id="email" placeholder="Contact Number" name="contactNumber"> -->
+                                      </div>
+
+                                      <div class="col-md-6 pt-4">
+                                        <label for="">Mobile Number</label>
+
+                                          <?php $name_data = [
+                                            'name' => 'mobileNumber',
+                                            'value' => set_value('mobileNumber'),
+                                            'placeholder' => '+1 Mobile Number',
+                                            'class' => 'form-control'
+                                          ]; ?>
+
+                                          <?php echo form_input($name_data); ?>
+                                          <!-- <input type="text" class="form-control" id="email" placeholder="+1 Mobile Number" name="mobileNumber"> -->
+                                      </div>
+
+                                      <div class="col-md-6 pt-4">
+
+                                      </div>
+
+                                      <div class="col-md-6 pt-4">
+                                        <label for="">GST</label>
+
+                                          <?php $name_data = [
+                                            'name' => 'gst',
+                                            'value' => set_value('gst'),
+                                            'placeholder' => 'Company GST / VAT Number',
+                                            'class' => 'form-control'
+                                          ]; ?>
+
+                                          <?php echo form_input($name_data); ?>
+                                          <!-- <input type="text" class="form-control" id="email" placeholder="Company GST / VAT Number" name="gst"> -->
+                                      </div>
+
+                                      <div class="col-md-6 pt-4">
+                                        <label for="">Industry</label>
+
+                                          <?php $name_data = [
+                                            'name' => 'industry',
+                                            'value' => set_value('industry'),
+                                            'placeholder' => 'Industry',
+                                            'class' => 'form-control'
+                                          ]; ?>
+
+                                          <?php echo form_input($name_data); ?>
+                                          <!-- <input type="text" class="form-control" id="email" placeholder="Industry" name="industry"> -->
+                                      </div>
+
+                                      <div class="col-md-12 pt-4">
+                                        <label for="">Remarks</label>
+
+                                          <?php $name_data = [
+                                            'name' => 'comment',
+                                            'value' => set_value('comment'),
+                                            'placeholder' => 'Remarks / Additional Info',
+                                            'class' => 'form-control',
+                                            'rows' => '3'
+                                          ]; ?>
+
+                                          <?php echo form_textarea($name_data); ?>
+                                          <!-- <textarea class="form-control" rows="3" placeholder="Remarks / Additional Info" id="comment"></textarea> -->
+                                      </div>
+
+                                      <div class="col-md-6 mt-4">
+                                        <?php echo form_submit(['name'=>'mysubmit','value'=>'SUBMIT','class'=>'w-100 btn btn-success']); ?>
+                                        <?php echo form_close(); ?>
+                                      </div>
+
+                                  </div>
+
+
                               </div>
                             </div>
-                              <div class="col-xl-12">
-                                  <div class="card-box">
-                                      <div class="table-responsive">
-                                      </div>
+
                                     <?php } else {?>
 
                                     <?php } ?>
-                                  </div>
-                              </div><!-- end col -->
 
                           </div>
                           <!-- end row -->

@@ -132,7 +132,7 @@
                               </li>
 
                               <li>
-                                  <a href="<?php echo base_url('user_list'); ?>">
+                                  <a href="<?php echo base_url('Dashbord/user_list'); ?>">
                                       <i class="mdi mdi-invert-colors"></i>
                                       <span> User List </span>
                                   </a>
@@ -158,7 +158,7 @@
                                       <li><a href="<?php echo base_url('supplier_form_admin'); ?>"> Supplier Form </a></li>
                                   </ul>
                               </li>
-                                                      <?php } else {?>
+                                                        <?php } else {?>
                             <li>
                                 <a href="<?php echo base_url('Dashbord'); ?>">
                                     <i class="mdi mdi-texture"></i>
@@ -199,36 +199,41 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="card-box table-responsive">
-                                    <h4 class="mt-0 header-title">Supplier View</h4>
+                                    <h4 class="mt-0 header-title">Show Form</h4>
                                     <table id="responsive-datatable" class="table table-bordered table-bordered dt-responsive nowrap">
                                         <thead>
                                         <tr>
-                                            <th>Supplier Number</th>
-                                            <th>Company Name</th>
-                                            <th>Company Category</th>
-                                            <th>Country</th>
-                                            <th>Person Name</th>
-                                            <th>Number</th>
+                                            <th>Enquiry Number</th>
+                                            <th>Appliction</th>
+                                            <th>Machine Model</th>
+                                            <th>Machine Make</th>
+                                            <th>Required Qty</th>
+                                            <th>Date Time</th>
                                             <th>Action</th>
+                                            <th>Enq To PO</th>
                                             <!-- <th>Ed</th> -->
                                         </tr>
                                         </thead>
                                         <tbody>
-                                          <?php if ($supplier) { ?>
-                                            <?php foreach($supplier as $s_supplier){ ?>
+                                          <?php if ($enquiry) { ?>
+                                            <?php foreach($enquiry as $sw_enquiry){ ?>
                                             <tr>
-                                                <td><?php echo $s_supplier->s_supplier_id; ?></td>
-                                                <td><?php echo $s_supplier->s_company_name; ?></td>
-                                                <td><?php echo $s_supplier->s_company_category; ?></td>
-                                                <td><?php echo $s_supplier->s_country; ?></td>
-                                                <td><?php echo $s_supplier->s_contact_person_name; ?></td>
-                                                <td><?php echo $s_supplier->s_contact_number_1; ?></td>
+                                                <td><?php echo $sw_enquiry->e_enquiryId; ?></td>
+                                                <td><?php echo $sw_enquiry->e_appliction; ?></td>
+                                                <td><?php echo $sw_enquiry->e_machine_model; ?></td>
+                                                <td><?php echo $sw_enquiry->e_machine_make; ?></td>
+                                                <td><?php echo $sw_enquiry->e_required_qty; ?></td>
+                                                <td><?php echo $sw_enquiry->e_date_time; ?></td>
                                                 <td>
-                                                  <a href='<?php echo base_url("supplier_view/".base64_encode($s_supplier->s_supplier_id)); ?>' class="btn btn-success mdi mdi-view-list"></a>
-                                                  <a href='<?php echo base_url("supplier_edite/".base64_encode($s_supplier->s_supplier_id)); ?>' class="btn btn-warning mdi mdi-account-edit"></a>
-                                                  <a href="#" class="btn btn-danger mdi mdi-delete-sweep-outline"></a>
+                                                  <a href="<?php echo base_url("view_enquiry_single_admin/$sw_enquiry->e_customerID/$sw_enquiry->e_enquiryId"); ?>"><button type="button" class="bg-success mdi mdi-view-list" name="button"></button></a>
+                                                  <a href="<?php echo base_url("view_enquiry_admin/$sw_enquiry->e_customerID/$sw_enquiry->e_enquiryId"); ?>"><button type="button" class="bg-warning mdi mdi-view-list" name="button"></button></a>
+                                                  <!-- <a href="<?php //echo base_url('edite_enquiry'); ?>"><button type="button" class="bg-warning" name="button">Edit</button></a> -->
+                                                  <a href="<?php echo base_url('delete_enquiry_admin'); ?>"><button type="button" class="bg-danger mdi mdi-delete-sweep-outline" name="button"></button></a>
                                                 </td>
+                                                <td>
+                                                  <a href="<?php echo base_url("view_enquiry_admin/$sw_enquiry->e_customerID/$sw_enquiry->e_enquiryId"); ?>"><button type="button" class="bg-info mdi mdi-view-list" name="button"></button></a>
 
+                                                </td>
                                                 <!-- <td>Ac</td> -->
                                             </tr>
                                           <?php } ?>

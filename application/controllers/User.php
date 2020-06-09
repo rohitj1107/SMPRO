@@ -28,7 +28,7 @@ class User extends CI_Controller{
       $user_view = $this->Admin_model->select_user_view($uid);
       $this->load->model('Home_model');
       $countries = $this->Home_model->select_countri();
-      $this->load->view('dashbord/user_one_edite_view',['data'=>$data,'countries'=>$countries,'type'=>$type,'user_view'=>$user_view,'user'=>$user]);
+      $this->load->view('dashbord/user/user_one_edite_view',['data'=>$data,'countries'=>$countries,'type'=>$type,'user_view'=>$user_view,'user'=>$user]);
   }
 
   public function register_update($u_Id){
@@ -65,7 +65,7 @@ class User extends CI_Controller{
       $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
       $this->load->model('Home_model');
       $countries = $this->Home_model->select_countri();
-      $this->load->view('dashbord/create_user_view',['data'=>$data,'countries'=>$countries,'type'=>$type,'user'=>$user]);
+      $this->load->view('dashbord/user/create_user_view',['data'=>$data,'countries'=>$countries,'type'=>$type,'user'=>$user]);
   }
 
   public function create_user_insert(){
@@ -93,7 +93,7 @@ class User extends CI_Controller{
           'u_gst' => $this->security->xss_clean($this->input->post('gst')),
           'u_industry' => $this->security->xss_clean($this->input->post('industry')),
           'u_comment' => $this->security->xss_clean($this->input->post('comment')),
-          'u_customerId' => substr(str_shuffle($ran_cust), 0, 10),
+          'u_customerId' => 'CU-'.time(),
           'u_password' => md5(substr(str_shuffle($ran_pass),0,5)),
 
           'u_otp' => rand('1000','5000')
@@ -135,6 +135,14 @@ class User extends CI_Controller{
 
         return redirect('create_user');
       }
+  }
+
+  public function user_list(){
+      $data = $this->Admin_model->user_table();
+      $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
+      $type = $this->Admin_model->select_type();
+      $this->load->view('dashbord/user/user_list_view',['data'=>$data,'type'=>$type,'user'=>$user]);
+
   }
 }
 

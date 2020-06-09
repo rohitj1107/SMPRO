@@ -5,6 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <title>SMPRO - Welcome <?php echo $user->u_companyName; ?></title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
@@ -12,8 +13,21 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/admin/images/favicon.ico">
 
-    <!--Morris Chart-->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/libs/morris-js/morris.css" />
+    <!-- Plugins css -->
+    <link href="<?php echo base_url(); ?>assets/admin/libs/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" />
+    <link href="<?php echo base_url(); ?>assets/admin/libs/switchery/switchery.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="<?php echo base_url(); ?>assets/admin/libs/toastr/toastr.min.css" rel="stylesheet" type="text/css" />
+
+
+    <link href="<?php echo base_url(); ?>assets/admin/libs/multiselect/multi-select.css"  rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url(); ?>assets/admin/libs/select2/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url(); ?>assets/admin/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
+    <link href="<?php echo base_url(); ?>assets/admin/libs/switchery/switchery.min.css" rel="stylesheet" />
+    <link href="<?php echo base_url(); ?>assets/admin/libs/bootstrap-timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+    <!-- <link href="<?php echo base_url(); ?>assets/admin/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/admin/libs/bootstrap-datepicker/bootstrap-datepicker.css" rel="stylesheet"> -->
+    <link href="<?php echo base_url(); ?>assets/admin/libs/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 
     <!-- App css -->
     <link href="<?php echo base_url(); ?>assets/admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -196,54 +210,99 @@
 
                     <!-- Start Content-->
                     <div class="container-fluid">
+
                         <div class="row">
-                            <div class="col-12">
-                                <div class="card-box table-responsive">
-                                    <h4 class="mt-0 header-title">Show Form</h4>
-                                    <table id="responsive-datatable" class="table table-bordered table-bordered dt-responsive nowrap">
-                                        <thead>
-                                        <tr>
-                                            <th>Enquiry Number</th>
-                                            <th>Appliction</th>
-                                            <th>Machine Model</th>
-                                            <th>Machine Make</th>
-                                            <th>Required Qty</th>
-                                            <th>Date Time</th>
-                                            <th>Action</th>
-                                            <!-- <th>Ed</th> -->
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                          <?php if ($enquiry) { ?>
-                                            <?php foreach($enquiry as $sw_enquiry){ ?>
-                                            <tr>
-                                                <td><?php echo $sw_enquiry->e_enquiryId; ?></td>
-                                                <td><?php echo $sw_enquiry->e_appliction; ?></td>
-                                                <td><?php echo $sw_enquiry->e_machine_model; ?></td>
-                                                <td><?php echo $sw_enquiry->e_machine_make; ?></td>
-                                                <td><?php echo $sw_enquiry->e_required_qty; ?></td>
-                                                <td><?php echo $sw_enquiry->e_date_time; ?></td>
-                                                <td>
-                                                  <a href="<?php echo base_url("view_enquiry_admin/$sw_enquiry->e_customerID/$sw_enquiry->e_enquiryId"); ?>"><button type="button" class="bg-success mdi mdi-view-list" name="button"></button></a>
-                                                  <!-- <a href="<?php echo base_url('edite_enquiry'); ?>"><button type="button" class="bg-warning" name="button">Edit</button></a> -->
-                                                  <a href="<?php echo base_url('delete_enquiry_admin'); ?>"><button type="button" class="bg-danger mdi mdi-delete-sweep-outline" name="button"></button></a>
-                                                </td>
+                            <div class="col-md-12">
+                                <div class="card-box task-detail">
+                                    <h4>Application</h4>
+                                    <p class="text-muted">
+                                        <?php print_r($view_enquiry->e_appliction); ?>
+                                    </p>
+                                    <div class="row task-dates mb-0 mt-2">
+                                        <div class="col-lg-4">
+                                            <h5 class="font-600 m-b-5">Customer ID</h5>
+                                            <p> <?php print_r($view_enquiry->e_customerID); ?></p>
+                                        </div>
 
-                                                <!-- <td>Ac</td> -->
-                                            </tr>
-                                          <?php } ?>
-                                        <?php }  ?>
-                                        </tbody>
-                                    </table>
+                                        <div class="col-lg-4">
+                                            <h5 class="font-600 m-b-5">Enquiry ID</h5>
+                                            <p> <?php print_r($view_enquiry->e_enquiryId); ?></p>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <h5 class="font-600 m-b-5">Date</h5>
+                                            <p> <?php print_r($view_enquiry->e_date_time); ?></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row task-dates mb-0 mt-0">
+                                        <div class="col-lg-4">
+                                            <h5 class="font-600 m-b-5">Machine Model</h5>
+                                            <p> <?php print_r($view_enquiry->e_machine_model); ?></p>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <h5 class="font-600 m-b-5">Required Qty</h5>
+                                            <p> <?php print_r($view_enquiry->e_required_qty); ?></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="assign-team mt-2">
+                                        <h5>Required Description</h5>
+                                        <p><?php print_r($view_enquiry->e_required_description); ?></p>
+                                    </div>
+
+                                    <div class="assign-team mt-2">
+                                        <h5>Machine Make</h5>
+                                        <p><?php print_r($view_enquiry->e_machine_make); ?></p>
+                                    </div>
+
+                                    <div class="assign-team mt-2">
+                                        <h5>Special Remarks</h5>
+                                        <p><?php print_r($view_enquiry->e_special_remarks); ?></p>
+                                    </div>
+
+                                    <div class="row task-dates mb-0 mt-2">
+                                        <div class="col-lg-4">
+                                            <h5 class="font-600 m-b-5">Photo Of The Parts</h5>
+                                            <?php if ($view_enquiry->e_photo_of_the_parts_name): ?>
+                                              <?php
+                                                  $name1 = (explode(' | ',$view_enquiry->e_photo_of_the_parts_name));
+                                                  for ($i=0; $i < count($name1); $i++) { ?>
+                                                    <a href="<?php echo base_url('uploads/').$name1[$i]; ?>" download><img src="<?php echo base_url('uploads/').$name1[$i]; ?> " alt="W3Schools" width="20" height="20">Download File</a><br>
+                                                  <?php } ?>
+
+                                            <?php else: ?>
+                                              <p>File Not Upload</p>
+                                            <?php endif;?>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <h5 class="font-600 m-b-5">Drawing Of The Parts</h5>
+                                            <?php if ($view_enquiry->e_drawing_of_the_parts_name): ?>
+                                              <?php
+                                                  $name = (explode(' | ',$view_enquiry->e_drawing_of_the_parts_name));
+                                                  for ($i=0; $i < count($name); $i++) { ?>
+                                                    <a href="<?php echo base_url('uploads/').$name[$i]; ?>" download><img src="<?php echo base_url('uploads/').$name[$i]; ?>" alt="W3Schools" width="20" height="20">Download File</a><br>
+                                                  <?php } ?>
+
+                                            <?php else: ?>
+                                              <p>File Not Upload</p>
+                                            <?php endif;?>
+                                        </div>
+                                    </div>
+
+
                                 </div>
-                            </div>
-                        </div> <!-- end row -->
-                    </div> <!-- container-fluid -->
+                            </div><!-- end col -->
 
+                        </div>
+                        <!-- end row -->
+
+                    </div> <!-- container-fluid -->
                 </div> <!-- content -->
 
                 <!-- Footer Start -->
-
                 <!-- end Footer -->
 
             </div>
@@ -359,29 +418,53 @@
         <!-- Vendor js -->
         <script src="<?php echo base_url(); ?>assets/admin/js/vendor.min.js"></script>
 
-        <!-- third party js -->
-        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/jquery.dataTables.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/dataTables.bootstrap4.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/dataTables.responsive.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/responsive.bootstrap4.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/dataTables.buttons.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/buttons.bootstrap4.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/buttons.html5.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/buttons.flash.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/buttons.print.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/dataTables.keyTable.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/dataTables.select.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/libs/pdfmake/pdfmake.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/libs/pdfmake/vfs_fonts.js"></script>
-        <!-- third party js ends -->
+        <!-- Plugins Js -->
+        <!-- <script src="<?php echo base_url(); ?>assets/admin/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script> -->
+        <script src="<?php echo base_url(); ?>assets/admin/libs/switchery/switchery.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/multiselect/jquery.multi-select.js"></script>
+        <!-- <script src="<?php echo base_url(); ?>assets/admin/libs/jquery-quicksearch/jquery.quicksearch.min.js"></script> -->
 
-        <!-- Datatables init -->
-        <script src="<?php echo base_url(); ?>assets/admin/js/pages/datatables.init.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/select2/select2.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/jquery-mask-plugin/jquery.mask.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/moment/moment.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/bootstrap-daterangepicker/daterangepicker.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+
+        <!-- Init js-->
+        <script src="<?php echo base_url(); ?>assets/admin/js/pages/form-advanced.init.js"></script>
+
+        <!-- Toastr js -->
+        <!-- <script src="<?php echo base_url(); ?>assets/admin/libs/toastr/toastr.min.js"></script> -->
+
+        <script src="<?php echo base_url(); ?>assets/admin/js/pages/toastr.init.js"></script>
 
         <!-- App js -->
         <script src="<?php echo base_url(); ?>assets/admin/js/app.min.js"></script>
 
-    </body>
+        <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script> -->
+
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/> -->
+
+<!-- <script>
+    $(document).ready(function(){
+        var date_input=$('input[name="select_date"]'); //our date input has the name "date"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'mm/dd/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        })
+    })
+</script> -->
+
+</body>
 </html>
 <?php } else { ?>
 

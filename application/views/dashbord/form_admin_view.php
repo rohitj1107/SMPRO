@@ -142,7 +142,7 @@
                             </li>
 
                             <li>
-                                <a href="<?php echo base_url('Dashbord/user_list'); ?>">
+                                <a href="<?php echo base_url('user_list'); ?>">
                                     <i class="mdi mdi-invert-colors"></i>
                                     <span> User List </span>
                                 </a>
@@ -168,7 +168,7 @@
                                     <li><a href="<?php echo base_url('supplier_form_admin'); ?>"> Supplier Form </a></li>
                                 </ul>
                             </li>
-                                                    
+
                         </ul>
                     </div>
                     <!-- End Sidebar -->

@@ -66,6 +66,7 @@ $route['enquiry_show'] = 'Dashbord/enquiry_show';
 $route['view_enquiry/(:any)/(:any)'] = 'Dashbord/view_enquiry/$1/$2';
 $route['edite_enquiry/(:any)/(:any)'] = 'Dashbord/edite_enquiry/$1/$2';
 $route['delete_enquiry/(:any)/(:any)'] = 'Dashbord/delete_enquiry/$1/$2';
+$route['view_enquiry_single_admin/(:any)/(:any)'] = 'Enquiry/view_enquiry_single_admin/$1/$2';
 
 $route['enquiry_show_admin'] = 'Dashbord/enquiry_show_admin';
 $route['view_enquiry_admin/(:any)/(:any)'] = 'Dashbord/view_enquiry_admin/$1/$2';
@@ -74,7 +75,7 @@ $route['do_upload_admin'] = 'Dashbord/do_upload_admin';
 $route['insert_quotation'] = 'Dashbord/insert_quotation';
 $route['quotation_to_po/(:any)'] = 'Dashbord/quotation_to_po/$1';
 $route['insert_po'] = 'Dashbord/insert_po';
-$route['user_list'] = 'Dashbord/user_list';
+$route['user_list'] = 'User/user_list';
 $route['follow_up'] = 'Dashbord/follow_up';
 
 $route['supplier_form_admin'] = 'Dashbord/supplier_form_admin';
