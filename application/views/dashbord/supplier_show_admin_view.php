@@ -117,53 +117,47 @@
 
                             <li class="menu-title">Navigation</li>
                             <?php if($this->session->userdata('actionId') ==3 ){ ?>
-                            <li>
-                                <a href="index.html">
-                                    <i class="mdi mdi-view-dashboard"></i>
-                                    <span> Dashboard </span>
-                                </a>
-                            </li>
+                              <li>
+                                  <a href="<?php echo base_url('Dashbord'); ?>">
+                                      <i class="mdi mdi-view-dashboard"></i>
+                                      <span> Dashboard </span>
+                                  </a>
+                              </li>
 
-                            <li>
-                                <a href="typography.html">
-                                    <i class="mdi mdi-format-font"></i>
-                                    <span> Employee </span>
-                                </a>
-                            </li>
+                              <li>
+                                  <a href="<?php echo base_url('Dashbord'); ?>">
+                                      <i class="mdi mdi-format-font"></i>
+                                      <span> Employee </span>
+                                  </a>
+                              </li>
 
-                            <li>
-                                <a href="javascript: void(0);">
-                                    <i class="mdi mdi-invert-colors"></i>
-                                    <span> User List </span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <ul class="nav-second-level" aria-expanded="false">
-                                    <!-- <li><a href="ui-buttons.html">Buttons</a></li>
+                              <li>
+                                  <a href="<?php echo base_url('Dashbord/user_list'); ?>">
+                                      <i class="mdi mdi-invert-colors"></i>
+                                      <span> User List </span>
+                                  </a>
+                              </li>
 
-                                    <li><a href="ui-widgets.html">Widgets</a></li> -->
-                                </ul>
-                            </li>
-
-                            <li>
-                                <a href="javascript: void(0);">
-                                    <i class="mdi mdi-texture"></i>
-                                    <span class="badge badge-warning float-right">7</span>
-                                    <span> Enquiry Forms </span>
-                                </a>
-                                <ul class="nav-second-level" aria-expanded="false">
-                                    <!-- <li><a href="form-elements.html">General Elements</a></li> -->
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript: void(0);">
-                                    <i class="mdi mdi-texture"></i>
-                                    <span> Supplier </span>
-                                </a>
-                                <ul class="nav-second-level" aria-expanded="false">
-                                    <li><a href="<?php echo base_url('supplier_show_admin'); ?>"> Supplier List </a></li>
-                                    <li><a href="<?php echo base_url('supplier_form_admin'); ?>"> Supplier Form </a></li>
-                                </ul>
-                            </li>
+                              <li>
+                                  <a href="javascript: void(0);">
+                                      <i class="mdi mdi-texture"></i>
+                                      <span> Enquiry </span>
+                                  </a>
+                                  <ul class="nav-second-level" aria-expanded="false">
+                                      <li><a href="<?php echo base_url('enquiry_show_admin'); ?>"> Enquiry List </a></li>
+                                      <li><a href="<?php echo base_url('enquiry_form_admin'); ?>"> Enquiry Form </a></li>
+                                  </ul>
+                              </li>
+                              <li>
+                                  <a href="javascript: void(0);">
+                                      <i class="mdi mdi-texture"></i>
+                                      <span> Supplier </span>
+                                  </a>
+                                  <ul class="nav-second-level" aria-expanded="false">
+                                      <li><a href="<?php echo base_url('supplier_show_admin'); ?>"> Supplier List </a></li>
+                                      <li><a href="<?php echo base_url('supplier_form_admin'); ?>"> Supplier Form </a></li>
+                                  </ul>
+                              </li>
                                                       <?php } else {?>
                             <li>
                                 <a href="<?php echo base_url('Dashbord'); ?>">
@@ -205,34 +199,34 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="card-box table-responsive">
-                                    <h4 class="mt-0 header-title">Show Form</h4>
+                                    <h4 class="mt-0 header-title">Supplier View</h4>
                                     <table id="responsive-datatable" class="table table-bordered table-bordered dt-responsive nowrap">
                                         <thead>
                                         <tr>
-                                            <th>Enquiry Number</th>
-                                            <th>Appliction</th>
-                                            <th>Machine Model</th>
-                                            <th>Machine Make</th>
-                                            <th>Required Qty</th>
-                                            <th>Date Time</th>
+                                            <th>Supplier Number</th>
+                                            <th>Company Name</th>
+                                            <th>Company Category</th>
+                                            <th>Country</th>
+                                            <th>Person Name</th>
+                                            <th>Number</th>
                                             <th>Action</th>
                                             <!-- <th>Ed</th> -->
                                         </tr>
                                         </thead>
                                         <tbody>
-                                          <?php if ($enquiry) { ?>
-                                            <?php foreach($enquiry as $sw_enquiry){ ?>
+                                          <?php if ($supplier) { ?>
+                                            <?php foreach($supplier as $s_supplier){ ?>
                                             <tr>
-                                                <td><?php echo $sw_enquiry->e_enquiryId; ?></td>
-                                                <td><?php echo $sw_enquiry->e_appliction; ?></td>
-                                                <td><?php echo $sw_enquiry->e_machine_model; ?></td>
-                                                <td><?php echo $sw_enquiry->e_machine_make; ?></td>
-                                                <td><?php echo $sw_enquiry->e_required_qty; ?></td>
-                                                <td><?php echo $sw_enquiry->e_date_time; ?></td>
+                                                <td><?php echo $s_supplier->s_supplier_id; ?></td>
+                                                <td><?php echo $s_supplier->s_company_name; ?></td>
+                                                <td><?php echo $s_supplier->s_company_category; ?></td>
+                                                <td><?php echo $s_supplier->s_country; ?></td>
+                                                <td><?php echo $s_supplier->s_contact_person_name; ?></td>
+                                                <td><?php echo $s_supplier->s_contact_number_1; ?></td>
                                                 <td>
-                                                  <a href="<?php echo base_url("view_enquiry/$sw_enquiry->e_customerID/$sw_enquiry->e_enquiryId"); ?>"><button type="button" class="bg-success" name="button">View</button></a>
-                                                  <!-- <a href="<?php echo base_url('edite_enquiry'); ?>"><button type="button" class="bg-warning" name="button">Edit</button></a> -->
-                                                  <a href="<?php echo base_url('delete_enquiry'); ?>"><button type="button" class="bg-danger" name="button">Delete</button></a>
+                                                  <a href='<?php echo base_url("supplier_view/".base64_encode($s_supplier->s_supplier_id)); ?>' class="btn btn-success mdi mdi-view-list"></a>
+                                                  <a href='<?php echo base_url("supplier_edite/".base64_encode($s_supplier->s_supplier_id)); ?>' class="btn btn-warning mdi mdi-account-edit"></a>
+                                                  <a href="#" class="btn btn-danger mdi mdi-delete-sweep-outline"></a>
                                                 </td>
 
                                                 <!-- <td>Ac</td> -->

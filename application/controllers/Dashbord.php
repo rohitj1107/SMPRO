@@ -180,152 +180,124 @@ class Dashbord extends CI_Controller{
   }
 
   public function view_enquiry_admin($customerID,$enquiryID){
-    $data = $this->Admin_model->user_table();
-    $type = $this->Admin_model->select_type();
-    $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
-    $enquiry = $this->Admin_model->select_enquiry($user->u_customerId);
-    $view_enquiry = $this->Admin_model->select_view_enquiry($customerID,$enquiryID);
-    $quatation = $this->Admin_model->select_quatation_list($view_enquiry->e_customerID,$view_enquiry->e_enquiryId);
-    $follow_up = $this->Admin_model->select_follow_up($view_enquiry->e_enquiryId);
-    $this->load->view('dashbord/view_enquiry_admin_view',['data'=>$data,'type'=>$type,'user'=>$user,'enquiry'=>$enquiry,'view_enquiry'=>$view_enquiry,'quatation'=>$quatation,'follow_up'=>$follow_up]);
+      $data = $this->Admin_model->user_table();
+      $type = $this->Admin_model->select_type();
+      $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
+      $enquiry = $this->Admin_model->select_enquiry($user->u_customerId);
+      $view_enquiry = $this->Admin_model->select_view_enquiry($customerID,$enquiryID);
+      $quatation = $this->Admin_model->select_quatation_list($view_enquiry->e_customerID,$view_enquiry->e_enquiryId);
+      $follow_up = $this->Admin_model->select_follow_up($view_enquiry->e_enquiryId);
+      $this->load->view('dashbord/view_enquiry_admin_view',['data'=>$data,'type'=>$type,'user'=>$user,'enquiry'=>$enquiry,'view_enquiry'=>$view_enquiry,'quatation'=>$quatation,'follow_up'=>$follow_up]);
   }
 
   public function enquiry_form_admin(){
-    $data = $this->Admin_model->user_table();
-    $type = $this->Admin_model->select_type();
-    $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
-    $customerID = $this->Admin_model->customerId_admin();
-    $this->load->view('dashbord/form_admin_view',['data'=>$data,'type'=>$type,'user'=>$user,'customerID'=>$customerID]);
+      $data = $this->Admin_model->user_table();
+      $type = $this->Admin_model->select_type();
+      $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
+      $customerID = $this->Admin_model->customerId_admin();
+      $this->load->view('dashbord/form_admin_view',['data'=>$data,'type'=>$type,'user'=>$user,'customerID'=>$customerID]);
   }
 
   public function do_upload_admin(){
-    $custo = explode(' ',$this->input->post('customerId'));
+      $custo = explode(' ',$this->input->post('customerId'));
+      $cpt = count($_FILES['Photo_Of_The_Parts']['name']);
 
-    // $image1 = $_FILES["Photo_Of_The_Parts"]['name'];
-    // $image2 = $_FILES["Drawing_Of_The_Parts"]['name'];
-    // $config['image_metadata1']['file_name'] = $image1;
-    // $config['image_metadata2']['file_name'] = $image2;
-    // $data_one = null;
-    // $data_two = null;
-    //
-    // $config['upload_path'] = './uploads/';
-    // $config['allowed_types'] = 'gif|jpg|png';
-    // $config['max_size'] = 2000;
-    // $config['max_width'] = 1500;
-    // $config['max_height'] = 1500;
-    // $this->load->library('upload', $config);
-    //
-    // if ($this->upload->do_upload('Photo_Of_The_Parts')){
-    //     $data_one = array('image_metadata1' => $this->upload->data());
-    // } else {
-    //     $data_one['image_metadata1']['full_path'] = null;
-    //     $data_one['image_metadata1']['file_name'] = null;
-    // }
-    // if($this->upload->do_upload('Drawing_Of_The_Parts')){
-    //     $data_two = array('image_metadata2' => $this->upload->data());
-    // } else {
-    //     $data_two['image_metadata2']['full_path'] = null;
-    //     $data_two['image_metadata2']['file_name'] = null;
-    // }
+      for($i=0; $i < $cpt; $i++) {
+      unset($config);
+      $config = array();
+      $config['upload_path']   = './uploads/';
+      $config['allowed_types'] = 'gif|jpg|png|pdf';
 
-    $cpt = count($_FILES['Photo_Of_The_Parts']['name']);
+      $config['max_size'] = 2000;
+      $config['max_width'] = 1500;
+      $config['max_height'] = 1500;
+      $config['remove_spaces'] = FALSE;
+      $config['file_name'] = $_FILES['Photo_Of_The_Parts']['name'][$i];
 
-    for($i=0; $i < $cpt; $i++) {
-    unset($config);
-    $config = array();
-    $config['upload_path']   = './uploads/';
-    $config['allowed_types'] = 'gif|jpg|png|pdf';
+      $_FILES['f']['name'] =  $_FILES['Photo_Of_The_Parts']['name'][$i];
+      $_FILES['f']['type'] = $_FILES['Photo_Of_The_Parts']['type'][$i];
+      $_FILES['f']['tmp_name'] = $_FILES['Photo_Of_The_Parts']['tmp_name'][$i];
+      $_FILES['f']['error'] = $_FILES['Photo_Of_The_Parts']['error'][$i];
+      $_FILES['f']['size'] = $_FILES['Photo_Of_The_Parts']['size'][$i];
 
-    $config['max_size'] = 2000;
-    $config['max_width'] = 1500;
-    $config['max_height'] = 1500;
-    $config['remove_spaces'] = FALSE;
-    $config['file_name'] = $_FILES['Photo_Of_The_Parts']['name'][$i];
+      $this->load->library('upload', $config);
+      $this->upload->initialize($config);
+      if (! $this->upload->do_upload('f')) {
+        $data1['upload_data']['file_name'] = null;
+        $data1['upload_data']['full_path'] = null;
 
-    $_FILES['f']['name'] =  $_FILES['Photo_Of_The_Parts']['name'][$i];
-    $_FILES['f']['type'] = $_FILES['Photo_Of_The_Parts']['type'][$i];
-    $_FILES['f']['tmp_name'] = $_FILES['Photo_Of_The_Parts']['tmp_name'][$i];
-    $_FILES['f']['error'] = $_FILES['Photo_Of_The_Parts']['error'][$i];
-    $_FILES['f']['size'] = $_FILES['Photo_Of_The_Parts']['size'][$i];
-
-    $this->load->library('upload', $config);
-    $this->upload->initialize($config);
-    if (! $this->upload->do_upload('f')) {
-      $data1['upload_data']['file_name'] = null;
-      $data1['upload_data']['full_path'] = null;
-
-    } else {
-      $data1 = array('upload_data' => $this->upload->data());
+      } else {
+        $data1 = array('upload_data' => $this->upload->data());
+      }
+        $name1[] = $data1['upload_data']['file_name'];
+        $path1[] = $data1['upload_data']['full_path'];
     }
-      $name1[] = $data1['upload_data']['file_name'];
-      $path1[] = $data1['upload_data']['full_path'];
-  }
 
-  $img_name1 = implode(' | ',$name1);
-  $img_path1 = implode(' | ',$path1);
+    $img_name1 = implode(' | ',$name1);
+    $img_path1 = implode(' | ',$path1);
 
-  $cpt1 = count($_FILES['Drawing_Of_The_Parts']['name']);
-  for ($j=0; $j < $cpt1; $j++) {
-    unset($config);
-    $config = array();
-    $config['upload_path']   = './uploads/';
-    $config['allowed_types'] = 'gif|jpg|png|pdf';
+    $cpt1 = count($_FILES['Drawing_Of_The_Parts']['name']);
+    for ($j=0; $j < $cpt1; $j++) {
+      unset($config);
+      $config = array();
+      $config['upload_path']   = './uploads/';
+      $config['allowed_types'] = 'gif|jpg|png|pdf';
 
-    $config['max_size'] = 2000;
-    $config['max_width'] = 1500;
-    $config['max_height'] = 1500;
-    $config['remove_spaces'] = FALSE;
-    $config['file_name'] = $_FILES['Drawing_Of_The_Parts']['name'][$j];
+      $config['max_size'] = 2000;
+      $config['max_width'] = 1500;
+      $config['max_height'] = 1500;
+      $config['remove_spaces'] = FALSE;
+      $config['file_name'] = $_FILES['Drawing_Of_The_Parts']['name'][$j];
 
-    $_FILES['ff']['name'] =  $_FILES['Drawing_Of_The_Parts']['name'][$j];
-    $_FILES['ff']['type'] = $_FILES['Drawing_Of_The_Parts']['type'][$j];
-    $_FILES['ff']['tmp_name'] = $_FILES['Drawing_Of_The_Parts']['tmp_name'][$j];
-    $_FILES['ff']['error'] = $_FILES['Drawing_Of_The_Parts']['error'][$j];
-    $_FILES['ff']['size'] = $_FILES['Drawing_Of_The_Parts']['size'][$j];
+      $_FILES['ff']['name'] =  $_FILES['Drawing_Of_The_Parts']['name'][$j];
+      $_FILES['ff']['type'] = $_FILES['Drawing_Of_The_Parts']['type'][$j];
+      $_FILES['ff']['tmp_name'] = $_FILES['Drawing_Of_The_Parts']['tmp_name'][$j];
+      $_FILES['ff']['error'] = $_FILES['Drawing_Of_The_Parts']['error'][$j];
+      $_FILES['ff']['size'] = $_FILES['Drawing_Of_The_Parts']['size'][$j];
 
-    $this->load->library('upload', $config);
-    $this->upload->initialize($config);
-    if (! $this->upload->do_upload('ff')) {
-      $data2['upload_data']['file_name'] = null;
-      $data2['upload_data']['full_path'] = null;
-      // $error = array('error' => $this->upload->display_errors());
-    } else {
-      $data2 = array('upload_data' => $this->upload->data());
+      $this->load->library('upload', $config);
+      $this->upload->initialize($config);
+      if (! $this->upload->do_upload('ff')) {
+        $data2['upload_data']['file_name'] = null;
+        $data2['upload_data']['full_path'] = null;
+        // $error = array('error' => $this->upload->display_errors());
+      } else {
+        $data2 = array('upload_data' => $this->upload->data());
+      }
+      $name2[] = $data2['upload_data']['file_name'];
+      $path2[] = $data2['upload_data']['full_path'];
     }
-    $name2[] = $data2['upload_data']['file_name'];
-    $path2[] = $data2['upload_data']['full_path'];
-  }
 
-  $img_name2 = implode(' | ',$name2);
-  $img_path2 = implode(' | ',$path2);
-  // echo $img_name1.'<br>';
-  // echo $img_name2.'<br>';
-  // print_r($error);
-  // exit;
+    $img_name2 = implode(' | ',$name2);
+    $img_path2 = implode(' | ',$path2);
+    // echo $img_name1.'<br>';
+    // echo $img_name2.'<br>';
+    // print_r($error);
+    // exit;
 
-    $ran_cust = '0123456789abcdefghijklmnopqrstuvwxyz';
-    $data = [
-        'e_customerID'=>$custo[0],
-        'e_emailID' => $custo[1],
-        'e_appliction'=>$this->input->post('application'),
-        'e_machine_model'=>$this->input->post('machine_model'),
-        'e_machine_make'=>$this->input->post('machine_make'),
-        'e_required_qty'=>$this->input->post('required_qty'),
-        'e_required_description'=>$this->input->post('required_description'),
-        'e_photo_of_the_parts_path'=>$img_path1,
-        'e_photo_of_the_parts_name'=>$img_name1,
-        'e_drawing_of_the_parts_path'=>$img_path2,
-        'e_drawing_of_the_parts_name'=>$img_name2,
-        'e_special_remarks'=>$this->input->post('special_remarks'),
-        'e_enquiryId'=>time().substr(str_shuffle($ran_cust), 1, 3)
-    ];
-    if ($this->Admin_model->insert_enquiry($data)) {
-        $this->session->set_flashdata('enquiry_success','Insert Enquiry success fully !');
+      $ran_cust = '0123456789abcdefghijklmnopqrstuvwxyz';
+      $data = [
+          'e_customerID'=>$custo[0],
+          'e_emailID' => $custo[1],
+          'e_appliction'=>$this->input->post('application'),
+          'e_machine_model'=>$this->input->post('machine_model'),
+          'e_machine_make'=>$this->input->post('machine_make'),
+          'e_required_qty'=>$this->input->post('required_qty'),
+          'e_required_description'=>$this->input->post('required_description'),
+          'e_photo_of_the_parts_path'=>$img_path1,
+          'e_photo_of_the_parts_name'=>$img_name1,
+          'e_drawing_of_the_parts_path'=>$img_path2,
+          'e_drawing_of_the_parts_name'=>$img_name2,
+          'e_special_remarks'=>$this->input->post('special_remarks'),
+          'e_enquiryId'=>time().substr(str_shuffle($ran_cust), 1, 3)
+      ];
+      if ($this->Admin_model->insert_enquiry($data)) {
+          $this->session->set_flashdata('enquiry_success','Insert Enquiry success fully !');
+          return redirect('enquiry_form_admin');
+      } else {
+        $this->session->set_flashdata('enquiry_faile','Not Insert Enquiry !');
         return redirect('enquiry_form_admin');
-    } else {
-      $this->session->set_flashdata('enquiry_faile','Not Insert Enquiry !');
-      return redirect('enquiry_form_admin');
-    }
+      }
 
   }
 
@@ -428,6 +400,141 @@ class Dashbord extends CI_Controller{
           return redirect('view_enquiry_admin/'.$customerId.'/'.$enquiry_ID);
       }
   }
+
+  public function supplier_form_admin(){
+      $data = $this->Admin_model->user_table();
+      $type = $this->Admin_model->select_type();
+      $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
+      $customerID = $this->Admin_model->customerId_admin();
+      $this->load->model('Home_model');
+      $countries = $this->Home_model->select_countri();
+      $this->load->view('dashbord/supplier_form_admin_view',['countries'=>$countries,'data'=>$data,'type'=>$type,'user'=>$user,'customerID'=>$customerID]);
+  }
+
+  public function supplier_form_admin_insert(){
+      $cpt = count($_FILES['s_attachment_of_company_catalogue']['name']);
+
+      for($i=0; $i < $cpt; $i++) {
+      unset($config);
+      $config = array();
+      $config['upload_path']   = './uploads/';
+      $config['allowed_types'] = 'gif|jpg|png|pdf';
+
+      $config['max_size'] = 2000;
+      $config['max_width'] = 1500;
+      $config['max_height'] = 1500;
+      $config['remove_spaces'] = FALSE;
+      $config['file_name'] = $_FILES['s_attachment_of_company_catalogue']['name'][$i];
+
+      $_FILES['f']['name'] =  $_FILES['s_attachment_of_company_catalogue']['name'][$i];
+      $_FILES['f']['type'] = $_FILES['s_attachment_of_company_catalogue']['type'][$i];
+      $_FILES['f']['tmp_name'] = $_FILES['s_attachment_of_company_catalogue']['tmp_name'][$i];
+      $_FILES['f']['error'] = $_FILES['s_attachment_of_company_catalogue']['error'][$i];
+      $_FILES['f']['size'] = $_FILES['s_attachment_of_company_catalogue']['size'][$i];
+
+      $this->load->library('upload', $config);
+      $this->upload->initialize($config);
+      if (! $this->upload->do_upload('f')) {
+        $data1['upload_data']['file_name'] = null;
+        $data1['upload_data']['full_path'] = null;
+
+      } else {
+        $data1 = array('upload_data' => $this->upload->data());
+      }
+        $name1[] = $data1['upload_data']['file_name'];
+        $path1[] = $data1['upload_data']['full_path'];
+    }
+
+    $img_name1 = implode(' | ',$name1);
+    $img_path1 = implode(' | ',$path1);
+    $data = [
+        's_supplier_id'=> $this->input->post('s_supplier_id'),
+        's_company_name' => $this->input->post('s_company_name'),
+        's_website'=> $this->input->post('s_website'),
+        's_company_category'=> $this->input->post('s_company_category'),
+        's_country'=> $this->input->post('s_country'),
+        's_contact_person_name'=> $this->input->post('s_contact_person_name'),
+        's_contact_information'=> $this->input->post('s_contact_information'),
+        's_attachment_of_company_catalogue_path'=> $img_path1,
+        's_attachment_of_company_catalogue_name'=> $img_name1,
+        's_contact_email_id'=> $this->input->post('s_contact_email_id'),
+        's_verification'=> $this->input->post('application'),
+        's_country_code'=> $this->input->post('s_country_code'),
+        's_contact_number_1'=> $this->input->post('s_contact_number_1'),
+        's_infrastructure_details'=> $this->input->post('s_infrastructure_details'),
+        's_machines_plant_capacity'=> $this->input->post('s_machines_plant_capacity'),
+        's_support_infrastructure'=> $this->input->post('s_support_infrastructure'),
+        's_qms_applicable'=> $this->input->post('s_qms_applicable'),
+    ];
+    if ($this->Admin_model->supplier_form_admin_insert_model($data)) {
+        $this->session->set_flashdata('enquiry_success','Insert Enquiry success fully !');
+        return redirect('supplier_form_admin');
+    } else {
+      $this->session->set_flashdata('enquiry_faile','Not Insert Enquiry !');
+      return redirect('supplier_form_admin');
+    }
+  }
+
+  public function supplier_show_admin(){
+      $data = $this->Admin_model->user_table();
+      $type = $this->Admin_model->select_type();
+      $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
+      $customerID = $this->Admin_model->customerId_admin();
+      $supplier = $this->Admin_model->select_supplier_model();
+      $this->load->view('dashbord/supplier_show_admin_view',['supplier'=>$supplier,'data'=>$data,'type'=>$type,'user'=>$user,'customerID'=>$customerID]);
+  }
+
+  public function supplier_view($supplier_id){
+      // echo base64_decode($supplier_id);
+      $data = $this->Admin_model->user_table();
+      $type = $this->Admin_model->select_type();
+      $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
+      $customerID = $this->Admin_model->customerId_admin();
+      $supplier = $this->Admin_model->select_supplier_ob_model(base64_decode($supplier_id));
+      $this->load->view('dashbord/supplier/supplier_show_ob_admin_view',['supplier'=>$supplier,'data'=>$data,'type'=>$type,'user'=>$user,'customerID'=>$customerID]);
+  }
+
+  public function supplier_edite($supplier_id){
+      $data = $this->Admin_model->user_table();
+      $type = $this->Admin_model->select_type();
+      $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
+      $customerID = $this->Admin_model->customerId_admin();
+      $supplier = $this->Admin_model->select_supplier_ob_model(base64_decode($supplier_id));
+      $this->load->model('Home_model');
+      $countries = $this->Home_model->select_countri();
+      $this->load->view('dashbord/supplier/supplier_edite_ob_admin_view',['countries'=>$countries,'supplier'=>$supplier,'data'=>$data,'type'=>$type,'user'=>$user,'customerID'=>$customerID]);
+
+  }
+
+  public function supplier_form_admin_update($supplier_id){
+    // echo $supplier_id;exit;
+    $data = [
+        's_supplier_id'=> $this->input->post('s_supplier_id'),
+        's_company_name' => $this->input->post('s_company_name'),
+        's_website'=> $this->input->post('s_website'),
+        's_company_category'=> $this->input->post('s_company_category'),
+        's_country'=> $this->input->post('s_country'),
+        's_contact_person_name'=> $this->input->post('s_contact_person_name'),
+        's_contact_information'=> $this->input->post('s_contact_information'),
+        's_contact_email_id'=> $this->input->post('s_contact_email_id'),
+        's_verification'=> $this->input->post('s_verification'),
+        's_country_code'=> $this->input->post('s_country_code'),
+        's_contact_number_1'=> $this->input->post('s_contact_number_1'),
+        's_infrastructure_details'=> $this->input->post('s_infrastructure_details'),
+        's_machines_plant_capacity'=> $this->input->post('s_machines_plant_capacity'),
+        's_support_infrastructure'=> $this->input->post('s_support_infrastructure'),
+        's_qms_applicable'=> $this->input->post('s_qms_applicable'),
+    ];
+    if ($this->Admin_model->supplier_form_admin_update_model($data)) {
+        $this->session->set_flashdata('supplier_success','Update Supplier success fully !');
+        return redirect('supplier_edite/'.base64_encode($this->input->post('s_supplier_id')));
+    } else {
+      $this->session->set_flashdata('supplier_faile','Not Update Supplier !');
+      return redirect('supplier_edite/'.base64_encode($this->input->post('s_supplier_id')));
+    }
+  }
+
+
 }
 
 ?>

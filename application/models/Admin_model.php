@@ -257,6 +257,44 @@ class Admin_model extends CI_Model{
       }
   }
 
+  public function supplier_form_admin_insert_model($data){
+    $sql = $this->db->insert('s_supplier',$data);
+    if ($sql) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+  }
+
+  public function select_supplier_model(){
+      $sql = $this->db->get('s_supplier');
+      if ($sql->num_rows() > 0) {
+          return $sql->result();
+      } else {
+          return FALSE;
+      }
+  }
+
+  public function select_supplier_ob_model($supplier_id){
+      $sql = $this->db->where('s_supplier_id',$supplier_id)->get('s_supplier');
+      if ($sql->num_rows() > 0) {
+          return $sql->row();
+      } else {
+          return FALSE;
+      }
+  }
+
+  public function supplier_form_admin_update_model($data){
+    // echo $data['s_supplier_id'];exit;
+    $this->db->where('s_supplier_id', $data['s_supplier_id']);
+    $sql = $this->db->update('s_supplier', $data);
+    if ($sql) {
+        return true;
+    } else {
+        return false;
+    }
+  }
+
 }
 
 

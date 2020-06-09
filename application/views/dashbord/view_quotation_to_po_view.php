@@ -162,7 +162,17 @@
                                       <li><a href="<?php echo base_url('enquiry_form_admin'); ?>"> Enquiry Form </a></li>
                                   </ul>
                               </li>
-                          <?php } else {?>
+                              <li>
+                                  <a href="javascript: void(0);">
+                                      <i class="mdi mdi-texture"></i>
+                                      <span> Supplier </span>
+                                  </a>
+                                  <ul class="nav-second-level" aria-expanded="false">
+                                      <li><a href="<?php echo base_url('supplier_show_admin'); ?>"> Supplier List </a></li>
+                                      <li><a href="<?php echo base_url('supplier_form_admin'); ?>"> Supplier Form </a></li>
+                                  </ul>
+                              </li>
+                                                        <?php } else {?>
                             <li>
                                 <a href="<?php echo base_url('Dashbord'); ?>">
                                     <i class="mdi mdi-texture"></i>

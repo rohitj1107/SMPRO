@@ -77,6 +77,14 @@ $route['insert_po'] = 'Dashbord/insert_po';
 $route['user_list'] = 'Dashbord/user_list';
 $route['follow_up'] = 'Dashbord/follow_up';
 
+$route['supplier_form_admin'] = 'Dashbord/supplier_form_admin';
+$route['supplier_show_admin'] = 'Dashbord/supplier_show_admin';
+$route['supplier_form_admin_insert'] = 'Dashbord/supplier_form_admin_insert';
+$route['supplier_view/(:any)'] = 'Dashbord/supplier_view/$1';
+$route['supplier_edite/(:any)'] = 'Dashbord/supplier_edite/$1';
+// $route['supplier_form_admin_updatee/(:any)'] = 'Dashbord/supplier_form_admin_update/$1';
+$route['supplier_form_admin_update/(:any)'] = 'Dashbord/supplier_form_admin_update/$1';
+
 $route['view/(:any)'] = 'User/view/$1';
 $route['edite/(:any)'] = 'User/edite/$1';
 $route['register_update/(:any)'] = 'User/register_update/$1';

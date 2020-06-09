@@ -203,89 +203,79 @@
                                         <div class="row mb-0 mt-2">
                                           <div class="col-lg-4">
                                               <h5>Customer Id</h5>
-                                              <p><?php print_r($user_view->u_customerId); ?></p>
+                                              <p><?php print_r($supplier->s_supplier_id); ?></p>
                                           </div>
                                             <div class="col-lg-4">
                                                 <h5 class="font-600 m-b-5">Company Name</h5>
-                                                <p> <?php print_r($user_view->u_companyName); ?></p>
+                                                <p> <?php print_r($supplier->s_company_name); ?></p>
                                             </div>
                                             <div class="col-lg-4">
                                                 <h5>Website Url</h5>
-                                                <p> <?php print_r($user_view->u_websiteUrl); ?></p>
+                                                <p> <?php print_r($supplier->s_website); ?></p>
                                             </div>
                                         </div>
 
                                         <div class="row task-dates mb-0 mt-0">
                                             <div class="col-lg-4">
                                                 <h5> Country </h5>
-                                                <p> <?php print_r($user_view->u_country); ?></p>
+                                                <p> <?php print_r($supplier->s_country); ?></p>
                                             </div>
                                             <div class="col-lg-4">
-                                                <h5>Postal Code</h5>
-                                                <p> <?php print_r($user_view->u_postalCode); ?></p>
+                                                <h5>Country Code</h5>
+                                                <p> <?php print_r($supplier->s_country_code); ?></p>
                                             </div>
                                             <div class="col-lg-4">
-                                              <h5>Company Type</h5>
-                                              <p><?php print_r($user_view->u_companyType); ?></p>
+                                              <h5>Company Category</h5>
+                                              <p><?php print_r($supplier->s_company_category); ?></p>
                                             </div>
                                         </div>
 
                                         <div class="row task-dates mb-0 mt-0">
                                             <div class="col-lg-4">
-                                              <h5>EOU</h5>
-                                              <p><?php print_r($user_view->u_eou); ?></p>
+                                              <h5>Infrastructure Details</h5>
+                                              <p><?php print_r($supplier->s_infrastructure_details); ?></p>
                                             </div>
                                             <div class="col-lg-4">
-                                              <h5>Email Id</h5>
-                                              <p><?php print_r($user_view->u_emailId); ?></p>
+                                              <h5>Machines Plant Capacity</h5>
+                                              <p><?php print_r($supplier->s_machines_plant_capacity); ?></p>
                                             </div>
+                                            <div class="col-lg-4">
+                                              <h5>Contact Person name</h5>
+                                              <p><?php print_r($supplier->s_contact_person_name); ?></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row task-dates mb-0 mt-0">
                                             <div class="col-lg-4">
                                               <h5>Contact Number</h5>
-                                              <p><?php print_r($user_view->u_contactNumber); ?></p>
+                                              <p><?php print_r($supplier->s_contact_number_1); ?></p>
+                                            </div>
+                                            <div class="col-lg-4">
+                                              <h5>Support Infrastructure</h5>
+                                              <p><?php print_r($supplier->s_support_infrastructure); ?></p>
+                                            </div>
+                                            <div class="col-lg-4">
+                                              <h5>QMS Applicable</h5>
+                                              <p><?php print_r($supplier->s_qms_applicable); ?></p>
                                             </div>
                                         </div>
 
                                         <div class="row task-dates mb-0 mt-0">
                                             <div class="col-lg-4">
-                                              <h5>Contact Number one</h5>
-                                              <p><?php print_r($user_view->u_contactNumber_one); ?></p>
+                                              <h5>Contact Information</h5>
+                                              <p><?php print_r($supplier->s_contact_information); ?></p>
                                             </div>
                                             <div class="col-lg-4">
-                                              <h5>Mobile Number</h5>
-                                              <p><?php print_r($user_view->u_mobileNumber); ?></p>
+                                              <h5>Created Date</h5>
+                                              <p><?php print_r($supplier->s_c_date); ?></p>
                                             </div>
                                             <div class="col-lg-4">
-                                              <h5>Gst</h5>
-                                              <p><?php print_r($user_view->u_gst); ?></p>
+                                              <h5>Email ID</h5>
+                                              <p><?php print_r($supplier->s_contact_email_id); ?></p>
                                             </div>
                                         </div>
 
                                         <div class="row task-dates mb-0 mt-0">
-                                            <div class="col-lg-4">
-                                              <h5>Industry</h5>
-                                              <p><?php print_r($user_view->u_industry); ?></p>
-                                            </div>
-                                            <div class="col-lg-4">
-                                              <h5>Comment</h5>
-                                              <p><?php print_r($user_view->u_comment); ?></p>
-                                            </div>
-                                            <div class="col-lg-4">
-                                              <h5>User Join Date</h5>
-                                              <p><?php print_r($user_view->u_c_date); ?></p>
-                                            </div>
-                                        </div>
-
-                                        <div class="row task-dates mb-0 mt-0">
-                                            <div class="col-lg-4">
-                                              <h5>Role</h5>
-                                              <p><?php
-                                              foreach ($type as $value) {
-                                                  if ($user_view->u_action == $value->t_id) {
-                                                      print_r( $value->t_name);
-                                                  }
-                                              } ?>
-                                              </p>
-                                            </div>
 
                                         </div>
                                         <div class="assign-team mt-2">
