@@ -161,6 +161,27 @@
                             <li>
                                 <a href="javascript: void(0);">
                                     <i class="mdi mdi-texture"></i>
+                                    <span> Quotation </span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="<?php echo base_url('quotation_show'); ?>"> quotation List </a></li>
+                                    <li><a href="<?php echo base_url('quotation_form'); ?>"> quotation Form </a></li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript: void(0);">
+                                    <i class="mdi mdi-texture"></i>
+                                    <span> PO </span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="<?php echo base_url('po_show'); ?>"> PO List </a></li>
+                                    <li><a href="<?php echo base_url('po_form'); ?>"> PO Form </a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">
+                                    <i class="mdi mdi-texture"></i>
                                     <span> Supplier </span>
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
@@ -168,6 +189,7 @@
                                     <li><a href="<?php echo base_url('supplier_form_admin'); ?>"> Supplier Form </a></li>
                                 </ul>
                             </li>
+
                         </ul>
                     </div>
                     <!-- End Sidebar -->
@@ -193,7 +215,7 @@
                                     <div class="container-fluid">
                                         <div class="row">
                                             <div class="col-md-12 d-flex justify-content-center align-items-center coverpic-headline">
-                                                <p class="font-weight-bold">Supplier</p>
+                                                <p class="font-weight-bold">Enquiry</p>
                                             </div>
                                         </div>
                                     </div>
@@ -218,83 +240,38 @@
 
                                                 </div>
                                                 <div class="col-md-6 pt-4">
-                                                  <?php echo form_open_multipart('Dashbord/supplier_form_admin_insert');?>
-                                                    <label for="">Supplier ID</label>
-                                                    <input type="text" readonly class="form-control" value="SU-<?php echo time(); ?>" name="s_supplier_id">
-                                                </div>
-                                                <div class="col-md-6 pt-4">
-                                                    <label for="">Company Name</label>
-                                                    <input type="text" class="form-control" placeholder="Company Name" value="<?php set_value('s_company_name'); ?>" name="s_company_name">
-                                                </div>
-                                                <div class="col-md-6 pt-4">
-                                                    <label for="">Website</label>
-                                                    <input type="text" class="form-control" placeholder="Website" value="<?php set_value('s_website'); ?>" name="s_website">
-                                                </div>
-                                                <div class="col-md-6 pt-4">
-                                                    <label for="">Company Category</label>
-                                                    <select class="form-control" name="s_company_category">
-                                                        <option value="0">Select Company Category</option>
-                                                        <option value="pvt_ltd">Pvt Ltd</option>
-                                                        <option value="prop">Prop</option>
-                                                        <option value="llp">LLP</option>
-                                                        <option value="ltd">LTD</option>
-                                                    </select>
-                                                    <!-- <input type="text" class="form-control" placeholder="Company Category" value="<?php set_value('s_company_category'); ?>" name="s_company_category"> -->
-                                                </div>
-                                                <div class="col-md-6 pt-4">
-                                                  <label for="">Country</label>
-                                                  <select class="form-control" name="s_country">
-                                                    <option value="Not Select">Select Country</option>
+                                                  <?php echo form_open_multipart('do_upload_edite/'.$editenquiry->e_customerID.'/'.$editenquiry->e_enquiryId);?>
+                                                    <label for="customerId">CUSTOMER ID</label>
+                                                    <p class="text-danger"> <?php echo $editenquiry->e_customerID; ?></p>
+                                                    <!-- <select name="customerId" class="form-control select2"> -->
+                                                            <!-- <option value="<?php //echo $editenquiry->e_customerID; ?>">Selected Customer ID : <?php //echo $editenquiry->e_customerID; ?></option> -->
 
-                                                    <?php foreach ($countries as $value) { ?>
-
-                                                      <option value="<?php echo $value->country_name ?>"><?php echo $value->country_name ?></option>
-
-                                                    <?php } ?>
-                                                  </select>
+                                                    <input type="hidden" readonly class="form-control" value="<?php echo $editenquiry->e_customerID; ?>" name="customerId">
+                                                </div>
+                                                <div class="col-md-12 pt-4">
+                                                  <label for="">Application</label>
+                                                    <input type="text" value="<?php echo $editenquiry->e_appliction; ?>" class="form-control" placeholder="Application" name="application">
+                                                </div>
+                                                <div class="col-md-12 pt-4">
+                                                  <label for="">Machine Model</label>
+                                                    <textarea class="form-control" rows="3" name="machine_model" placeholder="Machine Model / Specs"><?php echo $editenquiry->e_machine_model; ?></textarea>
                                                 </div>
                                                 <div class="col-md-6 pt-4">
-                                                    <label for="">Contact Person Name</label>
-                                                    <input type="text" class="form-control" placeholder="Contact Person Name" value="<?php set_value('s_contact_person_name'); ?>" name="s_contact_person_name">
+                                                  <label for="">Machine Make</label>
+                                                    <input type="text" class="form-control" value="<?php echo $editenquiry->e_machine_make; ?>" name="machine_make" placeholder="Machine Make">
                                                 </div>
                                                 <div class="col-md-6 pt-4">
-                                                  <label for="">Contact Information</label>
-                                                  <input type="text" class="form-control" placeholder="Contact Information" value="<?php set_value('s_contact_information'); ?>" name="s_contact_information">
+                                                  <label for="">Required QTY</label>
+                                                    <input type="text" class="form-control" value="<?php echo $editenquiry->e_required_qty; ?>" name="required_qty" placeholder="Required Qty">
                                                 </div>
-                                                <div class="col-md-6 pt-4">
-                                                    <label for="">Contact Email Id</label>
-                                                    <input type="text" class="form-control" placeholder="Contact Email Id" value="<?php set_value('s_contact_email_id'); ?>" name="s_contact_email_id">
+                                                <div class="col-md-12 pt-4">
+                                                  <label for="">Description</label>
+                                                    <textarea class="form-control" rows="4" name="required_description" placeholder="Required Description"><?php echo $editenquiry->e_required_description; ?></textarea>
                                                 </div>
-                                                <div class="col-md-6 pt-4">
-                                                  <label for="">Country Code</label>
-
-                                                  <input type="text" class="form-control" placeholder="Country Code" value="<?php set_value('s_country_code'); ?>" name="s_country_code">
-                                                </div>
-                                                <div class="col-md-6 pt-4">
-                                                  <label for="">Contact Number</label>
-
-                                                    <input type="text" class="form-control" placeholder="Contact Number 1" value="<?php set_value('s_contact_number_1'); ?>" name="s_contact_number_1">
-                                                </div>
-                                                <div class="col-md-6 pt-4">
-                                                  <label for="">Infrastructure Details</label>
-
-                                                  <input type="text" class="form-control" placeholder="Infrastructure Details" value="<?php set_value('s_infrastructure_details'); ?>" name="s_infrastructure_details">
-                                                </div>
-                                                <div class="col-md-6 pt-4">
-                                                  <label for="">Machines Plant Capacity</label>
-
-                                                    <input type="text" class="form-control" placeholder="Machines Plant Capacity" value="<?php set_value('s_machines_plant_capacity'); ?>" name="s_machines_plant_capacity">
-                                                </div>
-                                                <div class="col-md-6 pt-4">
-                                                  <label for="">Support Infrastructure</label>
-
-                                                    <input type="text" class="form-control" placeholder="Support Infrastructure" value="<?php set_value('s_support_infrastructure'); ?>" name="s_support_infrastructure">
-                                                </div>
-                                                <div class="col-md-6 pt-4">
-                                                  <label for="">Attachment Of Company Catalogue</label>
+                                                <!-- <div class="col-md-6 pt-4">
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <input type="file" class="form-control" multiple name="s_attachment_of_company_catalogue[]">
+                                                            <input type="file" class="form-control" multiple name="Photo_Of_The_Parts[]">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <button class="btn btn-info w-100">Browse</button>
@@ -302,22 +279,25 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 pt-4">
-                                                  <label for="">Qms Applicable</label>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <input type="file" class="form-control" multiple name="Drawing_Of_The_Parts[]">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <button class="btn btn-info w-100">Browse</button>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+                                                <div class="col-md-12 pt-4">
+                                                  <label for="">Special Remarks</label>
+                                                    <textarea class="form-control" rows="3" name="special_remarks" placeholder="Special Remarks"><?php echo $editenquiry->e_special_remarks; ?></textarea>
+                                                </div>
 
-                                                    <input type="text" class="form-control" placeholder="Qms Applicable" value="<?php set_value('s_qms_applicable'); ?>" name="s_qms_applicable">
-                                                </div>
-                                                <div class="col-md-6 pt-4">
-                                                </div>
                                                 <div class="col-md-6 mt-4">
                                                     <button class="w-100 btn btn-success">
                                                         SUBMIT
                                                     </button>
                                                 </div>
-                                                <div class="col-md-6 pt-4">
-                                                </div>
-                                                <div class="col-md-6 pt-4">
-                                                </div>
-
                                                 <?php echo "</form>"?>
 
                                             </div>

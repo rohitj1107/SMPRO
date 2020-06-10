@@ -230,17 +230,17 @@
                                             <th>Required Qty</th>
                                             <th>Date Time</th>
                                             <th>Action</th>
-                                            <th>Enquiry To Quotation</th>
+                                            <th>Enq To PO</th>
                                             <!-- <th>Ed</th> -->
                                         </tr>
                                         </thead>
                                         <tbody>
-                                          <?php if ($enquiry) { ?>
-                                            <?php foreach($enquiry as $sw_enquiry){ ?>
+                                          <?php if ($po) { ?>
+                                            <?php foreach($po as $sw_po){ ?>
                                             <tr>
-                                                <td><?php echo $sw_enquiry->e_enquiryId; ?></td>
-                                                <td><?php echo $sw_enquiry->e_customerID; ?></td>
-                                                <td>
+                                                <td><?php echo $sw_po->po_customer_ID; ?></td>
+                                                <td><?php echo $sw_po->po_enquiry_ID; ?></td>
+                                                <!-- <td>
                                                     <?php
                                                     $count ="<p class='text-danger' > No Quatation Create </p>";
                                                     // print_r($qu_count);
@@ -251,7 +251,7 @@
                                                               }
                                                           }
                                                       } echo $count;
-                                                       ?>
+                                                       ?> -->
                                                 </td>
                                                 <td><?php echo $sw_enquiry->e_required_qty; ?></td>
                                                 <td><?php echo $sw_enquiry->e_date_time; ?></td>

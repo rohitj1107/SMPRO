@@ -285,14 +285,79 @@ class Admin_model extends CI_Model{
   }
 
   public function supplier_form_admin_update_model($data){
-    // echo $data['s_supplier_id'];exit;
-    $this->db->where('s_supplier_id', $data['s_supplier_id']);
-    $sql = $this->db->update('s_supplier', $data);
-    if ($sql) {
-        return true;
-    } else {
-        return false;
-    }
+      // echo $data['s_supplier_id'];exit;
+      $this->db->where('s_supplier_id', $data['s_supplier_id']);
+      $sql = $this->db->update('s_supplier', $data);
+      if ($sql) {
+          return true;
+      } else {
+          return false;
+      }
+  }
+
+  public function select_edite($customerID,$enquiryID){
+      $sql = $this->db->where('e_customerID',$customerID)->where('e_enquiryId',$enquiryID)->get('s_enquiry');
+      if ($sql->num_rows() > 0) {
+          return $sql->row();
+      } else {
+          return FALSE;
+      }
+  }
+
+  public function edite_enquiry($data,$customerID,$enquiryID){
+      $sql = $this->db->set($data)->where('e_customerID',$customerID)->where('e_enquiryId',$enquiryID)->update('s_enquiry');
+      if ($sql) {
+          return TRUE;
+      } else {
+          return FALSE;
+      }
+  }
+
+  public function count_qu($customerID,$enquiryID){
+      $sql = $this->db->select("count(s_quotation.q_quote_number) as number , q_enquiry_ID")->where('q_customer_ID',$customerID)->where('q_enquiry_ID',$enquiryID)->get('s_quotation');
+      if ($sql) {
+          return $sql->result();
+          // print_r($sql->result());exit;
+      } else {
+          return FALSE;
+      }
+  }
+
+  public function count_quotation($enquiryID,$quotation_number){
+      $sql = $this->db->select("count(s_po.po_po_number) as number , po_quote_number")->where('po_quote_number',$quotation_number)->where('po_enquiry_ID',$enquiryID)->get('s_po');
+      if ($sql) {
+          return $sql->result();
+          // print_r($sql->result());exit;
+      } else {
+          return FALSE;
+      }
+  }
+
+  public function select_po_list(){
+      $sql = $this->db->get('s_po');
+      if ($sql->num_rows() > 0) {
+          return $sql->result();
+      } else {
+          return FALSE;
+      }
+  }
+
+  public function select_quotation_list(){
+      $sql = $this->db->get('s_quotation');
+      if ($sql->num_rows() > 0) {
+          return $sql->result();
+      } else {
+          return FALSE;
+      }
+  }
+
+  public function select_quotation_admin(){
+      $sql = $this->db->get('s_quotation');
+      if ($sql->num_rows() > 0) {
+          return $sql->result();
+      } else {
+          return false;
+      }
   }
 
 }

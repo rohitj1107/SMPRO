@@ -151,6 +151,27 @@
                               <li>
                                   <a href="javascript: void(0);">
                                       <i class="mdi mdi-texture"></i>
+                                      <span> Quotation </span>
+                                  </a>
+                                  <ul class="nav-second-level" aria-expanded="false">
+                                      <li><a href="<?php echo base_url('quotation_show'); ?>"> quotation List </a></li>
+                                      <li><a href="<?php echo base_url('quotation_form'); ?>"> quotation Form </a></li>
+                                  </ul>
+                              </li>
+
+                              <li>
+                                  <a href="javascript: void(0);">
+                                      <i class="mdi mdi-texture"></i>
+                                      <span> PO </span>
+                                  </a>
+                                  <ul class="nav-second-level" aria-expanded="false">
+                                      <li><a href="<?php echo base_url('po_show'); ?>"> PO List </a></li>
+                                      <li><a href="<?php echo base_url('po_form'); ?>"> PO Form </a></li>
+                                  </ul>
+                              </li>
+                              <li>
+                                  <a href="javascript: void(0);">
+                                      <i class="mdi mdi-texture"></i>
                                       <span> Supplier </span>
                                   </a>
                                   <ul class="nav-second-level" aria-expanded="false">
@@ -158,7 +179,7 @@
                                       <li><a href="<?php echo base_url('supplier_form_admin'); ?>"> Supplier Form </a></li>
                                   </ul>
                               </li>
-                                                      <?php } else {?>
+                                                        <?php } else {?>
                             <li>
                                 <a href="<?php echo base_url('Dashbord'); ?>">
                                     <i class="mdi mdi-texture"></i>
@@ -170,7 +191,7 @@
                                 <a href="<?php echo base_url('enquiry_show'); ?>">
                                     <i class="mdi mdi-texture"></i>
                                     <!-- <span class="badge badge-warning float-right">7</span> -->
-                                     Show Forms
+                                     Show Quotation
                                 </a>
                             </li>
                           <?php  } ?>
@@ -199,36 +220,55 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="card-box table-responsive">
-                                    <h4 class="mt-0 header-title">Supplier View</h4>
+                                    <h4 class="mt-0 header-title">Show Quotation</h4>
                                     <table id="responsive-datatable" class="table table-bordered table-bordered dt-responsive nowrap">
                                         <thead>
                                         <tr>
-                                            <th>Supplier Number</th>
-                                            <th>Company Name</th>
-                                            <th>Company Category</th>
-                                            <th>Country</th>
-                                            <th>Person Name</th>
-                                            <th>Number</th>
+                                            <th>Customer Number</th>
+                                            <th>Enquiry Number</th>
+                                            <th>Qoutation Number</th>
+                                            <!-- <th>Quotation</th> -->
+                                            <th>PO</th>
+                                            <th>Required Qty</th>
+                                            <th>Date Time</th>
                                             <th>Action</th>
+                                            <th>Quotation To PO</th>
                                             <!-- <th>Ed</th> -->
                                         </tr>
                                         </thead>
                                         <tbody>
-                                          <?php if ($supplier) { ?>
-                                            <?php foreach($supplier as $s_supplier){ ?>
+                                          <?php if ($quotation) { ?>
+                                            <?php foreach($quotation as $sw_quotation){ ?>
                                             <tr>
-                                                <td><?php echo $s_supplier->s_supplier_id; ?></td>
-                                                <td><?php echo $s_supplier->s_company_name; ?></td>
-                                                <td><?php echo $s_supplier->s_company_category; ?></td>
-                                                <td><?php echo $s_supplier->s_country; ?></td>
-                                                <td><?php echo $s_supplier->s_contact_person_name; ?></td>
-                                                <td><?php echo $s_supplier->s_contact_number_1; ?></td>
-                                                <td>
-                                                  <a href='<?php echo base_url("supplier_view/".base64_encode($s_supplier->s_supplier_id)); ?>' class="btn btn-success mdi mdi-view-list"></a>
-                                                  <a href='<?php echo base_url("supplier_edite/".base64_encode($s_supplier->s_supplier_id)); ?>' class="btn btn-warning mdi mdi-account-edit"></a>
-                                                  <a href="#" class="btn btn-danger mdi mdi-delete-sweep-outline"></a>
-                                                </td>
+                                                <td><?php echo $sw_quotation->q_customer_ID; ?></td>
+                                                <td><?php echo $sw_quotation->q_enquiry_ID; ?></td>
+                                                <td><?php echo $sw_quotation->q_quote_number; ?></td>
 
+                                                <td>
+                                                    <?php
+                                                    $count ="<p class='text-danger' > No PO Create </p>";
+                                                    // print_r($qu_count);
+                                                      foreach ($po_count as $count_qu) {
+                                                          foreach ($count_qu as $value) {
+                                                              if ($value->po_quote_number == $sw_quotation->q_quote_number) {
+                                                                $count = $value->number;
+                                                              }
+                                                          }
+                                                      } echo $count;
+                                                       ?>
+                                                </td>
+                                                <td><?php echo $sw_quotation->q_quote_number; ?></td>
+                                                <td><?php echo $sw_quotation->q_payment_terms; ?></td>
+                                                <td>
+                                                  <a href="<?php echo base_url("view_enquiry_single_admin/$sw_quotation->q_quote_number"); ?>"><button type="button" class="btn btn-success mdi mdi-view-list" name="button"></button></a>
+                                                  <a href="<?php echo base_url("enquiry_edite/$sw_quotation->q_quote_number"); ?>"><button type="button" class="btn btn-warning mdi mdi-view-list" name="button"></button></a>
+                                                  <!-- <a href="<?php //echo base_url('edite_enquiry'); ?>"><button type="button" class="bg-warning" name="button">Edit</button></a> -->
+                                                  <a href="<?php echo base_url('delete_enquiry_admin'); ?>"><button type="button" class="btn btn-danger mdi mdi-delete-sweep-outline" name="button"></button></a>
+                                                </td>
+                                                <td>
+                                                  <a href="<?php echo base_url("view_enquiry_admin/$sw_quotation->q_quote_number"); ?>"><button type="button" class="btn btn-info mdi mdi-view-list" name="button"></button></a>
+
+                                                </td>
                                                 <!-- <td>Ac</td> -->
                                             </tr>
                                           <?php } ?>

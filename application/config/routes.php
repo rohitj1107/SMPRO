@@ -60,41 +60,66 @@ $route['check_otp'] = 'Home/check_otp';
 $route['otp/(:any)'] = 'Home/otp/$1';
 $route['logout'] = 'Home/logout';
 
+// Dashbord
+
 $route['Dashbord'] = 'Dashbord';
 $route['do_upload'] = 'Dashbord/do_upload';
 $route['enquiry_show'] = 'Dashbord/enquiry_show';
 $route['view_enquiry/(:any)/(:any)'] = 'Dashbord/view_enquiry/$1/$2';
 $route['edite_enquiry/(:any)/(:any)'] = 'Dashbord/edite_enquiry/$1/$2';
 $route['delete_enquiry/(:any)/(:any)'] = 'Dashbord/delete_enquiry/$1/$2';
-$route['view_enquiry_single_admin/(:any)/(:any)'] = 'Enquiry/view_enquiry_single_admin/$1/$2';
 
-$route['enquiry_show_admin'] = 'Dashbord/enquiry_show_admin';
-$route['view_enquiry_admin/(:any)/(:any)'] = 'Dashbord/view_enquiry_admin/$1/$2';
-$route['enquiry_form_admin'] = 'Dashbord/enquiry_form_admin';
-$route['do_upload_admin'] = 'Dashbord/do_upload_admin';
-$route['insert_quotation'] = 'Dashbord/insert_quotation';
+// Enquiry
+
+$route['view_enquiry_single_admin/(:any)/(:any)'] = 'Enquiry/view_enquiry_single_admin/$1/$2';
+$route['enquiry_edite/(:any)/(:any)'] = 'Enquiry/enquiry_edite/$1/$2';
+$route['do_upload_edite/(:any)/(:any)'] = 'Enquiry/do_upload_edite/$1/$2';
+$route['enquiry_show_admin'] = 'Enquiry/enquiry_show_admin';
+$route['view_enquiry_admin/(:any)/(:any)'] = 'Enquiry/view_enquiry_admin/$1/$2';
+$route['enquiry_form_admin'] = 'Enquiry/enquiry_form_admin';
+$route['do_upload_admin'] = 'Enquiry/do_upload_admin';
+
+// Quotation
+
+$route['insert_quotation'] = 'Quotation/insert_quotation';
 $route['quotation_to_po/(:any)'] = 'Dashbord/quotation_to_po/$1';
 $route['insert_po'] = 'Dashbord/insert_po';
 $route['user_list'] = 'User/user_list';
 $route['follow_up'] = 'Dashbord/follow_up';
 
-$route['supplier_form_admin'] = 'Dashbord/supplier_form_admin';
-$route['supplier_show_admin'] = 'Dashbord/supplier_show_admin';
-$route['supplier_form_admin_insert'] = 'Dashbord/supplier_form_admin_insert';
-$route['supplier_view/(:any)'] = 'Dashbord/supplier_view/$1';
-$route['supplier_edite/(:any)'] = 'Dashbord/supplier_edite/$1';
-// $route['supplier_form_admin_updatee/(:any)'] = 'Dashbord/supplier_form_admin_update/$1';
-$route['supplier_form_admin_update/(:any)'] = 'Dashbord/supplier_form_admin_update/$1';
+// User
 
 $route['view/(:any)'] = 'User/view/$1';
 $route['edite/(:any)'] = 'User/edite/$1';
 $route['register_update/(:any)'] = 'User/register_update/$1';
 $route['create_user'] = 'User/create_user';
 
+// Supplier
+
+$route['supplier_form_admin'] = 'Supplier/supplier_form_admin';
+$route['supplier_show_admin'] = 'Supplier/supplier_show_admin';
+$route['supplier_form_admin_insert'] = 'Supplier/supplier_form_admin_insert';
+$route['supplier_view/(:any)'] = 'Supplier/supplier_view/$1';
+$route['supplier_edite/(:any)'] = 'Supplier/supplier_edite/$1';
+// $route['supplier_form_admin_updatee/(:any)'] = 'Dashbord/supplier_form_admin_update/$1';
+$route['supplier_form_admin_update/(:any)'] = 'Dashbord/supplier_form_admin_update/$1';
+
+// Admin
+
 $route['admin'] = 'Admin/login';
 $route['admin_login'] = 'Admin/check_login';
 $route['admin_approval/(:any)'] = 'Admin/admin_approval/$1';
 $route['admin_unapproval/(:any)'] = 'Admin/admin_unapproval/$1';
+
+// PO
+$route['po_show'] = 'Po/po_show';
+$route['po_form'] = 'Po/po_form';
+
+// Quotation
+
+$route['quotation_show'] = 'Quotation/quotation_show';
+$route['quotation_form'] = 'Quotation/quotation_form';
+
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

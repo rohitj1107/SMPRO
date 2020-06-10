@@ -161,6 +161,27 @@
                             <li>
                                 <a href="javascript: void(0);">
                                     <i class="mdi mdi-texture"></i>
+                                    <span> Quotation </span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="<?php echo base_url('quotation_show'); ?>"> quotation List </a></li>
+                                    <li><a href="<?php echo base_url('quotation_form'); ?>"> quotation Form </a></li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript: void(0);">
+                                    <i class="mdi mdi-texture"></i>
+                                    <span> PO </span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="<?php echo base_url('po_show'); ?>"> PO List </a></li>
+                                    <li><a href="<?php echo base_url('po_form'); ?>"> PO Form </a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">
+                                    <i class="mdi mdi-texture"></i>
                                     <span> Supplier </span>
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
@@ -219,12 +240,15 @@
 
                                                 </div>
                                                 <div class="col-md-6 pt-4">
-                                                  <?php echo form_open_multipart('Dashbord/do_upload_admin');?>
+                                                  <?php echo form_open_multipart('do_upload_admin');?>
                                                     <label for="customerId">CUSTOMER ID</label>
                                                     <select name="customerId" class="form-control select2">
                                                             <option>Select Customer ID</option>
                                                             <?php foreach($customerID as $customer){ ?>
-                                                            <option value="<?php echo $customer->u_customerId.' '.$customer->u_emailId; ?>"><?php echo $customer->u_customerId.' '.$customer->u_emailId; ?></option>
+                                                              <?php if ($customer->u_emailId == $this->session->userdata('emailId')): ?>
+                                                              <?php else :?>
+                                                                <option value="<?php echo $customer->u_customerId.' '.$customer->u_emailId; ?>"><?php echo $customer->u_customerId.' '.$customer->u_emailId; ?></option>
+                                                              <?php endif; ?>
                                                           <?php }?>
                                                     </select>
                                                     <!-- <input type="text" readonly class="form-control" value="<?php echo $user->u_customerId; ?>" name="customerId"> -->

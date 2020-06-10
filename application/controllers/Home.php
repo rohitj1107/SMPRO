@@ -77,20 +77,20 @@ class Home extends CI_Controller{
 
           $config = array(
               'protocol' => 'smtp', // 'mail', 'sendmail', or 'smtp'
-              'smtp_host' => 'ssl://smtp.googlemail.com',
+              'smtp_host' => 'youtubergo.club',
               'smtp_port' => 465,
-              'smtp_user' => 'your_email@gmail.com',
-              'smtp_pass' => 'your_password',
-              'mailtype' => 'html', //plaintext 'text' mails or 'html'
+              'smtp_user' => 'rohit@youtubergo.club',
+              'smtp_pass' => 'Rohit!123',
+              'mailtype' => 'text', //plaintext 'text' mails or 'html'
               'charset' => 'iso-8859-1',
               'wordwrap' => TRUE
           );
           $this->load->library('email',$config);
 
-          $this->email->from('from_email', 'From Email');
-          $this->email->to('to_email','To Email');
-          $this->email->subject('OTP for register form');
-          $this->email->message('Please type your OTO'. $data['u_otp']);
+          $this->email->from('no-reply@youtubergo.club', 'SMPRO');
+          $this->email->to($data['u_emailId'],$data['u_companyName']);
+          $this->email->subject('OTP For SMPRO');
+          $this->email->message('Please type your OTO : '. $data['u_otp']);
 
           $this->email->send();
 

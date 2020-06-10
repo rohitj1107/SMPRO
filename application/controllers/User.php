@@ -47,7 +47,7 @@ class User extends CI_Controller{
           'u_gst' => $this->input->post('gst'),
           'u_industry' => $this->input->post('industry'),
           'u_comment' => $this->input->post('comment'),
-          'u_action' => $this->input->post('action')
+          // 'u_action' => $this->input->post('action')
       ];
 
       if ($this->Admin_model->user_update($data,$uid)) {
@@ -102,18 +102,18 @@ class User extends CI_Controller{
           if ($this->Admin_model->create_user($data)) {
             $config = array(
                 'protocol' => 'smtp', // 'mail', 'sendmail', or 'smtp'
-                'smtp_host' => 'ssl://smtp.googlemail.com',
+                'smtp_host' => 'youtubergo.club',
                 'smtp_port' => 465,
-                'smtp_user' => 'your_email@gmail.com',
-                'smtp_pass' => 'your_password',
-                'mailtype' => 'html', //plaintext 'text' mails or 'html'
+                'smtp_user' => 'rohit@youtubergo.club',
+                'smtp_pass' => 'Rohit!123',
+                'mailtype' => 'text', //plaintext 'text' mails or 'html'
                 'charset' => 'iso-8859-1',
                 'wordwrap' => TRUE
             );
             $this->load->library('email',$config);
 
-            $this->email->from('from_email', 'From Email');
-            $this->email->to('to_email','To Email');
+            $this->email->from('rohit@youtubergo.club', 'From Email');
+            $this->email->to($data['u_emailId'],'To Email');
             $this->email->subject('OTP for register form');
             $this->email->message('Please type your OTO'. $data['u_otp']);
 
