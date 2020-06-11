@@ -20,9 +20,33 @@
     <!-- Latest compiled JavaScript -->
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script> -->
 <!-- </head> -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="stylesheet/style.css">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="//unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="//unpkg.com/bootstrap-select@1.12.4/dist/css/bootstrap-select.min.css" type="text/css" />
+<link rel="stylesheet" href="//unpkg.com/bootstrap-select-country@4.0.0/dist/css/bootstrap-select-country.min.css" type="text/css" />
+
+<script src="//unpkg.com/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="//unpkg.com/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+<script src="//unpkg.com/bootstrap-select@1.12.4/dist/js/bootstrap-select.min.js"></script>
+<script src="//unpkg.com/bootstrap-select-country@4.0.0/dist/js/bootstrap-select-country.min.js"></script>
 
 <!-- <body> -->
-<?php include('header.php'); ?>
+<?php //include('header.php'); ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 d-flex justify-content-center align-items-center coverpic-headline">
@@ -33,6 +57,11 @@
 
     <div class="container mt-5 registration">
         <div class="row">
+          <?php echo form_open('Home/register_create');
+              // echo form_open('cap');
+          ?>
+          <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+
             <div class="col-md-12">
 
               <?php if ($this->session->flashdata('errors')) { ?>
@@ -43,11 +72,9 @@
                 </div>
               <?php } ?>
 
-              <?php echo form_open('Home/register_create'); ?>
                 <p class="font-weight-bold m-0">Lorem Ipsum</p>
             </div>
             <?php echo validation_errors(); ?>
-            <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
             <div class="col-md-6 pt-4">
 
                 <?php $name_data = [
@@ -82,8 +109,9 @@
                 // ]; ?>
 
                 <?php //echo form_input($name_data); ?>
+                <select class="selectpicker countrypicker form-control" name="country" data-flag="true" ></select>
 
-                <select class="form-control" name="country">
+                <!-- <select class="form-control" name="country">
                   <option value="Not Select">Select Country</option>
 
                   <?php foreach ($countries as $value) { ?>
@@ -91,7 +119,7 @@
                     <option value="<?php echo $value->country_name ?>"><?php echo $value->country_name ?></option>
 
                   <?php } ?>
-                </select>
+                </select> -->
 
                 <!-- <input type="text" class="form-control" id="email" placeholder="Country" name="country"> -->
             </div>
@@ -234,7 +262,7 @@
                 <!-- <textarea class="form-control" rows="3" placeholder="Remarks / Additional Info" id="comment"></textarea> -->
             </div>
 
-            <div class="col-md-3 grid-captcha mt-4">
+            <!-- <div class="col-md-3 grid-captcha mt-4">
                 <div class="form-check captcha-checkbox">
                     <label class="form-check-label">
                     <input type="checkbox" class="form-check-input" value="">
@@ -246,6 +274,14 @@
                     <p>reCAPTCHA</p>
                     <small>Privacy - Terms</small>
                 </div>
+            </div> -->
+            <div class="col-md-3 mt-4">
+              <?php //echo $capcha['widget'];?>
+              <?php //echo $capcha['script'];?>
+              <script src='https://www.google.com/recaptcha/api.js'></script>
+
+
+              <div class="g-recaptcha" data-sitekey="6Lf8J6MZAAAAAFHT5nnm8mO57laBx7nHxIGDBkj-"></div>
             </div>
 
             <div class="col-md-12 mt-4 termsConditions">
@@ -264,5 +300,7 @@
 
 </body>
 <?php include('footer.php'); ?>
-
+<script>
+    $('.countrypicker').countrypicker();
+</script>
 </html>

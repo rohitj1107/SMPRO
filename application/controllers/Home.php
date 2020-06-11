@@ -9,6 +9,7 @@ class Home extends CI_Controller{
       parent::__construct();
       $this->load->model('Home_model');
       $this->load->helper('security');
+
   }
 
   public function index(){
@@ -32,13 +33,24 @@ class Home extends CI_Controller{
     $this->load->view('register_view',['countries'=>$data]);
   }
 
+  function validate_captcha() {
+        $captcha = $this->input->post('g-recaptcha-response');
+         $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=6Lf8J6MZAAAAAKm5B6EpR6iS5YCF84y9nECUHX78 &response=" . $captcha . "&remoteip=" . $_SERVER['REMOTE_ADDR']);
+        if ($response . 'success' == false) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+
   public function register_create(){
     $this->form_validation->set_rules('companyName','Company Name','trim|required|min_length[3]');
     $this->form_validation->set_rules('emailId','Email','trim|required|valid_email');
     $this->form_validation->set_rules('termsConditions','Terms Conditions','required');
     $this->form_validation->set_rules('websiteUrl','web Site Url','valid_url');
     $this->form_validation->set_rules('password','Password','trim|required|md5');
-
+    $this->form_validation->set_rules('g-recaptcha-response', 'recaptcha validation', 'required|callback_validate_captcha');
+    $this->form_validation->set_message('validate_captcha', 'Please check the the captcha form');
 
     if($this->form_validation->run()){
       $ran_cust = '0123456789abcdefghijklmnopqrstuvwxyz';

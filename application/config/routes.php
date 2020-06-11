@@ -56,6 +56,7 @@ $route['products'] = 'Home/products';
 
 $route['login'] = 'Home/login';
 $route['register'] = 'Home/register';
+$route['cap'] = 'Test/cap';
 $route['check_otp'] = 'Home/check_otp';
 $route['otp/(:any)'] = 'Home/otp/$1';
 $route['logout'] = 'Home/logout';
