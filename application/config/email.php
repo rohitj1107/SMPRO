@@ -5,10 +5,10 @@ $config = array(
     'smtp_host' => 'youtubergo.club',
     'smtp_port' => 465,
     'smtp_user' => 'smpro@youtubergo.club',
-    'smtp_pass' => 'HvBeKS06vR@!',
+    'smtp_pass' => 'HvBeKSo6vR@!',
     'smtp_crypto' => 'ssl', //can be 'ssl' or 'tls' for example
     'mailtype' => 'text', //plaintext 'text' mails or 'html'
-    'smtp_timeout' => '4', //in seconds
+    'smtp_timeout' => '5', //in seconds
     'charset' => 'iso-8859-1',
     'wordwrap' => TRUE
 );

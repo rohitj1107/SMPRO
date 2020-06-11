@@ -70,7 +70,7 @@ class User extends CI_Controller{
 
   public function create_user_insert(){
       $this->form_validation->set_rules('companyName','Company Name','trim|required|min_length[3]');
-      $this->form_validation->set_rules('emailId','Email','trim|required|valid_email');
+      $this->form_validation->set_rules('emailId','Email','trim|required');
       // $this->form_validation->set_rules('termsConditions','Terms Conditions','required');
       $this->form_validation->set_rules('websiteUrl','web Site Url','valid_url');
       $this->form_validation->set_rules('password','Password','trim|md5');
@@ -100,22 +100,19 @@ class User extends CI_Controller{
         ];
 
           if ($this->Admin_model->create_user($data)) {
-            $config = array(
-                'protocol' => 'smtp', // 'mail', 'sendmail', or 'smtp'
-                'smtp_host' => 'youtubergo.club',
-                'smtp_port' => 465,
-                'smtp_user' => 'rohit@youtubergo.club',
-                'smtp_pass' => 'Rohit!123',
-                'mailtype' => 'text', //plaintext 'text' mails or 'html'
-                'charset' => 'iso-8859-1',
-                'wordwrap' => TRUE
-            );
-            $this->load->library('email',$config);
+            $this->load->config('email');
+            $this->load->library('email');
 
-            $this->email->from('rohit@youtubergo.club', 'From Email');
-            $this->email->to($data['u_emailId'],'To Email');
-            $this->email->subject('OTP for register form');
-            $this->email->message('Please type your OTO'. $data['u_otp']);
+            $from = $this->config->item('smtp_user');
+            $to = $data['u_emailId'];
+            $subject = 'SMPRO Website';
+            $message = 'You Are Register On SMPRO Website';
+
+            $this->email->set_newline("\r\n");
+            $this->email->from($from);
+            $this->email->to($to);
+            $this->email->subject($subject);
+            $this->email->message($message);
 
             $this->email->send();
 

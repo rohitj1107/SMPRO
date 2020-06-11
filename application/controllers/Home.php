@@ -34,11 +34,26 @@ class Home extends CI_Controller{
   }
 
   function validate_captcha() {
-        $captcha = $this->input->post('g-recaptcha-response');
-         $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=6Lf8J6MZAAAAAKm5B6EpR6iS5YCF84y9nECUHX78 &response=" . $captcha . "&remoteip=" . $_SERVER['REMOTE_ADDR']);
-        if ($response . 'success' == false) {
+        $recaptcha = trim($this->input->post('g-recaptcha-response'));
+        $userIp= $this->input->ip_address();
+        $secret='6Lf8J6MZAAAAAKm5B6EpR6iS5YCF84y9nECUHX78';
+        $data = array(
+            'secret' => "$secret",
+            'response' => "$recaptcha",
+            'remoteip' =>"$userIp"
+        );
+
+        $verify = curl_init();
+        curl_setopt($verify, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify");
+        curl_setopt($verify, CURLOPT_POST, true);
+        curl_setopt($verify, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($verify, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($verify, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($verify);
+        $status= json_decode($response, true);
+        if(empty($status['success'])){
             return FALSE;
-        } else {
+        }else{
             return TRUE;
         }
     }
@@ -70,7 +85,7 @@ class Home extends CI_Controller{
         'u_gst' => $this->security->xss_clean($this->input->post('gst')),
         'u_industry' => $this->security->xss_clean($this->input->post('industry')),
         'u_comment' => $this->security->xss_clean($this->input->post('comment')),
-        'u_customerId' => substr(str_shuffle($ran_cust), 0, 10),
+        'u_customerId' => 'CU-'.time(),
         'u_password' => $this->security->xss_clean($this->input->post('password')),
 
         'u_otp' => rand('1000','5000')
@@ -87,22 +102,19 @@ class Home extends CI_Controller{
           // $this->load->view('layouts/main',$data);
           // $this->u_emailId = $this->input->post('emailId');
 
-          $config = array(
-              'protocol' => 'smtp', // 'mail', 'sendmail', or 'smtp'
-              'smtp_host' => 'youtubergo.club',
-              'smtp_port' => 465,
-              'smtp_user' => 'smpro@youtubergo.club',
-              'smtp_pass' => 'HvBeKS06vR@!',
-              'mailtype' => 'text', //plaintext 'text' mails or 'html'
-              'charset' => 'iso-8859-1',
-              'wordwrap' => TRUE
-          );
-          $this->load->library('email',$config);
+          $this->load->config('email');
+          $this->load->library('email');
 
-          $this->email->from('smpro@youtubergo.club', 'SMPRO');
-          $this->email->to($data['u_emailId'],$data['u_companyName']);
-          $this->email->subject('OTP For SMPRO');
-          $this->email->message('Please type your OTO : '. $data['u_otp']);
+          $from = $this->config->item('smtp_user');
+          $to = $data['u_emailId'];
+          $subject = 'OTP For SMPRO';
+          $message = 'Please type your OTO : '. $data['u_otp'];
+
+          $this->email->set_newline("\r\n");
+          $this->email->from($from);
+          $this->email->to($to);
+          $this->email->subject($subject);
+          $this->email->message($message);
 
           $this->email->send();
 
