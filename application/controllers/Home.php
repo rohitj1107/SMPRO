@@ -91,15 +91,15 @@ class Home extends CI_Controller{
               'protocol' => 'smtp', // 'mail', 'sendmail', or 'smtp'
               'smtp_host' => 'youtubergo.club',
               'smtp_port' => 465,
-              'smtp_user' => 'rohit@youtubergo.club',
-              'smtp_pass' => 'Rohit!123',
+              'smtp_user' => 'smpro@youtubergo.club',
+              'smtp_pass' => 'HvBeKS06vR@!',
               'mailtype' => 'text', //plaintext 'text' mails or 'html'
               'charset' => 'iso-8859-1',
               'wordwrap' => TRUE
           );
           $this->load->library('email',$config);
 
-          $this->email->from('no-reply@youtubergo.club', 'SMPRO');
+          $this->email->from('smpro@youtubergo.club', 'SMPRO');
           $this->email->to($data['u_emailId'],$data['u_companyName']);
           $this->email->subject('OTP For SMPRO');
           $this->email->message('Please type your OTO : '. $data['u_otp']);
