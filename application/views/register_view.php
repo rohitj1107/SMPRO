@@ -47,6 +47,26 @@
 
 <!-- <body> -->
 <?php //include('header.php'); ?>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 nav-grid">
+            <div class="company-logo">
+                <img src="<?php echo base_url(); ?>assets/images/logo.png" width="150" class="img-fluid" alt="">
+            </div>
+            <div class="menu">
+                <a href="<?php echo base_url('Home'); ?>">Home</a>
+                <a href="<?php echo base_url('about'); ?>">About Us</a>
+                <a href="<?php echo base_url('products'); ?>">Product & Services</a>
+                <a href="#">Partners</a>
+                <a href="">Contact Us</a>
+            </div>
+            <div class="login">
+                <a href="<?php echo base_url('login'); ?>"> <button>LOGIN</button> </a>
+                <a href="<?php echo base_url('register'); ?>"> <button>REGISTER</button> </a>
+            </div>
+        </div>
+    </div>
+</div>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 d-flex justify-content-center align-items-center coverpic-headline">
@@ -76,6 +96,7 @@
             </div>
             <?php echo validation_errors(); ?>
             <div class="col-md-6 pt-4">
+              <label for="">Company Name</label>
 
                 <?php $name_data = [
                   'name' => 'companyName',
@@ -89,6 +110,8 @@
             </div>
 
             <div class="col-md-6 pt-4">
+              <label for="">Website Url</label>
+
                 <?php $name_data = [
                   'name' => 'websiteUrl',
                   'value' => set_value('websiteUrl'),
@@ -101,6 +124,8 @@
             </div>
 
             <div class="col-md-6 pt-4">
+              <label for="">Country</label>
+
                 <?php //$name_data = [
                   // 'name' => 'country',
                   // 'value' => set_value('country'),
@@ -125,6 +150,8 @@
             </div>
 
             <div class="col-md-6 pt-4">
+              <label for="">Postal Code</label>
+
                 <?php $name_data = [
                   'name' => 'postalCode',
                   'value' => set_value('postalCode'),
@@ -137,18 +164,28 @@
             </div>
 
             <div class="col-md-6 pt-4">
+              <label for="">Company Type</label>
+
                 <?php $name_data = [
                   'name' => 'companyType',
                   'value' => set_value('companyType'),
                   'placeholder' => 'Company Type',
                   'class' => 'form-control'
                 ]; ?>
-
-                <?php echo form_input($name_data); ?>
+                <select class="form-control" name="companyType">
+                    <option value="0">Select Company Type</option>
+                    <option value="PVT LTD">PVT LTD</option>
+                    <option value="Prop">Prop</option>
+                    <option value="LLP">LLP</option>
+                    <option value="LTD">LTD</option>
+                </select>
+                <?php //echo form_input($name_data); ?>
                 <!-- <input type="text" class="form-control" id="email" placeholder="Company Type" name="companyType"> -->
             </div>
 
             <div class="col-md-6 pt-4">
+              <label for="">EOU</label>
+
                 <?php $name_data = [
                   'name' => 'eou',
                   'value' => set_value('eou'),
@@ -156,11 +193,19 @@
                   'class' => 'form-control'
                 ]; ?>
 
-                <?php echo form_input($name_data); ?>
+                <select class="form-control" name="eou">
+                    <option value="0">Select EOU</option>
+                    <option value="EOU">EOU</option>
+                    <option value="SEZ">SEZ</option>
+                    <option value="General">General</option>
+                </select>
+                <?php //echo form_input($name_data); ?>
                 <!-- <input type="text" class="form-control" id="email" placeholder="EOU / SEZ / General" name="eou"> -->
             </div>
 
             <div class="col-md-6 pt-4">
+              <label for="">Email ID</label>
+
               <?php echo form_error('emailId'); ?>
                 <?php $name_data = [
                   'name' => 'emailId',
@@ -174,6 +219,8 @@
             </div>
 
             <div class="col-md-6 pt-4">
+              <label for="">Password</label>
+
               <?php echo form_error('password'); ?>
                 <?php $name_data = [
                   'name' => 'password',
@@ -186,6 +233,8 @@
             </div>
 
             <div class="col-md-6 pt-4">
+              <label for="">Contact Number</label>
+
                 <?php $name_data = [
                   'name' => 'contactNumber',
                   'value' => set_value('contactNumber'),
@@ -198,6 +247,8 @@
             </div>
 
             <div class="col-md-6 pt-4">
+              <label for="">Contact Number</label>
+
                 <?php $name_data = [
                   'name' => 'contactNumber_one',
                   'value' => set_value('contactNumber_one'),
@@ -210,6 +261,8 @@
             </div>
 
             <div class="col-md-6 pt-4">
+              <label for="">Mobile Number</label>
+
                 <?php $name_data = [
                   'name' => 'mobileNumber',
                   'value' => set_value('mobileNumber'),
@@ -226,6 +279,8 @@
             </div>
 
             <div class="col-md-6 pt-4">
+              <label for="">GST</label>
+
                 <?php $name_data = [
                   'name' => 'gst',
                   'value' => set_value('gst'),
@@ -238,6 +293,8 @@
             </div>
 
             <div class="col-md-6 pt-4">
+              <label for="">Industry</label>
+
                 <?php $name_data = [
                   'name' => 'industry',
                   'value' => set_value('industry'),
@@ -250,6 +307,8 @@
             </div>
 
             <div class="col-md-12 pt-4">
+              <label for="">Remarks</label>
+
                 <?php $name_data = [
                   'name' => 'comment',
                   'value' => set_value('comment'),
