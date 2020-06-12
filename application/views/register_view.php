@@ -338,8 +338,6 @@
               <?php //echo $capcha['widget'];?>
               <?php //echo $capcha['script'];?>
               <script src='https://www.google.com/recaptcha/api.js'></script>
-
-
               <div class="g-recaptcha" data-sitekey="6Lf8J6MZAAAAAFHT5nnm8mO57laBx7nHxIGDBkj-"></div>
             </div>
 

@@ -9,9 +9,11 @@
 
 
     <div class="container w-50 mt-5">
+      <?php echo form_open('Home/login_check','id="myform"'); ?>
+
         <div class="row login-grid">
+
             <div class="col-md-12 mt-4">
-              <?php echo form_open('Home/login_check','id="myform"') ?>
               <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
 
               <?php if ($this->session->flashdata('errors')) { ?>
@@ -21,10 +23,17 @@
 
                 </div>
               <?php } ?>
-              <?php if ($this->session->flashdata('otp_success')) { ?>
-                <div class="text-white bg-danger text-center">
+              <?php if ($this->session->flashdata('email_success')) { ?>
+                <div class="text-white bg-success text-center">
 
-                  <?php echo $this->session->flashdata('otp_success'); ?>
+                  <?php echo $this->session->flashdata('email_success'); ?>
+
+                </div>
+              <?php } ?>
+              <?php if ($this->session->flashdata('email_faild')) { ?>
+                <div class="text-white bg-success text-center">
+
+                  <?php echo $this->session->flashdata('email_faild'); ?>
 
                 </div>
               <?php } ?>
@@ -70,17 +79,9 @@
             </div>
             <div class="col-md-12 mt-4">
                 <div class="row">
-                    <div class="recaptcha-48 d-flex justify-content-between">
-                        <div class="form-check captcha-checkbox">
-                            <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" value="">I'm not a robot
-                            </label>
-                        </div>
-                        <div class="logo text-center">
-                            <img src="https://forum.nox.tv/core/index.php?media/9-recaptcha-png/" width="30" />
-                            <p class="m-0 pt-2">reCAPTCHA</p>
-                            <small>Privacy - Terms</small>
-                        </div>
+                    <div class="col-md-6">
+                      <script src='https://www.google.com/recaptcha/api.js'></script>
+                      <div class="g-recaptcha" data-sitekey="6Lf8J6MZAAAAAFHT5nnm8mO57laBx7nHxIGDBkj-"></div>
                     </div>
                     <div class="col-md-6 align-self">
                         <p class="m-0"><a href="">Forgot Password</a></p>
@@ -89,7 +90,6 @@
             </div>
             <div class="col-md-12 mt-4">
               <?php echo form_submit(['name'=>'mysubmit','value'=>'LOGIN','class'=>'w-100 btn btn-danger']); ?>
-              <?php echo form_close(); ?>
 
                 <!-- <button class="w-100 btn btn-danger">LOGIN</button> -->
 
@@ -101,6 +101,8 @@
                 <a href="<?php echo base_url('register'); ?>"> <button class="w-100 btn btn-signup">SIGN UP</button></a>
             </div>
         </div>
+        <?php echo form_close(); ?>
+        
     </div>
 
 </body>

@@ -60,7 +60,7 @@ class Home extends CI_Controller{
 
   public function register_create(){
     $this->form_validation->set_rules('companyName','Company Name','trim|required|min_length[3]');
-    $this->form_validation->set_rules('emailId','Email','trim|required|valid_email');
+    $this->form_validation->set_rules('emailId','Email','trim|required|valid_email|is_unique[s_user.u_emailId]',array('is_unique' => 'This %s already exists.'));
     $this->form_validation->set_rules('termsConditions','Terms Conditions','required');
     $this->form_validation->set_rules('websiteUrl','web Site Url','valid_url');
     $this->form_validation->set_rules('password','Password','trim|required|md5');
@@ -107,8 +107,15 @@ class Home extends CI_Controller{
 
           $from = $this->config->item('smtp_user');
           $to = $data['u_emailId'];
-          $subject = 'OTP For SMPRO';
-          $message = 'Please type your OTO : '. $data['u_otp'];
+          $subject = 'Important: verify your email to use SMPRO';
+          $message = 'Hey '. $data['u_companyName']."<br>";
+          $message .= "<br>";
+          $message .= 'We need to verify your email address so you can use SMPRO'."<br>";;
+          $message .= "<br>";
+          $message .= "<a href='h'>Hello</a>";
+          $message .= "<a href='".base_url('emailcheck/'.base64_encode($data['u_emailId']))."'>Click here to verify your email.</a>"."<br>";
+          $message .= 'Thanks'."<br>";
+          $message .= 'Team SMPRO'."<br>";
 
           $this->email->set_newline("\r\n");
           $this->email->from($from);
@@ -118,8 +125,8 @@ class Home extends CI_Controller{
 
           $this->email->send();
 
-          $url_data = base64_encode($this->input->post('emailId'));
-          return redirect("otp/$url_data");
+          // $url_data = base64_encode($this->input->post('emailId'));
+          return redirect("checkemail_message");
 
         } else {
           $data =  array('errors' => validation_errors());
@@ -142,6 +149,8 @@ class Home extends CI_Controller{
   public function login_check(){
     $this->form_validation->set_rules('name','CUSTOMER ID / Registered Email','trim|required|min_length[3]');
     $this->form_validation->set_rules('password','Password','trim|md5|required');
+    $this->form_validation->set_rules('g-recaptcha-response', 'recaptcha validation', 'required|callback_validate_captcha');
+    $this->form_validation->set_message('validate_captcha', 'Please check the the captcha form');
 
     if ($this->form_validation->run()) {
         $name = $this->security->xss_clean($this->input->post('name'));
@@ -174,24 +183,39 @@ class Home extends CI_Controller{
     return redirect('login');
   }
 
-  public function otp($segment){
-    $data = base64_decode($segment);
-    $this->load->view('otp_view',['segment'=>$data]);
+  // public function otp($segment){
+  //   $data = base64_decode($segment);
+  //   $this->load->view('otp_view',['segment'=>$data]);
+  // }
+
+  // public function check_otp(){
+  //   $otp = $this->input->post('otp');
+  //   $emailID = $this->input->post('emailId');
+  //   // echo $emailID;
+  //
+  //   if ($this->Home_model->check_otp_model($otp,$emailID)) {
+  //       $this->session->set_flashdata('otp_success','OTP success fully create !');
+  //       return redirect('login');
+  //   } else {
+  //       $this->session->set_flashdata('errors','OTP is not match');
+  //       $url_data = base64_encode($this->input->post('emailId'));
+  //       return redirect("otp/$url_data");
+  //   }
+  // }
+
+  public function emailcheck($email){
+      $emailID = base64_decode($email);
+      if ($this->Home_model->checkemail($emailID)) {
+          $this->session->set_flashdata('email_success','Email ID is verify Success fully !');
+          return redirect('login');
+      } else {
+          $this->session->set_flashdata('email_faild','Email ID is not verify !');
+          return redirect('login');
+      }
   }
 
-  public function check_otp(){
-    $otp = $this->input->post('otp');
-    $emailID = $this->input->post('emailId');
-    // echo $emailID;
-
-    if ($this->Home_model->check_otp_model($otp,$emailID)) {
-        $this->session->set_flashdata('otp_success','OTP success fully create !');
-        return redirect('login');
-    } else {
-        $this->session->set_flashdata('errors','OTP is not match');
-        $url_data = base64_encode($this->input->post('emailId'));
-        return redirect("otp/$url_data");
-    }
+  public function checkemail_message(){
+      $this->load->view('checkemail_view');
   }
 
 }

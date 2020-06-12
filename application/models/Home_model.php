@@ -51,6 +51,16 @@ class Home_model extends CI_Model{
     }
   }
 
+  public function checkemail($emailID){
+      $sql = $this->db->where('u_emailId',$emailID)->get('s_user');
+      if ($sql->num_rows() > 0) {
+          $sql = $this->db->set('u_action','1')->where('u_emailId',$emailID)->update('s_user');
+          return TRUE;
+      } else {
+          return FALSE;
+      }
+  }
+
 }
 
 ?>
