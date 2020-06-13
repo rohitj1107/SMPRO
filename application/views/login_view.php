@@ -94,6 +94,13 @@
                 <!-- <button class="w-100 btn btn-danger">LOGIN</button> -->
 
             </div>
+            <div class="col-md-12 mt-4">
+              <?php
+                  if(isset($login_button)){
+                       echo '<div align="center">'.$login_button . '</div>';
+                  }
+              ?>
+            </div>
             <div class="col-md-12 mt-5 hr-line-center">
                 <p class="m-auto"><span>Or</span></p>
             </div>
@@ -102,7 +109,7 @@
             </div>
         </div>
         <?php echo form_close(); ?>
-        
+
     </div>
 
 </body>

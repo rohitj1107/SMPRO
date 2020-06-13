@@ -143,7 +143,60 @@ class Home extends CI_Controller{
   }
 
   public function login(){
-    $this->load->view('login_view');
+      include_once APPPATH . "libraries/vendor/autoload.php";
+
+      $google_client = new Google_Client();
+      $google_client->setClientId('190202093767-mj3tjlg9cptq1fofd0knfrfm2l19ll0c.apps.googleusercontent.com'); //Define your ClientID
+      $google_client->setClientSecret('aOb03sLytgZwlxTibYCqY_MD'); //Define your Client Secret Key
+      $google_client->setRedirectUri(base_url().'login'); //Define your Redirect Uri
+      $google_client->addScope('email');
+      $google_client->addScope('profile');
+
+      if(isset($_GET["code"])){
+         $token = $google_client->fetchAccessTokenWithAuthCode($_GET["code"]);
+         if(!isset($token["error"])){
+              $google_client->setAccessToken($token['access_token']);
+              $this->session->set_userdata('access_token', $token['access_token']);
+              $google_service = new Google_Service_Oauth2($google_client);
+              $data = $google_service->userinfo->get();
+              $current_datetime = date('Y-m-d H:i:s');
+              if($this->Home_model->Is_already_register($data['id'])){
+                  //update data
+                   $user_data = array(
+                      'first_name' => $data['given_name'],
+                      'last_name'  => $data['family_name'],
+                      'email_address' => $data['email'],
+                      'profile_picture'=> $data['picture'],
+                      'updated_at' => $current_datetime
+                   );
+
+             $this->Home_model->Update_user_data($user_data, $data['id']);
+
+          } else {
+           //insert data
+               $user_data = array(
+                    'login_oauth_uid' => $data['id'],
+                    'first_name'  => $data['given_name'],
+                    'last_name'   => $data['family_name'],
+                    'email_address'  => $data['email'],
+                    'profile_picture' => $data['picture'],
+                    'created_at'  => $current_datetime
+               );
+
+               $this->Home_model->Insert_user_data($user_data);
+           }
+           $this->session->set_userdata('user_data', $user_data);
+         }
+      }
+
+      $login_button = '';
+      if(!$this->session->userdata('access_token')){
+           $login_button = '<a href="'.$google_client->createAuthUrl().'"><img src="'.base_url().'assets/sign-in-with-google.png" width="200"/></a>';
+           $data['login_button'] = $login_button;
+           $this->load->view('login_view', $data);
+      }else{
+           $this->load->view('register_g_view');
+      }
   }
 
   public function login_check(){
