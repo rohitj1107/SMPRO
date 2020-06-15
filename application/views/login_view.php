@@ -30,8 +30,15 @@
 
                 </div>
               <?php } ?>
-              <?php if ($this->session->flashdata('email_faild')) { ?>
+              <?php if ($this->session->flashdata('forgot_success')) { ?>
                 <div class="text-white bg-success text-center">
+
+                  <?php echo $this->session->flashdata('forgot_success'); ?>
+
+                </div>
+              <?php } ?>
+              <?php if ($this->session->flashdata('email_faild')) { ?>
+                <div class="text-white bg-danger text-center">
 
                   <?php echo $this->session->flashdata('email_faild'); ?>
 
@@ -84,7 +91,7 @@
                       <div class="g-recaptcha" data-sitekey="6Lf8J6MZAAAAAFHT5nnm8mO57laBx7nHxIGDBkj-"></div>
                     </div>
                     <div class="col-md-6 align-self">
-                        <p class="m-0"><a href="">Forgot Password</a></p>
+                        <p class="m-0"><a href="<?php echo base_url('forgot_password'); ?>">Forgot Password</a></p>
                     </div>
                 </div>
             </div>

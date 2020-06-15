@@ -123,10 +123,14 @@ class Home extends CI_Controller{
           $this->email->subject($subject);
           $this->email->message($message);
 
-          $this->email->send();
+          if($this->email->send()){
+              return redirect("checkemail_message");
+          } else {
+              $this->session->set_flashdata('email_error','Email Not send !');
+              return redirect('register');
+          }
 
           // $url_data = base64_encode($this->input->post('emailId'));
-          return redirect("checkemail_message");
 
         } else {
           $data =  array('errors' => validation_errors());
@@ -312,6 +316,87 @@ class Home extends CI_Controller{
                 return redirect('Dashbord');
 
 	}
+
+  public function forgot_password(){
+      $this->load->view('forgot_password_view');
+  }
+
+  public function forgot_password_check(){
+      $this->form_validation->set_rules('name','CUSTOMER ID / Registered Email','trim|required');
+      $this->form_validation->set_rules('g-recaptcha-response', 'recaptcha validation', 'required|callback_validate_captcha');
+      $this->form_validation->set_message('validate_captcha', 'Please check the the captcha form');
+
+      if ($this->form_validation->run()) {
+          $name = $this->security->xss_clean($this->input->post('name'));
+          $result = $this->Home_model->forgot_password_check($name);
+          if ($result) {
+            $this->load->config('email');
+            $this->load->library('email');
+
+            $from = $this->config->item('smtp_user');
+            $to = $result[0]->u_emailId;
+            $subject = 'Important : Change Your Password with SMPRO';
+            $message = 'Hey '. $result[0]->u_companyName."<br>";
+            $message .= "<br>";
+            $message .= 'someone requested that the password for SMPRO account be reset'."<br>";;
+            $message .= "<br>";
+            $message .= "<a href='".base_url('forgot_password_email/'.base64_encode($result[0]->u_emailId))."'> Reset My Password </a>"."<br>";
+            $message .= "<br>";
+            $message .= 'Thanks'."<br>";
+            $message .= 'Team SMPRO'."<br>";
+
+            $this->email->set_newline("\r\n");
+            $this->email->from($from);
+            $this->email->to($to);
+            $this->email->subject($subject);
+            $this->email->message($message);
+
+            if($this->email->send()){
+                $this->session->set_flashdata('forgot_success','Email send Success Fully !');
+                return redirect('login');
+            } else {
+                $this->session->set_flashdata('forgot_faild','Email Not send Please type again !');
+                return redirect('forgot_password');
+            }
+          } else {
+            $this->session->set_flashdata('forgot_faild','Email Not match, Please type again !');
+            return redirect('forgot_password');
+          }
+      } else {
+        $this->session->set_flashdata('errors',array(validation_errors()));
+        return redirect('forgot_password');
+      }
+  }
+
+  public function forgot_password_email($email){
+      $emailID['email'] = base64_decode($email);
+      $this->load->view('forgot_password_email',$emailID);
+  }
+
+  public function new_password_type(){
+      $this->form_validation->set_rules('password','passwrod','trim|md5|required');
+      $this->form_validation->set_rules('re_password','Retype Passwrod','trim|md5|required|matches[password]');
+      $this->form_validation->set_rules('email','email','trim|required');
+      $this->form_validation->set_rules('g-recaptcha-response', 'recaptcha validation', 'required|callback_validate_captcha');
+      $this->form_validation->set_message('validate_captcha', 'Please check the the captcha form');
+
+      if ($this->form_validation->run()) {
+          $result = $this->Home_model->new_password($this->input->post('passwrod'),$this->input->post('email'));
+          if ($result) {
+              echo  "<script type='text/javascript'>";
+              echo "window.close();";
+              echo "</script>";
+          } else {
+              $this->session->set_flashdata('new_password_failed','New password is not created please type agine !');
+              return redirect('forgot_password_email/'.base64_encode($this->input->post('email')));
+          }
+      } else {
+          $this->session->set_flashdata(array('errors'=> validation_errors()));
+          return redirect('forgot_password_email/'.base64_encode($this->input->post('email')));
+      }
+
+  }
+
 }
 
  ?>

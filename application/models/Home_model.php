@@ -112,6 +112,27 @@ class Home_model extends CI_Model{
             return false;
         }
  }
+
+ public function forgot_password_check($emailID){
+     $where = "u_customerId='$emailID' OR u_emailId='$emailID'";
+     $sql = $this->db->where($where)->get('s_user');
+
+     if ($sql->num_rows() > 0) {
+         $result = $sql->result();
+         return $result;
+     } else {
+         return false;
+     }
+ }
+
+ public function new_password($password,$email){
+    $sql = $this->db->set('u_password',$password)->where('u_emailId',$email)->update('s_user');
+    if ($sql) {
+        return true;
+    } else {
+        return false;
+    }
+ }
 }
 
 ?>

@@ -91,6 +91,13 @@
 
                 </div>
               <?php } ?>
+              <?php if ($this->session->flashdata('email_error')) { ?>
+                <div class="text-white bg-danger text-center">
+
+                  <?php echo $this->session->flashdata('email_error'); ?>
+
+                </div>
+              <?php } ?>
 
                 <p class="font-weight-bold m-0">Lorem Ipsum</p>
             </div>

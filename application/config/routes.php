@@ -54,6 +54,10 @@ $route['about'] = 'Home/about';
 $route['enquiry'] = 'Home/enquiry';
 $route['products'] = 'Home/products';
 
+$route['new_password_type'] = 'Home/new_password_type';
+$route['forgot_password_email/(:any)'] = 'Home/forgot_password_email/$1';
+$route['forgot_password_check'] = 'Home/forgot_password_check';
+$route['forgot_password'] = 'Home/forgot_password';
 $route['login'] = 'Home/login';
 $route['register'] = 'Home/register';
 $route['cap'] = 'Test/cap';
