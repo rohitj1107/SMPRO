@@ -8,19 +8,23 @@ class Dashbord extends CI_Controller{
   function __construct(){
       parent::__construct();
       $this->load->model('Admin_model');
+      $this->load->model('Home_model');
+
   }
 
   public function index(){
-    $data = $this->Admin_model->user_table();
-    $type = $this->Admin_model->select_type();
-    $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
-    $admin_head = 'Dashbord_head';
-    $users_count = $this->Admin_model->users_count();
-    $enquiry_count = $this->Admin_model->enquiry_count();
-    $quatation_count = $this->Admin_model->quatation_count();
-    $po_count = $this->Admin_model->po_count();
-    $this->load->view('dashbord/dashbord_view',['data'=>$data,'type'=>$type,'user'=>$user,$admin_head,
-    'users_count'=>$users_count,'enquiry_count'=>$enquiry_count,'quatation_count'=>$quatation_count,'po_count'=>$po_count]);
+      $data = $this->Admin_model->user_table();
+      $type = $this->Admin_model->select_type();
+      $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
+      $admin_head = 'Dashbord_head';
+      $users_count = $this->Admin_model->users_count();
+      $enquiry_count = $this->Admin_model->enquiry_count();
+      $quatation_count = $this->Admin_model->quatation_count();
+      $po_count = $this->Admin_model->po_count();
+      $countries = $this->Home_model->select_countri();
+      
+      $this->load->view('dashbord/dashbord_view',['countries'=>$countries,'data'=>$data,'type'=>$type,'user'=>$user,$admin_head,
+      'users_count'=>$users_count,'enquiry_count'=>$enquiry_count,'quatation_count'=>$quatation_count,'po_count'=>$po_count]);
   }
 
   public function do_upload(){
@@ -222,6 +226,56 @@ class Dashbord extends CI_Controller{
       } else {
           $this->session->set_flashdata('follow_up_faild','Follow Up Not created !');
           return redirect('view_enquiry_admin/'.$customerId.'/'.$enquiry_ID);
+      }
+  }
+
+  public function register_create(){
+      $this->form_validation->set_rules('companyName','Company Name','trim|required|min_length[3]');
+      $this->form_validation->set_rules('termsConditions','Terms Conditions','required');
+      $this->form_validation->set_rules('websiteUrl','web Site Url','valid_url');
+      $this->form_validation->set_rules('password','Password','trim|required|md5');
+
+      if($this->form_validation->run()){
+
+          $data = [
+              'u_companyName' => $this->security->xss_clean($this->input->post('companyName')),
+              'u_websiteUrl' => $this->security->xss_clean($this->input->post('websiteUrl')),
+              'u_country' => $this->security->xss_clean($this->input->post('country')),
+              'u_postalCode' => $this->security->xss_clean($this->input->post('postalCode')),
+              'u_companyType' => $this->security->xss_clean($this->input->post('companyType')),
+              'u_eou' => $this->security->xss_clean($this->input->post('eou')),
+              'u_emailId' => $this->security->xss_clean($this->input->post('emailId')),
+              'u_contactNumber' => $this->security->xss_clean($this->input->post('contactNumber')),
+              'u_contactNumber_one' => $this->security->xss_clean($this->input->post('contactNumber_one')),
+              'u_mobileNumber' => $this->security->xss_clean($this->input->post('mobileNumber')),
+              'u_gst' => $this->security->xss_clean($this->input->post('gst')),
+              'u_industry' => $this->security->xss_clean($this->input->post('industry')),
+              'u_comment' => $this->security->xss_clean($this->input->post('comment')),
+              'u_customerId' => 'CU-'.time(),
+              'u_password' => $this->security->xss_clean($this->input->post('password')),
+              'u_action' => '1',
+              'u_otp' => rand('1000','5000')
+          ];
+
+          if ($this->Home_model->Update_create_user_data($data,$data['u_emailId'])) {
+
+              echo $data['u_action'];
+              $user_data = array('emailId'=>$data['u_emailId'],'actionId'=>$data['u_action'],'logged_in'=>true);
+              $this->session->set_userdata($user_data);
+              $this->session->sess_destroy();
+              return redirect("Dashbord");
+
+          } else {
+              $data =  array('errors' => validation_errors());
+
+              $this->session->set_flashdata($data);
+              return redirect('Dashbord');
+          }
+      } else {
+          $data =  array('errors' => validation_errors());
+          $this->session->set_flashdata($data);
+
+          return redirect('Dashbord');
       }
   }
 

@@ -160,42 +160,45 @@ class Home extends CI_Controller{
               $google_service = new Google_Service_Oauth2($google_client);
               $data = $google_service->userinfo->get();
               $current_datetime = date('Y-m-d H:i:s');
-              if($this->Home_model->Is_already_register($data['id'])){
+              if($this->Home_model->Is_already_register($data['email'])){
                   //update data
-                   $user_data = array(
-                      'first_name' => $data['given_name'],
-                      'last_name'  => $data['family_name'],
-                      'email_address' => $data['email'],
-                      'profile_picture'=> $data['picture'],
-                      'updated_at' => $current_datetime
+                   $user_data1 = array(
+                      // 'first_name' => $data['given_name'],
+                      // 'last_name'  => $data['family_name'],
+                      'u_emailId'   => $data['email'],
+                      'u_picture'   => $data['picture'],
+                      'updated_at'  => $current_datetime
                    );
-
-             $this->Home_model->Update_user_data($user_data, $data['id']);
-
-          } else {
-           //insert data
-               $user_data = array(
-                    'login_oauth_uid' => $data['id'],
-                    'first_name'  => $data['given_name'],
-                    'last_name'   => $data['family_name'],
-                    'email_address'  => $data['email'],
-                    'profile_picture' => $data['picture'],
-                    'created_at'  => $current_datetime
-               );
-
-               $this->Home_model->Insert_user_data($user_data);
+                   $this->Home_model->Update_user_data($user_data1, $data['email']);
+              } else {
+                  //insert data
+                  $user_data1 = array(
+                      // 'login_oauth_uid' => $data['id'],
+                      // 'first_name'  => $data['given_name'],
+                      // 'last_name'   => $data['family_name'],
+                      'u_emailId'  => $data['email'],
+                      'u_picture' => $data['picture'],
+                      'u_c_date'  => $current_datetime
+                  );
+                  $this->Home_model->Insert_user_data($user_data1);
            }
-           $this->session->set_userdata('user_data', $user_data);
+           $this->session->set_userdata('user_data', $user_data1['u_emailId']);
          }
       }
 
       $login_button = '';
       if(!$this->session->userdata('access_token')){
-           $login_button = '<a href="'.$google_client->createAuthUrl().'"><img src="'.base_url().'assets/sign-in-with-google.png" width="200"/></a>';
-           $data['login_button'] = $login_button;
-           $this->load->view('login_view', $data);
+          $login_button = '<a href="'.$google_client->createAuthUrl().'"><img src="'.base_url().'assets/sign-in-with-google.png" width="200"/></a>';
+          $data['login_button'] = $login_button;
+          $this->load->view('login_view', $data);
       }else{
-           $this->load->view('register_g_view');
+          // echo $user_data1['u_emailId'];exit;
+          $result = $this->Home_model->check_user_g($user_data1['u_emailId']);
+          $user_data = array('emailId'=>$user_data1['u_emailId'],'actionId'=>$result,'logged_in'=>true);
+
+          $this->session->set_userdata($user_data);
+          $this->session->set_flashdata('login_success','You are now logged in');
+          return redirect('Dashbord');
       }
   }
 

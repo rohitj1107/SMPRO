@@ -210,7 +210,7 @@
                 <?php $name_data = [
                   'name' => 'emailId',
                   'readonly' => true,
-                  'value' => $user_data['email_address'],
+                  'value' => $user_data1['email_address'],
                   'placeholder' => 'Official Contact Email ID *',
                   'class' => 'form-control'
                 ]; ?>

@@ -224,6 +224,7 @@
               <?php echo form_error('password'); ?>
                 <?php $name_data = [
                   'name' => 'password',
+                  'type' => 'password',
                   'value' => set_value('password'),
                   'placeholder' => 'Type Password *',
                   'class' => 'form-control'

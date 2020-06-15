@@ -62,6 +62,7 @@ $route['otp/(:any)'] = 'Home/otp/$1';
 $route['logout'] = 'Home/logout';
 $route['emailcheck/(:any)'] = 'Home/emailcheck/$1';
 $route['checkemail_message'] = 'Home/checkemail_message';
+
 // Dashbord
 
 $route['Dashbord'] = 'Dashbord';

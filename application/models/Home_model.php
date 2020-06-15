@@ -19,15 +19,27 @@ class Home_model extends CI_Model{
   }
 
   public function check_user($name,$password){
-    $where = "u_password='$password' AND (u_customerId='$name' OR u_emailId='$name')";
-    $sql = $this->db->where($where)->get('s_user');
+      $where = "u_password='$password' AND (u_customerId='$name' OR u_emailId='$name')";
+      $sql = $this->db->where($where)->get('s_user');
 
-    if ($sql->num_rows() > 0) {
-      $result = $sql->result();
-      return $result[0]->u_action;
-    } else {
-      return false;
-    }
+      if ($sql->num_rows() > 0) {
+          $result = $sql->result();
+          return $result[0]->u_action;
+      } else {
+          return false;
+      }
+  }
+
+  public function check_user_g($name){
+      $where = "u_emailId='$name'";
+      $sql = $this->db->where($where)->get('s_user');
+
+      if ($sql->num_rows() > 0) {
+          $result = $sql->result();
+          return $result[0]->u_action;
+      } else {
+          return false;
+      }
   }
 
   public function check_otp_model($otp,$emailID){
@@ -62,8 +74,8 @@ class Home_model extends CI_Model{
   }
 
   function Is_already_register($id){
-      $this->db->where('login_oauth_uid', $id);
-      $query = $this->db->get('chat_user');
+      $this->db->where('u_emailId', $id);
+      $query = $this->db->get('s_user');
       if($query->num_rows() > 0){
        return true;
       } else {
@@ -72,12 +84,25 @@ class Home_model extends CI_Model{
   }
 
  function Update_user_data($data, $id){
-      $this->db->where('login_oauth_uid', $id);
-      $this->db->update('chat_user', $data);
+      $this->db->set(['u_picture'=>$data['u_picture'],'u_updated_at'=>$data['updated_at']])->where('u_emailId', $id);
+      $this->db->update('s_user');
+ }
+
+ function Update_create_user_data($data, $id){
+      $this->db->where('u_emailId', $id);
+      $this->db->update('s_user',$data);
  }
 
  function Insert_user_data($data){
-      $this->db->insert('chat_user', $data);
+      $data_g = array(
+           'u_emailId' => $data['u_emailId'],
+           'u_picture' => $data['u_picture'],
+           'u_updated_at' => $data['u_updated_at'],
+           'u_customerId' => 'CU-'.time(),
+           'u_action' => 'google',
+           'u_password' => 'GO-'.time()
+      );
+      $this->db->insert('s_user', $data_g);
  }
 
 }
