@@ -9,7 +9,7 @@ class Home extends CI_Controller{
       parent::__construct();
       $this->load->model('Home_model');
       $this->load->helper('security');
-
+      $this->load->library('facebook');
   }
 
   public function index(){
@@ -167,7 +167,7 @@ class Home extends CI_Controller{
                       // 'last_name'  => $data['family_name'],
                       'u_emailId'   => $data['email'],
                       'u_picture'   => $data['picture'],
-                      'updated_at'  => $current_datetime
+                      'u_updated_at'  => $current_datetime
                    );
                    $this->Home_model->Update_user_data($user_data1, $data['email']);
               } else {
@@ -273,6 +273,45 @@ class Home extends CI_Controller{
       $this->load->view('checkemail_view');
   }
 
+  public function facebook_login(){
+			$data['user'] = array();
+            $current_datetime = date('Y-m-d H:i:s');
+			// Check if user is logged in
+				if ($this->facebook->is_authenticated()){
+					// User logged in, get user details
+						$user = $this->facebook->request('get', '/me?fields=id,name,email,picture');
+						if (!isset($user['error'])){
+							$data['user'] = $user;
+						}
+				}
+
+				if($this->Home_model->facebook_login($data['user']['email'])){
+    				     $user_data1 = array(
+                          // 'first_name' => $data['given_name'],
+                          // 'last_name'  => $data['family_name'],
+                          'u_emailId'   => $data['user']['email'],
+                          'u_picture'   => $data['user']['picture']['data']['url'],
+                          'updated_at'  => $current_datetime
+                       );
+                       $this->Home_model->Update_user_data($user_data1, $data['user']['email']);
+				} else {
+				        $user_data1 = array(
+                          // 'first_name' => $data['given_name'],
+                          // 'last_name'  => $data['family_name'],
+                          'u_emailId'   => $data['user']['email'],
+                          'u_picture'   => $data['user']['picture']['data']['url'],
+                          'updated_at'  => $current_datetime
+                       );
+                       $this->Home_model->Insert_user_data($user_data1, $data['user']['email']);
+				}
+
+				$result = $this->Home_model->check_user_g($user_data1['u_emailId']);
+                $user_data = array('emailId'=>$user_data1['u_emailId'],'actionId'=>$result,'logged_in'=>true);
+                $this->session->set_userdata($user_data);
+                $this->session->set_flashdata('login_success','You are now logged in');
+                return redirect('Dashbord');
+
+	}
 }
 
  ?>

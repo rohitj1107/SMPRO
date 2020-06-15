@@ -104,7 +104,14 @@ class Home_model extends CI_Model{
       );
       $this->db->insert('s_user', $data_g);
  }
-
+ function facebook_login($email){
+        $sql = $this->db->where('u_emailId',$email)->get('s_user');
+        if($sql->num_rows() > 0){
+            return true;
+        } else {
+            return false;
+        }
+ }
 }
 
 ?>

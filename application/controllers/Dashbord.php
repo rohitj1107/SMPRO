@@ -22,7 +22,7 @@ class Dashbord extends CI_Controller{
       $quatation_count = $this->Admin_model->quatation_count();
       $po_count = $this->Admin_model->po_count();
       $countries = $this->Home_model->select_countri();
-      
+
       $this->load->view('dashbord/dashbord_view',['countries'=>$countries,'data'=>$data,'type'=>$type,'user'=>$user,$admin_head,
       'users_count'=>$users_count,'enquiry_count'=>$enquiry_count,'quatation_count'=>$quatation_count,'po_count'=>$po_count]);
   }

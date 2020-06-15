@@ -95,11 +95,18 @@
 
             </div>
             <div class="col-md-12 mt-4">
-              <?php
-                  if(isset($login_button)){
-                       echo '<div align="center">'.$login_button . '</div>';
-                  }
-              ?>
+                <div class="row">
+                    <div class="col-md-6 mt-4">
+                      <?php
+                          if(isset($login_button)){
+                               echo '<div align="center">'.$login_button . '</div>';
+                          }
+                      ?>
+                    </div>
+                    <div class="col-md-6 mt-4">
+                      <a href="<?php echo $this->facebook->login_url(); ?>" class="web"><img src="<?php echo base_url(); ?>/assets/facebook-logo.png" alt="Girl in a jacket" width="150" height="50"></a>
+                    </div>
+                </div>
             </div>
             <div class="col-md-12 mt-5 hr-line-center">
                 <p class="m-auto"><span>Or</span></p>
