@@ -195,7 +195,6 @@ class Home extends CI_Controller{
           // echo $user_data1['u_emailId'];exit;
           $result = $this->Home_model->check_user_g($user_data1['u_emailId']);
           $user_data = array('emailId'=>$user_data1['u_emailId'],'actionId'=>$result,'logged_in'=>true);
-
           $this->session->set_userdata($user_data);
           $this->session->set_flashdata('login_success','You are now logged in');
           return redirect('Dashbord');

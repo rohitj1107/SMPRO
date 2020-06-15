@@ -270,21 +270,15 @@
                                                 </div>
                                                 <div class="col-md-6 pt-4">
                                                     <div class="row">
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-12">
                                                             <input type="file" class="form-control" multiple name="Photo_Of_The_Parts[]">
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <button class="btn btn-info w-100">Browse</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 pt-4">
                                                     <div class="row">
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-12">
                                                             <input type="file" class="form-control" multiple name="Drawing_Of_The_Parts[]">
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <button class="btn btn-info w-100">Browse</button>
                                                         </div>
                                                     </div>
                                                 </div>
