@@ -87,7 +87,6 @@ class Home extends CI_Controller{
         'u_comment' => $this->security->xss_clean($this->input->post('comment')),
         'u_customerId' => 'CU-'.time(),
         'u_password' => $this->security->xss_clean($this->input->post('password')),
-
         'u_otp' => rand('1000','5000')
       ];
 
@@ -381,7 +380,7 @@ class Home extends CI_Controller{
       $this->form_validation->set_message('validate_captcha', 'Please check the the captcha form');
 
       if ($this->form_validation->run()) {
-          $result = $this->Home_model->new_password($this->input->post('passwrod'),$this->input->post('email'));
+          $result = $this->Home_model->new_password($this->security->xss_clean($this->input->post('password')),$this->input->post('email'));
           if ($result) {
               echo  "<script type='text/javascript'>";
               echo "window.close();";
