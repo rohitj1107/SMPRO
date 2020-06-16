@@ -360,6 +360,33 @@ class Admin_model extends CI_Model{
       }
   }
 
+  public function select_quotation_single($q_id){
+      $sql = $this->db->where('q_quote_number',$q_id)->get('s_quotation');
+      if ($sql->num_rows() > 0) {
+          return $sql->row();
+      } else {
+          return FALSE;
+      }
+  }
+
+  public function update_quotation_single($quotation_id,$data){
+      $sql = $this->db->set($data)->where('q_quote_number',$quotation_id)->update('s_quotation');
+      if ($sql) {
+          return true;
+      } else {
+          return false;
+      }
+  }
+
+  public function select_company_name(){
+      $sql = $this->db->select('u_customerId,u_companyName')->get('s_user');
+      if ($sql->num_rows() > 0) {
+          return $sql->result();
+      } else {
+          return false;
+      }
+  }
+
 }
 
 

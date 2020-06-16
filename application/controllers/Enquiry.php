@@ -138,6 +138,7 @@ class Enquiry extends CI_Controller{
       $this->load->model('Admin_model');
       $data = $this->Admin_model->user_table();
       $type = $this->Admin_model->select_type();
+      $companyname = $this->Admin_model->select_company_name();
       $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
       $enquiry = $this->Admin_model->select_enquiry_admin();
       for ($i=0; $i < count($enquiry); $i++) {
@@ -151,7 +152,8 @@ class Enquiry extends CI_Controller{
 
       // exit;
       // print_r($qu_count);
-      $this->load->view('dashbord/enquiry/enquiry_show_admin_view',['data'=>$data,'type'=>$type,'user'=>$user,'enquiry'=>$enquiry,'qu_count'=>$qu_count]);
+      $this->load->view('dashbord/enquiry/enquiry_show_admin_view',['data'=>$data,'type'=>$type,'user'=>$user,
+      'companyname'=>$companyname,'enquiry'=>$enquiry,'qu_count'=>$qu_count]);
   }
 
   public function enquiry_edite($customerID,$enquiryID){

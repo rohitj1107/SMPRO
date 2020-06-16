@@ -222,10 +222,10 @@ class Dashbord extends CI_Controller{
     // print_r($data);exit;
       if ($this->Admin_model->insert_follow_up($data)) {
           $this->session->set_flashdata('follow_up_success','Follow Up created success fully !');
-          return redirect('view_enquiry_admin/'.$customerId.'/'.$enquiry_ID);
+          return redirect('view_quotation_single/'.base64_encode($data['f_quote_number']));
       } else {
           $this->session->set_flashdata('follow_up_faild','Follow Up Not created !');
-          return redirect('view_enquiry_admin/'.$customerId.'/'.$enquiry_ID);
+          return redirect('view_quotation_single/'.base64_encode($data['f_quote_number']));
       }
   }
 

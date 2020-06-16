@@ -224,6 +224,7 @@
                                     <table id="responsive-datatable" class="table table-bordered table-bordered dt-responsive nowrap">
                                         <thead>
                                         <tr>
+                                            <th>Company Name</th>
                                             <th>Enquiry Number</th>
                                             <th>Customer Number</th>
                                             <th>Quatation</th>
@@ -238,6 +239,15 @@
                                           <?php if ($enquiry) { ?>
                                             <?php foreach($enquiry as $sw_enquiry){ ?>
                                             <tr>
+                                                <td>
+                                                  <?php
+                                                        foreach ($companyname as $value) {
+                                                            if ($value->u_customerId == $sw_enquiry->e_customerID) {
+                                                                echo $value->u_companyName;
+                                                            }
+                                                        }
+                                                   ?>
+                                                </td>
                                                 <td><?php echo $sw_enquiry->e_enquiryId; ?></td>
                                                 <td><?php echo $sw_enquiry->e_customerID; ?></td>
                                                 <td>
