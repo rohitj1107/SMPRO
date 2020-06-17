@@ -18,6 +18,15 @@ class Home_model extends CI_Model{
       }
   }
 
+  public function select_user_agent(){
+      $sql = $this->db->get('s_user_agent');
+      if ($sql->num_rows() > 0) {
+          return $sql->result();
+      } else {
+          return FALSE;
+      }
+  }
+
   public function create_user($data){
     $sql = $this->db->insert('s_user',$data);
     if ($sql) {

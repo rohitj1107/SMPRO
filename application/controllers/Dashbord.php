@@ -279,6 +279,14 @@ class Dashbord extends CI_Controller{
       }
   }
 
+  public function user_history(){
+      $data = $this->Admin_model->user_table();
+      $type = $this->Admin_model->select_type();
+      $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
+      $result = $this->Home_model->select_user_agent();
+      $this->load->view('dashbord/user_agent',['data'=>$data,'type'=>$type,'user'=>$user,'result'=>$result]);
+  }
+
 }
 
 ?>

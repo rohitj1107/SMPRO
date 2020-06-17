@@ -26,7 +26,7 @@ class Home extends CI_Controller{
     }
 
     // echo $_SERVER['REMOTE_ADDR'];
-    $ip = '103.121.73.134';//$_SERVER['REMOTE_ADDR']; // This will contain the ip of the request
+    $ip = $_SERVER['REMOTE_ADDR']; // This will contain the ip of the request
     $dataArray = json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=".$ip));
     $data = [
         'browser' => $this->agent->browser(),

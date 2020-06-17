@@ -179,6 +179,12 @@
                                       <li><a href="<?php echo base_url('supplier_form_admin'); ?>"> Supplier Form </a></li>
                                   </ul>
                               </li>
+                              <li>
+                                  <a href="<?php echo base_url('user_history'); ?>">
+                                      <i class="mdi mdi-invert-colors"></i>
+                                      <span> User History </span>
+                                  </a>
+                              </li>
                                                       <?php } else {?>
                             <li>
                                 <a href="<?php echo base_url('Dashbord'); ?>">

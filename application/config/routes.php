@@ -90,6 +90,7 @@ $route['quotation_to_po/(:any)'] = 'Dashbord/quotation_to_po/$1';
 $route['insert_po'] = 'Dashbord/insert_po';
 $route['user_list'] = 'User/user_list';
 $route['follow_up'] = 'Dashbord/follow_up';
+$route['user_history'] = 'Dashbord/user_history';
 
 // User
 

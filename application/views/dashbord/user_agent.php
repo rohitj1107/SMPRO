@@ -117,83 +117,75 @@
 
                             <li class="menu-title">Navigation</li>
                             <?php if($this->session->userdata('actionId') ==3 ){ ?>
-                            <li>
-                                <a href="index.html">
-                                    <i class="mdi mdi-view-dashboard"></i>
-                                    <span> Dashboard </span>
-                                </a>
-                            </li>
+                              <li>
+                                  <a href="<?php echo base_url('Dashbord'); ?>">
+                                      <i class="mdi mdi-view-dashboard"></i>
+                                      <span> Dashboard </span>
+                                  </a>
+                              </li>
 
-                            <li>
-                                <a href="typography.html">
-                                    <i class="mdi mdi-format-font"></i>
-                                    <span> Employee </span>
-                                </a>
-                            </li>
+                              <li>
+                                  <a href="<?php echo base_url('Dashbord'); ?>">
+                                      <i class="mdi mdi-format-font"></i>
+                                      <span> Employee </span>
+                                  </a>
+                              </li>
 
-                            <li>
-                                <a href="javascript: void(0);">
-                                    <i class="mdi mdi-invert-colors"></i>
-                                    <span> User List </span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <ul class="nav-second-level" aria-expanded="false">
-                                    <!-- <li><a href="ui-buttons.html">Buttons</a></li>
+                              <li>
+                                  <a href="<?php echo base_url('user_list'); ?>">
+                                      <i class="mdi mdi-invert-colors"></i>
+                                      <span> User List </span>
+                                  </a>
+                              </li>
 
-                                    <li><a href="ui-widgets.html">Widgets</a></li> -->
-                                </ul>
-                            </li>
+                              <li>
+                                  <a href="javascript: void(0);">
+                                      <i class="mdi mdi-texture"></i>
+                                      <span> Enquiry </span>
+                                  </a>
+                                  <ul class="nav-second-level" aria-expanded="false">
+                                      <li><a href="<?php echo base_url('enquiry_show_admin'); ?>"> Enquiry List </a></li>
+                                      <li><a href="<?php echo base_url('enquiry_form_admin'); ?>"> Enquiry Form </a></li>
+                                  </ul>
+                              </li>
+                              <li>
+                                  <a href="javascript: void(0);">
+                                      <i class="mdi mdi-texture"></i>
+                                      <span> Quotation </span>
+                                  </a>
+                                  <ul class="nav-second-level" aria-expanded="false">
+                                      <li><a href="<?php echo base_url('quotation_show'); ?>"> quotation List </a></li>
+                                      <li><a href="<?php echo base_url('quotation_form'); ?>"> quotation Form </a></li>
+                                  </ul>
+                              </li>
 
-                            <li>
-                                <a href="javascript: void(0);">
-                                    <i class="mdi mdi-texture"></i>
-                                    <span class="badge badge-warning float-right">7</span>
-                                    <span> Enquiry Forms </span>
-                                </a>
-                                <ul class="nav-second-level" aria-expanded="false">
-                                    <!-- <li><a href="form-elements.html">General Elements</a></li> -->
-                                </ul>
-                            </li>
-
-                            <li>
-                                <a href="javascript: void(0);">
-                                    <i class="mdi mdi-texture"></i>
-                                    <span> Quotation </span>
-                                </a>
-                                <ul class="nav-second-level" aria-expanded="false">
-                                    <li><a href="<?php echo base_url('quotation_show'); ?>"> quotation List </a></li>
-                                    <li><a href="<?php echo base_url('quotation_form'); ?>"> quotation Form </a></li>
-                                </ul>
-                            </li>
-
-                            <li>
-                                <a href="javascript: void(0);">
-                                    <i class="mdi mdi-texture"></i>
-                                    <span> PO </span>
-                                </a>
-                                <ul class="nav-second-level" aria-expanded="false">
-                                    <li><a href="<?php echo base_url('po_show'); ?>"> PO List </a></li>
-                                    <li><a href="<?php echo base_url('po_form'); ?>"> PO Form </a></li>
-                                </ul>
-                            </li>
-
-                            <li>
-                                <a href="javascript: void(0);">
-                                    <i class="mdi mdi-texture"></i>
-                                    <span> Supplier </span>
-                                </a>
-                                <ul class="nav-second-level" aria-expanded="false">
-                                    <li><a href="<?php echo base_url('supplier_show_admin'); ?>"> Supplier List </a></li>
-                                    <li><a href="<?php echo base_url('supplier_form_admin'); ?>"> Supplier Form </a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="<?php echo base_url('user_history'); ?>">
-                                    <i class="mdi mdi-invert-colors"></i>
-                                    <span> User History </span>
-                                </a>
-                            </li>
-                                                      <?php } else {?>
+                              <li>
+                                  <a href="javascript: void(0);">
+                                      <i class="mdi mdi-texture"></i>
+                                      <span> PO </span>
+                                  </a>
+                                  <ul class="nav-second-level" aria-expanded="false">
+                                      <li><a href="<?php echo base_url('po_show'); ?>"> PO List </a></li>
+                                      <li><a href="<?php echo base_url('po_form'); ?>"> PO Form </a></li>
+                                  </ul>
+                              </li>
+                              <li>
+                                  <a href="javascript: void(0);">
+                                      <i class="mdi mdi-texture"></i>
+                                      <span> Supplier </span>
+                                  </a>
+                                  <ul class="nav-second-level" aria-expanded="false">
+                                      <li><a href="<?php echo base_url('supplier_show_admin'); ?>"> Supplier List </a></li>
+                                      <li><a href="<?php echo base_url('supplier_form_admin'); ?>"> Supplier Form </a></li>
+                                  </ul>
+                              </li>
+                              <li>
+                                  <a href="<?php echo base_url('user_history'); ?>">
+                                      <i class="mdi mdi-invert-colors"></i>
+                                      <span> User History </span>
+                                  </a>
+                              </li>
+                                                        <?php } else {?>
                             <li>
                                 <a href="<?php echo base_url('Dashbord'); ?>">
                                     <i class="mdi mdi-texture"></i>
@@ -238,31 +230,36 @@
                                     <table id="responsive-datatable" class="table table-bordered table-bordered dt-responsive nowrap">
                                         <thead>
                                         <tr>
-                                            <th>Enquiry Number</th>
-                                            <th>Appliction</th>
-                                            <th>Machine Model</th>
-                                            <th>Machine Make</th>
-                                            <th>Required Qty</th>
-                                            <th>Date Time</th>
-                                            <th>Action</th>
+                                            <th>IP address</th>
+                                            <th>browser</th>
+                                            <th>platform</th>
+                                            <th>city</th>
+                                            <th>region</th>
+                                            <th>Country Name</th>
+                                            <th>Continent Name</th>
+                                            <th>latitude</th>
+                                            <th>longitude</th>
+                                            <th>referrer</th>
+                                            <th>Date</th>
                                             <!-- <th>Ed</th> -->
                                         </tr>
                                         </thead>
                                         <tbody>
-                                          <?php if ($enquiry) { ?>
-                                            <?php foreach($enquiry as $sw_enquiry){ ?>
+                                          <?php if ($result) { ?>
+                                            <?php foreach($result as $user_agent){ ?>
                                             <tr>
-                                                <td><?php echo $sw_enquiry->e_enquiryId; ?></td>
-                                                <td><?php echo $sw_enquiry->e_appliction; ?></td>
-                                                <td><?php echo $sw_enquiry->e_machine_model; ?></td>
-                                                <td><?php echo $sw_enquiry->e_machine_make; ?></td>
-                                                <td><?php echo $sw_enquiry->e_required_qty; ?></td>
-                                                <td><?php echo $sw_enquiry->e_date_time; ?></td>
-                                                <td>
-                                                  <a href="<?php echo base_url("view_enquiry/$sw_enquiry->e_customerID/$sw_enquiry->e_enquiryId"); ?>"><button type="button" class="bg-success" name="button">View</button></a>
-                                                  <!-- <a href="<?php echo base_url('edite_enquiry'); ?>"><button type="button" class="bg-warning" name="button">Edit</button></a> -->
-                                                  <a href="<?php echo base_url('delete_enquiry'); ?>"><button type="button" class="bg-danger" name="button">Delete</button></a>
-                                                </td>
+                                                <td><?php echo $user_agent->ip_address; ?></td>
+                                                <td><?php echo $user_agent->browser; ?></td>
+                                                <td><?php echo $user_agent->platform; ?></td>
+                                                <td><?php echo $user_agent->city; ?></td>
+                                                <td><?php echo $user_agent->region; ?></td>
+                                                <td><?php echo $user_agent->countryName; ?></td>
+                                                <td><?php echo $user_agent->continentName; ?></td>
+                                                <td><?php echo $user_agent->latitude; ?></td>
+                                                <td><?php echo $user_agent->longitude; ?></td>
+                                                <td><?php echo $user_agent->referrer; ?></td>
+                                                <td><?php echo $user_agent->c_date; ?></td>
+
 
                                                 <!-- <td>Ac</td> -->
                                             </tr>
