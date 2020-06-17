@@ -230,6 +230,7 @@
                                     <table id="responsive-datatable" class="table table-bordered table-bordered dt-responsive nowrap">
                                         <thead>
                                         <tr>
+                                            <th>Company Name </th>
                                             <th>Enquiry Number</th>
                                             <th>Customer Number</th>
                                             <th>Quatation</th>
@@ -244,31 +245,30 @@
                                           <?php if ($po) { ?>
                                             <?php foreach($po as $sw_po){ ?>
                                             <tr>
+                                                <td>
+                                                  <?php
+                                                        foreach ($companyname as $value) {
+                                                            if ($value->u_customerId == $sw_po->po_customer_ID) {
+                                                                echo $value->u_companyName;
+                                                            }
+                                                        }
+                                                   ?>
+                                                 </td>
                                                 <td><?php echo $sw_po->po_customer_ID; ?></td>
                                                 <td><?php echo $sw_po->po_enquiry_ID; ?></td>
-                                                <!-- <td>
-                                                    <?php
-                                                    $count ="<p class='text-danger' > No Quatation Create </p>";
-                                                    // print_r($qu_count);
-                                                      foreach ($qu_count as $count_qu) {
-                                                          foreach ($count_qu as $value) {
-                                                              if ($value->q_enquiry_ID == $sw_enquiry->e_enquiryId) {
-                                                                $count = $value->number;
-                                                              }
-                                                          }
-                                                      } echo $count;
-                                                       ?> -->
-                                                </td>
-                                                <td><?php echo $sw_enquiry->e_required_qty; ?></td>
-                                                <td><?php echo $sw_enquiry->e_date_time; ?></td>
                                                 <td>
-                                                  <a href="<?php echo base_url("view_enquiry_single_admin/$sw_enquiry->e_customerID/$sw_enquiry->e_enquiryId"); ?>"><button type="button" class="btn btn-success mdi mdi-view-list" name="button"></button></a>
-                                                  <a href="<?php echo base_url("enquiry_edite/$sw_enquiry->e_customerID/$sw_enquiry->e_enquiryId"); ?>"><button type="button" class="btn btn-warning mdi mdi-view-list" name="button"></button></a>
+
+                                                </td>
+                                                <td><?php echo $sw_po->po_customer_ID; ?></td>
+                                                <td><?php echo $sw_po->po_customer_ID; ?></td>
+                                                <td>
+                                                  <a href="<?php echo base_url("view_enquiry_single_admin/$sw_po->po_customer_ID"); ?>"><button type="button" class="btn btn-success mdi mdi-view-list" name="button"></button></a>
+                                                  <a href="<?php echo base_url("enquiry_edite/$sw_po->po_customer_ID"); ?>"><button type="button" class="btn btn-warning mdi mdi-view-list" name="button"></button></a>
                                                   <!-- <a href="<?php //echo base_url('edite_enquiry'); ?>"><button type="button" class="bg-warning" name="button">Edit</button></a> -->
                                                   <a href="<?php echo base_url('delete_enquiry_admin'); ?>"><button type="button" class="btn btn-danger mdi mdi-delete-sweep-outline" name="button"></button></a>
                                                 </td>
                                                 <td>
-                                                  <a href="<?php echo base_url("view_enquiry_admin/$sw_enquiry->e_customerID/$sw_enquiry->e_enquiryId"); ?>"><button type="button" class="btn btn-info mdi mdi-view-list" name="button"></button></a>
+                                                  <a href="<?php echo base_url("view_enquiry_admin/$sw_po->po_customer_ID"); ?>"><button type="button" class="btn btn-info mdi mdi-view-list" name="button"></button></a>
 
                                                 </td>
                                                 <!-- <td>Ac</td> -->

@@ -343,7 +343,7 @@ class Admin_model extends CI_Model{
   }
 
   public function select_quotation_list(){
-      $sql = $this->db->get('s_quotation');
+      $sql = $this->db->order_by('q_id','desc')->get('s_quotation');
       if ($sql->num_rows() > 0) {
           return $sql->result();
       } else {

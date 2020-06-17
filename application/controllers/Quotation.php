@@ -55,7 +55,7 @@ class Quotation extends CI_Controller{
         }
 
         // exit;
-        // print_r($qu_count);
+        // print_r($po_count);
         $this->load->view('dashbord/quotation/quotation_show_view',['data'=>$data,'type'=>$type,'user'=>$user,
         'po_count'=>$po_count,'quotation'=>$quotation,'companyname'=>$companyname]);
         // $this->load->view('dashbord/quotation/quotation_show_view');
@@ -114,6 +114,46 @@ class Quotation extends CI_Controller{
             $this->session->set_flashdata('quotation_failed','Failed To upload !');
             return redirect("edite_quotation_single/".$quotation_id);
         }
+    }
+
+    public function quotation_to_po($q_quote_number){
+        $quotation_id = base64_decode($q_quote_number);
+        $quatation = $this->Admin_model->select_quatation_single($quotation_id);
+        $data = $this->Admin_model->user_table();
+        $type = $this->Admin_model->select_type();
+        $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
+        $po_number_result = $this->Admin_model->select_po($quotation_id);
+        $po_number_row = $this->Admin_model->select_po_row($quotation_id);
+
+        $this->load->view('dashbord/quotation/view_quotation_to_po_view',['data'=>$data,'type'=>$type,'user'=>$user,'quatation'=>$quatation,'po_number_result'=>$po_number_result,'po_number_row'=>$po_number_row]);
+    }
+
+    public function insert_po(){
+        $data = [
+            'po_customer_ID'=>$this->input->post('customer_ID'),
+            'po_enquiry_ID'=>$this->input->post('enquiry_ID'),
+            'po_quote_number'=>$this->input->post('quote_number'),
+            'po_po_number'=>$this->input->post('po_number'),
+            'po_date'=>$this->input->post('date'),
+            'po_market_segment'=>$this->input->post('market_segment'),
+            'po_delay_penalty'=>$this->input->post('delay_penalty'),
+            'po_scope_text'=>$this->input->post('scope_text'),
+            'po_lc_applicabl'=>$this->input->post('lc_applicabl'),
+            'po_into_terms'=>$this->input->post('into_terms'),
+            'po_load_time'=>$this->input->post('load_time'),
+            'po_payment'=>$this->input->post('payment'),
+            'po_expiry_date_of_lc'=>$this->input->post('expiry_date_of_lc'),
+            'po_emailId'=>$this->input->post('emailId')
+        ];
+
+        if($this->Admin_model->insert_po_model($data)){
+            $this->session->set_flashdata('po_seccess','PO upload success fully !');
+            return redirect("quotation_to_po/".base64_encode($this->input->post('quote_number')));
+        } else {
+            $this->session->set_flashdata('po_failed','PO NOT upload !');
+            return redirect("quotation_to_po/".base64_encode($this->input->post('quote_number')));
+        }
+
     }
 }
 

@@ -86,8 +86,6 @@ $route['view_enquiry_admin/(:any)/(:any)'] = 'Enquiry/view_enquiry_admin/$1/$2';
 $route['enquiry_form_admin'] = 'Enquiry/enquiry_form_admin';
 $route['do_upload_admin'] = 'Enquiry/do_upload_admin';
 
-$route['quotation_to_po/(:any)'] = 'Dashbord/quotation_to_po/$1';
-$route['insert_po'] = 'Dashbord/insert_po';
 $route['user_list'] = 'User/user_list';
 $route['follow_up'] = 'Dashbord/follow_up';
 $route['user_history'] = 'Dashbord/user_history';
@@ -125,6 +123,9 @@ $route['quotation_show'] = 'Quotation/quotation_show';
 $route['view_quotation_single/(:any)'] = 'Quotation/view_quotation_single/$1';
 $route['edite_quotation_single/(:any)'] = 'Quotation/edite_quotation_single/$1';
 $route['update_quotation/(:any)'] = 'Quotation/update_quotation/$1';
+$route['quotation_to_po/(:any)'] = 'Quotation/quotation_to_po/$1';
+$route['insert_po'] = 'Quotation/insert_po';
+
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

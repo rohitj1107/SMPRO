@@ -15,7 +15,8 @@ class Po extends CI_Controller{
       $type = $this->Admin_model->select_type();
       $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
       $po = $this->Admin_model->select_po_list();
-      $this->load->view('dashbord/po/po_show_view',['data'=>$data,'type'=>$type,'user'=>$user,'po'=>$po]);
+      $companyname = $this->Admin_model->select_company_name();
+      $this->load->view('dashbord/po/po_show_view',['data'=>$data,'type'=>$type,'user'=>$user,'po'=>$po,'companyname'=>$companyname]);
         // $this->load->view('dashbord/po/po_show_view');
     }
 

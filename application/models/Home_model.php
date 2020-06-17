@@ -19,7 +19,7 @@ class Home_model extends CI_Model{
   }
 
   public function select_user_agent(){
-      $sql = $this->db->get('s_user_agent');
+      $sql = $this->db->order_by("ua_Id","desc")->get('s_user_agent');
       if ($sql->num_rows() > 0) {
           return $sql->result();
       } else {

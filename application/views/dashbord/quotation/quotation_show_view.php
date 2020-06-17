@@ -264,7 +264,7 @@
                                                 <td>
                                                     <?php
                                                     $count ="<p class='text-danger' > No PO Create </p>";
-                                                    // print_r($qu_count);
+                                                    // print_r($po_count);
                                                       foreach ($po_count as $count_qu) {
                                                           foreach ($count_qu as $value) {
                                                               if ($value->po_quote_number == $sw_quotation->q_quote_number) {
@@ -289,7 +289,7 @@
                                                   <a href="<?php echo base_url('delete_enquiry_admin'); ?>"><button type="button" class="btn btn-danger mdi mdi-delete-sweep-outline" name="button"></button></a>
                                                 </td>
                                                 <td>
-                                                  <a href="<?php echo base_url("view_enquiry_admin/$sw_quotation->q_quote_number"); ?>"><button type="button" class="btn btn-info mdi mdi-view-list" name="button"></button></a>
+                                                  <a href="<?php echo base_url("quotation_to_po/".base64_encode($sw_quotation->q_quote_number)); ?>"><button type="button" class="btn btn-info mdi mdi-view-list" name="button"></button></a>
 
                                                 </td>
                                                 <!-- <td>Ac</td> -->
