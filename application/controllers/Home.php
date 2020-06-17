@@ -13,6 +13,35 @@ class Home extends CI_Controller{
   }
 
   public function index(){
+    $this->load->library('user_agent');
+
+    if ($this->agent->is_browser()){
+            $agent = $this->agent->browser().' '.$this->agent->version();
+    } elseif ($this->agent->is_robot()) {
+            $agent = $this->agent->robot();
+    } elseif ($this->agent->is_mobile()) {
+            $agent = $this->agent->mobile();
+    } else {
+            $agent = 'Unidentified User Agent';
+    }
+
+    // echo $_SERVER['REMOTE_ADDR'];
+    $ip = '103.121.73.134';//$_SERVER['REMOTE_ADDR']; // This will contain the ip of the request
+    $dataArray = json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=".$ip));
+    $data = [
+        'browser' => $this->agent->browser(),
+        'platform' => $this->agent->platform(),
+        'ip_address' => $_SERVER['REMOTE_ADDR'],
+        'city' => $dataArray->geoplugin_city,
+        'region' => $dataArray->geoplugin_region,
+        'countryName' => $dataArray->geoplugin_countryName,
+        'continentName' => $dataArray->geoplugin_continentName,
+        'latitude' => $dataArray->geoplugin_latitude,
+        'longitude' => $dataArray->geoplugin_longitude,
+        'referrer' => $this->agent->referrer()
+    ];
+    $this->Home_model->user_agent($data);
+
     $this->load->view('Home_view');
   }
 

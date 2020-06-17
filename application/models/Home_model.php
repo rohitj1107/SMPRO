@@ -9,6 +9,15 @@ class Home_model extends CI_Model{
       parent::__construct();
   }
 
+  public function user_agent($data){
+      $sql = $this->db->insert('s_user_agent',$data);
+      if ($sql) {
+          return true;
+      } else {
+          return FALSE;
+      }
+  }
+
   public function create_user($data){
     $sql = $this->db->insert('s_user',$data);
     if ($sql) {
