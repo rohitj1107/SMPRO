@@ -104,6 +104,8 @@ $route['supplier_show_admin'] = 'Supplier/supplier_show_admin';
 $route['supplier_form_admin_insert'] = 'Supplier/supplier_form_admin_insert';
 $route['supplier_view/(:any)'] = 'Supplier/supplier_view/$1';
 $route['supplier_edite/(:any)'] = 'Supplier/supplier_edite/$1';
+$route['po_to_supplier'] = 'Supplier/po_to_supplier';
+
 // $route['supplier_form_admin_updatee/(:any)'] = 'Dashbord/supplier_form_admin_update/$1';
 $route['supplier_form_admin_update/(:any)'] = 'Dashbord/supplier_form_admin_update/$1';
 
@@ -116,6 +118,11 @@ $route['admin_unapproval/(:any)'] = 'Admin/admin_unapproval/$1';
 
 // PO
 $route['po_show'] = 'Po/po_show';
+$route['view_po_single/(:any)'] = 'Po/view_po_single/$1';
+$route['po_edite/(:any)'] = 'Po/po_edite/$1';
+$route['delete_po/(:any)'] = 'Po/delete_po/$1';
+$route['follow_up_po'] = 'Po/follow_up_po';
+$route['update_po'] = 'Po/update_po';
 
 // Quotation
 $route['insert_quotation'] = 'Quotation/insert_quotation';
@@ -125,7 +132,6 @@ $route['edite_quotation_single/(:any)'] = 'Quotation/edite_quotation_single/$1';
 $route['update_quotation/(:any)'] = 'Quotation/update_quotation/$1';
 $route['quotation_to_po/(:any)'] = 'Quotation/quotation_to_po/$1';
 $route['insert_po'] = 'Quotation/insert_po';
-
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -5,6 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <title>SMPRO - Welcome <?php echo $user->u_companyName; ?></title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
@@ -12,8 +13,21 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/admin/images/favicon.ico">
 
-    <!--Morris Chart-->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/libs/morris-js/morris.css" />
+    <!-- Plugins css -->
+    <link href="<?php echo base_url(); ?>assets/admin/libs/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" />
+    <link href="<?php echo base_url(); ?>assets/admin/libs/switchery/switchery.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="<?php echo base_url(); ?>assets/admin/libs/toastr/toastr.min.css" rel="stylesheet" type="text/css" />
+
+
+    <link href="<?php echo base_url(); ?>assets/admin/libs/multiselect/multi-select.css"  rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url(); ?>assets/admin/libs/select2/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url(); ?>assets/admin/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
+    <link href="<?php echo base_url(); ?>assets/admin/libs/switchery/switchery.min.css" rel="stylesheet" />
+    <link href="<?php echo base_url(); ?>assets/admin/libs/bootstrap-timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+    <!-- <link href="<?php echo base_url(); ?>assets/admin/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/admin/libs/bootstrap-datepicker/bootstrap-datepicker.css" rel="stylesheet"> -->
+    <link href="<?php echo base_url(); ?>assets/admin/libs/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 
     <!-- App css -->
     <link href="<?php echo base_url(); ?>assets/admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -221,69 +235,230 @@
             <div class="content-page">
                 <div class="content">
 
+                  <div class="modal" id="myModalshow<?php echo $po_select->po_po_number;?>">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                              <h4 class="modal-title"><?php echo $po_select->po_po_number; ?></h4>
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <form method="post" action="<?php echo base_url('follow_up_po'); ?>">
+                            <!-- Modal body -->
+                            <div class="col-md-12 scrollbar scrollbar-primary" style="height: 420px; overflow-y: scroll;">
+                                <div class="card-box task-detail">
+                                  <div class="row">
+                                    <?php if ($follow_up) { ?>
+                                    <?php foreach($follow_up as $follow_up_ob):
+                                      if ($po_select->po_quote_number == $follow_up_ob->fp_quote_number) { ?>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label>Status</label>
+                                          <p><?php echo $follow_up_ob->fp_status; ?></p>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label>Comment</label>
+                                          <p><?php echo $follow_up_ob->fp_comment; ?></p>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label>Follow Up Date</label>
+                                          <?php if (date('m/d/yy') > $follow_up_ob->fp_select_date) { ?>
+                                            <p class="text-danger"><?php echo $follow_up_ob->fp_select_date; ?></p>
+
+                                          <?php } else { ?>
+                                            <p class="text-success"><?php echo $follow_up_ob->fp_select_date; ?></p>
+
+                                          <?php }?>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label>Created Date</label>
+                                          <p><?php echo $follow_up_ob->fp_c_date; ?></p>
+                                      </div>
+                                    </div>
+                                    <div class="bg-primary col-12">
+                                        <hr>
+                                    </div>
+                                  <?php
+                                }
+                                 endforeach; ?>
+                                <?php } else { ?>
+                                    <p class="text-warning">Comment Is Not Created</p>
+                                <?php } ?>
+                                  </div>
+                                </div>
+                            </div><!-- end col -->
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                        </form>
+
+                      </div>
+                    </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="modal" id="myModall<?php echo $po_select->po_po_number;?>">
+
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                              <h4 class="modal-title"><?php echo $po_select->po_po_number; ?></h4>
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <form method="post" action="<?php echo base_url('follow_up_po'); ?>">
+                              <input type="hidden" name="po_number" value="<?php echo $po_select->po_po_number; ?>">
+                              <input type="hidden" name="enquiry_ID" value="<?php echo $view_enquiry->e_enquiryId; ?>">
+                              <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+                              <input type="hidden" name="quote_number" value="<?php echo $po_select->po_quote_number; ?>">
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <label for="">Select Status</label>
+                                  <select class="form-control select1" name="status">
+                                      <option value="select"> Select </option>
+                                      <option value="open"> open </option>
+                                      <option value="close"> close </option>
+                                  </select>
+                                  <p></p>
+                                  <label for="">Type Commit</label>
+                                  <textarea name="comment" class="form-control" rows="8" cols="80"></textarea>
+                                  <p></p>
+                                  <label for="">Select Date</label>
+                                  <input class="form-control" id="date" name="select_date" placeholder="MM/DD/YYY" type="text"/>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                              <button type="submit" class="btn btn-success" id="btn_save" name="button">Submit</button>
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                        </form>
+
+                      </div>
+                    </div>
+
+                      </div>
+                    </div>
+                  </div>
                     <!-- Start Content-->
                     <div class="container-fluid">
+
                         <div class="row">
-                            <div class="col-12">
-                                <div class="card-box table-responsive">
-                                    <h4 class="mt-0 header-title">Show Form</h4>
-                                    <table id="responsive-datatable" class="table table-bordered table-bordered dt-responsive nowrap">
-                                        <thead>
-                                        <tr>
-                                            <th>Company Name </th>
-                                            <th>Customer Number</th>
-                                            <th>Enquiry Number</th>
-                                            <th>Quotation Number</th>
-                                            <th>PO Number</th>
-                                            <th>Date Time</th>
-                                            <th>Action</th>
-                                            <th>Enq To PO</th>
-                                            <!-- <th>Ed</th> -->
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                          <?php if ($po) { ?>
-                                            <?php foreach($po as $sw_po){ ?>
-                                            <tr>
-                                                <td>
-                                                  <?php
-                                                        foreach ($companyname as $value) {
-                                                            if ($value->u_customerId == $sw_po->po_customer_ID) {
-                                                                echo $value->u_companyName;
-                                                            }
-                                                        }
-                                                   ?>
-                                                 </td>
-                                                <td><?php echo $sw_po->po_customer_ID; ?></td>
-                                                <td><?php echo $sw_po->po_enquiry_ID; ?></td>
-                                                <td><?php echo $sw_po->po_quote_number; ?></td>
-                                                <td><?php echo $sw_po->po_po_number; ?></td>
-                                                <td><?php echo $sw_po->po_date; ?></td>
-                                                <td>
-                                                  <a href="<?php echo base_url("view_po_single/".base64_encode($sw_po->po_po_number)); ?>"><button type="button" class="btn btn-success mdi mdi-view-list" name="button"></button></a>
-                                                  <a href="<?php echo base_url("po_edite/".base64_encode($sw_po->po_po_number)); ?>"><button type="button" class="btn btn-warning mdi mdi-view-list" name="button"></button></a>
-                                                  <!-- <a href="<?php //echo base_url('edite_enquiry'); ?>"><button type="button" class="bg-warning" name="button">Edit</button></a> -->
-                                                  <a href="<?php echo base_url('delete_po/'.base64_encode($sw_po->po_po_number)); ?>"><button type="button" class="btn btn-danger mdi mdi-delete-sweep-outline" name="button"></button></a>
-                                                </td>
-                                                <td>
-                                                  <a href="<?php echo base_url("po_to_supplier/".base64_encode($sw_po->po_po_number)); ?>"><button type="button" class="btn btn-info mdi mdi-view-list" name="button"></button></a>
+                            <div class="col-md-12">
+                              <?php
+                              if ($this->session->flashdata('follow_up_success')) { ?>
+                                <p class="bg-success text-white">  <?php echo $this->session->flashdata('follow_up_success'); ?> </p>
+                              <?php } ?>
+                              <?php
+                              if ($this->session->flashdata('follow_up_faild')) { ?>
+                                <p class="bg-danger text-white">  <?php echo $this->session->flashdata('follow_up_faild'); ?> </p>
+                              <?php } ?>
+                                <div class="card-box task-detail">
+                                    <h4>PO</h4>
+                                    <p class="text-muted">
+                                        <?php print_r($po_select->po_po_number); ?>
+                                    </p>
+                                    <div class="row task-dates mb-0 mt-2">
+                                        <div class="col-lg-4">
+                                            <h5 class="font-600 m-b-5">Customer ID</h5>
+                                            <p> <?php print_r($po_select->po_customer_ID); ?></p>
+                                        </div>
 
-                                                </td>
-                                                <!-- <td>Ac</td> -->
-                                            </tr>
-                                          <?php } ?>
-                                        <?php }  ?>
-                                        </tbody>
-                                    </table>
+                                        <div class="col-lg-4">
+                                            <h5 class="font-600 m-b-5">Enquiry ID</h5>
+                                            <p> <?php print_r($po_select->po_enquiry_ID); ?></p>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <h5 class="font-600 m-b-5">Quotation ID</h5>
+                                            <p> <?php print_r($po_select->po_quote_number); ?></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row task-dates mb-0 mt-0">
+                                        <div class="col-lg-4">
+                                            <h5 class="font-600 m-b-5">Date </h5>
+                                            <p> <?php print_r($po_select->po_date); ?></p>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <h5 class="font-600 m-b-5">Market segment</h5>
+                                            <p> <?php print_r($po_select->po_market_segment); ?></p>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <h5 class="font-600 m-b-5">Delay Penalty</h5>
+                                            <p> <?php print_r($po_select->po_delay_penalty); ?></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row task-dates mb-0 mt-0">
+                                        <div class="col-lg-4">
+                                            <h5>Scope Text</h5>
+                                            <p><?php print_r($po_select->po_scope_text); ?></p>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <h5>Load Time</h5>
+                                            <p><?php print_r($po_select->po_load_time); ?></p>
+                                    </div>
+                                  </div>
+
+                                  <div class="row mb-0 mt-0">
+                                      <div class="col-lg-4">
+                                          <h5 class="font-600 m-b-5">payment</h5>
+                                          <p> <?php print_r($po_select->po_payment); ?></p>
+                                      </div>
+
+                                      <div class="col-lg-4">
+                                          <h5 class="font-600 text-danger m-b-5">Expected Date</h5>
+                                          <p> <?php print_r($po_select->po_expiry_date_of_lc); ?></p>
+                                      </div>
+
+                                      <div class="col-lg-4">
+                                          <h5 class="font-600 m-b-5">Create Date</h5>
+                                          <p> <?php print_r($po_select->po_c_date); ?></p>
+                                      </div>
+                                  </div>
+                                  <div class="row mb-0 mt-0">
+
+                                  <div class="col-lg-4">
+                                      <h5 class="font-600 m-b-5">Created Date</h5>
+
+                                      <p><?php echo $po_select->po_c_date; ?></p>
+                                  </div>
+                                  <div class="col-md-2">
+                                        <label>Order Status</label>
+                                        <p><?php echo $po_select->po_po_number; ?>
+                                          <a href="#" class="text-success" data-toggle="modal" data-target="#myModall<?php echo $po_select->po_po_number;?>">
+                                            <i class="mdi mdi-comment"> </i> </a>
+                                          <a href="#" class="text-info" data-toggle="modal" data-target="#myModalshow<?php echo $po_select->po_po_number;?>"> <i class="mdi mdi-check-circle"> </i> </a>
+                                        </p>
+                                  </div>
+                                  </div>
                                 </div>
-                            </div>
-                        </div> <!-- end row -->
-                    </div> <!-- container-fluid -->
+                            </div><!-- end col -->
 
+                        </div>
+                        <!-- end row -->
+
+                    </div> <!-- container-fluid -->
                 </div> <!-- content -->
 
                 <!-- Footer Start -->
-
                 <!-- end Footer -->
 
             </div>
@@ -399,29 +574,53 @@
         <!-- Vendor js -->
         <script src="<?php echo base_url(); ?>assets/admin/js/vendor.min.js"></script>
 
-        <!-- third party js -->
-        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/jquery.dataTables.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/dataTables.bootstrap4.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/dataTables.responsive.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/responsive.bootstrap4.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/dataTables.buttons.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/buttons.bootstrap4.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/buttons.html5.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/buttons.flash.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/buttons.print.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/dataTables.keyTable.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/libs/datatables/dataTables.select.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/libs/pdfmake/pdfmake.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/libs/pdfmake/vfs_fonts.js"></script>
-        <!-- third party js ends -->
+        <!-- Plugins Js -->
+        <!-- <script src="<?php echo base_url(); ?>assets/admin/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script> -->
+        <script src="<?php echo base_url(); ?>assets/admin/libs/switchery/switchery.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/multiselect/jquery.multi-select.js"></script>
+        <!-- <script src="<?php echo base_url(); ?>assets/admin/libs/jquery-quicksearch/jquery.quicksearch.min.js"></script> -->
 
-        <!-- Datatables init -->
-        <script src="<?php echo base_url(); ?>assets/admin/js/pages/datatables.init.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/select2/select2.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/jquery-mask-plugin/jquery.mask.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/moment/moment.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/bootstrap-daterangepicker/daterangepicker.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+
+        <!-- Init js-->
+        <script src="<?php echo base_url(); ?>assets/admin/js/pages/form-advanced.init.js"></script>
+
+        <!-- Toastr js -->
+        <!-- <script src="<?php echo base_url(); ?>assets/admin/libs/toastr/toastr.min.js"></script> -->
+
+        <script src="<?php echo base_url(); ?>assets/admin/js/pages/toastr.init.js"></script>
 
         <!-- App js -->
         <script src="<?php echo base_url(); ?>assets/admin/js/app.min.js"></script>
 
-    </body>
+        <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script> -->
+
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/> -->
+
+<script>
+    $(document).ready(function(){
+        var date_input=$('input[name="select_date"]'); //our date input has the name "date"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'mm/dd/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        })
+    })
+</script>
+
+</body>
 </html>
 <?php } else { ?>
 

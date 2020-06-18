@@ -387,6 +387,42 @@ class Admin_model extends CI_Model{
       }
   }
 
+  public function select_po_single($po_id){
+      $sql = $this->db->where('po_po_number',$po_id)->get('s_po');
+      if ($sql->num_rows() > 0) {
+          return $sql->row();
+      } else {
+          return FALSE;
+      }
+  }
+
+  public function create_follow_up_po($data){
+      $sql = $this->db->insert('s_follow_up_po',$data);
+      if ($sql) {
+          return true;
+      } else {
+          return false;
+      }
+  }
+
+  public function select_follow_up_po($po_id){
+      $sql = $this->db->where('fp_po_number',$po_id)->get('s_follow_up_po');
+      if ($sql->num_rows() > 0) {
+          return $sql->result();
+      } else {
+          return FALSE;
+      }
+  }
+
+  public function update_po($data,$po_id){
+      $sql = $this->db->where('po_po_number',$po_id)->set($data)->update('s_po');
+      if ($sql) {
+          return true;
+      } else {
+          return FALSE;
+      }
+  }
+
 }
 
 

@@ -141,7 +141,7 @@ class Dashbord extends CI_Controller{
         'e_drawing_of_the_parts_path'=>$img_path2,
         'e_drawing_of_the_parts_name'=>$img_name2,
         'e_special_remarks'=>$this->input->post('special_remarks'),
-        'e_enquiryId'=>time().substr(str_shuffle($ran_cust), 1, 3)
+        'e_enquiryId'=> 'EN-'.time(),
     ];
     if ($this->Admin_model->insert_enquiry($data)) {
         $this->session->set_flashdata('enquiry_success','Insert Enquiry success fully !');

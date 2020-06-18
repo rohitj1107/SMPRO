@@ -142,6 +142,10 @@ class Supplier extends CI_Controller{
         return redirect('supplier_edite/'.base64_encode($this->input->post('s_supplier_id')));
       }
     }
+
+    public function po_to_supplier(){
+        $this->load->view('dashbord/supplier/po_to_supplier_view');
+    }
 }
 
 
