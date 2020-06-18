@@ -124,6 +124,15 @@ class Admin_model extends CI_Model{
       }
   }
 
+  public function supplierID_admin(){
+      $sql = $this->db->select(['s_supplier_id','s_company_name','s_contact_email_id'])->get('s_supplier');
+      if ($sql->num_rows() > 0) {
+          return $sql->result();
+      } else {
+          return false;
+      }
+  }
+
   public function insert_quotation_model($data){
       $sql = $this->db->insert('s_quotation',$data);
       if ($sql) {
@@ -420,6 +429,15 @@ class Admin_model extends CI_Model{
           return true;
       } else {
           return FALSE;
+      }
+  }
+
+  public function insert_so($data){
+      $sql = $this->db->insert('s_so',$data);
+      if ($sql) {
+          return true;
+      } else {
+          return false;
       }
   }
 

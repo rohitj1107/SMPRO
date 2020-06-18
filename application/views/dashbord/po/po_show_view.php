@@ -237,7 +237,7 @@
                                             <th>PO Number</th>
                                             <th>Date Time</th>
                                             <th>Action</th>
-                                            <th>Enq To PO</th>
+                                            <th>PO To SO</th>
                                             <!-- <th>Ed</th> -->
                                         </tr>
                                         </thead>

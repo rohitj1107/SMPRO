@@ -123,6 +123,9 @@ $route['po_edite/(:any)'] = 'Po/po_edite/$1';
 $route['delete_po/(:any)'] = 'Po/delete_po/$1';
 $route['follow_up_po'] = 'Po/follow_up_po';
 $route['update_po'] = 'Po/update_po';
+$route['po_to_supplier/(:any)'] = 'Po/po_to_supplier/$1';
+$route['so_create/(:any)'] = 'Po/so_create/$1';
+
 
 // Quotation
 $route['insert_quotation'] = 'Quotation/insert_quotation';

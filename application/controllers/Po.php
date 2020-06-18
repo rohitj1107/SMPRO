@@ -85,6 +85,122 @@ class Po extends CI_Controller{
         }
     }
 
+    public function po_to_supplier($po_id){
+        $id_po = base64_decode($po_id);
+        $data = $this->Admin_model->user_table();
+        $type = $this->Admin_model->select_type();
+        $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
+        $po_select = $this->Admin_model->select_po_single($id_po);
+        $supplierID = $this->Admin_model->supplierID_admin();
+        $this->load->view('dashbord/po/po_to_supplier_view',['data'=>$data,'type'=>$type,'user'=>$user,'po_select'=>$po_select,'supplierID'=>$supplierID]);
+    }
+
+    public function so_create($po_id){
+        $id_po = base64_decode($po_id);
+        $this->load->model('Admin_model');
+        $supp = $this->input->post('supplierID');
+
+        $cpt = count($_FILES['po_anachment']['name']);
+
+        for($i=0; $i < $cpt; $i++) {
+        unset($config);
+        $config = array();
+        $config['upload_path']   = './uploads/';
+        $config['allowed_types'] = 'gif|jpg|png|pdf';
+
+        $config['max_size'] = 2000;
+        $config['max_width'] = 1500;
+        $config['max_height'] = 1500;
+        $config['remove_spaces'] = FALSE;
+        $config['file_name'] = $_FILES['po_anachment']['name'][$i];
+
+        $_FILES['f']['name'] =  $_FILES['po_anachment']['name'][$i];
+        $_FILES['f']['type'] = $_FILES['po_anachment']['type'][$i];
+        $_FILES['f']['tmp_name'] = $_FILES['po_anachment']['tmp_name'][$i];
+        $_FILES['f']['error'] = $_FILES['po_anachment']['error'][$i];
+        $_FILES['f']['size'] = $_FILES['po_anachment']['size'][$i];
+
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+        if (! $this->upload->do_upload('f')) {
+          $data1['upload_data']['file_name'] = null;
+          $data1['upload_data']['full_path'] = null;
+
+        } else {
+          $data1 = array('upload_data' => $this->upload->data());
+        }
+          $name1[] = $data1['upload_data']['file_name'];
+          $path1[] = $data1['upload_data']['full_path'];
+      }
+
+      $img_name1 = implode(' | ',$name1);
+      $img_path1 = implode(' | ',$path1);
+
+      $cpt1 = count($_FILES['quote_anachment']['name']);
+      for ($j=0; $j < $cpt1; $j++) {
+        unset($config);
+        $config = array();
+        $config['upload_path']   = './uploads/';
+        $config['allowed_types'] = 'gif|jpg|png|pdf';
+
+        $config['max_size'] = 2000;
+        $config['max_width'] = 1500;
+        $config['max_height'] = 1500;
+        $config['remove_spaces'] = FALSE;
+        $config['file_name'] = $_FILES['quote_anachment']['name'][$j];
+
+        $_FILES['ff']['name'] =  $_FILES['quote_anachment']['name'][$j];
+        $_FILES['ff']['type'] = $_FILES['quote_anachment']['type'][$j];
+        $_FILES['ff']['tmp_name'] = $_FILES['quote_anachment']['tmp_name'][$j];
+        $_FILES['ff']['error'] = $_FILES['quote_anachment']['error'][$j];
+        $_FILES['ff']['size'] = $_FILES['quote_anachment']['size'][$j];
+
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+        if (! $this->upload->do_upload('ff')) {
+          $data2['upload_data']['file_name'] = null;
+          $data2['upload_data']['full_path'] = null;
+          // $error = array('error' => $this->upload->display_errors());
+        } else {
+          $data2 = array('upload_data' => $this->upload->data());
+        }
+        $name2[] = $data2['upload_data']['file_name'];
+        $path2[] = $data2['upload_data']['full_path'];
+      }
+
+      $img_name2 = implode(' | ',$name2);
+      $img_path2 = implode(' | ',$path2);
+      // echo $img_name1.'<br>';
+      // echo $img_name2.'<br>';
+      // print_r($error);
+      // exit;
+
+        $data = [
+            's_quote_number'=> $this->input->post('quote_number'),
+            's_enquiry_ID' => $this->input->post('enquiry_ID'),
+            's_customer_ID'=> $this->input->post('customer_ID'),
+            's_po_number'=>$this->input->post('po_number'),
+            's_so_number'=>$this->input->post('so_number'),
+            's_class'=>$this->input->post('Class'),
+            's_po_anachment_path'=>$img_path1,
+            's_po_anachment_name'=>$img_name1,
+            's_quote_anachment_path'=>$img_path2,
+            's_quote_anachment_name'=>$img_name2,
+            's_market'=>$this->input->post('Market'),
+            's_value'=>$this->input->post('value'),
+            's_into_term'=>$this->input->post('into_term'),
+            's_delivery_me'=>$this->input->post('delivery_me'),
+            's_payment_terms'=>$this->input->post('payment_terms'),
+        ];
+        if ($this->Admin_model->insert_so($data)) {
+            $this->session->set_flashdata('so_success','Insert SO success fully !');
+            return redirect('po_to_supplier/'.base64_encode($id_po));
+        } else {
+          $this->session->set_flashdata('so_faile','Not Insert SO !');
+          return redirect('po_to_supplier/'.base64_encode($id_po));
+        }
+    }
+    
 }
 
 

@@ -216,111 +216,172 @@
                     <div class="container-fluid">
                         <!-- end row -->
                         <div class="row">
-                            <div class="col-xl-12">
+                            <div class="col-xl-6">
                                 <div class="card-box">
-                                    <div class="container-fluid">
-                                        <div class="row">
-
-                                          <div class="col-md-12">
-                                              <div class="card-box task-detail">
-                                                <h4> PO </h4>
-
-                                              <?php if ($this->session->flashdata('po_seccess')) { ?>
-                                                  <div class="bg-success"><?php echo $this->session->flashdata('po_seccess'); ?></div>
-                                              <?php } ?>
-                                              <?php if ($this->session->flashdata('po_failed')) { ?>
-                                                  <div class="bg-danger"><?php echo $this->session->flashdata('po_failed'); ?></div>
-                                              <?php } ?>
-                                              <?php echo form_open('update_po'); ?>
-                                                <!-- Start Content-->
-
-                                                                      <p class="text-muted">
-                                                                          <input type="hidden" name="po_po_number" readonly class="form-control" value="<?php print_r($po_select->po_po_number); ?>">
-                                                                          <?php print_r($po_select->po_po_number); ?>
-                                                                      </p>
-                                                                      <div class="row task-dates mb-0 mt-2">
-                                                                          <div class="col-lg-4">
-                                                                              <h5 class="font-600 m-b-5">Customer ID</h5>
-                                                                              <p> <?php print_r($po_select->po_customer_ID); ?></p>
-                                                                          </div>
-
-                                                                          <div class="col-lg-4">
-                                                                              <h5 class="font-600 m-b-5">Enquiry ID</h5>
-                                                                              <p> <?php print_r($po_select->po_enquiry_ID); ?></p>
-                                                                          </div>
-
-                                                                          <div class="col-lg-4">
-                                                                              <h5 class="font-600 m-b-5">Quotation ID</h5>
-                                                                              <p> <?php print_r($po_select->po_quote_number); ?></p>
-                                                                          </div>
-                                                                      </div>
-
-                                                                      <div class="row task-dates mb-0 mt-0">
-                                                                          <div class="col-lg-4">
-                                                                              <h5 class="font-600 m-b-5">Date </h5>
-                                                                              <p> <?php print_r($po_select->po_date); ?></p>
-                                                                          </div>
-
-                                                                          <div class="col-lg-4">
-                                                                              <h5 class="font-600 m-b-5">Market segment</h5>
-                                                                              <input type="text" name="po_market_segment" class="form-control" value="<?php print_r($po_select->po_market_segment); ?>">
-                                                                          </div>
-
-                                                                          <div class="col-lg-4">
-                                                                              <h5 class="font-600 m-b-5">Delay Penalty</h5>
-                                                                              <input type="text" name="po_delay_penalty" class="form-control" value="<?php print_r($po_select->po_delay_penalty); ?>">
-                                                                          </div>
-                                                                      </div>
-
-                                                                      <div class="row task-dates mb-0 mt-0">
-                                                                          <div class="col-lg-4">
-                                                                              <h5>Scope Text</h5>
-                                                                              <input type="text" name="po_scope_text" class="form-control" value="<?php print_r($po_select->po_scope_text); ?>">
-                                                                          </div>
-
-                                                                          <div class="col-lg-4">
-                                                                              <h5>Load Time</h5>
-                                                                              <input type="text" name="po_load_time" class="form-control" value="<?php print_r($po_select->po_load_time); ?>">
-
-                                                                      </div>
-                                                                    </div>
-
-                                                                    <div class="row mb-0 mt-0">
-                                                                        <div class="col-lg-4">
-                                                                            <h5 class="font-600 m-b-5">payment</h5>
-                                                                            <p> <?php print_r($po_select->po_payment); ?></p>
-                                                                        </div>
-
-                                                                        <div class="col-lg-4">
-                                                                            <h5 class="font-600 text-danger m-b-5">Expected Date</h5>
-                                                                            <p> <?php print_r($po_select->po_expiry_date_of_lc); ?></p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row mb-0 mt-0">
-
-                                                                    <div class="col-lg-4">
-                                                                        <h5 class="font-600 m-b-5">Created Date</h5>
-
-                                                                        <p><?php echo $po_select->po_c_date; ?></p>
-                                                                    </div>
-                                                                    </div>
-
-                                                  <input type="hidden" name="emailId" value="<?php echo $this->session->userdata('emailId'); ?>">
-                                                  <div class="col-md-6">
-                                                      <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">Update</button>
-                                                  </div>
-
-
-                                                <?php echo form_close(); ?>
-                                              </div>
-                                          </div><!-- end col -->
-
+                                    <div class="enquiry-custom-div">
+                                        <div class="container-fluid enquiry">
+                                            <div class="row">
+                                                <div class="col-md-12 pt-4">
+                                                    <?php if ($this->session->flashdata('so_success')) { ?>
+                                                      <div class="alert alert-success alert-dismissable">
+                                                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                      <?php echo $this->session->flashdata('so_success'); ?>
+                                                    </div>
+                                                    <?php } ?>
+                                                    <?php if ($this->session->flashdata('so_faile')) { ?>
+                                                      <div class="alert alert-danger alert-dismissable">
+                                                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                      <?php echo $this->session->flashdata('so_faile'); ?>
+                                                    </div>
+                                                    <?php } ?>
+                                                </div>
+                                                <div class="col-md-12 pt-4">
+                                                  <?php echo form_open_multipart('so_create/'.base64_encode($po_select->po_po_number));?>
+                                                    <label for="customerId">Supplier ID</label>
+                                                    <select name="supplierID" class="form-control select2">
+                                                            <option>Select Supplier ID</option>
+                                                            <?php foreach($supplierID as $supplier){ ?>
+                                                              <?php if ($supplier->s_contact_email_id == $this->session->userdata('emailId')): ?>
+                                                              <?php else :?>
+                                                                <option value="<?php echo $supplier->s_supplier_id; ?>"><?php echo $supplier->s_company_name.' '.$supplier->s_supplier_id.' '.$supplier->s_contact_email_id; ?></option>
+                                                              <?php endif; ?>
+                                                          <?php }?>
+                                                    </select>
+                                                    <!-- <input type="text" readonly class="form-control" value="<?php echo $user->u_customerId; ?>" name="customerId"> -->
+                                                </div>
+                                                  <input type="hidden" class="form-control" value="<?php echo $po_select->po_quote_number; ?>" name="quote_number">
+                                                  <input type="hidden" class="form-control" value="<?php echo $po_select->po_enquiry_ID; ?>" name="enquiry_ID">
+                                                  <input type="hidden" class="form-control" value="<?php echo $po_select->po_customer_ID; ?>" name="customer_ID">
+                                                  <input type="hidden" class="form-control" value="<?php echo $po_select->po_po_number; ?>" name="po_number">
+                                                <div class="col-md-4 pt-4">
+                                                  <label for="">SO Number</label>
+                                                  <p><?php echo 'SO-'.time(); ?></p>
+                                                  <input type="hidden" class="form-control" value="<?php echo 'SO-'.time(); ?>" name="so_number">
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                    <label for="">Class</label>
+                                                    <select class="form-control" name="Class">
+                                                        <option value="0">Select Class</option>
+                                                        <option value="A">A</option>
+                                                        <option value="B">B</option>
+                                                        <option value="C">C</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                  <label for="">Category</label>
+                                                  <select class="form-control" name="so_number">
+                                                      <option value="0">Select Category</option>
+                                                      <option value="Sales Parts">Sales Parts</option>
+                                                      <option value="Sales Service">Sales Service</option>
+                                                      <option value="FOC Parts">FOC Parts</option>
+                                                      <option value="FOC Service">FOC Service</option>
+                                                      <option value="Solu'on Sales">Solu'on Sales</option>
+                                                      <option value="Trading">Trading</option>
+                                                      <option value="Consumables">Consumables</option>
+                                                  </select>
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                  <label for="">Market</label>
+                                                  <input type="text" name="po_c_date" class="form-control" placeholder="Market">
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                    <label for="">value</label>
+                                                    <input type="text" class="form-control" placeholder="value" name="value">
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                    <label for="">into term</label>
+                                                    <input type="text" class="form-control" placeholder="into term" name="into_term">
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                    <label for="">Delivery me</label>
+                                                    <input type="text" class="form-control" placeholder="Delivery me" name="delivery_me">
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                    <label for=""> Payment terms </label>
+                                                    <input type="text" class="form-control" placeholder="Payment terms" name="payment_terms">
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                    <label for=""> Status </label>
+                                                    <input type="text" name="status" class="form-control" placeholder="Status">
+                                                </div>
+                                                <div class="col-md-6 pt-4">
+                                                    <label for="">PO Anachment</label>
+                                                    <input type="file" name="po_anachment[]" multiple>
+                                                </div>
+                                                <div class="col-md-6 pt-4">
+                                                    <label for="">Quote anachment</label>
+                                                    <input type="file" name="quote_anachment[]" multiple>
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                    <button class="w-100 btn btn-danger">
+                                                        SUBMIT
+                                                    </button>
+                                                </div>
+                                                <?php echo "</form>"?>
+                                            </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div><!-- end col -->
+                            <div class="col-xl-6">
+                                <div class="card-box">
+                                    <div class="enquiry-custom-div">
+                                        <div class="container-fluid enquiry">
+                                            <div class="row">
+                                                <div class="col-md-4 pt-4">
+                                                    <label for="customerId">PO Number</label>
+                                                    <p><?php echo $po_select->po_po_number; ?></p>
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                  <label for="">Customer ID</label>
+                                                  <p><?php echo $po_select->po_customer_ID; ?></p>
 
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                  <label for="">Enquiry ID</label>
+                                                  <p><?php echo $po_select->po_enquiry_ID; ?></p>
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                  <label for="">Quote Number</label>
+                                                  <p><?php echo $po_select->po_quote_number; ?></p>
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                  <label for="">PO Date</label>
+                                                  <p><?php echo $po_select->po_date; ?></p>
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                  <label for="">Market Segment</label>
+                                                  <p><?php echo $po_select->po_market_segment; ?></p>
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                  <label for="">Scope Text</label>
+                                                  <p><?php echo $po_select->po_scope_text; ?></p>
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                  <label for="">LC Applicabl</label>
+                                                  <p><?php echo $po_select->po_lc_applicabl; ?></p>
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                  <label for="">Into Terms</label>
+                                                  <p><?php echo $po_select->po_into_terms; ?></p>
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                  <label for="">Load Time ID</label>
+                                                  <p><?php echo $po_select->po_load_time; ?></p>
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                  <label for="">Payment</label>
+                                                  <p><?php echo $po_select->po_payment; ?></p>
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                  <label for="">expiry date of LC</label>
+                                                  <p><?php echo $po_select->po_expiry_date_of_lc; ?></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- end col -->
                         </div>
                         <!-- end row -->
 
@@ -465,7 +526,18 @@
 
         <!-- App js -->
         <script src="<?php echo base_url(); ?>assets/admin/js/app.min.js"></script>
-
+        <script>
+            $(document).ready(function(){
+                var date_input=$('input[id="select_date"]'); //our date input has the name "date"
+                var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+                date_input.datepicker({
+                    format: 'mm/dd/yyyy',
+                    container: container,
+                    todayHighlight: true,
+                    autoclose: true,
+                })
+            })
+        </script>
     </body>
 </html>
 <?php } else { ?>
