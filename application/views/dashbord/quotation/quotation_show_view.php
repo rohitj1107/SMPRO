@@ -162,11 +162,10 @@
                               <li>
                                   <a href="javascript: void(0);">
                                       <i class="mdi mdi-texture"></i>
-                                      <span> PO </span>
+                                      <span> SO </span>
                                   </a>
                                   <ul class="nav-second-level" aria-expanded="false">
                                       <li><a href="<?php echo base_url('po_show'); ?>"> PO List </a></li>
-                                      <li><a href="<?php echo base_url('po_form'); ?>"> PO Form </a></li>
                                   </ul>
                               </li>
                               <li>
@@ -240,7 +239,7 @@
                                             <th>Required Qty</th>
                                             <th>Date Time</th>
                                             <th>Action</th>
-                                            <th>Quotation To PO</th>
+                                            <th>Quotation To PO (SO) </th>
                                             <!-- <th>Ed</th> -->
                                         </tr>
                                         </thead>
@@ -263,11 +262,11 @@
 
                                                 <td>
                                                     <?php
-                                                    $count ="<p class='text-danger' > No PO Create </p>";
+                                                    $count ="<p class='text-danger' > No PO (SO) Create </p>";
                                                     // print_r($po_count);
                                                       foreach ($po_count as $count_qu) {
                                                           foreach ($count_qu as $value) {
-                                                              if ($value->po_quote_number == $sw_quotation->q_quote_number) {
+                                                              if ($value->s_quote_number == $sw_quotation->q_quote_number) {
                                                                 $count = $value->number;
                                                               }
                                                           }

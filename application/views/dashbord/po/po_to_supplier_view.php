@@ -172,11 +172,10 @@
                             <li>
                                 <a href="javascript: void(0);">
                                     <i class="mdi mdi-texture"></i>
-                                    <span> PO </span>
+                                    <span> SO </span>
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li><a href="<?php echo base_url('po_show'); ?>"> PO List </a></li>
-                                    <li><a href="<?php echo base_url('po_form'); ?>"> PO Form </a></li>
                                 </ul>
                             </li>
                             <li>
@@ -222,21 +221,21 @@
                                         <div class="container-fluid enquiry">
                                             <div class="row">
                                                 <div class="col-md-12 pt-4">
-                                                    <?php if ($this->session->flashdata('so_success')) { ?>
+                                                    <?php if ($this->session->flashdata('po_success')) { ?>
                                                       <div class="alert alert-success alert-dismissable">
                                                       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                                      <?php echo $this->session->flashdata('so_success'); ?>
+                                                      <?php echo $this->session->flashdata('po_success'); ?>
                                                     </div>
                                                     <?php } ?>
-                                                    <?php if ($this->session->flashdata('so_faile')) { ?>
+                                                    <?php if ($this->session->flashdata('po_faile')) { ?>
                                                       <div class="alert alert-danger alert-dismissable">
                                                       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                                      <?php echo $this->session->flashdata('so_faile'); ?>
+                                                      <?php echo $this->session->flashdata('po_faile'); ?>
                                                     </div>
                                                     <?php } ?>
                                                 </div>
                                                 <div class="col-md-12 pt-4">
-                                                  <?php echo form_open_multipart('so_create/'.base64_encode($po_select->po_po_number));?>
+                                                  <?php echo form_open_multipart('po_create/'.base64_encode($po_select->s_so_number));?>
                                                     <label for="customerId">Supplier ID</label>
                                                     <select name="supplierID" class="form-control select2">
                                                             <option>Select Supplier ID</option>
@@ -249,14 +248,21 @@
                                                     </select>
                                                     <!-- <input type="text" readonly class="form-control" value="<?php echo $user->u_customerId; ?>" name="customerId"> -->
                                                 </div>
-                                                  <input type="hidden" class="form-control" value="<?php echo $po_select->po_quote_number; ?>" name="quote_number">
-                                                  <input type="hidden" class="form-control" value="<?php echo $po_select->po_enquiry_ID; ?>" name="enquiry_ID">
-                                                  <input type="hidden" class="form-control" value="<?php echo $po_select->po_customer_ID; ?>" name="customer_ID">
-                                                  <input type="hidden" class="form-control" value="<?php echo $po_select->po_po_number; ?>" name="po_number">
+                                                  <input type="hidden" class="form-control" value="<?php echo $po_select->s_quote_number; ?>" name="quote_number">
+                                                  <input type="hidden" class="form-control" value="<?php echo $po_select->s_enquiry_ID; ?>" name="enquiry_ID">
+                                                  <input type="hidden" class="form-control" value="<?php echo $po_select->s_customer_ID; ?>" name="customer_ID">
+                                                  <input type="hidden" class="form-control" value="<?php echo $po_select->s_so_number; ?>" name="so_number">
                                                 <div class="col-md-4 pt-4">
                                                   <label for="">SO Number</label>
-                                                  <p><?php echo 'SO-'.time(); ?></p>
-                                                  <input type="hidden" class="form-control" value="<?php echo 'SO-'.time(); ?>" name="so_number">
+
+                                                  <p><?php echo $po_select->s_so_number.'.001'; ?></p>
+                                                  <input type="hidden" class="form-control" value="<?php echo 'PO-'.time(); ?>" name="po_number">
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                  <label for="">PO Number</label>
+
+                                                  <p><?php echo 'PO-'.time(); ?></p>
+                                                  <input type="hidden" class="form-control" value="<?php echo 'PO-'.time(); ?>" name="po_number">
                                                 </div>
                                                 <div class="col-md-4 pt-4">
                                                     <label for="">Class</label>
@@ -328,54 +334,93 @@
                                     <div class="enquiry-custom-div">
                                         <div class="container-fluid enquiry">
                                             <div class="row">
+                                              <div class="col-md-12">
+                                                <label for="customerId">PO(SO)</label>
+                                              </div>
                                                 <div class="col-md-4 pt-4">
-                                                    <label for="customerId">PO Number</label>
-                                                    <p><?php echo $po_select->po_po_number; ?></p>
+                                                    <label for="customerId">SO Number</label>
+                                                    <p><?php echo $po_select->s_so_number; ?></p>
                                                 </div>
                                                 <div class="col-md-4 pt-4">
                                                   <label for="">Customer ID</label>
-                                                  <p><?php echo $po_select->po_customer_ID; ?></p>
+                                                  <p><?php echo $po_select->s_customer_ID; ?></p>
 
                                                 </div>
                                                 <div class="col-md-4 pt-4">
                                                   <label for="">Enquiry ID</label>
-                                                  <p><?php echo $po_select->po_enquiry_ID; ?></p>
+                                                  <p><?php echo $po_select->s_enquiry_ID; ?></p>
                                                 </div>
                                                 <div class="col-md-4 pt-4">
                                                   <label for="">Quote Number</label>
-                                                  <p><?php echo $po_select->po_quote_number; ?></p>
+                                                  <p><?php echo $po_select->s_quote_number; ?></p>
                                                 </div>
                                                 <div class="col-md-4 pt-4">
-                                                  <label for="">PO Date</label>
-                                                  <p><?php echo $po_select->po_date; ?></p>
+                                                  <label for="">SO Date</label>
+                                                  <p><?php echo $po_select->s_so_date; ?></p>
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                  <label for="">Category</label>
+                                                  <p><?php echo $po_select->s_category; ?></p>
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                  <label for="">Customer PO Number</label>
+                                                  <p><?php echo $po_select->s_customer_po_number; ?></p>
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                  <label for="">PO date</label>
+                                                  <p><?php echo $po_select->s_po_date; ?></p>
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                  <label for="">Value</label>
+                                                  <p><?php echo $po_select->s_value; ?></p>
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                  <label for="">Currency</label>
+                                                  <p><?php echo $po_select->s_currency; ?></p>
                                                 </div>
                                                 <div class="col-md-4 pt-4">
                                                   <label for="">Market Segment</label>
-                                                  <p><?php echo $po_select->po_market_segment; ?></p>
+                                                  <p><?php echo $po_select->s_market_segment; ?></p>
                                                 </div>
                                                 <div class="col-md-4 pt-4">
-                                                  <label for="">Scope Text</label>
-                                                  <p><?php echo $po_select->po_scope_text; ?></p>
+                                                  <label for="">Delay Penalty</label>
+                                                  <p><?php echo $po_select->s_delay_penalty; ?></p>
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                  <label for="">Scope TEXT</label>
+                                                  <p><?php echo $po_select->s_scope_text; ?></p>
                                                 </div>
                                                 <div class="col-md-4 pt-4">
                                                   <label for="">LC Applicabl</label>
-                                                  <p><?php echo $po_select->po_lc_applicabl; ?></p>
+                                                  <p><?php echo $po_select->s_lc_applicabl; ?></p>
                                                 </div>
                                                 <div class="col-md-4 pt-4">
-                                                  <label for="">Into Terms</label>
-                                                  <p><?php echo $po_select->po_into_terms; ?></p>
-                                                </div>
-                                                <div class="col-md-4 pt-4">
-                                                  <label for="">Load Time ID</label>
-                                                  <p><?php echo $po_select->po_load_time; ?></p>
+                                                  <label for="">Load Time</label>
+                                                  <p><?php echo $po_select->s_load_time; ?></p>
                                                 </div>
                                                 <div class="col-md-4 pt-4">
                                                   <label for="">Payment</label>
-                                                  <p><?php echo $po_select->po_payment; ?></p>
+                                                  <p><?php echo $po_select->s_payment; ?></p>
                                                 </div>
                                                 <div class="col-md-4 pt-4">
-                                                  <label for="">expiry date of LC</label>
-                                                  <p><?php echo $po_select->po_expiry_date_of_lc; ?></p>
+                                                  <label for="">Expiry Date of LC</label>
+                                                  <p><?php echo $po_select->s_expiry_date_of_lc; ?></p>
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                  <label for="">SN</label>
+                                                  <p><?php echo $po_select->s_sn; ?></p>
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                  <label for="">Description</label>
+                                                  <p><?php echo $po_select->s_description; ?></p>
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                  <label for="">QTY</label>
+                                                  <p><?php echo $po_select->s_qty; ?></p>
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                  <label for="">SO Create date</label>
+                                                  <p><?php echo $po_select->s_c_date; ?></p>
                                                 </div>
                                             </div>
                                         </div>

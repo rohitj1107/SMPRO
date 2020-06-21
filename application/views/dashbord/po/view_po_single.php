@@ -176,11 +176,10 @@
                               <li>
                                   <a href="javascript: void(0);">
                                       <i class="mdi mdi-texture"></i>
-                                      <span> PO </span>
+                                      <span> SO </span>
                                   </a>
                                   <ul class="nav-second-level" aria-expanded="false">
                                       <li><a href="<?php echo base_url('po_show'); ?>"> PO List </a></li>
-                                      <li><a href="<?php echo base_url('po_form'); ?>"> PO Form </a></li>
                                   </ul>
                               </li>
                               <li>
@@ -235,24 +234,24 @@
             <div class="content-page">
                 <div class="content">
 
-                  <div class="modal" id="myModalshow<?php echo $po_select->po_po_number;?>">
+                  <div class="modal" id="myModalshow<?php echo $po_select->s_so_number;?>">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="row">
                           <div class="col-md-12">
                             <!-- Modal Header -->
                             <div class="modal-header">
-                              <h4 class="modal-title"><?php echo $po_select->po_po_number; ?></h4>
+                              <h4 class="modal-title"><?php echo $po_select->s_so_number; ?></h4>
                               <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
-                            <form method="post" action="<?php echo base_url('follow_up_po'); ?>">
+                            <form method="post" action="<?php echo base_url('follow_up_so'); ?>">
                             <!-- Modal body -->
                             <div class="col-md-12 scrollbar scrollbar-primary" style="height: 420px; overflow-y: scroll;">
                                 <div class="card-box task-detail">
                                   <div class="row">
                                     <?php if ($follow_up) { ?>
                                     <?php foreach($follow_up as $follow_up_ob):
-                                      if ($po_select->po_quote_number == $follow_up_ob->fp_quote_number) { ?>
+                                      if ($po_select->s_so_number == $follow_up_ob->fp_po_number) { ?>
                                     <div class="col-md-6">
                                       <div class="form-group">
                                           <label>Status</label>
@@ -308,7 +307,7 @@
                     </div>
                   </div>
 
-                  <div class="modal" id="myModall<?php echo $po_select->po_po_number;?>">
+                  <div class="modal" id="myModall<?php echo $po_select->s_so_number;?>">
 
                     <div class="modal-dialog">
                       <div class="modal-content">
@@ -316,14 +315,14 @@
                           <div class="col-md-12">
                             <!-- Modal Header -->
                             <div class="modal-header">
-                              <h4 class="modal-title"><?php echo $po_select->po_po_number; ?></h4>
+                              <h4 class="modal-title"><?php echo $po_select->s_so_number; ?></h4>
                               <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
-                            <form method="post" action="<?php echo base_url('follow_up_po'); ?>">
-                              <input type="hidden" name="po_number" value="<?php echo $po_select->po_po_number; ?>">
-                              <input type="hidden" name="enquiry_ID" value="<?php echo $view_enquiry->e_enquiryId; ?>">
+                            <form method="post" action="<?php echo base_url('follow_up_so'); ?>">
+                              <input type="hidden" name="po_number" value="<?php echo $po_select->s_so_number; ?>">
+                              <input type="hidden" name="enquiry_ID" value="<?php echo $po_select->s_enquiry_ID; ?>">
                               <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
-                              <input type="hidden" name="quote_number" value="<?php echo $po_select->po_quote_number; ?>">
+                              <input type="hidden" name="quote_number" value="<?php echo $po_select->s_quote_number; ?>">
                             <!-- Modal body -->
                             <div class="modal-body">
                                 <label for="">Select Status</label>
@@ -367,70 +366,118 @@
                                 <p class="bg-danger text-white">  <?php echo $this->session->flashdata('follow_up_faild'); ?> </p>
                               <?php } ?>
                                 <div class="card-box task-detail">
-                                    <h4>PO</h4>
+                                    <h4>PO(SO)</h4>
                                     <p class="text-muted">
-                                        <?php print_r($po_select->po_po_number); ?>
+                                        <?php print_r($po_select->s_so_number); ?>
                                     </p>
                                     <div class="row task-dates mb-0 mt-2">
                                         <div class="col-lg-4">
                                             <h5 class="font-600 m-b-5">Customer ID</h5>
-                                            <p> <?php print_r($po_select->po_customer_ID); ?></p>
+                                            <p> <?php print_r($po_select->s_customer_ID); ?></p>
                                         </div>
 
                                         <div class="col-lg-4">
                                             <h5 class="font-600 m-b-5">Enquiry ID</h5>
-                                            <p> <?php print_r($po_select->po_enquiry_ID); ?></p>
+                                            <p> <?php print_r($po_select->s_enquiry_ID); ?></p>
                                         </div>
 
                                         <div class="col-lg-4">
                                             <h5 class="font-600 m-b-5">Quotation ID</h5>
-                                            <p> <?php print_r($po_select->po_quote_number); ?></p>
+                                            <p> <?php print_r($po_select->s_quote_number); ?></p>
                                         </div>
                                     </div>
 
                                     <div class="row task-dates mb-0 mt-0">
                                         <div class="col-lg-4">
-                                            <h5 class="font-600 m-b-5">Date </h5>
-                                            <p> <?php print_r($po_select->po_date); ?></p>
+                                            <h5 class="font-600 m-b-5">SO Date </h5>
+                                            <p> <?php print_r($po_select->s_so_date); ?></p>
                                         </div>
 
                                         <div class="col-lg-4">
-                                            <h5 class="font-600 m-b-5">Market segment</h5>
-                                            <p> <?php print_r($po_select->po_market_segment); ?></p>
+                                            <h5 class="font-600 m-b-5">s_market</h5>
+                                            <p> <?php print_r($po_select->s_market); ?></p>
                                         </div>
 
                                         <div class="col-lg-4">
-                                            <h5 class="font-600 m-b-5">Delay Penalty</h5>
-                                            <p> <?php print_r($po_select->po_delay_penalty); ?></p>
+                                            <h5 class="font-600 m-b-5">s_category</h5>
+                                            <p> <?php print_r($po_select->s_category); ?></p>
                                         </div>
                                     </div>
 
                                     <div class="row task-dates mb-0 mt-0">
                                         <div class="col-lg-4">
-                                            <h5>Scope Text</h5>
-                                            <p><?php print_r($po_select->po_scope_text); ?></p>
+                                            <h5>s_customer_po_number</h5>
+                                            <p><?php print_r($po_select->s_customer_po_number); ?></p>
                                         </div>
 
                                         <div class="col-lg-4">
-                                            <h5>Load Time</h5>
-                                            <p><?php print_r($po_select->po_load_time); ?></p>
+                                            <h5>s_po_date</h5>
+                                            <p><?php print_r($po_select->s_po_date); ?></p>
                                     </div>
                                   </div>
 
                                   <div class="row mb-0 mt-0">
                                       <div class="col-lg-4">
-                                          <h5 class="font-600 m-b-5">payment</h5>
-                                          <p> <?php print_r($po_select->po_payment); ?></p>
+                                          <h5 class="font-600 m-b-5">s_value</h5>
+                                          <p> <?php print_r($po_select->s_value); ?></p>
                                       </div>
 
                                       <div class="col-lg-4">
-                                          <h5 class="font-600 text-danger m-b-5">Expected Date</h5>
-                                          <p> <?php print_r($po_select->po_expiry_date_of_lc); ?></p>
+                                          <h5 class="font-600 text-danger m-b-5">s_currency</h5>
+                                          <p> <?php print_r($po_select->s_currency); ?></p>
                                       </div>
 
                                       <div class="col-lg-4">
-                                          <h5 class="font-600 m-b-5">Create Date</h5>
-                                          <p> <?php print_r($po_select->po_c_date); ?></p>
+                                          <h5 class="font-600 m-b-5">s_market_segment</h5>
+                                          <p> <?php print_r($po_select->s_market_segment); ?></p>
+                                      </div>
+                                  </div>
+                                  <div class="row mb-0 mt-0">
+                                      <div class="col-lg-4">
+                                          <h5 class="font-600 m-b-5">s_delay_penalty</h5>
+                                          <p> <?php print_r($po_select->s_delay_penalty); ?></p>
+                                      </div>
+
+                                      <div class="col-lg-4">
+                                          <h5 class="font-600 text-danger m-b-5">s_scope_text</h5>
+                                          <p> <?php print_r($po_select->s_scope_text); ?></p>
+                                      </div>
+
+                                      <div class="col-lg-4">
+                                          <h5 class="font-600 m-b-5">s_lc_applicabl</h5>
+                                          <p> <?php print_r($po_select->s_lc_applicabl); ?></p>
+                                      </div>
+                                  </div>
+                                  <div class="row mb-0 mt-0">
+                                      <div class="col-lg-4">
+                                          <h5 class="font-600 m-b-5">s_load_time</h5>
+                                          <p> <?php print_r($po_select->s_load_time); ?></p>
+                                      </div>
+
+                                      <div class="col-lg-4">
+                                          <h5 class="font-600 text-danger m-b-5">s_payment</h5>
+                                          <p> <?php print_r($po_select->s_payment); ?></p>
+                                      </div>
+
+                                      <div class="col-lg-4">
+                                          <h5 class="font-600 m-b-5">s_expiry_date_of_lc</h5>
+                                          <p> <?php print_r($po_select->s_expiry_date_of_lc); ?></p>
+                                      </div>
+                                  </div>
+                                  <div class="row mb-0 mt-0">
+                                      <div class="col-lg-4">
+                                          <h5 class="font-600 m-b-5">s_sn</h5>
+                                          <p> <?php print_r($po_select->s_sn); ?></p>
+                                      </div>
+
+                                      <div class="col-lg-4">
+                                          <h5 class="font-600 text-danger m-b-5">s_description</h5>
+                                          <p> <?php print_r($po_select->s_description); ?></p>
+                                      </div>
+
+                                      <div class="col-lg-4">
+                                          <h5 class="font-600 m-b-5">s_qty</h5>
+                                          <p> <?php print_r($po_select->s_qty); ?></p>
                                       </div>
                                   </div>
                                   <div class="row mb-0 mt-0">
@@ -438,14 +485,14 @@
                                   <div class="col-lg-4">
                                       <h5 class="font-600 m-b-5">Created Date</h5>
 
-                                      <p><?php echo $po_select->po_c_date; ?></p>
+                                      <p><?php echo $po_select->s_c_date; ?></p>
                                   </div>
                                   <div class="col-md-2">
                                         <label>Order Status</label>
-                                        <p><?php echo $po_select->po_po_number; ?>
-                                          <a href="#" class="text-success" data-toggle="modal" data-target="#myModall<?php echo $po_select->po_po_number;?>">
+                                        <p><?php echo $po_select->s_so_number; ?>
+                                          <a href="#" class="text-success" data-toggle="modal" data-target="#myModall<?php echo $po_select->s_so_number;?>">
                                             <i class="mdi mdi-comment"> </i> </a>
-                                          <a href="#" class="text-info" data-toggle="modal" data-target="#myModalshow<?php echo $po_select->po_po_number;?>"> <i class="mdi mdi-check-circle"> </i> </a>
+                                          <a href="#" class="text-info" data-toggle="modal" data-target="#myModalshow<?php echo $po_select->s_so_number;?>"> <i class="mdi mdi-check-circle"> </i> </a>
                                         </p>
                                   </div>
                                   </div>

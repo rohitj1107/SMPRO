@@ -117,47 +117,57 @@
 
                               <li class="menu-title">Navigation</li>
                               <?php if($this->session->userdata('actionId') ==3 ){ ?>
-                              <li>
-                                  <a href="<?php echo base_url('Dashbord'); ?>">
-                                      <i class="mdi mdi-view-dashboard"></i>
-                                      <span> Dashboard </span>
-                                  </a>
-                              </li>
+                                <li>
+                                    <a href="<?php echo base_url('Dashbord'); ?>">
+                                        <i class="mdi mdi-view-dashboard"></i>
+                                        <span> Dashboard </span>
+                                    </a>
+                                </li>
 
-                              <li>
-                                  <a href="<?php echo base_url('Dashbord'); ?>">
-                                      <i class="mdi mdi-format-font"></i>
-                                      <span> Employee </span>
-                                  </a>
-                              </li>
+                                <li>
+                                    <a href="<?php echo base_url('Dashbord'); ?>">
+                                        <i class="mdi mdi-format-font"></i>
+                                        <span> Employee </span>
+                                    </a>
+                                </li>
 
-                              <li>
-                                  <a href="<?php echo base_url('user_list'); ?>">
-                                      <i class="mdi mdi-invert-colors"></i>
-                                      <span> User List </span>
-                                  </a>
-                              </li>
+                                <li>
+                                    <a href="<?php echo base_url('user_list'); ?>">
+                                        <i class="mdi mdi-invert-colors"></i>
+                                        <span> User List </span>
+                                    </a>
+                                </li>
 
-                              <li>
-                                  <a href="javascript: void(0);">
-                                      <i class="mdi mdi-texture"></i>
-                                      <span> Enquiry </span>
-                                  </a>
-                                  <ul class="nav-second-level" aria-expanded="false">
-                                      <li><a href="<?php echo base_url('enquiry_show_admin'); ?>"> Enquiry List </a></li>
-                                      <li><a href="<?php echo base_url('enquiry_form_admin'); ?>"> Enquiry Form </a></li>
-                                  </ul>
-                              </li>
-                              <li>
-                                  <a href="javascript: void(0);">
-                                      <i class="mdi mdi-texture"></i>
-                                      <span> Supplier </span>
-                                  </a>
-                                  <ul class="nav-second-level" aria-expanded="false">
-                                      <li><a href="<?php echo base_url('supplier_show_admin'); ?>"> Supplier List </a></li>
-                                      <li><a href="<?php echo base_url('supplier_form_admin'); ?>"> Supplier Form </a></li>
-                                  </ul>
-                              </li>
+                                <li>
+                                    <a href="javascript: void(0);">
+                                        <i class="mdi mdi-texture"></i>
+                                        <span> Enquiry </span>
+                                    </a>
+                                    <ul class="nav-second-level" aria-expanded="false">
+                                        <li><a href="<?php echo base_url('enquiry_show_admin'); ?>"> Enquiry List </a></li>
+                                        <li><a href="<?php echo base_url('enquiry_form_admin'); ?>"> Enquiry Form </a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript: void(0);">
+                                        <i class="mdi mdi-texture"></i>
+                                        <span> Quotation </span>
+                                    </a>
+                                    <ul class="nav-second-level" aria-expanded="false">
+                                        <li><a href="<?php echo base_url('quotation_show'); ?>"> quotation List </a></li>
+                                        <li><a href="<?php echo base_url('quotation_form'); ?>"> quotation Form </a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="javascript: void(0);">
+                                        <i class="mdi mdi-texture"></i>
+                                        <span> SO </span>
+                                    </a>
+                                    <ul class="nav-second-level" aria-expanded="false">
+                                        <li><a href="<?php echo base_url('po_show'); ?>"> PO List </a></li>
+                                    </ul>
+                                </li>
                                                         <?php } else {?>
                               <li>
                                   <a href="<?php echo base_url('Dashbord'); ?>">

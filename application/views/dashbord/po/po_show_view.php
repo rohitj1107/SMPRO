@@ -162,11 +162,10 @@
                               <li>
                                   <a href="javascript: void(0);">
                                       <i class="mdi mdi-texture"></i>
-                                      <span> PO </span>
+                                      <span> SO </span>
                                   </a>
                                   <ul class="nav-second-level" aria-expanded="false">
                                       <li><a href="<?php echo base_url('po_show'); ?>"> PO List </a></li>
-                                      <li><a href="<?php echo base_url('po_form'); ?>"> PO Form </a></li>
                                   </ul>
                               </li>
                               <li>
@@ -234,39 +233,39 @@
                                             <th>Customer Number</th>
                                             <th>Enquiry Number</th>
                                             <th>Quotation Number</th>
-                                            <th>PO Number</th>
+                                            <th>SO Number</th>
                                             <th>Date Time</th>
                                             <th>Action</th>
-                                            <th>PO To SO</th>
+                                            <th>SO To PO</th>
                                             <!-- <th>Ed</th> -->
                                         </tr>
                                         </thead>
                                         <tbody>
-                                          <?php if ($po) { ?>
-                                            <?php foreach($po as $sw_po){ ?>
+                                          <?php if ($so) { ?>
+                                            <?php foreach($so as $sw_po){ ?>
                                             <tr>
                                                 <td>
                                                   <?php
                                                         foreach ($companyname as $value) {
-                                                            if ($value->u_customerId == $sw_po->po_customer_ID) {
+                                                            if ($value->u_customerId == $sw_po->s_customer_ID) {
                                                                 echo $value->u_companyName;
                                                             }
                                                         }
                                                    ?>
                                                  </td>
-                                                <td><?php echo $sw_po->po_customer_ID; ?></td>
-                                                <td><?php echo $sw_po->po_enquiry_ID; ?></td>
-                                                <td><?php echo $sw_po->po_quote_number; ?></td>
-                                                <td><?php echo $sw_po->po_po_number; ?></td>
-                                                <td><?php echo $sw_po->po_date; ?></td>
+                                                <td><?php echo $sw_po->s_customer_ID; ?></td>
+                                                <td><?php echo $sw_po->s_enquiry_ID; ?></td>
+                                                <td><?php echo $sw_po->s_quote_number; ?></td>
+                                                <td><?php echo $sw_po->s_so_number; ?></td>
+                                                <td><?php echo $sw_po->s_c_date; ?></td>
                                                 <td>
-                                                  <a href="<?php echo base_url("view_po_single/".base64_encode($sw_po->po_po_number)); ?>"><button type="button" class="btn btn-success mdi mdi-view-list" name="button"></button></a>
-                                                  <a href="<?php echo base_url("po_edite/".base64_encode($sw_po->po_po_number)); ?>"><button type="button" class="btn btn-warning mdi mdi-view-list" name="button"></button></a>
+                                                  <a href="<?php echo base_url("view_po_single/".base64_encode($sw_po->s_so_number)); ?>"><button type="button" class="btn btn-success mdi mdi-view-list" name="button"></button></a>
+                                                  <a href="<?php echo base_url("po_edite/".base64_encode($sw_po->s_so_number)); ?>"><button type="button" class="btn btn-warning mdi mdi-view-list" name="button"></button></a>
                                                   <!-- <a href="<?php //echo base_url('edite_enquiry'); ?>"><button type="button" class="bg-warning" name="button">Edit</button></a> -->
-                                                  <a href="<?php echo base_url('delete_po/'.base64_encode($sw_po->po_po_number)); ?>"><button type="button" class="btn btn-danger mdi mdi-delete-sweep-outline" name="button"></button></a>
+                                                  <a href="<?php echo base_url('delete_po/'.base64_encode($sw_po->s_so_number)); ?>"><button type="button" class="btn btn-danger mdi mdi-delete-sweep-outline" name="button"></button></a>
                                                 </td>
                                                 <td>
-                                                  <a href="<?php echo base_url("po_to_supplier/".base64_encode($sw_po->po_po_number)); ?>"><button type="button" class="btn btn-info mdi mdi-view-list" name="button"></button></a>
+                                                  <a href="<?php echo base_url("so_to_po_supplier/".base64_encode($sw_po->s_so_number)); ?>"><button type="button" class="btn btn-info mdi mdi-view-list" name="button"></button></a>
 
                                                 </td>
                                                 <!-- <td>Ac</td> -->

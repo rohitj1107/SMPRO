@@ -14,9 +14,9 @@ class Po extends CI_Controller{
       $data = $this->Admin_model->user_table();
       $type = $this->Admin_model->select_type();
       $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
-      $po = $this->Admin_model->select_po_list();
+      $so = $this->Admin_model->select_po_so_list();
       $companyname = $this->Admin_model->select_company_name();
-      $this->load->view('dashbord/po/po_show_view',['data'=>$data,'type'=>$type,'user'=>$user,'po'=>$po,'companyname'=>$companyname]);
+      $this->load->view('dashbord/po/po_show_view',['data'=>$data,'type'=>$type,'user'=>$user,'so'=>$so,'companyname'=>$companyname]);
         // $this->load->view('dashbord/po/po_show_view');
     }
 
@@ -30,8 +30,8 @@ class Po extends CI_Controller{
         $type = $this->Admin_model->select_type();
         $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
         $po_select = $this->Admin_model->select_po_single($id_po);
-        $view_enquiry = $this->Admin_model->select_view_enquiry($po_select->po_customer_ID,$po_select->po_enquiry_ID);
-        $follow_up = $this->Admin_model->select_follow_up_po($id_po);
+        $view_enquiry = $this->Admin_model->select_view_enquiry($po_select->s_customer_ID,$po_select->s_enquiry_ID);
+        $follow_up = $this->Admin_model->select_follow_up_so($id_po);
         $this->load->view('dashbord/po/view_po_single',['data'=>$data,'type'=>$type,'user'=>$user,
         'po_select'=>$po_select,'view_enquiry'=>$view_enquiry,'follow_up'=>$follow_up]);
 
@@ -50,7 +50,7 @@ class Po extends CI_Controller{
         $this->load->view('dashbord/po/delete_po');
     }
 
-    public function follow_up_po(){
+    public function follow_up_so(){
         $data = [
             'fp_po_number' => $this->input->post('po_number'),
             'fp_quote_number' => $this->input->post('quote_number'),
@@ -59,7 +59,7 @@ class Po extends CI_Controller{
             'fp_select_date' => $this->input->post('select_date'),
             'fp_enquiry_id' => $this->input->post('enquiry_ID')
         ];
-        if ($this->Admin_model->create_follow_up_po($data)) {
+        if ($this->Admin_model->create_follow_up_so($data)) {
             $this->session->set_flashdata('follow_up_create','Create Follow Up Success fully !');
             return redirect("view_po_single/".base64_encode($this->input->post('po_number')));
         } else {
@@ -85,17 +85,17 @@ class Po extends CI_Controller{
         }
     }
 
-    public function po_to_supplier($po_id){
+    public function so_to_po_supplier($po_id){
         $id_po = base64_decode($po_id);
         $data = $this->Admin_model->user_table();
         $type = $this->Admin_model->select_type();
         $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
-        $po_select = $this->Admin_model->select_po_single($id_po);
+        $po_select = $this->Admin_model->select_so_single($id_po);
         $supplierID = $this->Admin_model->supplierID_admin();
         $this->load->view('dashbord/po/po_to_supplier_view',['data'=>$data,'type'=>$type,'user'=>$user,'po_select'=>$po_select,'supplierID'=>$supplierID]);
     }
 
-    public function so_create($po_id){
+    public function po_create($po_id){
         $id_po = base64_decode($po_id);
         $this->load->model('Admin_model');
         $supp = $this->input->post('supplierID');
@@ -192,15 +192,15 @@ class Po extends CI_Controller{
             's_delivery_me'=>$this->input->post('delivery_me'),
             's_payment_terms'=>$this->input->post('payment_terms'),
         ];
-        if ($this->Admin_model->insert_so($data)) {
-            $this->session->set_flashdata('so_success','Insert SO success fully !');
-            return redirect('po_to_supplier/'.base64_encode($id_po));
+        if ($this->Admin_model->insert_po($data)) {
+            $this->session->set_flashdata('po_success','Insert SO success fully !');
+            return redirect('so_to_po_supplier/'.base64_encode($id_po));
         } else {
-          $this->session->set_flashdata('so_faile','Not Insert SO !');
-          return redirect('po_to_supplier/'.base64_encode($id_po));
+          $this->session->set_flashdata('po_faile','Not Insert SO !');
+          return redirect('so_to_po_supplier/'.base64_encode($id_po));
         }
     }
-    
+
 }
 
 

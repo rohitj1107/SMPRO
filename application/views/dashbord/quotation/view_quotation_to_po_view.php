@@ -176,11 +176,10 @@
                               <li>
                                   <a href="javascript: void(0);">
                                       <i class="mdi mdi-texture"></i>
-                                      <span> PO </span>
+                                      <span> SO </span>
                                   </a>
                                   <ul class="nav-second-level" aria-expanded="false">
                                       <li><a href="<?php echo base_url('po_show'); ?>"> PO List </a></li>
-                                      <li><a href="<?php echo base_url('po_form'); ?>"> PO Form </a></li>
                                   </ul>
                               </li>
                               <li>
@@ -242,15 +241,15 @@
 
                             <div class="col-md-12">
                                 <div class="card-box task-detail">
-                                  <h4> PO process </h4>
+                                  <h4> PO(SO) process </h4>
 
-                                <?php if ($this->session->flashdata('po_seccess')) { ?>
-                                    <div class="bg-success"><?php echo $this->session->flashdata('po_seccess'); ?></div>
+                                <?php if ($this->session->flashdata('so_seccess')) { ?>
+                                    <div class="bg-success"><?php echo $this->session->flashdata('so_seccess'); ?></div>
                                 <?php } ?>
-                                <?php if ($this->session->flashdata('po_failed')) { ?>
-                                    <div class="bg-danger"><?php echo $this->session->flashdata('po_failed'); ?></div>
+                                <?php if ($this->session->flashdata('so_failed')) { ?>
+                                    <div class="bg-danger"><?php echo $this->session->flashdata('so_failed'); ?></div>
                                 <?php } ?>
-                                <?php echo form_open('insert_po'); ?>
+                                <?php echo form_open('insert_pos'); ?>
                                   <div class="row">
                                     <div class="col-md-2">
                                       <div class="form-group">
@@ -275,43 +274,83 @@
                                     </div>
                                     <div class="col-md-2">
                                       <div class="form-group">
-                                          <label>PO Number</label>
-                                          <p><?php echo 'PO-'.time(); ?></p>
-                                          <input type="hidden" name="po_number" value="<?php echo 'PO-'.time(); ?>">
+                                          <label>SO Number</label>
+                                          <p><?php echo 'SO-'.time(); ?></p>
+                                          <input type="hidden" name="so_number" value="<?php echo 'SO-'.time(); ?>">
                                       </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                       <div class="form-group">
-                                          <label>Date</label>
-                                          <p><?php echo $quatation->q_date; ?></p>
-                                          <input type="hidden" name="date" value="<?php echo $quatation->q_date; ?>">
+
+                                        <label for="">Market (DOM / Exp)</label>
+                                        <input type="text" class="form-control" name="market" >
                                       </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                      <div class="form-group">
+                                        <label for="">SO DATE</label>
+                                        <input type="text" class="form-control" name="so_date" id="so_date">
+                                      </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                      <div class="form-group">
+                                      <label for="">Category</label>
+                                      <select class="form-control" name="category">
+                                          <option value="0">Select Category</option>
+                                          <option value="Sales Parts">Sales Parts</option>
+                                          <option value="Sales Service">Sales Service</option>
+                                          <option value="FOC Parts">FOC Parts</option>
+                                          <option value="FOC Service">FOC Service</option>
+                                          <option value="Solu'on Sales">Solu'on Sales</option>
+                                          <option value="Trading">Trading</option>
+                                          <option value="Consumables">Consumables</option>
+                                      </select>
+                                    </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="">Customer PO Number</label>
+                                        <input type="text" class="form-control" name="customer_po_number">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="">PO Create Date</label>
+                                        <input type="text" class="form-control" name="po_date" id="po_date">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="">value</label>
+                                        <input type="text" class="form-control" name="value">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="">Currency</label>
+                                        <select class="form-control" name="currency">
+                                            <option value="0">select currency</option>
+                                            <option value="INR">INR</option>
+                                            <option value="USD">USD</option>
+                                        </select>
                                     </div>
 
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                       <div class="form-group">
                                           <label>Market Segment</label>
                                           <p><?php echo $quatation->q_market_segment; ?></p>
                                           <input type="hidden" name="market_segment" value="<?php echo $quatation->q_market_segment; ?>">
                                       </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-2">
                                       <div class="form-group">
                                           <label>Delay Penalty</label>
-                                          <input type="text" class="form-control" name="delay_penalty" value="">
-                                      </div>
+                                          <input type="text" class="form-control" name="delay_penalty">
+                                       </div>
                                     </div>
-                                    <div class="col-md-4">
+                                     <div class="col-md-2">
                                       <div class="form-group">
                                           <label>Scope Text</label>
-                                          <p><?php echo $quatation->q_scope_text; ?></p>
-                                          <input type="hidden" name="scope_text" value="<?php echo $quatation->q_scope_text; ?>">
+                                          <input type="text" class="form-control" name="scope_text" value="<?php echo $quatation->q_scope_text; ?>">
                                       </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-2">
                                       <div class="form-group">
                                           <label class="text-danger">LC applicabl</label>
-                                          <input type="text" class="form-control" name="lc_applicabl" value="">
+                                          <input type="text" class="form-control" name="lc_applicabl">
                                       </div>
                                     </div>
                                     <div class="col-md-2">
@@ -336,27 +375,45 @@
                                       </div>
                                     </div>
 
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                       <div class="form-group">
                                           <label class="text-danger">EXPIRY DATE OF LC</label>
-                                          <input type="text" name="expiry_date_of_lc" class="form-control" placeholder="mm/dd/yyyy" id="datepicker-autoclose" value="">
-
+                                          <input type="text" name="expiry_date_of_lc" class="form-control" placeholder="mm/dd/yyyy" id="datepicker-autoclose">
                                       </div>
                                     </div>
-
+                                    <div class="col-md-2">
+                                        <label for="">Sn</label>
+                                        <select class="form-control" name="sn">
+                                            <option value="0">Select SN</option>
+                                            <option value="Item code 1">Item code 1</option>
+                                            <option value="Item code 2">Item code 2</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="">Description</label>
+                                        <textarea name="description" class="form-control" ></textarea>
+                                    </div>
+                                    <div class="col-md-2">
+                                      <div class="form-group">
+                                          <label class="text-danger">QTY</label>
+                                          <input type="text" name="qty" class="form-control" placeholder="QTY">
+                                      </div>
+                                    </div>
                                     <input type="hidden" name="emailId" value="<?php echo $this->session->userdata('emailId'); ?>">
                                     <div class="col-md-12">
-                                      <?php if ($po_number_row) { ?>
+                                      <?php //if ($po_number_row) { ?>
 
-                                      <?php if (date('m/d/yy') > $po_number_row->po_expiry_date_of_lc) { ?>
-                                          <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">Submit</button>
-                                      <?php } else { ?>
-                                          <button class="btn btn-danger waves-effect waves-light mr-1" disabled type="submit">Submit</button>
-                                      <?php } ?>
+                                      <?php //if (date('m/d/yy') > $po_number_row->po_expiry_date_of_lc) { ?>
+                                          <!-- <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">Submit</button> -->
+                                      <?php //} else { ?>
+                                          <!-- <button class="btn btn-danger waves-effect waves-light mr-1" disabled type="submit">Submit</button> -->
+                                      <?php //} ?>
 
-                                  <?php } else { ?>
-                                      <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">Submit</button>
-                                  <?php } ?>
+                                  <?php //} else { ?>
+                                      <!-- <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">Submit</button> -->
+                                  <?php //} ?>
+                                  <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">Submit</button>
+
                                     </div>
                                   </div>
                                   <?php echo form_close(); ?>
@@ -445,7 +502,30 @@
 
         <!-- App js -->
         <script src="<?php echo base_url(); ?>assets/admin/js/app.min.js"></script>
-
+        <script>
+            $(document).ready(function(){
+                var date_input=$('input[id="po_date"]'); //our date input has the name "date"
+                var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+                date_input.datepicker({
+                    format: 'mm/dd/yyyy',
+                    container: container,
+                    todayHighlight: true,
+                    autoclose: true,
+                })
+            })
+        </script>
+        <script>
+            $(document).ready(function(){
+                var date_input=$('input[id="so_date"]'); //our date input has the name "date"
+                var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+                date_input.datepicker({
+                    format: 'mm/dd/yyyy',
+                    container: container,
+                    todayHighlight: true,
+                    autoclose: true,
+                })
+            })
+        </script>
     </body>
 </html>
 <?php } else { ?>

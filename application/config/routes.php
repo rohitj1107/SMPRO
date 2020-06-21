@@ -121,10 +121,10 @@ $route['po_show'] = 'Po/po_show';
 $route['view_po_single/(:any)'] = 'Po/view_po_single/$1';
 $route['po_edite/(:any)'] = 'Po/po_edite/$1';
 $route['delete_po/(:any)'] = 'Po/delete_po/$1';
-$route['follow_up_po'] = 'Po/follow_up_po';
+$route['follow_up_so'] = 'Po/follow_up_so';
 $route['update_po'] = 'Po/update_po';
-$route['po_to_supplier/(:any)'] = 'Po/po_to_supplier/$1';
-$route['so_create/(:any)'] = 'Po/so_create/$1';
+$route['so_to_po_supplier/(:any)'] = 'Po/so_to_po_supplier/$1';
+$route['po_create/(:any)'] = 'Po/po_create/$1';
 
 
 // Quotation
@@ -134,7 +134,7 @@ $route['view_quotation_single/(:any)'] = 'Quotation/view_quotation_single/$1';
 $route['edite_quotation_single/(:any)'] = 'Quotation/edite_quotation_single/$1';
 $route['update_quotation/(:any)'] = 'Quotation/update_quotation/$1';
 $route['quotation_to_po/(:any)'] = 'Quotation/quotation_to_po/$1';
-$route['insert_po'] = 'Quotation/insert_po';
+$route['insert_pos'] = 'Quotation/insert_pos';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -176,11 +176,10 @@
                               <li>
                                   <a href="javascript: void(0);">
                                       <i class="mdi mdi-texture"></i>
-                                      <span> PO </span>
+                                      <span> SO </span>
                                   </a>
                                   <ul class="nav-second-level" aria-expanded="false">
                                       <li><a href="<?php echo base_url('po_show'); ?>"> PO List </a></li>
-                                      <li><a href="<?php echo base_url('po_form'); ?>"> PO Form </a></li>
                                   </ul>
                               </li>
                               <li>

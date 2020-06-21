@@ -170,7 +170,7 @@ class Admin_model extends CI_Model{
   }
 
   public function select_po($po_number){
-      $sql = $this->db->where('po_quote_number',$po_number)->order_by('po_expiry_date_of_lc desc')->get('s_po');
+      $sql = $this->db->where('s_quote_number',$po_number)->order_by('s_so_id desc')->get('s_po');
       if ($sql->num_rows() > 0) {
           return $sql->result();
       } else {
@@ -179,7 +179,7 @@ class Admin_model extends CI_Model{
   }
 
   public function select_po_row($po_number){
-    $sql = $this->db->where('po_quote_number',$po_number)->order_by('po_expiry_date_of_lc desc')->get('s_po');
+    $sql = $this->db->where('s_quote_number',$po_number)->order_by('s_so_id desc')->get('s_po');
     if ($sql->num_rows() > 0) {
         return $sql->row();
     } else {
@@ -213,7 +213,7 @@ class Admin_model extends CI_Model{
       }
   }
   public function po_count(){
-      $sql = $this->db->select('po_id')->get('s_po');
+      $sql = $this->db->select('s_so_id')->get('s_po');
       if ($sql->num_rows() > 0) {
           return $sql->num_rows();
       } else {
@@ -333,7 +333,7 @@ class Admin_model extends CI_Model{
   }
 
   public function count_quotation($enquiryID,$quotation_number){
-      $sql = $this->db->select("count(s_po.po_po_number) as number , po_quote_number")->where('po_quote_number',$quotation_number)->where('po_enquiry_ID',$enquiryID)->get('s_po');
+      $sql = $this->db->select("count(s_po.s_po_number) as number , s_quote_number")->where('s_quote_number',$quotation_number)->where('s_enquiry_ID',$enquiryID)->get('s_po');
       if ($sql) {
           return $sql->result();
           // print_r($sql->result());exit;
@@ -397,7 +397,8 @@ class Admin_model extends CI_Model{
   }
 
   public function select_po_single($po_id){
-      $sql = $this->db->where('po_po_number',$po_id)->get('s_po');
+
+      $sql = $this->db->where('s_so_number',$po_id)->get('s_po_so');
       if ($sql->num_rows() > 0) {
           return $sql->row();
       } else {
@@ -405,8 +406,17 @@ class Admin_model extends CI_Model{
       }
   }
 
-  public function create_follow_up_po($data){
-      $sql = $this->db->insert('s_follow_up_po',$data);
+  public function select_so_single($po_id){
+      $sql = $this->db->where('s_so_number',$po_id)->get('s_po_so');
+      if ($sql->num_rows() > 0) {
+          return $sql->row();
+      } else {
+          return FALSE;
+      }
+  }
+
+  public function create_follow_up_so($data){
+      $sql = $this->db->insert('s_follow_up_so',$data);
       if ($sql) {
           return true;
       } else {
@@ -414,8 +424,8 @@ class Admin_model extends CI_Model{
       }
   }
 
-  public function select_follow_up_po($po_id){
-      $sql = $this->db->where('fp_po_number',$po_id)->get('s_follow_up_po');
+  public function select_follow_up_so($po_id){
+      $sql = $this->db->where('fp_po_number',$po_id)->get('s_follow_up_so');
       if ($sql->num_rows() > 0) {
           return $sql->result();
       } else {
@@ -432,12 +442,29 @@ class Admin_model extends CI_Model{
       }
   }
 
-  public function insert_so($data){
-      $sql = $this->db->insert('s_so',$data);
+  public function insert_po($data){
+      $sql = $this->db->insert('s_po',$data);
       if ($sql) {
           return true;
       } else {
           return false;
+      }
+  }
+
+  public function insert_pos_model($data){
+      $sql = $this->db->insert('s_po_so',$data);
+      if ($sql) {
+          return true;
+      } else {
+          return false;
+      }
+  }
+  public function select_po_so_list(){
+      $sql = $this->db->order_by('s_id','desc')->get('s_po_so');
+      if ($sql->num_rows() > 0) {
+          return $sql->result();
+      } else {
+          return FALSE;
       }
   }
 

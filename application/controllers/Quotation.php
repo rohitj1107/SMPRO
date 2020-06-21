@@ -128,29 +128,36 @@ class Quotation extends CI_Controller{
         $this->load->view('dashbord/quotation/view_quotation_to_po_view',['data'=>$data,'type'=>$type,'user'=>$user,'quatation'=>$quatation,'po_number_result'=>$po_number_result,'po_number_row'=>$po_number_row]);
     }
 
-    public function insert_po(){
+    public function insert_pos(){
         $data = [
-            'po_customer_ID'=>$this->input->post('customer_ID'),
-            'po_enquiry_ID'=>$this->input->post('enquiry_ID'),
-            'po_quote_number'=>$this->input->post('quote_number'),
-            'po_po_number'=>$this->input->post('po_number'),
-            'po_date'=>$this->input->post('date'),
-            'po_market_segment'=>$this->input->post('market_segment'),
-            'po_delay_penalty'=>$this->input->post('delay_penalty'),
-            'po_scope_text'=>$this->input->post('scope_text'),
-            'po_lc_applicabl'=>$this->input->post('lc_applicabl'),
-            'po_into_terms'=>$this->input->post('into_terms'),
-            'po_load_time'=>$this->input->post('load_time'),
-            'po_payment'=>$this->input->post('payment'),
-            'po_expiry_date_of_lc'=>$this->input->post('expiry_date_of_lc'),
-            'po_emailId'=>$this->input->post('emailId')
+            's_customer_ID'=>$this->input->post('customer_ID'),
+            's_enquiry_ID'=>$this->input->post('enquiry_ID'),
+            's_quote_number'=>$this->input->post('quote_number'),
+            's_so_number'=>$this->input->post('so_number'),
+            's_market'=>$this->input->post('market'),
+            's_so_date'=>$this->input->post('so_date'),
+            's_category'=>$this->input->post('category'),
+            's_customer_po_number'=>$this->input->post('customer_po_number'),
+            's_po_date'=>$this->input->post('po_date'),
+            's_value'=>$this->input->post('value'),
+            's_currency'=>$this->input->post('currency'),
+            's_market_segment'=>$this->input->post('market_segment'),
+            's_delay_penalty'=>$this->input->post('delay_penalty'),
+            's_lc_applicabl'=>$this->input->post('lc_applicabl'),
+            's_load_time'=>$this->input->post('load_time'),
+            's_payment'=>$this->input->post('payment'),
+            's_expiry_date_of_lc'=>$this->input->post('expiry_date_of_lc'),
+            's_sn'=>$this->input->post('sn'),
+            's_description'=>$this->input->post('description'),
+            's_qty'=>$this->input->post('qty'),
+            's_emailId'=>$this->input->post('emailId')
         ];
 
-        if($this->Admin_model->insert_po_model($data)){
-            $this->session->set_flashdata('po_seccess','PO upload success fully !');
+        if($this->Admin_model->insert_pos_model($data)){
+            $this->session->set_flashdata('so_seccess','PO(SO) upload success fully !');
             return redirect("quotation_to_po/".base64_encode($this->input->post('quote_number')));
         } else {
-            $this->session->set_flashdata('po_failed','PO NOT upload !');
+            $this->session->set_flashdata('so_failed','PO(SO) NOT upload !');
             return redirect("quotation_to_po/".base64_encode($this->input->post('quote_number')));
         }
 
