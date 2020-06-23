@@ -129,6 +129,10 @@ class Quotation extends CI_Controller{
     }
 
     public function insert_pos(){
+        $sn = implode(' | ',$this->input->post('sn'));
+        $description = implode(' | ',$this->input->post('description'));
+        $qty = implode(' | ',$this->input->post('qty'));
+
         $data = [
             's_customer_ID'=>$this->input->post('customer_ID'),
             's_enquiry_ID'=>$this->input->post('enquiry_ID'),
@@ -147,9 +151,9 @@ class Quotation extends CI_Controller{
             's_load_time'=>$this->input->post('load_time'),
             's_payment'=>$this->input->post('payment'),
             's_expiry_date_of_lc'=>$this->input->post('expiry_date_of_lc'),
-            's_sn'=>$this->input->post('sn'),
-            's_description'=>$this->input->post('description'),
-            's_qty'=>$this->input->post('qty'),
+            's_sn'=>$sn,
+            's_description'=>$description,
+            's_qty'=>$qty,
             's_emailId'=>$this->input->post('emailId')
         ];
 

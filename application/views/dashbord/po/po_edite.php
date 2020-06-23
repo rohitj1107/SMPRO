@@ -33,6 +33,53 @@
 
     </head>
 
+    <SCRIPT language="javascript">
+      function addRow(tableID) {
+        var table = document.getElementById(tableID);
+        var rowCount = table.rows.length;
+        var row = table.insertRow(rowCount);
+        var colCount = table.rows[0].cells.length;
+        for(var i=0; i<colCount; i++) {
+          var newcell	= row.insertCell(i);
+          newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+          //alert(newcell.childNodes);
+          switch(newcell.childNodes[0].type) {
+            case "text":
+                newcell.childNodes[0].value = "";
+                break;
+            case "checkbox":
+                newcell.childNodes[0].checked = false;
+                break;
+            case "select-one":
+                newcell.childNodes[0].selectedIndex = 0;
+                break;
+          }
+        }
+      }
+
+      function deleteRow(tableID) {
+        try {
+        var table = document.getElementById(tableID);
+        var rowCount = table.rows.length;
+        for(var i=0; i<rowCount; i++) {
+          var row = table.rows[i];
+          var chkbox = row.cells[0].childNodes[0];
+          if(null != chkbox && true == chkbox.checked) {
+            if(rowCount <= 1) {
+              alert("Cannot delete all the rows.");
+              break;
+            }
+            table.deleteRow(i);
+            rowCount--;
+            i--;
+          }
+        }
+        }catch(e) {
+          alert(e);
+        }
+      }
+    </SCRIPT>
+
     <body>
 
         <!-- Begin page -->
@@ -222,7 +269,7 @@
 
                                           <div class="col-md-12">
                                               <div class="card-box task-detail">
-                                                <h4> PO </h4>
+                                                <h4> SO </h4>
 
                                               <?php if ($this->session->flashdata('po_seccess')) { ?>
                                                   <div class="bg-success"><?php echo $this->session->flashdata('po_seccess'); ?></div>
@@ -234,52 +281,52 @@
                                                 <!-- Start Content-->
 
                                                                       <p class="text-muted">
-                                                                          <input type="hidden" name="po_po_number" readonly class="form-control" value="<?php print_r($po_select->po_po_number); ?>">
-                                                                          <?php print_r($po_select->po_po_number); ?>
+                                                                          <input type="hidden" name="po_po_number" readonly class="form-control" value="<?php print_r($po_select->s_so_number); ?>">
+                                                                          <?php print_r($po_select->s_so_number); ?>
                                                                       </p>
                                                                       <div class="row task-dates mb-0 mt-2">
                                                                           <div class="col-lg-4">
                                                                               <h5 class="font-600 m-b-5">Customer ID</h5>
-                                                                              <p> <?php print_r($po_select->po_customer_ID); ?></p>
+                                                                              <p> <?php print_r($po_select->s_customer_ID); ?></p>
                                                                           </div>
 
                                                                           <div class="col-lg-4">
                                                                               <h5 class="font-600 m-b-5">Enquiry ID</h5>
-                                                                              <p> <?php print_r($po_select->po_enquiry_ID); ?></p>
+                                                                              <p> <?php print_r($po_select->s_enquiry_ID); ?></p>
                                                                           </div>
 
                                                                           <div class="col-lg-4">
                                                                               <h5 class="font-600 m-b-5">Quotation ID</h5>
-                                                                              <p> <?php print_r($po_select->po_quote_number); ?></p>
+                                                                              <p> <?php print_r($po_select->s_quote_number); ?></p>
                                                                           </div>
                                                                       </div>
 
                                                                       <div class="row task-dates mb-0 mt-0">
                                                                           <div class="col-lg-4">
                                                                               <h5 class="font-600 m-b-5">Date </h5>
-                                                                              <p> <?php print_r($po_select->po_date); ?></p>
+                                                                              <p> <?php print_r($po_select->s_so_date); ?></p>
                                                                           </div>
 
                                                                           <div class="col-lg-4">
                                                                               <h5 class="font-600 m-b-5">Market segment</h5>
-                                                                              <input type="text" name="po_market_segment" class="form-control" value="<?php print_r($po_select->po_market_segment); ?>">
+                                                                              <input type="text" name="s_market_segment" class="form-control" value="<?php print_r($po_select->s_market_segment); ?>">
                                                                           </div>
 
                                                                           <div class="col-lg-4">
                                                                               <h5 class="font-600 m-b-5">Delay Penalty</h5>
-                                                                              <input type="text" name="po_delay_penalty" class="form-control" value="<?php print_r($po_select->po_delay_penalty); ?>">
+                                                                              <input type="text" name="s_delay_penalty" class="form-control" value="<?php print_r($po_select->s_delay_penalty); ?>">
                                                                           </div>
                                                                       </div>
 
                                                                       <div class="row task-dates mb-0 mt-0">
                                                                           <div class="col-lg-4">
                                                                               <h5>Scope Text</h5>
-                                                                              <input type="text" name="po_scope_text" class="form-control" value="<?php print_r($po_select->po_scope_text); ?>">
+                                                                              <input type="text" name="s_scope_text" class="form-control" value="<?php print_r($po_select->s_scope_text); ?>">
                                                                           </div>
 
                                                                           <div class="col-lg-4">
                                                                               <h5>Load Time</h5>
-                                                                              <input type="text" name="po_load_time" class="form-control" value="<?php print_r($po_select->po_load_time); ?>">
+                                                                              <input type="text" name="s_load_time" class="form-control" value="<?php print_r($po_select->s_load_time); ?>">
 
                                                                       </div>
                                                                     </div>
@@ -287,23 +334,66 @@
                                                                     <div class="row mb-0 mt-0">
                                                                         <div class="col-lg-4">
                                                                             <h5 class="font-600 m-b-5">payment</h5>
-                                                                            <p> <?php print_r($po_select->po_payment); ?></p>
+                                                                            <p> <?php print_r($po_select->s_payment); ?></p>
                                                                         </div>
 
                                                                         <div class="col-lg-4">
                                                                             <h5 class="font-600 text-danger m-b-5">Expected Date</h5>
-                                                                            <p> <?php print_r($po_select->po_expiry_date_of_lc); ?></p>
+                                                                            <p> <?php print_r($po_select->s_expiry_date_of_lc); ?></p>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="row mb-0 mt-0">
 
                                                                     <div class="col-lg-4">
                                                                         <h5 class="font-600 m-b-5">Created Date</h5>
-
-                                                                        <p><?php echo $po_select->po_c_date; ?></p>
+                                                                        <p><?php echo $po_select->s_c_date; ?></p>
                                                                     </div>
                                                                     </div>
+                                                                    <div class="row mb-0 mt-0">
 
+                                                                    <div class="col-md-10">
+                                                                      <INPUT class="btn btn-success waves-effect waves-light mr-1" type="button" value="Add Item" onclick="addRow('dataTable')" />
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                      <INPUT class="btn btn-danger waves-effect waves-light mr-1" type="button" value="Delete Item" onclick="deleteRow('dataTable')" />
+                                                                    </div>
+                                                                  </div>
+                                                                  <br>
+                                                                    <div class="col-md-12">
+                                                                      <table id="dataTable" class="table mb-0">
+                                                                        <tbody>
+                                                                          <tr>
+                                                                                  <td><INPUT type="checkbox" name="chk"/>
+                                                                                  <td>
+                                                                                      <input type="text" class="form-control" name="sn[]" placeholder="SN" value="">
+                                                                                  </td>
+                                                                                  <td>
+                                                                                      <textarea name="description[]" placeholder="Description" class="form-control" ></textarea>
+                                                                                  </td>
+                                                                                  <td>
+                                                                                      <input type="text" name="qty[]" class="form-control" placeholder="QTY" value="">
+                                                                                  </td>
+                                                                          </tr>
+                                                                          <?php for($i = 0; $i < count(explode(' | ',$po_select->s_sn)); $i++) {
+                                                                                    $sn = (explode(' | ',$po_select->s_sn));
+                                                                                    $de = (explode(' | ',$po_select->s_description));
+                                                                                    $qty = (explode(' | ',$po_select->s_qty));
+                                                                            ?>
+                                                                          <tr>
+                                                                                  <td><INPUT type="checkbox" name="chk"/>
+                                                                                  <td>
+                                                                                      <input type="text" class="form-control" name="sn[]" placeholder="SN" value="<?php echo $sn[$i]; ?>">
+                                                                                  </td>
+                                                                                  <td>
+                                                                                      <textarea name="description[]" placeholder="Description" class="form-control" ><?php echo $de[$i]; ?></textarea>
+                                                                                  </td>
+                                                                                  <td>
+                                                                                      <input type="text" name="qty[]" class="form-control" placeholder="QTY" value="<?php echo $qty[$i]; ?>">
+                                                                                  </td>
+                                                                          </tr>
+                                                                          <?php } ?>
+
+                                                                        </tbody>
+                                                                      </table>
+                                                                    </div>
                                                   <input type="hidden" name="emailId" value="<?php echo $this->session->userdata('emailId'); ?>">
                                                   <div class="col-md-6">
                                                       <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">Update</button>

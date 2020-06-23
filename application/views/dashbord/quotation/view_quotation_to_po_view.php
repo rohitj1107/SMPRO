@@ -34,6 +34,54 @@
     <link href="<?php echo base_url(); ?>assets/admin/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets/admin/css/app.min.css" rel="stylesheet" type="text/css" />
 
+
+    <SCRIPT language="javascript">
+      function addRow(tableID) {
+        var table = document.getElementById(tableID);
+        var rowCount = table.rows.length;
+        var row = table.insertRow(rowCount);
+        var colCount = table.rows[0].cells.length;
+        for(var i=0; i<colCount; i++) {
+          var newcell	= row.insertCell(i);
+          newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+          //alert(newcell.childNodes);
+          switch(newcell.childNodes[0].type) {
+            case "text":
+                newcell.childNodes[0].value = "";
+                break;
+            case "checkbox":
+                newcell.childNodes[0].checked = false;
+                break;
+            case "select-one":
+                newcell.childNodes[0].selectedIndex = 0;
+                break;
+          }
+        }
+      }
+
+      function deleteRow(tableID) {
+        try {
+        var table = document.getElementById(tableID);
+        var rowCount = table.rows.length;
+        for(var i=0; i<rowCount; i++) {
+          var row = table.rows[i];
+          var chkbox = row.cells[0].childNodes[0];
+          if(null != chkbox && true == chkbox.checked) {
+            if(rowCount <= 1) {
+              alert("Cannot delete all the rows.");
+              break;
+            }
+            table.deleteRow(i);
+            rowCount--;
+            i--;
+          }
+        }
+        }catch(e) {
+          alert(e);
+        }
+      }
+    </SCRIPT>
+
 </head>
 
     <body>
@@ -283,7 +331,11 @@
                                       <div class="form-group">
 
                                         <label for="">Market (DOM / Exp)</label>
-                                        <input type="text" class="form-control" name="market" >
+                                        <select class="form-control" name="market">
+                                            <option value="0">Select Market</option>
+                                            <option value="DOM">DOM</option>
+                                            <option value="EXP">EXP</option>
+                                        </select>
                                       </div>
                                     </div>
                                     <div class="col-md-2">
@@ -381,24 +433,56 @@
                                           <input type="text" name="expiry_date_of_lc" class="form-control" placeholder="mm/dd/yyyy" id="datepicker-autoclose">
                                       </div>
                                     </div>
+
                                     <div class="col-md-2">
-                                        <label for="">Sn</label>
-                                        <select class="form-control" name="sn">
-                                            <option value="0">Select SN</option>
-                                            <option value="Item code 1">Item code 1</option>
-                                            <option value="Item code 2">Item code 2</option>
-                                        </select>
+
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="">Description</label>
-                                        <textarea name="description" class="form-control" ></textarea>
+
                                     </div>
                                     <div class="col-md-2">
-                                      <div class="form-group">
-                                          <label class="text-danger">QTY</label>
-                                          <input type="text" name="qty" class="form-control" placeholder="QTY">
-                                      </div>
+
                                     </div>
+
+                                    <div class="col-md-10">
+                                      <INPUT class="btn btn-success waves-effect waves-light mr-1" type="button" value="Add Item" onclick="addRow('dataTable')" />
+                                    </div>
+                                    <div class="col-md-2">
+                                      <INPUT class="btn btn-danger waves-effect waves-light mr-1" type="button" value="Delete Item" onclick="deleteRow('dataTable')" />
+                                    </div>
+                                    <div class="col-md-2">
+                                      <br>
+                                    </div>
+                                    <div class="col-md-12">
+                                      <table class="table mb-0">
+                                          <tbody>
+                                            <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th><label for="">Sn</label></th>
+                                                <th><label for="">Description</label></th>
+                                                <th><label class="text-danger">QTY</label></th>
+                                            </tr>
+                                          </thead>
+                                        </tbody>
+                                      </table>
+
+                                      <TABLE id="dataTable" class="table mb-0">
+                                      <tr>
+                                        <TD><INPUT type="checkbox" name="chk"/></TD>
+                                        <td><input type="text" class="form-control" name="sn[]" placeholder="SN" value="">
+                                        </TD>
+                                        <td>
+                                          <textarea name="description[]" placeholder="Description" class="form-control" ></textarea></td>
+                                        </td>
+                                        <td>
+                                          <div class="form-group">
+                                              <input type="text" name="qty[]" class="form-control" placeholder="QTY">
+                                          </div>
+                                        </td>
+                                      </tr>
+                                    </TABLE>
+                                  </div>
                                     <input type="hidden" name="emailId" value="<?php echo $this->session->userdata('emailId'); ?>">
                                     <div class="col-md-12">
                                       <?php //if ($po_number_row) { ?>
@@ -412,6 +496,7 @@
                                   <?php //} else { ?>
                                       <!-- <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">Submit</button> -->
                                   <?php //} ?>
+                                  <br><br>
                                   <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">Submit</button>
 
                                     </div>

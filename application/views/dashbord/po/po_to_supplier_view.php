@@ -31,6 +31,54 @@
         <link href="<?php echo base_url(); ?>assets/admin/css/icons.min.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>assets/admin/css/app.min.css" rel="stylesheet" type="text/css" />
 
+
+        <SCRIPT language="javascript">
+          function addRow(tableID) {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+            var colCount = table.rows[0].cells.length;
+            for(var i=0; i<colCount; i++) {
+              var newcell	= row.insertCell(i);
+              newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+              //alert(newcell.childNodes);
+              switch(newcell.childNodes[0].type) {
+                case "text":
+                    newcell.childNodes[0].value = "";
+                    break;
+                case "checkbox":
+                    newcell.childNodes[0].checked = false;
+                    break;
+                case "select-one":
+                    newcell.childNodes[0].selectedIndex = 0;
+                    break;
+              }
+            }
+          }
+
+          function deleteRow(tableID) {
+            try {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+            for(var i=0; i<rowCount; i++) {
+              var row = table.rows[i];
+              var chkbox = row.cells[0].childNodes[0];
+              if(null != chkbox && true == chkbox.checked) {
+                if(rowCount <= 1) {
+                  alert("Cannot delete all the rows.");
+                  break;
+                }
+                table.deleteRow(i);
+                rowCount--;
+                i--;
+              }
+            }
+            }catch(e) {
+              alert(e);
+            }
+          }
+        </SCRIPT>
+
     </head>
 
     <body>
@@ -310,6 +358,10 @@
                                                     <label for=""> Status </label>
                                                     <input type="text" name="status" class="form-control" placeholder="Status">
                                                 </div>
+                                                <div class="col-md-12 pt-4">
+
+                                                </div>
+
                                                 <div class="col-md-6 pt-4">
                                                     <label for="">PO Anachment</label>
                                                     <input type="file" name="po_anachment[]" multiple>
@@ -318,6 +370,55 @@
                                                     <label for="">Quote anachment</label>
                                                     <input type="file" name="quote_anachment[]" multiple>
                                                 </div>
+                                                <div class="col-md-12 pt-4">
+
+                                                </div>
+
+                                                <div class="col-md-8">
+                                                  <INPUT class="btn btn-success waves-effect waves-light mr-1" type="button" value="Add Item" onclick="addRow('dataTable')" />
+                                                </div>
+                                                <div class="col-md-2">
+                                                  <INPUT class="btn btn-danger waves-effect waves-light mr-1" type="button" value="Delete Item" onclick="deleteRow('dataTable')" />
+                                                </div>
+                                                <br><br>
+                                                <div class="col-md-12">
+                                                  <table id="dataTable" class="table mb-0">
+                                                    <tbody>
+                                                      <tr>
+                                                              <td><INPUT type="checkbox" name="chk[]"/>
+                                                              <td>
+                                                                  <input type="text" class="form-control" name="sn[]" placeholder="SN" value="">
+                                                              </td>
+                                                              <td>
+                                                                  <textarea name="description[]" placeholder="Description" class="form-control" ></textarea>
+                                                              </td>
+                                                              <td>
+                                                                  <input type="text" name="qty[]" class="form-control" placeholder="QTY" value="">
+                                                              </td>
+                                                      </tr>
+                                                      <?php for($i = 0; $i < count(explode(' | ',$po_select->s_sn)); $i++) {
+                                                                $sn = (explode(' | ',$po_select->s_sn));
+                                                                $de = (explode(' | ',$po_select->s_description));
+                                                                $qty = (explode(' | ',$po_select->s_qty));
+                                                        ?>
+                                                      <tr>
+                                                              <td><INPUT type="checkbox" name="chk[]" value="<?php echo $sn[$i].' | '.$de[$i].' | '.$qty[$i]; ?>"/>
+                                                              <td>
+                                                                  <input type="text" class="form-control" name="sn[]" placeholder="SN" value="<?php echo $sn[$i]; ?>">
+                                                              </td>
+                                                              <td>
+                                                                  <textarea name="description[]" placeholder="Description" class="form-control" ><?php echo $de[$i]; ?></textarea>
+                                                              </td>
+                                                              <td>
+                                                                  <input type="text" name="qty[]" class="form-control" placeholder="QTY" value="<?php echo $qty[$i]; ?>">
+                                                              </td>
+                                                      </tr>
+                                                      <?php } ?>
+
+                                                    </tbody>
+                                                  </table>
+                                                </div>
+
                                                 <div class="col-md-4 pt-4">
                                                     <button class="w-100 btn btn-danger">
                                                         SUBMIT
@@ -407,21 +508,42 @@
                                                   <p><?php echo $po_select->s_expiry_date_of_lc; ?></p>
                                                 </div>
                                                 <div class="col-md-4 pt-4">
-                                                  <label for="">SN</label>
-                                                  <p><?php echo $po_select->s_sn; ?></p>
-                                                </div>
-                                                <div class="col-md-4 pt-4">
-                                                  <label for="">Description</label>
-                                                  <p><?php echo $po_select->s_description; ?></p>
-                                                </div>
-                                                <div class="col-md-4 pt-4">
-                                                  <label for="">QTY</label>
-                                                  <p><?php echo $po_select->s_qty; ?></p>
-                                                </div>
-                                                <div class="col-md-4 pt-4">
                                                   <label for="">SO Create date</label>
                                                   <p><?php echo $po_select->s_c_date; ?></p>
                                                 </div>
+                                                  <div class="col-md-12">
+                                                  <table class="table" border="1">
+                                                      <thead>
+                                                        <tr>
+                                                          <th>ID</th>
+                                                          <th>SN</th>
+                                                          <th>Description</th>
+                                                          <th>QTY</th>
+                                                        </tr>
+                                                      </thead>
+                                                      <tbody>
+                                                        <?php for($i = 0; $i < count(explode(' | ',$po_select->s_sn)); $i++) {
+                                                          $sn = (explode(' | ',$po_select->s_sn));
+                                                          $de = (explode(' | ',$po_select->s_description));
+                                                          $qty = (explode(' | ',$po_select->s_qty));
+                                                          ?>
+                                                        <tr>
+                                                                <td>
+                                                                    <?php echo $i+1; ?>
+                                                                </td>
+                                                                <td>
+                                                                    <?php echo $sn[$i]; ?>
+                                                                </td>
+                                                                <td>
+                                                                    <?php echo $de[$i]; ?>
+                                                                </td>
+                                                                <td>
+                                                                    <?php echo $qty[$i]; ?>
+                                                                </td>
+                                                        </tr>
+                                                        <?php } ?>
+                                                      </tbody>
+                                                  </table>
                                             </div>
                                         </div>
                                     </div>

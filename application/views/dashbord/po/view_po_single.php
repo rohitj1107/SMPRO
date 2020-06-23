@@ -394,91 +394,117 @@
                                         </div>
 
                                         <div class="col-lg-4">
-                                            <h5 class="font-600 m-b-5">s_market</h5>
+                                            <h5 class="font-600 m-b-5">Market</h5>
                                             <p> <?php print_r($po_select->s_market); ?></p>
                                         </div>
 
                                         <div class="col-lg-4">
-                                            <h5 class="font-600 m-b-5">s_category</h5>
+                                            <h5 class="font-600 m-b-5">Category</h5>
                                             <p> <?php print_r($po_select->s_category); ?></p>
                                         </div>
                                     </div>
 
                                     <div class="row task-dates mb-0 mt-0">
                                         <div class="col-lg-4">
-                                            <h5>s_customer_po_number</h5>
+                                            <h5>Customer PO Number</h5>
                                             <p><?php print_r($po_select->s_customer_po_number); ?></p>
                                         </div>
 
                                         <div class="col-lg-4">
-                                            <h5>s_po_date</h5>
+                                            <h5>PO Date</h5>
                                             <p><?php print_r($po_select->s_po_date); ?></p>
                                     </div>
                                   </div>
 
                                   <div class="row mb-0 mt-0">
                                       <div class="col-lg-4">
-                                          <h5 class="font-600 m-b-5">s_value</h5>
+                                          <h5 class="font-600 m-b-5">Value</h5>
                                           <p> <?php print_r($po_select->s_value); ?></p>
                                       </div>
 
                                       <div class="col-lg-4">
-                                          <h5 class="font-600 text-danger m-b-5">s_currency</h5>
+                                          <h5 class="font-600 text-danger m-b-5">Currency</h5>
                                           <p> <?php print_r($po_select->s_currency); ?></p>
                                       </div>
 
                                       <div class="col-lg-4">
-                                          <h5 class="font-600 m-b-5">s_market_segment</h5>
+                                          <h5 class="font-600 m-b-5">Market Segment</h5>
                                           <p> <?php print_r($po_select->s_market_segment); ?></p>
                                       </div>
                                   </div>
                                   <div class="row mb-0 mt-0">
                                       <div class="col-lg-4">
-                                          <h5 class="font-600 m-b-5">s_delay_penalty</h5>
+                                          <h5 class="font-600 m-b-5">Delay Penalty</h5>
                                           <p> <?php print_r($po_select->s_delay_penalty); ?></p>
                                       </div>
 
                                       <div class="col-lg-4">
-                                          <h5 class="font-600 text-danger m-b-5">s_scope_text</h5>
+                                          <h5 class="font-600 text-danger m-b-5">Scope Text</h5>
                                           <p> <?php print_r($po_select->s_scope_text); ?></p>
                                       </div>
 
                                       <div class="col-lg-4">
-                                          <h5 class="font-600 m-b-5">s_lc_applicabl</h5>
+                                          <h5 class="font-600 m-b-5">lc applicabl</h5>
                                           <p> <?php print_r($po_select->s_lc_applicabl); ?></p>
                                       </div>
                                   </div>
                                   <div class="row mb-0 mt-0">
                                       <div class="col-lg-4">
-                                          <h5 class="font-600 m-b-5">s_load_time</h5>
+                                          <h5 class="font-600 m-b-5">load time</h5>
                                           <p> <?php print_r($po_select->s_load_time); ?></p>
                                       </div>
 
                                       <div class="col-lg-4">
-                                          <h5 class="font-600 text-danger m-b-5">s_payment</h5>
+                                          <h5 class="font-600 text-danger m-b-5">Payment</h5>
                                           <p> <?php print_r($po_select->s_payment); ?></p>
                                       </div>
 
                                       <div class="col-lg-4">
-                                          <h5 class="font-600 m-b-5">s_expiry_date_of_lc</h5>
+                                          <h5 class="font-600 m-b-5">Expiry Date OF lc</h5>
                                           <p> <?php print_r($po_select->s_expiry_date_of_lc); ?></p>
                                       </div>
                                   </div>
                                   <div class="row mb-0 mt-0">
-                                      <div class="col-lg-4">
-                                          <h5 class="font-600 m-b-5">s_sn</h5>
-                                          <p> <?php print_r($po_select->s_sn); ?></p>
-                                      </div>
+                                    <div class="col-md-1">
 
-                                      <div class="col-lg-4">
-                                          <h5 class="font-600 text-danger m-b-5">s_description</h5>
-                                          <p> <?php print_r($po_select->s_description); ?></p>
-                                      </div>
+                                    </div>
+                                    <div class="col-md-10">
+                                    <table class="table" border="1">
+                                        <thead>
+                                          <tr>
+                                            <th>ID</th>
+                                            <th>SN</th>
+                                            <th>Description</th>
+                                            <th>QTY</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <?php for($i = 0; $i < count(explode(' | ',$po_select->s_sn)); $i++) {
+                                            $sn = (explode(' | ',$po_select->s_sn));
+                                            $de = (explode(' | ',$po_select->s_description));
+                                            $qty = (explode(' | ',$po_select->s_qty));
+                                            ?>
+                                          <tr>
+                                                  <td>
+                                                      <?php echo $i+1; ?>
+                                                  </td>
+                                                  <td>
+                                                      <?php echo $sn[$i]; ?>
+                                                  </td>
+                                                  <td>
+                                                      <?php echo $de[$i]; ?>
+                                                  </td>
+                                                  <td>
+                                                      <?php echo $qty[$i]; ?>
+                                                  </td>
+                                          </tr>
+                                          <?php } ?>
+                                        </tbody>
+                                    </table>
+                                  </div>
+                                  <div class="col-md-1">
 
-                                      <div class="col-lg-4">
-                                          <h5 class="font-600 m-b-5">s_qty</h5>
-                                          <p> <?php print_r($po_select->s_qty); ?></p>
-                                      </div>
+                                  </div>
                                   </div>
                                   <div class="row mb-0 mt-0">
 

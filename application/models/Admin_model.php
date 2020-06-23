@@ -434,7 +434,7 @@ class Admin_model extends CI_Model{
   }
 
   public function update_po($data,$po_id){
-      $sql = $this->db->where('po_po_number',$po_id)->set($data)->update('s_po');
+      $sql = $this->db->where('s_so_number',$po_id)->set($data)->update('s_po_so');
       if ($sql) {
           return true;
       } else {

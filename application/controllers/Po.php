@@ -69,11 +69,44 @@ class Po extends CI_Controller{
     }
 
     public function update_po(){
+        $s=null;
+        for($i=0; $i < count($this->input->post('sn'));$i++){
+            if (empty($this->input->post('sn')[$i])) {
+                $q[] = 0;
+            } else {
+                $s[] = $this->input->post('sn')[$i];
+            }
+        }
+        $sn = implode(' | ',$s);
+
+        $d = null;
+        for($i=0; $i < count($this->input->post('description'));$i++){
+            if (empty($this->input->post('description')[$i])) {
+                $q[] = 0;
+            } else {
+                $d[] = $this->input->post('description')[$i];
+            }
+        }
+        $description = implode(' | ',$d);
+
+        $q = null;
+        for($i=0; $i < count($this->input->post('qty'));$i++){
+            if (empty($this->input->post('qty')[$i])) {
+                $a[] = 0;
+            } else {
+                $q[] = $this->input->post('qty')[$i];
+            }
+        }
+        $qty = implode(' | ',$q);
+
         $data = [
-          'po_market_segment' => $this->input->post('po_market_segment'),
-          'po_delay_penalty' => $this->input->post('po_delay_penalty'),
-          'po_scope_text' => $this->input->post('po_scope_text'),
-          'po_load_time' => $this->input->post('po_load_time')
+          's_market_segment' => $this->input->post('s_market_segment'),
+          's_delay_penalty' => $this->input->post('s_delay_penalty'),
+          's_scope_text' => $this->input->post('s_scope_text'),
+          's_load_time' => $this->input->post('s_load_time'),
+          's_sn'=>$sn,
+          's_description'=>$description,
+          's_qty'=>$qty,
         ];
 
         if ($this->Admin_model->update_po($data,$this->input->post('po_po_number'))) {
@@ -96,6 +129,7 @@ class Po extends CI_Controller{
     }
 
     public function po_create($po_id){
+        // print_r($this->input->post('chk'));exit;
         $id_po = base64_decode($po_id);
         $this->load->model('Admin_model');
         $supp = $this->input->post('supplierID');
