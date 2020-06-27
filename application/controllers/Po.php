@@ -129,7 +129,14 @@ class Po extends CI_Controller{
     }
 
     public function po_create($po_id){
-        // print_r($this->input->post('chk'));exit;
+        $a = null;
+        if ($this->input->post('chk')) {
+          $a = implode(' |d|d| ',$this->input->post('chk'));
+        } else {
+            print_r('Atlist select One Item');
+        }
+            // print_r($a);
+
         $id_po = base64_decode($po_id);
         $this->load->model('Admin_model');
         $supp = $this->input->post('supplierID');
@@ -221,6 +228,7 @@ class Po extends CI_Controller{
             's_quote_anachment_path'=>$img_path2,
             's_quote_anachment_name'=>$img_name2,
             's_market'=>$this->input->post('Market'),
+            's_item' =>$a,
             's_value'=>$this->input->post('value'),
             's_into_term'=>$this->input->post('into_term'),
             's_delivery_me'=>$this->input->post('delivery_me'),

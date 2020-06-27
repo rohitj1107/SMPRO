@@ -158,6 +158,7 @@
                                     <li><a href="<?php echo base_url('enquiry_form_admin'); ?>"> Enquiry Form </a></li>
                                 </ul>
                             </li>
+                            
                             <li>
                                 <a href="javascript: void(0);">
                                     <i class="mdi mdi-texture"></i>
@@ -165,7 +166,6 @@
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li><a href="<?php echo base_url('quotation_show'); ?>"> quotation List </a></li>
-                                    <li><a href="<?php echo base_url('quotation_form'); ?>"> quotation Form </a></li>
                                 </ul>
                             </li>
 

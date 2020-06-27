@@ -194,7 +194,7 @@
                               </li>
 
                               <li>
-                                  <a href="<?php echo base_url('Dashbord'); ?>">
+                                  <a href="<?php echo base_url('user_list'); ?>">
                                       <i class="mdi mdi-invert-colors"></i>
                                       <span> User List </span>
                                   </a>
@@ -217,7 +217,6 @@
                                   </a>
                                   <ul class="nav-second-level" aria-expanded="false">
                                       <li><a href="<?php echo base_url('quotation_show'); ?>"> quotation List </a></li>
-                                      <li><a href="<?php echo base_url('quotation_form'); ?>"> quotation Form </a></li>
                                   </ul>
                               </li>
 
