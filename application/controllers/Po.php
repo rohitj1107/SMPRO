@@ -125,17 +125,66 @@ class Po extends CI_Controller{
         $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
         $po_select = $this->Admin_model->select_so_single($id_po);
         $supplierID = $this->Admin_model->supplierID_admin();
-        $this->load->view('dashbord/po/po_to_supplier_view',['data'=>$data,'type'=>$type,'user'=>$user,'po_select'=>$po_select,'supplierID'=>$supplierID]);
+        $min_item = $this->Admin_model->min_item($id_po);
+        $this->load->view('dashbord/po/po_to_supplier_view',['data'=>$data,'type'=>$type,'user'=>$user,'po_select'=>$po_select,
+        'supplierID'=>$supplierID,'min_item'=>$min_item]);
     }
 
     public function po_create($po_id){
         $a = null;
+        $b = null;
+        $c = null;
+        $d = null;
+        $item = null;
+        $match_qty = null;
+        $match_sn = null;
+        $match_desc = null;
+        $name = null;
+        $desc = null;
+        $qty = null;
+        $o_qty = null;
+        $o = null;
+        $match_o_qty = null;
+        $o_arry = null;
+        $o_m_qty = null;
         if ($this->input->post('chk')) {
-          $a = implode(' |d|d| ',$this->input->post('chk'));
-        } else {
-            print_r('Atlist select One Item');
-        }
-            // print_r($a);
+          $a = $this->input->post('chk[]');
+          $b = $this->input->post('qty[]');
+          $c = $this->input->post('sn[]');
+          $d = $this->input->post('description[]');
+          $o = $this->input->post('o_qty[]');
+
+          echo '<br>';
+            // print_r($o);
+            $match_qty = array_intersect_key($b,array_flip($a));
+            $match_sn = array_intersect_key($c,$match_qty);
+            $match_desc = array_intersect_key($d,$match_qty);
+            // $match_o_qty = array_intersect_key($o,$match_qty);
+
+
+            for ($i=0; $i < count($c); $i++) {
+                if (isset($match_sn[$i])) {
+                    $name = $match_sn[$i].' || ';
+                    $desc = $match_desc[$i].' || ';
+                    $qty = $match_qty[$i];
+                    $o_qty = $match_qty[$i];
+                } else {
+                    $name = null;
+                    $desc = null;
+                    $qty = null;
+                    $o_qty = null;
+                }
+
+                if (isset($name)) {
+                    $arry[] = $name.$desc.$qty;
+                    $o_arry[] = $qty;
+                }
+            }
+            $item = implode(' ||| ',$arry);
+            // print_r($item);
+            $o_m_qty = ($o-array_sum($o_arry));
+            // echo(($o_m_qty));
+            // exit;
 
         $id_po = base64_decode($po_id);
         $this->load->model('Admin_model');
@@ -222,13 +271,16 @@ class Po extends CI_Controller{
             's_customer_ID'=> $this->input->post('customer_ID'),
             's_po_number'=>$this->input->post('po_number'),
             's_so_number'=>$this->input->post('so_number'),
+            's_supplier_ID' =>$supp,
             's_class'=>$this->input->post('Class'),
+            's_category'=>$this->input->post('s_category'),
             's_po_anachment_path'=>$img_path1,
             's_po_anachment_name'=>$img_name1,
             's_quote_anachment_path'=>$img_path2,
             's_quote_anachment_name'=>$img_name2,
             's_market'=>$this->input->post('Market'),
-            's_item' =>$a,
+            's_item' =>$item,
+            's_o_m_qty' => $o_m_qty,
             's_value'=>$this->input->post('value'),
             's_into_term'=>$this->input->post('into_term'),
             's_delivery_me'=>$this->input->post('delivery_me'),
@@ -241,6 +293,13 @@ class Po extends CI_Controller{
           $this->session->set_flashdata('po_faile','Not Insert SO !');
           return redirect('so_to_po_supplier/'.base64_encode($id_po));
         }
+      } else {
+          $id_po = base64_decode($po_id);
+
+          $this->session->set_flashdata('po_faile','Atlist select One Item !');
+          return redirect('so_to_po_supplier/'.base64_encode($id_po));
+          // print_r('Atlist select One Item');
+      }
     }
 
 }

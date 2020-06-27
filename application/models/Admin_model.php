@@ -468,6 +468,15 @@ class Admin_model extends CI_Model{
       }
   }
 
+  public function min_item($so_number){
+      $sql = $this->db->select('s_o_m_qty')->where('s_so_number',$so_number)->order_by('s_so_id','desc')->get('s_po');
+      if ($sql->num_rows() > 0) {
+          return $sql->row();
+      } else {
+          return false;
+      }
+  }
+
 }
 
 

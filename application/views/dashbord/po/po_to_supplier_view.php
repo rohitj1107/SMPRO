@@ -322,7 +322,7 @@
                                                 </div>
                                                 <div class="col-md-4 pt-4">
                                                   <label for="">Category</label>
-                                                  <select class="form-control" name="so_number">
+                                                  <select class="form-control" name="s_category">
                                                       <option value="0">Select Category</option>
                                                       <option value="Sales Parts">Sales Parts</option>
                                                       <option value="Sales Service">Sales Service</option>
@@ -373,17 +373,19 @@
 
                                                 </div>
 
-                                                <div class="col-md-8">
+                                                <!-- <div class="col-md-8">
                                                   <INPUT class="btn btn-success waves-effect waves-light mr-1" type="button" value="Add Item" onclick="addRow('dataTable')" />
                                                 </div>
                                                 <div class="col-md-2">
                                                   <INPUT class="btn btn-danger waves-effect waves-light mr-1" type="button" value="Delete Item" onclick="deleteRow('dataTable')" />
-                                                </div>
+                                                </div> -->
                                                 <br><br>
                                                 <div class="col-md-12">
                                                   <table id="dataTable" class="table mb-0">
+
+
                                                     <tbody>
-                                                      <tr>
+                                                      <!-- <tr>
                                                               <td><INPUT type="checkbox" name="chk[]"/>
                                                               <td>
                                                                   <input type="text" class="form-control" name="sn[]" placeholder="SN" value="">
@@ -394,34 +396,107 @@
                                                               <td>
                                                                   <input type="text" name="qty[]" class="form-control" placeholder="QTY" value="">
                                                               </td>
-                                                      </tr>
+                                                      </tr> -->
+                                                      <!-- <label for="chkPassport"> -->
+
+                                                      <!-- </label> -->
+                                                      <hr />
+                                                      <!-- <div id="dvPassport" style="display: none">
+                                                          <input type="text" placeholder="QTY" id="txtPassportNumber" />
+                                                      </div> -->
+                                                      <?php
+                                                              $aa = null;
+                                                            if (isset($min_item->s_o_m_qty)) {
+                                                              $aa = $min_item->s_o_m_qty;
+                                                              // echo '<pre>';
+                                                              // print_r($aa);
+                                                              // echo '</pre>';
+                                                            }
+
+                                                      ?>
                                                       <?php for($i = 0; $i < count(explode(' | ',$po_select->s_sn)); $i++) {
                                                                 $sn = (explode(' | ',$po_select->s_sn));
                                                                 $de = (explode(' | ',$po_select->s_description));
                                                                 $qty = (explode(' | ',$po_select->s_qty));
                                                         ?>
                                                       <tr>
-                                                              <td><INPUT type="checkbox" name="chk[]" value="<?php echo $sn[$i].' | '.$de[$i].' | '.$qty[$i]; ?>"/>
                                                               <td>
-                                                                  <input type="text" class="form-control" name="sn[]" placeholder="SN" value="<?php echo $sn[$i]; ?>">
+                                                                <INPUT type="checkbox" name="chk[<?php echo $i; ?>]" value="<?php echo $i; ?>"/>
+                                                              </td>
+                                                              <td>
+                                                                  <input type="text" readonly class="form-control" name="sn[]" placeholder="SN" value="<?php echo $sn[$i]; ?>">
                                                               </td>
                                                               <td>
                                                                   <textarea name="description[]" placeholder="Description" class="form-control" ><?php echo $de[$i]; ?></textarea>
                                                               </td>
                                                               <td>
-                                                                  <input type="text" name="qty[]" class="form-control" placeholder="QTY" value="<?php echo $qty[$i]; ?>">
+                                                                  <?php echo 'QTY : '.$qty[$i]; ?>
+
+                                                                  <br>
+                                                                  <input type="text" name="qty[]" class="form-control" placeholder="QTY" value="">
                                                               </td>
                                                       </tr>
-                                                      <?php } ?>
+                                                    <?php } ?>
+                                                        <?php
+                                                        $m = array_sum($qty)-($aa);
+                                                        switch ($aa) {
+                                                          case (null):
+                                                              echo "<input type='hidden' name='o_qty' value='$m'>";
+                                                            break;
+
+                                                          case "0":
+                                                              echo "<input type='hidden' name='o_qty' value='$aa'>";
+                                                            break;
+
+                                                          case ($aa < "0"):
+                                                              echo "<input type='hidden' name='o_qty' value='$aa'>";
+                                                            break;
+
+                                                          case (($aa) > "0"):
+                                                              echo "<input type='hidden' name='o_qty' value='$aa'>";
+                                                            break;
+
+                                                          default:
+                                                              echo "<input type='hidden' name='o_qty' value='$aa'>";
+                                                            break;
+                                                        }
+
+                                                        ?>
 
                                                     </tbody>
                                                   </table>
                                                 </div>
-
+                                                <script type="text/javascript">
+                                                  $(document).ready(function() {
+                                                    $('input[type="checkbox"]').click(function() {
+                                                      var inputValue = $(this).attr("value");
+                                                      $("." + inputValue).toggle();
+                                                    });
+                                                  });
+                                                </script>
                                                 <div class="col-md-4 pt-4">
-                                                    <button class="w-100 btn btn-danger">
-                                                        SUBMIT
-                                                    </button>
+                                                  <?php
+                                                  // var_dump($aa);
+                                                      switch ($aa) {
+                                                        case "0":
+                                                            echo "<button disabled class='w-100 btn btn-danger'>";
+                                                            echo "SUBMIT";
+                                                            echo "</button>";
+                                                          break;
+
+                                                        case ($aa < "0"):
+                                                            echo "<button disabled class='w-100 btn btn-danger'>";
+                                                            echo "SUBMIT";
+                                                            echo "</button>";
+                                                          break;
+                                                        default:
+                                                            echo "<button class='w-100 btn btn-success'>";
+                                                            echo "SUBMIT";
+                                                            echo "</button>";
+                                                          break;
+                                                      }
+
+                                                    ?>
                                                 </div>
                                                 <?php echo "</form>"?>
                                             </div>
