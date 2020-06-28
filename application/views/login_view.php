@@ -118,12 +118,12 @@
             <div class="col-md-12 mt-5 hr-line-center">
                 <p class="m-auto"><span>Or</span></p>
             </div>
-            <div class="col-md-12 mt-5">
-                <a href="<?php echo base_url('register'); ?>"> <button class="w-100 btn btn-signup">SIGN UP</button></a>
-            </div>
+
         </div>
         <?php echo form_close(); ?>
-
+        <div class="col-md-12 mt-5">
+            <a href="<?php echo base_url('register'); ?>"> <button class="w-100 btn btn-signup">SIGN UP</button></a>
+        </div>
     </div>
 
 </body>

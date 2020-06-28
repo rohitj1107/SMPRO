@@ -126,6 +126,8 @@ $route['update_po'] = 'Po/update_po';
 $route['so_to_po_supplier/(:any)'] = 'Po/so_to_po_supplier/$1';
 $route['po_create/(:any)'] = 'Po/po_create/$1';
 
+// POF
+$route['pof_show'] = 'Pof';
 
 // Quotation
 $route['insert_quotation'] = 'Quotation/insert_quotation';
