@@ -37,12 +37,13 @@
                                                             <option>Select Supplier ID</option>
                                                             <?php foreach($supplierID as $supplier){ ?>
                                                               <?php if ($supplier->s_contact_email_id == $this->session->userdata('emailId')): ?>
+
                                                               <?php else :?>
                                                                 <option value="<?php echo $supplier->s_supplier_id; ?>"><?php echo $supplier->s_company_name.' '.$supplier->s_supplier_id.' '.$supplier->s_contact_email_id; ?></option>
                                                               <?php endif; ?>
                                                           <?php }?>
                                                     </select>
-                                                    <!-- <input type="text" readonly class="form-control" value="<?php echo $user->u_customerId; ?>" name="customerId"> -->
+                                                    <!-- <input type="text" readonly class="form-control" value="<?php //echo $user->u_customerId; ?>" name="customerId"> -->
                                                 </div>
                                                   <input type="hidden" class="form-control" value="<?php echo $po_select->s_quote_number; ?>" name="quote_number">
                                                   <input type="hidden" class="form-control" value="<?php echo $po_select->s_enquiry_ID; ?>" name="enquiry_ID">
@@ -51,14 +52,14 @@
                                                 <div class="col-md-4 pt-4">
                                                   <label for="">SO Number</label>
 
-                                                  <p><?php echo $po_select->s_so_number.'.001'; ?></p>
+                                                  <p><?php echo $po_select->s_so_number; ?></p>
                                                   <input type="hidden" class="form-control" value="<?php echo 'PO-'.time(); ?>" name="po_number">
                                                 </div>
                                                 <div class="col-md-4 pt-4">
-                                                  <label for="">PO Number</label>
+                                                  <!-- <label for="">PO Number</label> -->
 
-                                                  <p><?php echo 'PO-'.time(); ?></p>
-                                                  <input type="hidden" class="form-control" value="<?php echo 'PO-'.time(); ?>" name="po_number">
+                                                  <!-- <p><?php echo 'POS-SO-'.time().'-2'; ?></p> -->
+                                                  <!-- <input type="hidden" class="form-control" value="<?php echo 'PO-'.time(); ?>" name="po_number"> -->
                                                 </div>
                                                 <div class="col-md-4 pt-4">
                                                     <label for="">Class</label>
@@ -83,8 +84,14 @@
                                                   </select>
                                                 </div>
                                                 <div class="col-md-4 pt-4">
-                                                  <label for="">Market</label>
-                                                  <input type="text" name="po_c_date" class="form-control" placeholder="Market">
+                                                  <label for="">Market (DOM / Exp)</label>
+                                                  <select class="form-control" name="market">
+                                                      <option value="0">Select Market</option>
+                                                      <option value="DOM">DOM</option>
+                                                      <option value="EXP">EXP</option>
+                                                  </select>
+                                                  <!-- <label for="">Market</label> -->
+                                                  <!-- <input type="text" name="po_c_date" class="form-control" placeholder="Market"> -->
                                                 </div>
                                                 <div class="col-md-4 pt-4">
                                                     <label for="">value</label>
@@ -131,7 +138,15 @@
                                                 <br><br>
                                                 <div class="col-md-12">
                                                   <table id="dataTable" class="table mb-0">
+                                                    <tbody>
+                                                      <tr>
+                                                        <td>Select</td>
+                                                        <td>Item Code</td>
+                                                        <td>Pending QTY</td>
+                                                        <td>Original QTY</td>
 
+                                                      </tr>
+                                                    </tbody>
 
                                                     <tbody>
                                                       <!-- <tr>
@@ -155,34 +170,45 @@
                                                       </div> -->
                                                       <?php
                                                               $aa = null;
-                                                            if (isset($min_item->s_o_m_qty)) {
+                                                              if (isset($min_item->s_o_m_qty)) {
                                                               $aa = $min_item->s_o_m_qty;
+
                                                               // echo '<pre>';
-                                                              // print_r($aa);
+                                                              //   print_r($min_item->s_qty);
+                                                              //   print_r($min_item->s_item_code);
+                                                              //
                                                               // echo '</pre>';
+
                                                             }
 
                                                       ?>
                                                       <?php for($i = 0; $i < count(explode(' | ',$po_select->s_sn)); $i++) {
-                                                                $sn = (explode(' | ',$po_select->s_sn));
-                                                                $de = (explode(' | ',$po_select->s_description));
-                                                                $qty = (explode(' | ',$po_select->s_qty));
+                                                        $sn = (explode(' | ',$po_select->s_sn));
+                                                        $ic = (explode(' | ',$po_select->s_item_code));
+                                                        $ts = (explode(' | ',$po_select->s_tech_specs));
+                                                        $dd = (explode(' | ',$po_select->s_delivery_date));
+                                                        $de = (explode(' | ',$po_select->s_description));
+                                                        $qty = (explode(' | ',$po_select->s_qty));
                                                         ?>
                                                       <tr>
                                                               <td>
-                                                                <INPUT type="checkbox" name="chk[<?php echo $i; ?>]" value="<?php echo $i; ?>"/>
+                                                              <INPUT type="checkbox" name="chk[<?php echo $i; ?>]" value="<?php echo $i; ?>"/>
+                                                                  <input type="hidden" readonly class="form-control" name="sn[]" placeholder="SN" value="<?php echo 'POS-'.$po_select->s_so_number.'.'.$sn[$i]; ?>">
                                                               </td>
                                                               <td>
-                                                                  <input type="text" readonly class="form-control" name="sn[]" placeholder="SN" value="<?php echo $sn[$i]; ?>">
+                                                                  <input type="text" readonly class="form-control" name="ic[]" placeholder="SN" value="<?php echo $ic[$i]; ?>">
                                                               </td>
                                                               <td>
-                                                                  <textarea name="description[]" placeholder="Description" class="form-control" ><?php echo $de[$i]; ?></textarea>
+                                                                  <textarea name="description[]" readonly placeholder="Description" class="form-control" ><?php echo $de[$i]; ?></textarea>
+                                                                  <input type="hidden" readonly class="form-control" name="ts[]" placeholder="SN" value="<?php echo $ts[$i]; ?>">
                                                               </td>
                                                               <td>
-                                                                  <?php echo 'QTY : '.$qty[$i]; ?>
-
+                                                                  <div class="text-success"> <?php echo 'Original QTY : '.$qty[$i]; ?> </div>
                                                                   <br>
                                                                   <input type="text" name="qty[]" class="form-control" placeholder="QTY" value="">
+                                                              </td>
+                                                              <td>
+                                                                  <input type="hidden" readonly class="form-control" name="dd[]" placeholder="SN" value="<?php echo $dd[$i]; ?>">
                                                               </td>
                                                       </tr>
                                                     <?php } ?>
@@ -338,30 +364,41 @@
                                                   <table class="table" border="1">
                                                       <thead>
                                                         <tr>
-                                                          <th>ID</th>
                                                           <th>SN</th>
+                                                          <th>Item Code</th>
                                                           <th>Description</th>
+                                                          <th>Tech Specs</th>
                                                           <th>QTY</th>
+                                                          <th>Delivery Date</th>
                                                         </tr>
                                                       </thead>
                                                       <tbody>
                                                         <?php for($i = 0; $i < count(explode(' | ',$po_select->s_sn)); $i++) {
-                                                          $sn = (explode(' | ',$po_select->s_sn));
-                                                          $de = (explode(' | ',$po_select->s_description));
-                                                          $qty = (explode(' | ',$po_select->s_qty));
+                                                            $sn = (explode(' | ',$po_select->s_sn));
+                                                            $ic = (explode(' | ',$po_select->s_item_code));
+                                                            $ts = (explode(' | ',$po_select->s_tech_specs));
+                                                            $dd = (explode(' | ',$po_select->s_delivery_date));
+                                                            $de = (explode(' | ',$po_select->s_description));
+                                                            $qty = (explode(' | ',$po_select->s_qty));
                                                           ?>
                                                         <tr>
                                                                 <td>
-                                                                    <?php echo $i+1; ?>
+                                                                    <?php echo $sn[$i]; ?>
                                                                 </td>
                                                                 <td>
-                                                                    <?php echo $sn[$i]; ?>
+                                                                    <?php echo $ic[$i]; ?>
                                                                 </td>
                                                                 <td>
                                                                     <?php echo $de[$i]; ?>
                                                                 </td>
                                                                 <td>
+                                                                    <?php echo $ts[$i]; ?>
+                                                                </td>
+                                                                <td>
                                                                     <?php echo $qty[$i]; ?>
+                                                                </td>
+                                                                <td>
+                                                                    <?php echo $dd[$i]; ?>
                                                                 </td>
                                                         </tr>
                                                         <?php } ?>

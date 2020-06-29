@@ -128,6 +128,8 @@ $route['po_create/(:any)'] = 'Po/po_create/$1';
 
 // POF
 $route['pof_show'] = 'Pof';
+$route['view_pof_single/(:any)'] = 'Pof/view_pof_single/$1';
+$route['follow_up_po'] = 'Pof/follow_up_po';
 
 // Quotation
 $route['insert_quotation'] = 'Quotation/insert_quotation';

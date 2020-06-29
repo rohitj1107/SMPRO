@@ -459,6 +459,7 @@ class Admin_model extends CI_Model{
           return false;
       }
   }
+
   public function select_po_so_list(){
       $sql = $this->db->order_by('s_id','desc')->get('s_po_so');
       if ($sql->num_rows() > 0) {
@@ -469,7 +470,7 @@ class Admin_model extends CI_Model{
   }
 
   public function min_item($so_number){
-      $sql = $this->db->select('s_o_m_qty')->where('s_so_number',$so_number)->order_by('s_so_id','desc')->get('s_po');
+      $sql = $this->db->select('s_o_m_qty,s_qty,s_item_code')->where('s_so_number',$so_number)->order_by('s_so_id','desc')->get('s_po');
       if ($sql->num_rows() > 0) {
           return $sql->row();
       } else {
@@ -477,6 +478,51 @@ class Admin_model extends CI_Model{
       }
   }
 
+  public function select_pof_list(){
+      $sql = $this->db->order_by('s_so_id','desc')->get('s_po');
+      if ($sql->num_rows() > 0) {
+          return $sql->result();
+      } else {
+          return FALSE;
+      }
+  }
+
+  public function select_pof_single($pof_id){
+
+      $sql = $this->db->where('s_po_number',$pof_id)->get('s_po');
+      if ($sql->num_rows() > 0) {
+          return $sql->row();
+      } else {
+          return FALSE;
+      }
+  }
+
+  public function check_supplier($sID,$so_number){
+      $sql = $this->db->select('count(s_po.s_po_number) as number ,s_supplier_ID,s_so_number,s_po_number')->where('s_supplier_ID',$sID)->where('s_so_number',$so_number)->get('s_po');
+      if ($sql->num_rows() > 0) {
+          return $sql->row();
+      } else {
+          return FALSE;
+      }
+  }
+
+  public function insert_pos_update($data){
+      $sql = $this->db->insert('s_item_qty',$data);
+      if ($sql) {
+          return true;
+      } else {
+          return false;
+      }
+  }
+
+  public function update_select_item($so_number){
+      $sql = $this->db->where('up_so_number',$so_number)->order_by('up_id','desc')->get('s_item_qty');
+      if ($sql->num_rows() > 0) {
+          return $sql->row();
+      } else {
+          return false;
+      }
+  }
 }
 
 

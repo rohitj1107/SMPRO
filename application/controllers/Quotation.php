@@ -129,8 +129,14 @@ class Quotation extends CI_Controller{
     }
 
     public function insert_pos(){
-        $sn = implode(' | ',$this->input->post('sn'));
+        for ($i=0; $i < count( $this->input->post('item_code')); $i++) {
+            $sn[] = $i+1;
+        }
+        $snf = implode(' | ',$sn);
         $description = implode(' | ',$this->input->post('description'));
+        $item_code = implode(' | ',$this->input->post('item_code'));
+        $tech_specs = implode(' | ',$this->input->post('tech_specs'));
+        $delivery_date = implode(' | ',$this->input->post('delivery_date'));
         $qty = implode(' | ',$this->input->post('qty'));
 
         $data = [
@@ -151,13 +157,22 @@ class Quotation extends CI_Controller{
             's_load_time'=>$this->input->post('load_time'),
             's_payment'=>$this->input->post('payment'),
             's_expiry_date_of_lc'=>$this->input->post('expiry_date_of_lc'),
-            's_sn'=>$sn,
+            's_item_code'=>$item_code,
+            's_tech_specs'=>$tech_specs,
+            's_delivery_date'=>$delivery_date,
+            's_sn'=>$snf,
             's_description'=>$description,
             's_qty'=>$qty,
             's_emailId'=>$this->input->post('emailId')
         ];
+        $dataupdate = [
+          'up_qty'=>$qty,
+          'up_item_code'=>$item_code,
+          'up_so_number'=>$this->input->post('so_number'),
+        ];
 
         if($this->Admin_model->insert_pos_model($data)){
+            $this->Admin_model->insert_pos_update($dataupdate);
             $this->session->set_flashdata('so_seccess','PO(SO) upload success fully !');
             return redirect("quotation_to_po/".base64_encode($this->input->post('quote_number')));
         } else {

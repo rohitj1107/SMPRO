@@ -1,5 +1,50 @@
 <?php $this->load->view('dashbord/headAdmin');?>
+<SCRIPT language="javascript">
+      function addRow(tableID) {
+        var table = document.getElementById(tableID);
+        var rowCount = table.rows.length;
+        var row = table.insertRow(rowCount);
+        var colCount = table.rows[0].cells.length;
+        for(var i=0; i<colCount; i++) {
+          var newcell	= row.insertCell(i);
+          newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+          //alert(newcell.childNodes);
+          switch(newcell.childNodes[0].type) {
+            case "text":
+                newcell.childNodes[0].value = "";
+                break;
+            case "checkbox":
+                newcell.childNodes[0].checked = false;
+                break;
+            case "select-one":
+                newcell.childNodes[0].selectedIndex = 0;
+                break;
+          }
+        }
+      }
 
+      function deleteRow(tableID) {
+        try {
+        var table = document.getElementById(tableID);
+        var rowCount = table.rows.length;
+        for(var i=0; i<rowCount; i++) {
+          var row = table.rows[i];
+          var chkbox = row.cells[0].childNodes[0];
+          if(null != chkbox && true == chkbox.checked) {
+            if(rowCount <= 1) {
+              alert("Cannot delete all the rows.");
+              break;
+            }
+            table.deleteRow(i);
+            rowCount--;
+            i--;
+          }
+        }
+        }catch(e) {
+          alert(e);
+        }
+      }
+    </SCRIPT>
             <!-- ============================================================== -->
             <!-- Start Page Content here -->
             <!-- ============================================================== -->
@@ -183,10 +228,14 @@
                                           <tbody>
                                             <thead>
                                             <tr>
-                                                <th>#</th>
-                                                <th><label for="">Sn</label></th>
+                                                <th><label for="">SN</label></th>
+                                                <th><label for="">Item Code</label></th>
                                                 <th><label for="">Description</label></th>
+                                                <th><label for="">Tech Specs</label></th>
+
                                                 <th><label class="text-danger">QTY</label></th>
+                                                <th><label for="">Delivery date</label></th>
+
                                             </tr>
                                           </thead>
                                         </tbody>
@@ -195,16 +244,21 @@
                                       <TABLE id="dataTable" class="table mb-0">
                                       <tr>
                                         <TD><INPUT type="checkbox" name="chk"/></TD>
-                                        <td><input type="text" class="form-control" name="sn[]" placeholder="SN" value="">
+                                        <td>
+                                          <input type="text" class="form-control" name="item_code[]" placeholder="Item Code" value="">
                                         </TD>
                                         <td>
                                           <textarea name="description[]" placeholder="Description" class="form-control" ></textarea></td>
                                         </td>
+                                        <td><input type="text" class="form-control" name="tech_specs[]" placeholder="Tech Specs" value="">
+                                        </TD>
                                         <td>
                                           <div class="form-group">
-                                              <input type="text" name="qty[]" class="form-control" placeholder="QTY">
+                                              <input type="number" name="qty[]" class="form-control" placeholder="QTY">
                                           </div>
                                         </td>
+                                        <td><input type="date" class="form-control" name="delivery_date[]" placeholder="Day/Month/Year" value="">
+                                        </TD>
                                       </tr>
                                     </TABLE>
                                   </div>

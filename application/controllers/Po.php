@@ -126,8 +126,9 @@ class Po extends CI_Controller{
         $po_select = $this->Admin_model->select_so_single($id_po);
         $supplierID = $this->Admin_model->supplierID_admin();
         $min_item = $this->Admin_model->min_item($id_po);
+        $update_select_item = $this->Admin_model->update_select_item($id_po);
         $this->load->view('dashbord/po/po_to_supplier_view',['data'=>$data,'type'=>$type,'user'=>$user,'po_select'=>$po_select,
-        'supplierID'=>$supplierID,'min_item'=>$min_item]);
+        'supplierID'=>$supplierID,'min_item'=>$min_item,'update_select_item'=>$update_select_item]);
     }
 
     public function po_create($po_id){
@@ -150,22 +151,35 @@ class Po extends CI_Controller{
         if ($this->input->post('chk')) {
           $a = $this->input->post('chk[]');
           $b = $this->input->post('qty[]');
+          $ic = $this->input->post('ic[]');
+          $ts = $this->input->post('ts[]');
+          $dd = $this->input->post('dd[]');
           $c = $this->input->post('sn[]');
           $d = $this->input->post('description[]');
           $o = $this->input->post('o_qty[]');
 
-          echo '<br>';
+          //echo '<br>';
             // print_r($o);
             $match_qty = array_intersect_key($b,array_flip($a));
             $match_sn = array_intersect_key($c,$match_qty);
             $match_desc = array_intersect_key($d,$match_qty);
-            // $match_o_qty = array_intersect_key($o,$match_qty);
+            $match_ic = array_intersect_key($ic,$match_qty);
+            $match_ts = array_intersect_key($ts,$match_qty);
+            $match_dd = array_intersect_key($dd,$match_qty);
 
+            // $match_o_qty = array_intersect_key($o,$match_qty);
+            // print_r($match_qty);
+            // exit;
 
             for ($i=0; $i < count($c); $i++) {
                 if (isset($match_sn[$i])) {
-                    $name = $match_sn[$i].' || ';
-                    $desc = $match_desc[$i].' || ';
+                    $name = $match_sn[$i].' | ';
+                    $desc = $match_desc[$i].' | ';
+                    $sqty = $match_qty[$i].' | ';
+                    $mic = $match_ic[$i].' | ';
+                    $mts = $match_ts[$i].' | ';
+                    $mdd = $match_dd[$i].' | ';
+
                     $qty = $match_qty[$i];
                     $o_qty = $match_qty[$i];
                 } else {
@@ -173,18 +187,37 @@ class Po extends CI_Controller{
                     $desc = null;
                     $qty = null;
                     $o_qty = null;
+                    $mic = null;
+                    $mts = null;
+                    $mdd = null;
                 }
 
                 if (isset($name)) {
+                    $namee[] = $name;
+                    $descc[] = $desc;
+                    $qtyy[] = $sqty;
                     $arry[] = $name.$desc.$qty;
                     $o_arry[] = $qty;
+                    $micc[] = $mic;
+                    $mtss[] = $mts;
+                    $mddd[] = $mdd;
                 }
             }
             $item = implode(' ||| ',$arry);
+            $item_n = implode('',$namee);
+            $item_d = implode('',$descc);
+            $item_q = implode('',$qtyy);
+            $item_icc = implode('',$micc);
+            $item_tss = implode('',$mtss);
+            $item_ddd = implode('',$mddd);
             // print_r($item);
             $o_m_qty = ($o-array_sum($o_arry));
-            // echo(($o_m_qty));
+
             // exit;
+
+            //print_r ($array_ic_u).'<br>';
+            //print_r ($array_qty_u).'<br>';
+
 
         $id_po = base64_decode($po_id);
         $this->load->model('Admin_model');
@@ -264,12 +297,22 @@ class Po extends CI_Controller{
       // echo $img_name2.'<br>';
       // print_r($error);
       // exit;
-
+        // echo $supp;
+        echo '<br>';
+        $s_po_number = null;
+        $so_num = $this->Admin_model->check_supplier($supp,$this->input->post('so_number'));
+        if ($so_num->s_po_number){
+            $s_po_number = substr_replace($so_num->s_po_number,++$so_num->number,20);
+        } else {
+            $s_po_number = 'POS-SO-'.time().'-S.1';
+        }
+        // print_r($s_po_number);
+        // exit;
         $data = [
             's_quote_number'=> $this->input->post('quote_number'),
             's_enquiry_ID' => $this->input->post('enquiry_ID'),
             's_customer_ID'=> $this->input->post('customer_ID'),
-            's_po_number'=>$this->input->post('po_number'),
+            's_po_number'=>$s_po_number,
             's_so_number'=>$this->input->post('so_number'),
             's_supplier_ID' =>$supp,
             's_class'=>$this->input->post('Class'),
@@ -278,14 +321,25 @@ class Po extends CI_Controller{
             's_po_anachment_name'=>$img_name1,
             's_quote_anachment_path'=>$img_path2,
             's_quote_anachment_name'=>$img_name2,
-            's_market'=>$this->input->post('Market'),
+            's_market'=>$this->input->post('market'),
             's_item' =>$item,
+            's_name' =>$item_n,
+            's_desc' =>$item_d,
+            's_item_code' =>$item_icc,
+            's_tech_specs' =>$item_tss,
+            's_delivery_date' =>$item_ddd,
+            's_qty' =>$item_q,
             's_o_m_qty' => $o_m_qty,
             's_value'=>$this->input->post('value'),
             's_into_term'=>$this->input->post('into_term'),
             's_delivery_me'=>$this->input->post('delivery_me'),
             's_payment_terms'=>$this->input->post('payment_terms'),
         ];
+
+        // $dataUpdate = [
+        //     'up_item_code' => $up_item_ic,
+        //     'up_qty' => $up_qty_ic,
+        // ];
         if ($this->Admin_model->insert_po($data)) {
             $this->session->set_flashdata('po_success','Insert SO success fully !');
             return redirect('so_to_po_supplier/'.base64_encode($id_po));
