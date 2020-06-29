@@ -168,7 +168,7 @@ class Po extends CI_Controller{
             $match_dd = array_intersect_key($dd,$match_qty);
 
             // $match_o_qty = array_intersect_key($o,$match_qty);
-            // print_r($match_qty);
+            // print_r($match_ic);
             // exit;
 
             for ($i=0; $i < count($c); $i++) {
@@ -213,11 +213,29 @@ class Po extends CI_Controller{
             // print_r($item);
             $o_m_qty = ($o-array_sum($o_arry));
 
+
+            $update_select_item = $this->Admin_model->update_select_item($this->input->post('so_number'));
+            $update_select_item_a = explode(' | ',$update_select_item->up_item_code);
+            $update_select_item_q = explode(' | ',$update_select_item->up_qty);
+
+            $zzz = array_intersect($update_select_item_a,$match_ic);
+            $result = array_diff($update_select_item_a,$match_ic);
+            $item_update = array_merge_recursive($zzz,$result);
+
+            for ($i=0; $i < count($update_select_item_q); $i++) {
+                if (isset($match_qty[$i])) {
+                    $qty_update[] = $update_select_item_q[$i] - $match_qty[$i];
+                } else {
+                    $qty_update[] = $update_select_item_q[$i];
+                }
+            }
+
+            $update_qty = implode(' | ',$qty_update);
+            $update_item = implode(' | ',$item_update);
+
+            // print_r();
+
             // exit;
-
-            //print_r ($array_ic_u).'<br>';
-            //print_r ($array_qty_u).'<br>';
-
 
         $id_po = base64_decode($po_id);
         $this->load->model('Admin_model');
@@ -336,11 +354,12 @@ class Po extends CI_Controller{
             's_payment_terms'=>$this->input->post('payment_terms'),
         ];
 
-        // $dataUpdate = [
-        //     'up_item_code' => $up_item_ic,
-        //     'up_qty' => $up_qty_ic,
-        // ];
+        $dataUpdate = [
+            'up_item_code' => $update_item,
+            'up_qty' => $update_qty,
+        ];
         if ($this->Admin_model->insert_po($data)) {
+            $this->Admin_model->update_item_all($dataUpdate,$this->input->post('so_number'));
             $this->session->set_flashdata('po_success','Insert SO success fully !');
             return redirect('so_to_po_supplier/'.base64_encode($id_po));
         } else {

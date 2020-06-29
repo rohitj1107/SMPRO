@@ -199,8 +199,20 @@
                                                                   <input type="text" readonly class="form-control" name="ic[]" placeholder="SN" value="<?php echo $ic[$i]; ?>">
                                                               </td>
                                                               <td>
-                                                                  <textarea name="description[]" readonly placeholder="Description" class="form-control" ><?php echo $de[$i]; ?></textarea>
+                                                                  <!-- <textarea name="description[]" readonly placeholder="Description" class="form-control" ><?php echo $de[$i]; ?></textarea> -->
+                                                                  <input type="hidden" readonly class="form-control" name="description[]" placeholder="SN" value="<?php echo $de[$i]; ?>">
                                                                   <input type="hidden" readonly class="form-control" name="ts[]" placeholder="SN" value="<?php echo $ts[$i]; ?>">
+
+                                                                  <?php
+                                                                        if ($update_select_item) {
+                                                                            $up_qty = (explode(' | ',$update_select_item->up_qty)); ?>
+
+                                                                            <div class="text-danger">
+                                                                                  Pending QTY : <?php echo $up_qty[$i]; ?>
+                                                                            </div>
+
+
+                                                                        <?php } ?>
                                                               </td>
                                                               <td>
                                                                   <div class="text-success"> <?php echo 'Original QTY : '.$qty[$i]; ?> </div>

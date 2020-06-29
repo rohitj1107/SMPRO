@@ -523,6 +523,15 @@ class Admin_model extends CI_Model{
           return false;
       }
   }
+
+  public function update_item_all($dataUpdate,$so_number){
+      $sql = $this->db->set($dataUpdate)->where('up_so_number',$so_number)->update('s_item_qty');
+      if ($sql) {
+          return TRUE;
+      } else {
+          return FALSE;
+      }
+  }
 }
 
 
