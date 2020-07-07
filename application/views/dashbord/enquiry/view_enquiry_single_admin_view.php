@@ -36,7 +36,7 @@
 
                                     <div class="row task-dates mb-0 mt-0">
                                         <div class="col-lg-4">
-                                            <h5 class="font-600 m-b-5">Machine Model</h5>
+                                            <h5 class="font-600 m-b-5">Your Industry</h5>
                                             <p> <?php print_r($view_enquiry->e_machine_model); ?></p>
                                         </div>
 
@@ -52,7 +52,7 @@
                                     </div>
 
                                     <div class="assign-team mt-2">
-                                        <h5>Machine Make</h5>
+                                        <h5>Requirement Category</h5>
                                         <p><?php print_r($view_enquiry->e_machine_make); ?></p>
                                     </div>
 

@@ -161,8 +161,16 @@
 
                                     <div class="row task-dates mb-0 mt-0">
                                         <div class="col-lg-4">
+                                            <h5 class="font-600 m-b-5">Quote Status</h5>
+                                            <p> <?php print_r($q_select->q_enquiry_status); ?></p>
+                                        </div>
+                                        <div class="col-lg-4">
                                             <h5 class="font-600 m-b-5">Order Status</h5>
                                             <p> <?php print_r($q_select->q_order_status); ?></p>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <h5 class="font-600 m-b-5">Stage Gate</h5>
+                                            <p> <?php print_r($q_select->q_registration); ?></p>
                                         </div>
 
                                         <div class="col-lg-4">
@@ -186,16 +194,20 @@
                                             <h5>Scope Text</h5>
                                             <p><?php print_r($q_select->q_scope_text); ?></p>
                                         </div>
+                                        <div class="col-lg-4">
+                                            <h5>INCO TERMS</h5>
+                                            <p><?php print_r($q_select->q_into_terms); ?></p>
+                                        </div>
 
                                         <div class="col-lg-4">
-                                            <h5>Load Time</h5>
+                                            <h5>Lead Time</h5>
                                             <p><?php print_r($q_select->q_load_time); ?></p>
                                     </div>
                                   </div>
 
                                   <div class="row mb-0 mt-0">
                                       <div class="col-lg-4">
-                                          <h5 class="font-600 m-b-5">General Terms Gic Provided</h5>
+                                          <h5 class="font-600 m-b-5">Special Terms / Remarks</h5>
                                           <p> <?php print_r($q_select->q_general_terms_gic_provided); ?></p>
                                       </div>
 

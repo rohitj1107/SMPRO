@@ -36,7 +36,7 @@
 
                                     <div class="row task-dates mb-0 mt-0">
                                         <div class="col-lg-4">
-                                            <h5 class="font-600 m-b-5">Machine Model</h5>
+                                            <h5 class="font-600 m-b-5">Your Industry</h5>
                                             <p> <?php print_r($view_enquiry->e_machine_model); ?></p>
                                         </div>
 
@@ -52,7 +52,7 @@
                                     </div>
 
                                     <div class="assign-team mt-2">
-                                        <h5>Machine Make</h5>
+                                        <h5>Requirement Category</h5>
                                         <p><?php print_r($view_enquiry->e_machine_make); ?></p>
                                     </div>
 
@@ -109,40 +109,52 @@
                                   <div class="row">
                                     <div class="col-md-3">
                                       <div class="form-group">
-                                          <label>Enquiry Status</label>
+                                          <label>Quote Status</label>
                                           <select class="form-control select" name="enquiry_status">
                                               <option value="">Select</option>
-                                              <option value="info">Info</option>
-                                              <option value="success">success</option>
-                                              <option value="danger">danger</option>
+                                              <option value="Open">Open</option>
+                                              <option value="Under Process">Under Process</option>
+                                              <option value="Further InformaGon required">Further InformaGon required</option>
+                                              <option value="Closed">Closed</option>
+                                              <option value="Cancelled">Cancelled</option>
                                           </select>
                                       </div>
                                     </div>
                                     <div class="col-md-3">
                                       <div class="form-group">
-                                          <label>Registration</label>
-                                          <input type="text" class="form-control" name="registration" >
+                                          <label>Stage Gate</label>
+                                          <select class="form-control select" name="registration">
+                                              <option value="">Select</option>
+                                              <option value="Open">Open</option>
+                                              <option value="Under Process">Under Process</option>
+                                              <option value="Info awaited from Customer">Info awaited from Customer</option>
+                                              <option value="Closed">Closed</option>
+                                          </select>
+                                          <!-- <input type="text" class="form-control" name="registration" > -->
                                       </div>
                                     </div>
                                     <div class="col-md-3">
                                       <div class="form-group">
-                                          <label>Under process</label>
+                                          <!-- <label>Under process</label>
                                           <select class="form-control select" name="under_process">
                                               <option value="">Select</option>
                                               <option value="evaluation">Evaluation</option>
                                               <option value="further_info_required">Further info required</option>
                                               <option value="quotation_submitted">Quotation submitted</option>
-                                          </select>
+                                          </select> -->
                                       </div>
                                     </div>
                                     <div class="col-md-3">
                                       <div class="form-group">
-                                          <label>Order Statu</label>
+                                          <label>Order Status</label>
                                           <p>
                                             <select class="form-control select" name="order_status">
                                                 <option value="">Select</option>
                                                 <option value="open">Open</option>
                                                 <option value="received">Received</option>
+                                                <option value="cancelled">cancelled</option>
+                                                <option value="Quote expired">Quote expired</option>
+
                                             </select>
                                           </p>
                                       </div>
@@ -195,13 +207,13 @@
                                     </div>
                                     <div class="col-md-4">
                                       <div class="form-group">
-                                          <label>Into terms</label>
+                                          <label>INCO TERMS</label>
                                           <input type="text" class="form-control" name="into_terms" value="">
                                       </div>
                                     </div>
                                     <div class="col-md-4">
                                       <div class="form-group">
-                                          <label>Load time</label>
+                                          <label>Lead Time</label>
                                           <input id="demo3_22" type="text" placeholder="load_time" class="form-group" name="demo3_22">
                                       </div>
                                     </div>
@@ -218,7 +230,7 @@
 
                                     <div class="col-md-6">
                                       <div class="form-group">
-                                          <label>General terms GIC provided</label>
+                                          <label>Special Terms / Remarks</label>
                                           <input type="text" class="form-control" name="general_terms_gic_provided" value="">
                                       </div>
                                     </div>

@@ -14,7 +14,7 @@
                               <div class="card-box">
                                 <?php if($this->session->userdata('actionId') ==3 ){ ?>
 
-                                  <h4 class="header-title mt-0 mb-3">User Edit </h4>
+                                  <h4 class="header-title mt-0 mb-3">Customer Details </h4>
 
 
                                   <div class="row">
@@ -91,7 +91,7 @@
                                       </div>
 
                                       <div class="col-md-6 pt-4">
-                                        <label for="">Postal Code</label>
+                                        <label for="">Location</label>
                                           <?php $name_data = [
                                             'name' => 'postalCode',
                                             'value' => $user_view->u_postalCode,
@@ -115,16 +115,20 @@
                                           <?php //echo form_input($name_data); ?>
                                           <select class="form-control" name="companyType">
                                               <option value="<?php echo $user_view->u_companyType; ?>"><?php echo 'Selected Company Type : '.$user_view->u_companyType; ?></option>
-                                              <option value="PVT LTD">PVT LTD</option>
-                                              <option value="Prop">Prop</option>
+                                              <option value="Private Limited">Private Limited</option>
+                                              <option value="Limited">Limited</option>
                                               <option value="LLP">LLP</option>
-                                              <option value="LTD">LTD</option>
+                                              <option value="Proprietary">Proprietary</option>
+                                              <option value="Corporation">Corporation</option>
+                                              <option value="Govt Organisation">Govt Organisation</option>
+                                              <option value="Foreign entity">Foreign entity</option>
+                                              <option value="Others">Others</option>
                                           </select>
                                           <!-- <input type="text" class="form-control" id="email" placeholder="Company Type" name="companyType"> -->
                                       </div>
 
                                       <div class="col-md-6 pt-4">
-                                        <label for="">EOU</label>
+                                        <label for="">Company Category</label>
                                           <?php $name_data = [
                                             'name' => 'eou',
                                             'value' => $user_view->u_eou,
@@ -143,7 +147,7 @@
                                       </div>
 
                                       <div class="col-md-6 pt-4">
-                                        <label for="">Email ID</label>
+                                        <label for="">Official Email ID</label>
                                         <?php echo form_error('emailId'); ?>
                                           <?php $name_data = [
                                             'name' => 'emailId',
@@ -184,7 +188,7 @@
                                           <!-- <input type="text" class="form-control" id="email" placeholder="Contact Number" name="contactNumber"> -->
 
                                       <div class="col-md-6 pt-4">
-                                        <label for="">Contact Number</label>
+                                        <label for="">Contact Person Name</label>
                                           <?php $name_data = [
                                             'name' => 'contactNumber_one',
                                             'value' => $user_view->u_contactNumber_one,
@@ -214,7 +218,7 @@
                                       </div>
 
                                       <div class="col-md-6 pt-4">
-                                        <label for="">GST</label>
+                                        <label for="">Company Identity</label>
                                           <?php $name_data = [
                                             'name' => 'gst',
                                             'value' => $user_view->u_gst,
@@ -222,12 +226,23 @@
                                             'class' => 'form-control'
                                           ]; ?>
 
-                                          <?php echo form_input($name_data); ?>
+                                          <?php //echo form_input($name_data); ?>
+                                          <select class="form-control" name="gst">
+                                            <option value="<?php echo $user_view->u_gst; ?>"><?php echo 'Selected Company Identity : '.$user_view->u_gst; ?></option>
+
+                                              <option value="">Select Company Identity</option>
+                                              <option value="GST NUMBER">GST NUMBER</option>
+                                              <option value="PAN NUMBER">PAN NUMBER</option>
+                                              <option value="NUMBER">NUMBER</option>
+                                              <option value=" Corporation ID NO"> Corporation ID NO</option>
+                                              <option value="COMPANY REGISTRATION NUMBER">COMPANY REGISTRATION NUMBER</option>
+                                              <option value="OTHERS">OTHERS</option>
+                                          </select>
                                           <!-- <input type="text" class="form-control" id="email" placeholder="Company GST / VAT Number" name="gst"> -->
                                       </div>
 
                                       <div class="col-md-6 pt-4">
-                                        <label for="">Industry</label>
+                                        <label for="">Your Industry</label>
                                           <?php $name_data = [
                                             'name' => 'industry',
                                             'value' => $user_view->u_industry,
@@ -240,7 +255,7 @@
                                       </div>
 
                                       <div class="col-md-12 pt-4">
-                                        <label for="">Comment</label>
+                                        <label for="">Addi0onal Info / Remarks</label>
                                           <?php $name_data = [
                                             'name' => 'comment',
                                             'value' => $user_view->u_comment,

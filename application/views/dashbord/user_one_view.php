@@ -12,7 +12,7 @@
                           <div class="row">
                                 <div class="col-md-12">
                                     <div class="card-box task-detail">
-                                        <h4>User Ditals</h4>
+                                        <h4>Customer Details</h4>
                                         <div class="row mb-0 mt-2">
                                           <div class="col-lg-4">
                                               <h5>Customer Id</h5>
@@ -30,11 +30,11 @@
 
                                         <div class="row task-dates mb-0 mt-0">
                                             <div class="col-lg-4">
-                                                <h5> Country </h5>
+                                                <h5>Country </h5>
                                                 <p> <?php print_r($user_view->u_country); ?></p>
                                             </div>
                                             <div class="col-lg-4">
-                                                <h5>Postal Code</h5>
+                                                <h5>Location</h5>
                                                 <p> <?php print_r($user_view->u_postalCode); ?></p>
                                             </div>
                                             <div class="col-lg-4">
@@ -45,11 +45,11 @@
 
                                         <div class="row task-dates mb-0 mt-0">
                                             <div class="col-lg-4">
-                                              <h5>EOU</h5>
+                                              <h5>Company Category</h5>
                                               <p><?php print_r($user_view->u_eou); ?></p>
                                             </div>
                                             <div class="col-lg-4">
-                                              <h5>Email Id</h5>
+                                              <h5>Official Email ID</h5>
                                               <p><?php print_r($user_view->u_emailId); ?></p>
                                             </div>
                                             <div class="col-lg-4">
@@ -60,7 +60,7 @@
 
                                         <div class="row task-dates mb-0 mt-0">
                                             <div class="col-lg-4">
-                                              <h5>Contact Number one</h5>
+                                              <h5>Contact Person Name</h5>
                                               <p><?php print_r($user_view->u_contactNumber_one); ?></p>
                                             </div>
                                             <div class="col-lg-4">
@@ -68,18 +68,18 @@
                                               <p><?php print_r($user_view->u_mobileNumber); ?></p>
                                             </div>
                                             <div class="col-lg-4">
-                                              <h5>Gst</h5>
+                                              <h5>Company Identity</h5>
                                               <p><?php print_r($user_view->u_gst); ?></p>
                                             </div>
                                         </div>
 
                                         <div class="row task-dates mb-0 mt-0">
                                             <div class="col-lg-4">
-                                              <h5>Industry</h5>
+                                              <h5>Your Industry</h5>
                                               <p><?php print_r($user_view->u_industry); ?></p>
                                             </div>
                                             <div class="col-lg-4">
-                                              <h5>Comment</h5>
+                                              <h5>Addi0onal Info / Remarks</h5>
                                               <p><?php print_r($user_view->u_comment); ?></p>
                                             </div>
                                             <div class="col-lg-4">

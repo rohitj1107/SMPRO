@@ -55,21 +55,47 @@
                                                     <!-- <input type="text" readonly class="form-control" value="<?php echo $user->u_customerId; ?>" name="customerId"> -->
                                                 </div>
                                                 <div class="col-md-12 pt-4">
+                                                    <label for="">Application</label>
                                                     <input type="text" class="form-control" placeholder="Application" name="application">
                                                 </div>
                                                 <div class="col-md-12 pt-4">
+                                                  <label for="">Your Industry</label>
+
                                                     <textarea class="form-control" rows="3" name="machine_model" placeholder="Machine Model / Specs"></textarea>
                                                 </div>
                                                 <div class="col-md-6 pt-4">
-                                                    <input type="text" class="form-control" name="machine_make" placeholder="Machine Make">
+                                                  <label for="">Requirement Category</label>
+                                                  <select class="form-control" name="machine_make">
+                                                      <option value="Select Requirement Category">Select Requirement Category</option>
+                                                      <option value="Machinery And Equipment">Machinery And Equipment</option>
+                                                      <option value="EngineeringParts">EngineeringParts</option>
+                                                      <option value="Software Solutions">Software Solutions</option>
+                                                      <option value="Automation solution"> Automation solution</option>
+                                                      <option value="IOT Solution">IOT Solution</option>
+                                                      <option value="Project Services">Project Services</option>
+                                                      <option value="Consulting Services">Consulting Services</option>
+                                                      <option value="Training">Training</option>
+                                                      <option value="Commodity">Commodity</option>
+                                                      <option value="Consumables">Consumables</option>
+                                                      <option value="Others"> Others</option>
+
+
+                                                  </select>
+                                                    <!-- <input type="text" class="form-control" name="machine_make" placeholder="Machine Make"> -->
                                                 </div>
                                                 <div class="col-md-6 pt-4">
-                                                    <input type="text" class="form-control" name="required_qty" placeholder="Required Qty">
+                                                  <!-- <label for="">Required Qty</label> -->
+
+                                                    <!-- <input type="text" class="form-control" name="required_qty" placeholder="Required Qty"> -->
                                                 </div>
                                                 <div class="col-md-12 pt-4">
+                                                  <label for="">Required Description</label>
+
                                                     <textarea class="form-control" rows="4" name="required_description" placeholder="Required Description"></textarea>
                                                 </div>
                                                 <div class="col-md-6 pt-4">
+                                                  <label for="">Photo Of The Parts</label>
+
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <input type="file" class="form-control" multiple name="Photo_Of_The_Parts[]">
@@ -77,6 +103,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 pt-4">
+                                                  <label for="">Drawing Of The Parts</label>
+
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <input type="file" class="form-control" multiple name="Drawing_Of_The_Parts[]">
@@ -84,6 +112,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 pt-4">
+                                                  <label for="">Special Remarks</label>
+
                                                     <textarea class="form-control" rows="3" name="special_remarks" placeholder="Special Remarks"></textarea>
                                                 </div>
 

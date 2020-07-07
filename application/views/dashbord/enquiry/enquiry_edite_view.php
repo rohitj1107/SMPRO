@@ -54,19 +54,35 @@
                                                     <input type="text" value="<?php echo $editenquiry->e_appliction; ?>" class="form-control" placeholder="Application" name="application">
                                                 </div>
                                                 <div class="col-md-12 pt-4">
-                                                  <label for="">Machine Model</label>
+                                                  <label for="">Your Industry</label>
                                                     <textarea class="form-control" rows="3" name="machine_model" placeholder="Machine Model / Specs"><?php echo $editenquiry->e_machine_model; ?></textarea>
                                                 </div>
                                                 <div class="col-md-6 pt-4">
-                                                  <label for="">Machine Make</label>
-                                                    <input type="text" class="form-control" value="<?php echo $editenquiry->e_machine_make; ?>" name="machine_make" placeholder="Machine Make">
+                                                  <label for="">Requirement Category</label>
+                                                  <select class="form-control" name="machine_make">
+                                                      <option value="<?php echo $editenquiry->e_machine_make; ?>">Selected : <?php echo $editenquiry->e_machine_make; ?></option>
+                                                      <option value="Machinery And Equipment">Machinery And Equipment</option>
+                                                      <option value="EngineeringParts">EngineeringParts</option>
+                                                      <option value="Software Solutions">Software Solutions</option>
+                                                      <option value="Automation solution"> Automation solution</option>
+                                                      <option value="IOT Solution">IOT Solution</option>
+                                                      <option value="Project Services">Project Services</option>
+                                                      <option value="Consulting Services">Consulting Services</option>
+                                                      <option value="Training">Training</option>
+                                                      <option value="Commodity">Commodity</option>
+                                                      <option value="Consumables">Consumables</option>
+                                                      <option value="Others"> Others</option>
+
+
+                                                  </select>
+                                                    <!-- <input type="text" class="form-control" value="<?php echo $editenquiry->e_machine_make; ?>" name="machine_make" placeholder="Machine Make"> -->
                                                 </div>
                                                 <div class="col-md-6 pt-4">
-                                                  <label for="">Required QTY</label>
-                                                    <input type="text" class="form-control" value="<?php echo $editenquiry->e_required_qty; ?>" name="required_qty" placeholder="Required Qty">
+                                                  <!-- <label for="">Required QTY</label> -->
+                                                    <!-- <input type="text" class="form-control" value="<?php echo $editenquiry->e_required_qty; ?>" name="required_qty" placeholder="Required Qty"> -->
                                                 </div>
                                                 <div class="col-md-12 pt-4">
-                                                  <label for="">Description</label>
+                                                  <label for="">Requirement Description</label>
                                                     <textarea class="form-control" rows="4" name="required_description" placeholder="Required Description"><?php echo $editenquiry->e_required_description; ?></textarea>
                                                 </div>
                                                 <!-- <div class="col-md-6 pt-4">
