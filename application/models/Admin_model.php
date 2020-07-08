@@ -256,9 +256,62 @@ class Admin_model extends CI_Model{
         return FALSE;
     }
   }
+  public function insert_c_follow_up($data){
+    $sql = $this->db->insert('c_follow_up',$data);
+    if ($sql) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+  }
+
+  public function insert_e_follow_up($data){
+    $sql = $this->db->insert('e_follow_up',$data);
+    if ($sql) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+  }
+
+  public function insert_p_follow_up($data){
+    $sql = $this->db->insert('p_follow_up',$data);
+    if ($sql) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+  }
 
   public function select_follow_up($e_enquiryId){
       $sql = $this->db->where('f_enquiry_id',$e_enquiryId)->get('s_follow_up');
+      if ($sql->num_rows() > 0) {
+          return $sql->result();
+      } else {
+          return false;
+      }
+  }
+
+  public function select_c_follow_up($c_customerId){
+      $sql = $this->db->where('c_customerId',$c_customerId)->get('c_follow_up');
+      if ($sql->num_rows() > 0) {
+          return $sql->result();
+      } else {
+          return false;
+      }
+  }
+
+  public function select_e_follow_up($e_enquiryId){
+      $sql = $this->db->where('e_enquiryId',$e_enquiryId)->get('e_follow_up');
+      if ($sql->num_rows() > 0) {
+          return $sql->result();
+      } else {
+          return false;
+      }
+  }
+
+  public function select_p_follow_up($p_po_number){
+      $sql = $this->db->where('p_po_number',$p_po_number)->get('p_follow_up');
       if ($sql->num_rows() > 0) {
           return $sql->result();
       } else {

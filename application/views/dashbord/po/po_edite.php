@@ -34,70 +34,139 @@
                                                                           <?php print_r($po_select->s_so_number); ?>
                                                                       </p>
                                                                       <div class="row task-dates mb-0 mt-2">
-                                                                          <div class="col-lg-4">
+                                                                          <div class="col-lg-2">
                                                                               <h5 class="font-600 m-b-5">Customer ID</h5>
                                                                               <p> <?php print_r($po_select->s_customer_ID); ?></p>
                                                                           </div>
 
-                                                                          <div class="col-lg-4">
+                                                                          <div class="col-lg-2">
                                                                               <h5 class="font-600 m-b-5">Enquiry ID</h5>
                                                                               <p> <?php print_r($po_select->s_enquiry_ID); ?></p>
                                                                           </div>
 
-                                                                          <div class="col-lg-4">
+                                                                          <div class="col-lg-2">
                                                                               <h5 class="font-600 m-b-5">Quotation ID</h5>
                                                                               <p> <?php print_r($po_select->s_quote_number); ?></p>
                                                                           </div>
+                                                                          <div class="col-md-2">
+                                                                            <div class="form-group">
+                                                                              <label for="">SO DATE</label>
+                                                                              <input type="text" class="form-control" name="so_date" value="<?php print_r($po_select->s_so_date); ?>" id="so_date">
+                                                                            </div>
+                                                                          </div>
+                                                                          <div class="col-md-2">
+                                                                            <div class="form-group">
+
+                                                                              <label for="">Market (DOM / Exp)</label>
+                                                                              <select class="form-control" name="market">
+                                                                                  <option value="<?php print_r($po_select->s_market); ?>">Selected <?php print_r($po_select->s_market); ?></option>
+                                                                                  <option value="DOM">DOM</option>
+                                                                                  <option value="EXP">EXP</option>
+                                                                              </select>
+                                                                            </div>
+                                                                          </div>
+                                                                          <div class="col-md-2">
+                                                                              <label for="">Total Value</label>
+                                                                              <input type="text" class="form-control" value="<?php print_r($po_select->s_value); ?>" name="value">
+                                                                          </div>
                                                                       </div>
 
                                                                       <div class="row task-dates mb-0 mt-0">
-                                                                          <div class="col-lg-4">
-                                                                              <h5 class="font-600 m-b-5">Date </h5>
-                                                                              <p> <?php print_r($po_select->s_so_date); ?></p>
+
+                                                                          <div class="col-md-2">
+                                                                              <label for="">Customer PO Number</label>
+                                                                              <input type="text" class="form-control" value="<?php print_r($po_select->s_customer_po_number); ?>" name="customer_po_number">
+                                                                          </div>
+                                                                          <div class="col-md-2">
+                                                                              <label for="">PO Create Date</label>
+                                                                              <input type="text" class="form-control" value="<?php print_r($po_select->s_po_date); ?>" name="po_date" id="po_date">
+                                                                          </div>
+                                                                          <div class="col-md-2">
+                                                                            <div class="form-group">
+                                                                            <label for="">Category</label>
+                                                                            <select class="form-control" name="category">
+                                                                                <option value="<?php print_r($po_select->s_category); ?>">Selected <?php print_r($po_select->s_category); ?></option>
+                                                                                <option value="Sales Equipment And Machinery">Sales Equipment And Machinery</option>
+                                                                                <option value="Sales Parts">Sales Parts</option>
+                                                                                <option value="Sales Service">Sales Service</option>
+                                                                                <option value="Consulting Service Sales">Consulting Service Sales</option>
+                                                                                <option value="FOC Service">FOC Service</option>
+                                                                                <option value="FOC Parts">FOC Parts</option>
+                                                                                <option value="Solution Sales">Solution Sales</option>
+                                                                                <option value="Consumables">Consumables</option>
+                                                                                <option value="Sales Trading Items">Sales Trading Items</option>
+                                                                                <option value="Sales Commission">Sales Commission</option>
+                                                                                <option value="Royalties">Royalties</option>
+                                                                                <option value="Sales Others">Sales Others</option>
+                                                                            </select>
+
+                                                                          </div>
                                                                           </div>
 
-                                                                          <div class="col-lg-4">
-                                                                              <h5 class="font-600 m-b-5">Market segment</h5>
-                                                                              <input type="text" name="s_market_segment" class="form-control" value="<?php print_r($po_select->s_market_segment); ?>">
+                                                                          <div class="col-md-2">
+                                                                            <div class="form-group">
+                                                                                <label>Partial Shipment</label>
+                                                                                <!-- <p><?php echo $quatation->q_market_segment; ?></p> -->
+                                                                                  <select class="form-control" name="s_market_segment">
+                                                                                      <option value="<?php print_r($po_select->s_market_segment); ?>">Selected <?php print_r($po_select->s_market_segment); ?></option>
+                                                                                      <option value="Yes">Yes</option>
+                                                                                      <option value="No">No</option>
+                                                                                  </select>
+                                                                                <!-- <input type="hidden" name="market_segment" value="<?php echo $quatation->q_market_segment; ?>"> -->
+                                                                            </div>
                                                                           </div>
-
-                                                                          <div class="col-lg-4">
-                                                                              <h5 class="font-600 m-b-5">Delay Penalty</h5>
+                                                                          <div class="col-lg-2">
+                                                                              <label for="">Delay Penalty</label>
                                                                               <input type="text" name="s_delay_penalty" class="form-control" value="<?php print_r($po_select->s_delay_penalty); ?>">
                                                                           </div>
-                                                                      </div>
-
-                                                                      <div class="row task-dates mb-0 mt-0">
-                                                                          <div class="col-lg-4">
-                                                                              <h5>Scope Text</h5>
+                                                                          <div class="col-lg-2">
+                                                                              <label for="">Scope Text</label>
                                                                               <input type="text" name="s_scope_text" class="form-control" value="<?php print_r($po_select->s_scope_text); ?>">
                                                                           </div>
+                                                                      </div>
+                                                                      <div class="row task-dates mb-0 mt-0">
+                                                                        <div class="col-md-2">
+                                                                          <div class="form-group">
+                                                                              <label>INCO TERMS</label>
+                                                                              <input type="text" name="into_terms" class="form-control" value="<?php print_r($po_select->s_into_terms); ?>">
+                                                                          </div>
+                                                                        </div>
 
-                                                                          <div class="col-lg-4">
-                                                                              <h5>Load Time</h5>
+                                                                          <div class="col-lg-2">
+                                                                              <label for="">Load Time</label>
                                                                               <input type="text" name="s_load_time" class="form-control" value="<?php print_r($po_select->s_load_time); ?>">
+                                                                      </div>
+                                                                      <div class="col-md-2">
+                                                                          <label for="">Currency</label>
+                                                                          <select class="form-control" name="currency">
+                                                                              <option value="<?php print_r($po_select->s_currency); ?>">selected <?php print_r($po_select->s_currency); ?></option>
+                                                                              <option value="INR">INR</option>
+                                                                              <option value="USD">USD</option>
+                                                                              <option value="EURO">EURO</option>
+                                                                          </select>
+                                                                      </div>
+                                                                      <div class="col-lg-2">
+                                                                          <label for="">Payment Terms</label>
+                                                                          <input type="text" name="payment" class="form-control" value="<?php print_r($po_select->s_payment); ?>">
 
+                                                                      </div>
+                                                                      <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label class="text-danger">EXPIRY DATE OF LC</label>
+                                                                            <input type="text" name="expiry_date_of_lc" class="form-control" value="<?php print_r($po_select->s_expiry_date_of_lc); ?>" placeholder="mm/dd/yyyy" id="datepicker-autoclose">
+                                                                        </div>
+                                                                      </div>
+                                                                      <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label class="text-danger">LC applicable</label>
+                                                                            <input type="text" class="form-control" name="lc_applicabl" value="<?php print_r($po_select->s_lc_applicabl); ?>">
+                                                                        </div>
                                                                       </div>
                                                                     </div>
 
                                                                     <div class="row mb-0 mt-0">
-                                                                        <div class="col-lg-4">
-                                                                            <h5 class="font-600 m-b-5">payment</h5>
-                                                                            <p> <?php print_r($po_select->s_payment); ?></p>
-                                                                        </div>
-
-                                                                        <div class="col-lg-4">
-                                                                            <h5 class="font-600 text-danger m-b-5">Expected Date</h5>
-                                                                            <p> <?php print_r($po_select->s_expiry_date_of_lc); ?></p>
-                                                                        </div>
-
-                                                                    <div class="col-lg-4">
-                                                                        <h5 class="font-600 m-b-5">Created Date</h5>
-                                                                        <p><?php echo $po_select->s_c_date; ?></p>
-                                                                    </div>
                                                                     </div>
                                                                     <div class="row mb-0 mt-0">
-
                                                                     <div class="col-md-10">
                                                                       <INPUT class="btn btn-success waves-effect waves-light mr-1" type="button" value="Add Item" onclick="addRow('dataTable')" />
                                                                     </div>
@@ -303,6 +372,29 @@
 
         <!-- App js -->
         <script src="<?php echo base_url(); ?>assets/admin/js/app.min.js"></script>
-
+        <script>
+            $(document).ready(function(){
+                var date_input=$('input[id="po_date"]'); //our date input has the name "date"
+                var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+                date_input.datepicker({
+                    format: 'mm/dd/yyyy',
+                    container: container,
+                    todayHighlight: true,
+                    autoclose: true,
+                })
+            })
+        </script>
+        <script>
+            $(document).ready(function(){
+                var date_input=$('input[id="so_date"]'); //our date input has the name "date"
+                var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+                date_input.datepicker({
+                    format: 'mm/dd/yyyy',
+                    container: container,
+                    todayHighlight: true,
+                    autoclose: true,
+                })
+            })
+        </script>
     </body>
 </html>

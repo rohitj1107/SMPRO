@@ -119,14 +119,20 @@
                                       <label for="">Category</label>
                                       <select class="form-control" name="category">
                                           <option value="0">Select Category</option>
+                                          <option value="Sales Equipment And Machinery">Sales Equipment And Machinery</option>
                                           <option value="Sales Parts">Sales Parts</option>
                                           <option value="Sales Service">Sales Service</option>
-                                          <option value="FOC Parts">FOC Parts</option>
+                                          <option value="Consulting Service Sales">Consulting Service Sales</option>
                                           <option value="FOC Service">FOC Service</option>
-                                          <option value="Solu'on Sales">Solu'on Sales</option>
-                                          <option value="Trading">Trading</option>
+                                          <option value="FOC Parts">FOC Parts</option>
+                                          <option value="Solution Sales">Solution Sales</option>
                                           <option value="Consumables">Consumables</option>
+                                          <option value="Sales Trading Items">Sales Trading Items</option>
+                                          <option value="Sales Commission">Sales Commission</option>
+                                          <option value="Royalties">Royalties</option>
+                                          <option value="Sales Others">Sales Others</option>
                                       </select>
+
                                     </div>
                                     </div>
                                     <div class="col-md-2">
@@ -138,7 +144,7 @@
                                         <input type="text" class="form-control" name="po_date" id="po_date">
                                     </div>
                                     <div class="col-md-2">
-                                        <label for="">value</label>
+                                        <label for="">Total Value</label>
                                         <input type="text" class="form-control" name="value">
                                     </div>
                                     <div class="col-md-2">
@@ -147,14 +153,21 @@
                                             <option value="0">select currency</option>
                                             <option value="INR">INR</option>
                                             <option value="USD">USD</option>
+                                            <option value="EURO">EURO</option>
+
                                         </select>
                                     </div>
 
                                     <div class="col-md-2">
                                       <div class="form-group">
-                                          <label>Market Segment</label>
-                                          <p><?php echo $quatation->q_market_segment; ?></p>
-                                          <input type="hidden" name="market_segment" value="<?php echo $quatation->q_market_segment; ?>">
+                                          <label>Partial Shipment</label>
+                                          <!-- <p><?php echo $quatation->q_market_segment; ?></p> -->
+                                            <select class="form-control" name="">
+                                                <option value="Select Partial Shipment">Select Partial Shipment</option>
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+                                            </select>
+                                          <!-- <input type="hidden" name="market_segment" value="<?php echo $quatation->q_market_segment; ?>"> -->
                                       </div>
                                     </div>
                                     <div class="col-md-2">
@@ -171,29 +184,26 @@
                                     </div>
                                     <div class="col-md-2">
                                       <div class="form-group">
-                                          <label class="text-danger">LC applicabl</label>
+                                          <label class="text-danger">LC applicable</label>
                                           <input type="text" class="form-control" name="lc_applicabl">
                                       </div>
                                     </div>
                                     <div class="col-md-2">
                                       <div class="form-group">
-                                          <label>Into terms</label>
-                                          <p><?php echo $quatation->q_into_terms; ?></p>
-                                          <input type="hidden" name="into_terms" value="<?php echo $quatation->q_into_terms; ?>">
+                                          <label>INCO TERMS</label>
+                                          <input type="text" name="into_terms" class="form-control" value="">
                                       </div>
                                     </div>
                                     <div class="col-md-2">
                                       <div class="form-group">
-                                          <label>Load time</label>
-                                          <p><?php echo $quatation->q_load_time; ?></p>
-                                          <input type="hidden" name="load_time" value="<?php echo $quatation->q_load_time; ?>">
+                                          <label>Lead Time</label>
+                                          <input type="text" class="form-control" name="load_time" value="">
                                       </div>
                                     </div>
                                     <div class="col-md-2">
                                       <div class="form-group">
-                                          <label>Payment</label>
-                                          <p><?php echo $quatation->q_payment_terms; ?></p>
-                                          <input type="hidden" name="payment" value="<?php echo $quatation->q_payment_terms; ?>">
+                                          <label>Payment Terms</label>
+                                          <input type="text" name="payment" value="" class="form-control">
                                       </div>
                                     </div>
 
@@ -232,10 +242,8 @@
                                                 <th><label for="">Item Code</label></th>
                                                 <th><label for="">Description</label></th>
                                                 <th><label for="">Tech Specs</label></th>
-
                                                 <th><label class="text-danger">QTY</label></th>
                                                 <th><label for="">Delivery date</label></th>
-
                                             </tr>
                                           </thead>
                                         </tbody>

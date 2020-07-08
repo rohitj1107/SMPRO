@@ -66,6 +66,7 @@ $route['otp/(:any)'] = 'Home/otp/$1';
 $route['logout'] = 'Home/logout';
 $route['emailcheck/(:any)'] = 'Home/emailcheck/$1';
 $route['checkemail_message'] = 'Home/checkemail_message';
+$route['customer_follow_up'] = 'Home/customer_follow_up';
 
 // Dashbord
 
@@ -85,6 +86,7 @@ $route['enquiry_show_admin'] = 'Enquiry/enquiry_show_admin';
 $route['view_enquiry_admin/(:any)/(:any)'] = 'Enquiry/view_enquiry_admin/$1/$2';
 $route['enquiry_form_admin'] = 'Enquiry/enquiry_form_admin';
 $route['do_upload_admin'] = 'Enquiry/do_upload_admin';
+$route['enquiry_follow_up'] = 'Enquiry/enquiry_follow_up';
 
 $route['user_list'] = 'User/user_list';
 $route['follow_up'] = 'Dashbord/follow_up';
@@ -129,7 +131,7 @@ $route['po_create/(:any)'] = 'Po/po_create/$1';
 // POF
 $route['pof_show'] = 'Pof';
 $route['view_pof_single/(:any)'] = 'Pof/view_pof_single/$1';
-$route['follow_up_po'] = 'Pof/follow_up_po';
+$route['pof_follow_up'] = 'Pof/pof_follow_up';
 
 // Quotation
 $route['insert_quotation'] = 'Quotation/insert_quotation';

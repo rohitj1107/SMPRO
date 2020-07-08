@@ -10,6 +10,8 @@ class Home extends CI_Controller{
       $this->load->model('Home_model');
       $this->load->helper('security');
       $this->load->library('facebook');
+      $this->load->model('Admin_model');
+
   }
 
   public function index(){
@@ -423,6 +425,25 @@ class Home extends CI_Controller{
           return redirect('forgot_password_email/'.base64_encode($this->input->post('email')));
       }
 
+  }
+
+  public function customer_follow_up(){
+    // print_r($this->input->post());
+    $data = [
+        'c_customerId' => $this->input->post('customerId'),
+        'c_status' => $this->input->post('status'),
+        'c_comment' => $this->input->post('comment'),
+        'c_select_date' => $this->input->post('select_date')
+    ];
+    $u_id = $this->input->post('u_id');
+    // print_r($data);exit;
+      if ($this->Admin_model->insert_c_follow_up($data)) {
+          $this->session->set_flashdata('follow_up_success','Follow Up created success fully !');
+          return redirect('view/'.$u_id);
+      } else {
+          $this->session->set_flashdata('follow_up_faild','Follow Up Not created !');
+          return redirect('view/'.$u_id);
+      }
   }
 
 }

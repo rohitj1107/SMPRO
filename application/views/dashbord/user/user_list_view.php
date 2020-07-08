@@ -47,15 +47,10 @@
                                           <?php foreach($data as $us_list){ ?>
                                               <?php if ($this->session->userdata('emailId') != $us_list->u_emailId) { ?>
                                           <tr>
-
-
                                             <td><?php echo $us_list->u_customerId; ?></td>
-
                                             <td><?php echo $us_list->u_companyName; ?></td>
                                             <td><?php echo $us_list->u_emailId; ?></td>
                                             <td><?php echo $us_list->u_contactNumber; ?></td>
-
-
                                             <td>
                                                 <a href='<?php echo base_url("view/".base64_encode($us_list->u_Id)); ?>' class="btn btn-success mdi mdi-view-list"></a>
                                                 <a href='<?php echo base_url("edite/".base64_encode($us_list->u_Id)); ?>' class="btn btn-warning mdi mdi-account-edit"></a>

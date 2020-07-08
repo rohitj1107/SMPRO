@@ -7,7 +7,7 @@
             <div class="content-page">
                 <div class="content">
 
-                  <div class="modal" id="myModalshow<?php echo $po_select->s_po_number;?>">
+                  <div class="modal" id="myModalshow">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="row">
@@ -17,34 +17,34 @@
                               <h4 class="modal-title"><?php echo $po_select->s_po_number; ?></h4>
                               <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
-                            <form method="post" action="<?php echo base_url('follow_up_po'); ?>">
+                            <form method="post" action="<?php echo base_url('pof_follow_up'); ?>">
                             <!-- Modal body -->
                             <div class="col-md-12 scrollbar scrollbar-primary" style="height: 420px; overflow-y: scroll;">
                                 <div class="card-box task-detail">
                                   <div class="row">
-                                    <?php if ($follow_up) { ?>
-                                    <?php foreach($follow_up as $follow_up_ob):
-                                      if ($po_select->s_so_number == $follow_up_ob->fp_po_number) { ?>
+                                    <?php if ($select_p_follow_up) { ?>
+                                    <?php foreach($select_p_follow_up as $follow_up_ob):
+                                      if ($po_select->s_po_number == $follow_up_ob->p_po_number) { ?>
                                     <div class="col-md-6">
                                       <div class="form-group">
                                           <label>Status</label>
-                                          <p><?php echo $follow_up_ob->fp_status; ?></p>
+                                          <p><?php echo $follow_up_ob->p_status; ?></p>
                                       </div>
                                     </div>
                                     <div class="col-md-6">
                                       <div class="form-group">
                                           <label>Comment</label>
-                                          <p><?php echo $follow_up_ob->fp_comment; ?></p>
+                                          <p><?php echo $follow_up_ob->p_comment; ?></p>
                                       </div>
                                     </div>
                                     <div class="col-md-6">
                                       <div class="form-group">
                                           <label>Follow Up Date</label>
-                                          <?php if (date('m/d/yy') > $follow_up_ob->fp_select_date) { ?>
-                                            <p class="text-danger"><?php echo $follow_up_ob->fp_select_date; ?></p>
+                                          <?php if (date('m/d/yy') > $follow_up_ob->p_select_date) { ?>
+                                            <p class="text-danger"><?php echo $follow_up_ob->p_select_date; ?></p>
 
                                           <?php } else { ?>
-                                            <p class="text-success"><?php echo $follow_up_ob->fp_select_date; ?></p>
+                                            <p class="text-success"><?php echo $follow_up_ob->p_select_date; ?></p>
 
                                           <?php }?>
                                       </div>
@@ -52,7 +52,7 @@
                                     <div class="col-md-6">
                                       <div class="form-group">
                                           <label>Created Date</label>
-                                          <p><?php echo $follow_up_ob->fp_c_date; ?></p>
+                                          <p><?php echo $follow_up_ob->p_c_date; ?></p>
                                       </div>
                                     </div>
                                     <div class="bg-primary col-12">
@@ -80,7 +80,7 @@
                     </div>
                   </div>
 
-                  <div class="modal" id="myModall<?php echo $po_select->s_po_number;?>">
+                  <div class="modal" id="myModall">
 
                     <div class="modal-dialog">
                       <div class="modal-content">
@@ -91,12 +91,10 @@
                               <h4 class="modal-title"><?php echo $po_select->s_po_number; ?></h4>
                               <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
-                            <form method="post" action="<?php echo base_url('follow_up_po'); ?>">
-                              <input type="hidden" name="po_number" value="<?php echo $po_select->s_po_number; ?>">
-                              <input type="hidden" name="so_number" value="<?php echo $po_select->s_so_number; ?>">
-                              <input type="hidden" name="enquiry_ID" value="<?php echo $po_select->s_enquiry_ID; ?>">
+                            <form method="post" action="<?php echo base_url('pof_follow_up'); ?>">
+                              <input type="hidden" name="fp_po_number" value="<?php echo $po_select->s_po_number; ?>">
                               <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
-                              <input type="hidden" name="quote_number" value="<?php echo $po_select->s_quote_number; ?>">
+
                             <!-- Modal body -->
                             <div class="modal-body">
                                 <label for="">Select Status</label>
@@ -281,11 +279,11 @@
                                       <p><?php echo $po_select->s_c_date; ?></p>
                                   </div>
                                   <div class="col-md-2">
-                                        <label>Order Status</label>
+                                        <label>PO Status</label>
                                         <p><?php //echo $po_select->s_po_number; ?>
-                                          <a href="#" class="text-success" data-toggle="modal" data-target="#myModall<?php echo $po_select->s_po_number;?>">
+                                          <a href="#" class="text-success" data-toggle="modal" data-target="#myModall">
                                             <i class="mdi mdi-comment"> </i> </a>
-                                          <a href="#" class="text-info" data-toggle="modal" data-target="#myModalshow<?php echo $po_select->s_po_number;?>"> <i class="mdi mdi-check-circle"> </i> </a>
+                                          <a href="#" class="text-info" data-toggle="modal" data-target="#myModalshow"> <i class="mdi mdi-check-circle"> </i> </a>
                                         </p>
                                   </div>
                                   </div>

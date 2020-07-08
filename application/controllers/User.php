@@ -16,8 +16,9 @@ class User extends CI_Controller{
       $type = $this->Admin_model->select_type();
       $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
       $user_view = $this->Admin_model->select_user_view($uid);
-
-      $this->load->view('dashbord/user_one_view',['data'=>$data,'type'=>$type,'user_view'=>$user_view,'user'=>$user]);
+      $select_c_follow_up = $this->Admin_model->select_c_follow_up($user_view->u_customerId);
+      $this->load->view('dashbord/user_one_view',['data'=>$data,'type'=>$type,'user_view'=>$user_view,
+      'user'=>$user,'select_c_follow_up'=>$select_c_follow_up]);
   }
 
   public function edite($u_Id){

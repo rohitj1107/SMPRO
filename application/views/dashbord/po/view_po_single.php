@@ -191,7 +191,7 @@
 
                                   <div class="row mb-0 mt-0">
                                       <div class="col-lg-4">
-                                          <h5 class="font-600 m-b-5">Value</h5>
+                                          <h5 class="font-600 m-b-5"> Total Value</h5>
                                           <p> <?php print_r($po_select->s_value); ?></p>
                                       </div>
 
@@ -201,7 +201,7 @@
                                       </div>
 
                                       <div class="col-lg-4">
-                                          <h5 class="font-600 m-b-5">Market Segment</h5>
+                                          <h5 class="font-600 m-b-5">Partial Shipment</h5>
                                           <p> <?php print_r($po_select->s_market_segment); ?></p>
                                       </div>
                                   </div>
@@ -223,7 +223,11 @@
                                   </div>
                                   <div class="row mb-0 mt-0">
                                       <div class="col-lg-4">
-                                          <h5 class="font-600 m-b-5">load time</h5>
+                                          <h5 class="font-600 m-b-5">INCO TERMS</h5>
+                                          <p> <?php print_r($po_select->s_into_terms); ?></p>
+                                      </div>
+                                      <div class="col-lg-4">
+                                          <h5 class="font-600 m-b-5">Lead Time</h5>
                                           <p> <?php print_r($po_select->s_load_time); ?></p>
                                       </div>
 

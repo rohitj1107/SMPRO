@@ -7,6 +7,128 @@
             <div class="content-page">
                 <div class="content">
 
+
+                  <div class="modal" id="myModalshow<?php echo $view_enquiry->e_enquiryId;?>">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                              <h4 class="modal-title"><?php echo $view_enquiry->e_enquiryId; ?></h4>
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <form method="post" action="<?php echo base_url('follow_up'); ?>">
+                            <!-- Modal body -->
+                            <div class="col-md-12 scrollbar scrollbar-primary" style="height: 420px; overflow-y: scroll;">
+                                <div class="card-box task-detail">
+                                  <div class="row">
+                                    <?php if ($select_e_follow_up) { ?>
+                                    <?php foreach($select_e_follow_up as $follow_up_ob):
+                                      if ($view_enquiry->e_enquiryId == $follow_up_ob->e_enquiryId) { ?>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label>Status</label>
+                                          <p><?php echo $follow_up_ob->e_status; ?></p>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label>Comment</label>
+                                          <p><?php echo $follow_up_ob->e_comment; ?></p>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label>Follow Up Date</label>
+                                          <?php if (date('m/d/yy') > $follow_up_ob->e_select_date) { ?>
+                                            <p class="text-danger"><?php echo $follow_up_ob->e_select_date; ?></p>
+
+                                          <?php } else { ?>
+                                            <p class="text-success"><?php echo $follow_up_ob->e_select_date; ?></p>
+
+                                          <?php }?>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label>Created Date</label>
+                                          <p><?php echo $follow_up_ob->e_select_date; ?></p>
+                                      </div>
+                                    </div>
+                                    <div class="bg-primary col-12">
+                                        <hr>
+                                    </div>
+                                  <?php
+                                }
+                                 endforeach; ?>
+                                <?php } else { ?>
+                                    <p class="text-warning">Comment Is Not Created</p>
+                                <?php } ?>
+                                  </div>
+                                </div>
+                            </div><!-- end col -->
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                        </form>
+
+                      </div>
+                    </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="modal" id="myModal<?php echo $view_enquiry->e_enquiryId;?>">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                              <h4 class="modal-title"><?php echo $view_enquiry->e_enquiryId; ?></h4>
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <form method="post" action="<?php echo base_url('enquiry_follow_up'); ?>">
+                              <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+                              <input type="hidden" name="enquiryId" value="<?php echo $view_enquiry->e_enquiryId; ?>">
+                              <input type="hidden" name="customerId" value="<?php echo $view_enquiry->e_customerID; ?>">
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <label for="">Select Status</label>
+                                  <select class="form-control select1" name="status">
+                                      <option value="select"> Select </option>
+                                      <option value="open"> open </option>
+                                      <option value="close"> close </option>
+                                  </select>
+                                  <p></p>
+                                  <label for="">Type Commit</label>
+                                  <textarea name="comment" class="form-control" rows="8" cols="80"></textarea>
+                                  <p></p>
+                                  <label for="">Select Date</label>
+                                  <input class="form-control" id="date" name="select_date" placeholder="MM/DD/YYY" type="text"/>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                              <button type="submit" class="btn btn-success" id="btn_save" name="button">Submit</button>
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                        </form>
+
+                      </div>
+                    </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
                     <!-- Start Content-->
                     <div class="container-fluid">
 
@@ -88,6 +210,14 @@
                                             <?php else: ?>
                                               <p>File Not Upload</p>
                                             <?php endif;?>
+                                        </div>
+                                        <div class="col-md-2">
+                                              <label>Enquiry Status</label>
+                                              <p><?php //echo $q_value->q_order_status; ?>
+                                                <a href="#" class="text-success" data-toggle="modal" data-target="#myModal<?php echo $view_enquiry->e_enquiryId;?>">
+                                                  <i class="mdi mdi-comment"> </i> </a>
+                                                <a href="#" class="text-info" data-toggle="modal" data-target="#myModalshow<?php echo $view_enquiry->e_enquiryId;?>"> <i class="mdi mdi-check-circle"> </i> </a>
+                                              </p>
                                         </div>
                                     </div>
 
@@ -250,7 +380,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/> -->
 
-<!-- <script>
+<script>
     $(document).ready(function(){
         var date_input=$('input[name="select_date"]'); //our date input has the name "date"
         var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
@@ -261,7 +391,7 @@
             autoclose: true,
         })
     })
-</script> -->
+</script>
 
 </body>
 </html>

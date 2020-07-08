@@ -100,10 +100,21 @@ class Po extends CI_Controller{
         $qty = implode(' | ',$q);
 
         $data = [
+          's_so_date' => $this->input->post('so_date'),
+          's_market' => $this->input->post('market'),
+          's_value' => $this->input->post('value'),
+          's_customer_po_number' => $this->input->post('customer_po_number'),
+          's_po_date' => $this->input->post('po_date'),
+          's_category' => $this->input->post('category'),
           's_market_segment' => $this->input->post('s_market_segment'),
           's_delay_penalty' => $this->input->post('s_delay_penalty'),
           's_scope_text' => $this->input->post('s_scope_text'),
+          's_into_terms' => $this->input->post('into_terms'),
           's_load_time' => $this->input->post('s_load_time'),
+          's_currency' => $this->input->post('currency'),
+          's_payment' => $this->input->post('payment'),
+          's_expiry_date_of_lc' => $this->input->post('expiry_date_of_lc'),
+          's_lc_applicabl' => $this->input->post('lc_applicabl'),
           's_sn'=>$sn,
           's_description'=>$description,
           's_qty'=>$qty,

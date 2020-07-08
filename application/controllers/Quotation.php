@@ -154,6 +154,7 @@ class Quotation extends CI_Controller{
             's_market_segment'=>$this->input->post('market_segment'),
             's_delay_penalty'=>$this->input->post('delay_penalty'),
             's_lc_applicabl'=>$this->input->post('lc_applicabl'),
+            's_into_terms'=>$this->input->post('into_terms'),
             's_load_time'=>$this->input->post('load_time'),
             's_payment'=>$this->input->post('payment'),
             's_expiry_date_of_lc'=>$this->input->post('expiry_date_of_lc'),
