@@ -77,9 +77,13 @@
                                                   </select>
                                                     <!-- <input type="text" class="form-control" value="<?php echo $editenquiry->e_machine_make; ?>" name="machine_make" placeholder="Machine Make"> -->
                                                 </div>
-                                                <div class="col-md-6 pt-4">
-                                                  <!-- <label for="">Required QTY</label> -->
-                                                    <!-- <input type="text" class="form-control" value="<?php echo $editenquiry->e_required_qty; ?>" name="required_qty" placeholder="Required Qty"> -->
+                                                <div class="col-md-2 pt-4">
+                                                  <label for=""> Location</label>
+                                                  <input type="text" name="location" class="form-control" value="<?php print_r($editenquiry->e_location); ?>">
+                                                </div>
+                                                <div class="col-md-4 pt-4">
+                                                  <label for=""> Company Name</label>
+                                                  <input type="text" name="companyname" class="form-control" value="<?php print_r($editenquiry->e_companyname); ?>">
                                                 </div>
                                                 <div class="col-md-12 pt-4">
                                                   <label for="">Requirement Description</label>

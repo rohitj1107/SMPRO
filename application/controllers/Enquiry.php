@@ -11,7 +11,7 @@ class Enquiry extends CI_Controller{
 
   public function view_enquiry_single_admin($customerID,$enquiryID){
       $this->load->model('Admin_model');
-      $data = $this->Admin_model->user_table();
+      $data = $this->Admin_model->user_single_table($customerID);
       $type = $this->Admin_model->select_type();
       $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
       $enquiry = $this->Admin_model->select_enquiry($user->u_customerId);
@@ -112,6 +112,8 @@ class Enquiry extends CI_Controller{
     // exit;
 
       $ran_cust = '0123456789abcdefghijklmnopqrstuvwxyz';
+      $data = $this->Admin_model->user_single_table($custo[0]);
+
       $data = [
           'e_customerID'=>$custo[0],
           'e_emailID' => $custo[1],
@@ -125,7 +127,9 @@ class Enquiry extends CI_Controller{
           'e_drawing_of_the_parts_path'=>$img_path2,
           'e_drawing_of_the_parts_name'=>$img_name2,
           'e_special_remarks'=>$this->input->post('special_remarks'),
-          'e_enquiryId'=> 'EN-'.time()
+          'e_enquiryId'=> 'EN-'.time(),
+          'e_location'=>$data->u_country,
+          'e_companyname'=>$data->u_companyName,
       ];
       if ($this->Admin_model->insert_enquiry($data)) {
           $this->session->set_flashdata('enquiry_success','Insert Enquiry success fully !');
@@ -161,7 +165,7 @@ class Enquiry extends CI_Controller{
 
   public function enquiry_edite($customerID,$enquiryID){
       $this->load->model('Admin_model');
-      $data = $this->Admin_model->user_table();
+      $data = $this->Admin_model->user_single_table($customerID);
       $type = $this->Admin_model->select_type();
       $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
       $customerId = $this->Admin_model->customerId_admin();
@@ -179,8 +183,10 @@ class Enquiry extends CI_Controller{
         'e_required_qty'=>$this->input->post('required_qty'),
         'e_required_description'=>$this->input->post('required_description'),
         'e_special_remarks'=>$this->input->post('special_remarks'),
-
+        'e_location'=>$this->input->post('location'),
+        'e_companyname'=>$this->input->post('companyname'),
     ];
+
     if ($this->Admin_model->edite_enquiry($data,$customerID,$enquiryID)) {
         $this->session->set_flashdata('enquiry_success','Update Enquiry success fully !');
         return redirect('enquiry_edite/'.$customerID.'/'.$enquiryID);
@@ -192,6 +198,8 @@ class Enquiry extends CI_Controller{
 
   public function view_enquiry_admin($customerID,$enquiryID){
       $this->load->model('Admin_model');
+      $this->load->model('Home_model');
+
       $data = $this->Admin_model->user_table();
       $type = $this->Admin_model->select_type();
       $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
@@ -199,13 +207,17 @@ class Enquiry extends CI_Controller{
       $view_enquiry = $this->Admin_model->select_view_enquiry($customerID,$enquiryID);
       $quatation = $this->Admin_model->select_quatation_list($view_enquiry->e_customerID,$view_enquiry->e_enquiryId);
       $follow_up = $this->Admin_model->select_follow_up($view_enquiry->e_enquiryId);
-      $this->load->view('dashbord/enquiry/view_enquiry_admin_view',['data'=>$data,'type'=>$type,'user'=>$user,'enquiry'=>$enquiry,'view_enquiry'=>$view_enquiry,'quatation'=>$quatation,'follow_up'=>$follow_up]);
+      $countries = $this->Home_model->select_countri();
+      // print_r($countries);exit;
+      $this->load->view('dashbord/enquiry/view_enquiry_admin_view',['data'=>$data,'type'=>$type,'user'=>$user,
+      'enquiry'=>$enquiry,'view_enquiry'=>$view_enquiry,'quatation'=>$quatation,
+      'follow_up'=>$follow_up,'countries'=>$countries]);
   }
 
   public function enquiry_follow_up(){
     // print_r($this->input->post());
     $this->load->model('Admin_model');
-    
+
     $data = [
         'e_enquiryId' => $this->input->post('enquiryId'),
         'e_status' => $this->input->post('status'),

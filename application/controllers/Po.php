@@ -38,12 +38,15 @@ class Po extends CI_Controller{
     }
 
     public function po_edite($po_id){
+        $this->load->model('Home_model');
         $id_po = base64_decode($po_id);
         $data = $this->Admin_model->user_table();
         $type = $this->Admin_model->select_type();
         $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
         $po_select = $this->Admin_model->select_po_single($id_po);
-        $this->load->view('dashbord/po/po_edite',['data'=>$data,'type'=>$type,'user'=>$user,'po_select'=>$po_select]);
+        $countries = $this->Home_model->select_countri();
+        $this->load->view('dashbord/po/po_edite',['data'=>$data,'type'=>$type,'user'=>$user,'po_select'=>$po_select,
+      'countries'=>$countries]);
     }
 
     public function delete_po(){

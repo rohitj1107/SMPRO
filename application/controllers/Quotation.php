@@ -29,7 +29,15 @@ class Quotation extends CI_Controller{
           'q_general_terms_gic_provided'=>$this->input->post('general_terms_gic_provided'),
           'q_order_expected_by'=>$this->input->post('order_expected_by'),
           'q_date_entry_by'=>$this->input->post('date_entry_by'),
-          'q_emailId'=>$this->input->post('emailId')
+          'q_emailId'=>$this->input->post('emailId'),
+          'q_company'=>$this->input->post('company'),
+          'q_location'=>$this->input->post('location'),
+          'q_quote_categ'=>$this->input->post('quote_categ'),
+          'q_industry'=>$this->input->post('industry'),
+          'q_currency'=>$this->input->post('currency'),
+          'q_quote_class'=>$this->input->post('quote_class'),
+          'q_sales_channel'=>$this->input->post('sales_channel'),
+          'q_sales_engineer'=>$this->input->post('sales_engineer'),
 
         ];
         $result = $this->Admin_model->insert_quotation_model($data);
@@ -74,14 +82,15 @@ class Quotation extends CI_Controller{
     }
 
     public function edite_quotation_single($quotation_id){
+        $this->load->model('Home_model');
         $q_id = base64_decode($quotation_id);
         $q_select = $this->Admin_model->select_quotation_single($q_id);
         $data = $this->Admin_model->user_table();
         $type = $this->Admin_model->select_type();
         $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
-
+        $countries = $this->Home_model->select_countri();
         $this->load->view('dashbord/quotation/edite_quotation_single_view',['data'=>$data,'type'=>$type,'user'=>$user,
-        'q_select'=>$q_select]);
+        'q_select'=>$q_select,'countries'=>$countries]);
     }
 
     public function update_quotation($quotation_id){
@@ -104,7 +113,15 @@ class Quotation extends CI_Controller{
             'q_general_terms_gic_provided'=>$this->input->post('general_terms_gic_provided'),
             'q_order_expected_by'=>$this->input->post('order_expected_by'),
             'q_date_entry_by'=>$this->input->post('date_entry_by'),
-            'q_emailId'=>$this->input->post('emailId')
+            'q_emailId'=>$this->input->post('emailId'),
+            'q_company'=>$this->input->post('company'),
+            'q_location'=>$this->input->post('location'),
+            'q_quote_categ'=>$this->input->post('quote_categ'),
+            'q_industry'=>$this->input->post('industry'),
+            'q_currency'=>$this->input->post('currency'),
+            'q_quote_class'=>$this->input->post('quote_class'),
+            'q_sales_channel'=>$this->input->post('sales_channel'),
+            'q_sales_engineer'=>$this->input->post('sales_engineer')
         ];
         $q_update = $this->Admin_model->update_quotation_single($q_id,$data);
         if ($q_update) {
@@ -117,6 +134,7 @@ class Quotation extends CI_Controller{
     }
 
     public function quotation_to_po($q_quote_number){
+        $this->load->model('Home_model');
         $quotation_id = base64_decode($q_quote_number);
         $quatation = $this->Admin_model->select_quatation_single($quotation_id);
         $data = $this->Admin_model->user_table();
@@ -124,8 +142,10 @@ class Quotation extends CI_Controller{
         $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
         $po_number_result = $this->Admin_model->select_po($quotation_id);
         $po_number_row = $this->Admin_model->select_po_row($quotation_id);
-
-        $this->load->view('dashbord/quotation/view_quotation_to_po_view',['data'=>$data,'type'=>$type,'user'=>$user,'quatation'=>$quatation,'po_number_result'=>$po_number_result,'po_number_row'=>$po_number_row]);
+        $countries = $this->Home_model->select_countri();
+        $this->load->view('dashbord/quotation/view_quotation_to_po_view',['data'=>$data,'type'=>$type,'user'=>$user,
+        'quatation'=>$quatation,'po_number_result'=>$po_number_result,'po_number_row'=>$po_number_row,
+      'countries'=>$countries]);
     }
 
     public function insert_pos(){
@@ -164,7 +184,15 @@ class Quotation extends CI_Controller{
             's_sn'=>$snf,
             's_description'=>$description,
             's_qty'=>$qty,
-            's_emailId'=>$this->input->post('emailId')
+            's_emailId'=>$this->input->post('emailId'),
+            's_company'=>$this->input->post('company'),
+            's_location'=>$this->input->post('location'),
+            's_industry'=>$this->input->post('industry'),
+            's_so_status'=>$this->input->post('so_status'),
+            's_stage_gate'=>$this->input->post('stage_gate'),
+            's_sales_channel'=>$this->input->post('sales_channel'),
+            's_sales_engineer'=>$this->input->post('sales_engineer')
+
         ];
         $dataupdate = [
           'up_qty'=>$qty,

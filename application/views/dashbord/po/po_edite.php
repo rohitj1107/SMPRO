@@ -162,16 +162,105 @@
                                                                             <input type="text" class="form-control" name="lc_applicabl" value="<?php print_r($po_select->s_lc_applicabl); ?>">
                                                                         </div>
                                                                       </div>
+
+                                                                      <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label>Company</label>
+                                                                            <input type="text" name="company" class="form-control" value="<?php print_r($po_select->s_company); ?>">
+                                                                        </div>
+                                                                      </div>
+
+                                                                      <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label>Location</label>
+                                                                            <select class="form-control" name="location">
+                                                                              <option value="<?php print_r($po_select->s_location); ?>">Selected <?php print_r($po_select->s_location); ?></option>
+                                                                              <?php foreach ($countries as $value) { ?>
+
+                                                                                <option value="<?php echo $value->country_name ?>"><?php echo $value->country_name ?></option>
+
+                                                                              <?php } ?>
+                                                                            </select>
+                                                                            <!-- <input type="text" name="location" class="form-control" value=""> -->
+                                                                        </div>
+                                                                      </div>
+
+                                                                      <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label>Industry</label>
+                                                                            <input type="text" name="industry" class="form-control" value="<?php print_r($po_select->s_industry); ?>">
+                                                                        </div>
+                                                                      </div>
+
+                                                                      <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label>SO Status</label>
+                                                                            <select class="form-control" name="so_status">
+                                                                                <option value="<?php print_r($po_select->s_so_status); ?>">Selected <?php print_r($po_select->s_so_status); ?></option>
+                                                                                <option value="Open">Open</option>
+                                                                                <option value="Under Process (Procurement)">Under Process (Procurement)</option>
+                                                                                <option value="Received at warehouse">Received at warehouse</option>
+                                                                                <option value="Under Shipment clearance">Under Shipment clearance</option>
+                                                                                <option value="Shipment Done">Shipment Done</option>
+                                                                                <option value="Closed">Closed</option>
+                                                                                <option value="Customer feedback Closed">Customer feedback Closed</option>
+                                                                            </select>
+                                                                            <!-- <input type="text" name="so_status" class="form-control" value=""> -->
+                                                                        </div>
+                                                                      </div>
+
+                                                                      <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label>Stage Gate</label>
+                                                                            <select class="form-control" name="stage_gate">
+                                                                                <option value="<?php print_r($po_select->s_stage_gate); ?>">Selected <?php print_r($po_select->s_stage_gate); ?></option>
+                                                                                <option value="Open">Open </option>
+                                                                                <option value="Under Process">Under Process </option>
+                                                                                <option value="Info awaited from Customer">Info awaited from Customer </option>
+                                                                                <option value="Closed">Closed </option>
+                                                                            </select>
+                                                                            <!-- <input type="text" name="stage_gate" class="form-control" value=""> -->
+                                                                        </div>
+                                                                      </div>
+
+                                                                      <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label>Sales Channel</label>
+                                                                            <select class="form-control" name="sales_channel">
+                                                                                <option value="<?php print_r($po_select->s_sales_channel); ?>">Selected <?php print_r($po_select->s_sales_channel); ?></option>
+                                                                                <option value="S1">S1</option>
+                                                                                <option value="S2">S2</option>
+                                                                                <option value="S3">S3</option>
+                                                                                <option value="S4">S4</option>
+                                                                                <option value="S5">S5</option>
+                                                                            </select>
+                                                                            <!-- <input type="text" name="sales_channel" class="form-control" value=""> -->
+                                                                        </div>
+                                                                      </div>
+
+                                                                      <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label>Sales Engineer</label>
+                                                                            <select class="form-control" name="sales_engineer">
+                                                                                <option value="<?php print_r($po_select->s_sales_engineer); ?>">Selected <?php print_r($po_select->s_sales_engineer); ?></option>
+                                                                                <option value="1">1</option>
+                                                                                <option value="2">2</option>
+                                                                                <option value="3">3</option>
+                                                                                <option value="4">4</option>
+                                                                                <option value="5">5</option>
+                                                                                <option value="6">6</option>
+                                                                                <option value="7">7</option>
+                                                                            </select>
+                                                                        </div>
+                                                                      </div>
                                                                     </div>
 
                                                                     <div class="row mb-0 mt-0">
                                                                     </div>
                                                                     <div class="row mb-0 mt-0">
                                                                     <div class="col-md-10">
-                                                                      <INPUT class="btn btn-success waves-effect waves-light mr-1" type="button" value="Add Item" onclick="addRow('dataTable')" />
                                                                     </div>
                                                                     <div class="col-md-2">
-                                                                      <INPUT class="btn btn-danger waves-effect waves-light mr-1" type="button" value="Delete Item" onclick="deleteRow('dataTable')" />
                                                                     </div>
                                                                   </div>
                                                                   <br>

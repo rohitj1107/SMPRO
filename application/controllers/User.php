@@ -48,6 +48,7 @@ class User extends CI_Controller{
           'u_gst' => $this->input->post('gst'),
           'u_industry' => $this->input->post('industry'),
           'u_comment' => $this->input->post('comment'),
+          'u_designatiom' => $this->input->post('designatiom'),
           // 'u_action' => $this->input->post('action')
       ];
 
@@ -96,7 +97,7 @@ class User extends CI_Controller{
           'u_comment' => $this->security->xss_clean($this->input->post('comment')),
           'u_customerId' => 'CU-'.time(),
           'u_password' => md5(substr(str_shuffle($ran_pass),0,5)),
-
+          'u_designatiom' => $this->security->xss_clean($this->input->post('designatiom')),
           'u_otp' => rand('1000','5000')
         ];
 

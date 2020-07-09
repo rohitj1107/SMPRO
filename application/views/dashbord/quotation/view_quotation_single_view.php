@@ -202,7 +202,33 @@
                                         <div class="col-lg-4">
                                             <h5>Lead Time</h5>
                                             <p><?php print_r($q_select->q_load_time); ?></p>
-                                    </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <h5>Company</h5>
+                                            <p><?php print_r($q_select->q_company); ?></p>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <h5>Location</h5>
+                                            <p><?php print_r($q_select->q_location); ?></p>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <h5>Quote Categ</h5>
+                                            <p><?php print_r($q_select->q_quote_categ); ?></p>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <h5>Industry</h5>
+                                            <p><?php print_r($q_select->q_industry); ?></p>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <h5>Currency</h5>
+                                            <p><?php print_r($q_select->q_currency); ?></p>
+                                        </div>
+
                                   </div>
 
                                   <div class="row mb-0 mt-0">
@@ -225,8 +251,19 @@
 
                                   <div class="col-lg-4">
                                       <h5 class="font-600 m-b-5">Created Date</h5>
-
                                       <p><?php echo $q_select->q_c_date; ?></p>
+                                  </div>
+                                  <div class="col-lg-4">
+                                      <h5 class="font-600 m-b-5">Quote Class</h5>
+                                      <p><?php echo $q_select->q_quote_class; ?></p>
+                                  </div>
+                                  <div class="col-lg-4">
+                                      <h5 class="font-600 m-b-5">Sales Channel Date</h5>
+                                      <p><?php echo $q_select->q_sales_channel; ?></p>
+                                  </div>
+                                  <div class="col-lg-4">
+                                      <h5 class="font-600 m-b-5">Sales Engineer</h5>
+                                      <p><?php echo $q_select->q_sales_engineer; ?></p>
                                   </div>
                                   <div class="col-md-2">
                                         <label>Order Status</label>

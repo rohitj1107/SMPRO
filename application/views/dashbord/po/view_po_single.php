@@ -240,6 +240,34 @@
                                           <h5 class="font-600 m-b-5">Expiry Date OF lc</h5>
                                           <p> <?php print_r($po_select->s_expiry_date_of_lc); ?></p>
                                       </div>
+                                      <div class="col-lg-4">
+                                          <h5 class="font-600 m-b-5">Company</h5>
+                                          <p> <?php print_r($po_select->s_company); ?></p>
+                                      </div>
+                                      <div class="col-lg-4">
+                                          <h5 class="font-600 m-b-5">Location</h5>
+                                          <p> <?php print_r($po_select->s_location); ?></p>
+                                      </div>
+                                      <div class="col-lg-4">
+                                          <h5 class="font-600 m-b-5">Industry</h5>
+                                          <p> <?php print_r($po_select->s_industry); ?></p>
+                                      </div>
+                                      <div class="col-lg-4">
+                                          <h5 class="font-600 m-b-5">SO Status</h5>
+                                          <p> <?php print_r($po_select->s_so_status); ?></p>
+                                      </div>
+                                      <div class="col-lg-4">
+                                          <h5 class="font-600 m-b-5">Stage Gate</h5>
+                                          <p> <?php print_r($po_select->s_stage_gate); ?></p>
+                                      </div>
+                                      <div class="col-lg-4">
+                                          <h5 class="font-600 m-b-5">Sales Channel</h5>
+                                          <p> <?php print_r($po_select->s_sales_channel); ?></p>
+                                      </div>
+                                      <div class="col-lg-4">
+                                          <h5 class="font-600 m-b-5">Sales Engineer</h5>
+                                          <p> <?php print_r($po_select->s_sales_engineer); ?></p>
+                                      </div>
                                   </div>
                                   <div class="row mb-0 mt-0">
                                     <div class="col-md-1">

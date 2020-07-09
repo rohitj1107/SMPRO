@@ -214,7 +214,17 @@
                                       </div>
 
                                       <div class="col-md-6 pt-4">
+                                        <label for=""> Designatiom </label>
 
+                                          <?php $name_data = [
+                                            'name' => 'designatiom',
+                                            'value' => $user_view->u_designatiom,
+                                            'placeholder' => ' Designatiom ',
+                                            'class' => 'form-control'
+                                          ]; ?>
+
+                                          <?php echo form_input($name_data); ?>
+                                          <!-- <input type="text" class="form-control" id="email" placeholder="+1 Mobile Number" name="mobileNumber"> -->
                                       </div>
 
                                       <div class="col-md-6 pt-4">

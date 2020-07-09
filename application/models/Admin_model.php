@@ -33,6 +33,15 @@ class Admin_model extends CI_Model{
       }
   }
 
+  public function user_single_table($customerID){
+      $sql = $this->db->where('u_customerId',$customerID)->get('s_user');
+      if ($sql->num_rows() > 0) {
+          return $sql->row();
+      } else {
+          return false;
+      }
+  }
+
   public function user_table(){
     $sql = $this->db->get('s_user');
     if ($sql->num_rows() > 0) {

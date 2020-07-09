@@ -136,6 +136,103 @@
                                                         <input id="demo3_22" type="text" placeholder="load_time" value="<?php echo $q_select->q_load_time; ?>" class="form-group" name="demo3_22">
                                                     </div>
                                                   </div>
+                                                  <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Company</label>
+                                                        <input type="text" class="form-control" name="company" value="<?php echo $q_select->q_company; ?>">
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Location</label>
+                                                        <select class="form-control" name="location">
+                                                          <option value="<?php echo $q_select->q_location; ?>">Selected <?php echo $q_select->q_location; ?></option>
+                                                          <?php foreach ($countries as $value) { ?>
+                                                            <option value="<?php echo $value->country_name ?>"><?php echo $value->country_name ?></option>
+                                                          <?php } ?>
+                                                        </select>
+                                                        <!-- <input type="text" class="form-control" name="location" value="<?php echo $q_select->q_location; ?>"> -->
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Quote Categ</label>
+                                                        <select class="form-control select" name="quote_categ">
+                                                            <option value="<?php echo $q_select->q_quote_categ; ?>">Selected <?php echo $q_select->q_quote_categ; ?></option>
+                                                            <option value="Machinery And Equipment">Machinery And Equipment</option>
+                                                            <option value="Engineering Parts">Engineering Parts</option>
+                                                            <option value="Software Solutions">Software Solutions</option>
+                                                            <option value="Automation solution">Automation solution</option>
+                                                            <option value="IOT Solution">IOT Solution</option>
+                                                            <option value="Project Services">Project Services</option>
+                                                            <option value="Consulting Services">Consulting Services</option>
+                                                            <option value="Training">Training</option>
+                                                            <option value="Commodity">Commodity</option>
+                                                            <option value="Consumables">Consumables</option>
+                                                            <option value="COMMISSION">COMMISSION</option>
+                                                            <option value="Others">Others</option>
+                                                        </select>
+                                                        <!-- <input type="text" class="form-control" name="quote_categ" value="<?php echo $q_select->q_quote_categ; ?>"> -->
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Industry</label>
+                                                        <input type="text" class="form-control" name="industry" value="<?php echo $q_select->q_industry; ?>">
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Currency</label>
+                                                        <select class="form-control" name="currency">
+                                                            <option value="<?php echo $q_select->q_currency; ?>">Selected <?php echo $q_select->q_currency; ?></option>
+                                                            <option value="INR">INR</option>
+                                                            <option value="USD">USD</option>
+                                                            <option value="EURO">EURO</option>
+                                                        </select>
+                                                        <!-- <input type="text" class="form-control" name="currency" value="<?php echo $q_select->q_currency; ?>"> -->
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>  Quote Class </label>
+                                                        <select class="form-control" name="quote_class">
+                                                            <option value="<?php echo $q_select->q_quote_class; ?>">Selected <?php echo $q_select->q_quote_class; ?></option>
+                                                            <option value="A">A</option>
+                                                            <option value="B">B</option>
+                                                            <option value="C">C</option>
+                                                        </select>
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>  Sales Channel </label>
+                                                        <select class="form-control" name="sales_channel">
+                                                            <option value="<?php echo $q_select->q_sales_channel; ?>">Selected <?php echo $q_select->q_sales_channel; ?></option>
+                                                            <option value="s1">s1</option>
+                                                            <option value="s2">s2</option>
+                                                            <option value="s3">s3</option>
+                                                            <option value="s4">s4</option>
+                                                            <option value="s5">s5</option>
+                                                        </select>
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label> Sales Engineer </label>
+                                                        <select class="form-control" name="sales_engineer">
+                                                            <option value="<?php echo $q_select->q_sales_engineer; ?>">selected <?php echo $q_select->q_sales_engineer; ?></option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+
+                                                        </select>
+                                                    </div>
+                                                  </div>
                                                   <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Payment terms</label>

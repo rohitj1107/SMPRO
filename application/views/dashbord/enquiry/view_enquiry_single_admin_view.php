@@ -140,17 +140,22 @@
                                         <?php print_r($view_enquiry->e_appliction); ?>
                                     </p>
                                     <div class="row task-dates mb-0 mt-2">
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-3">
                                             <h5 class="font-600 m-b-5">Customer ID</h5>
                                             <p> <?php print_r($view_enquiry->e_customerID); ?></p>
                                         </div>
 
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-3">
                                             <h5 class="font-600 m-b-5">Enquiry ID</h5>
                                             <p> <?php print_r($view_enquiry->e_enquiryId); ?></p>
                                         </div>
 
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-3">
+                                            <h5 class="font-600 m-b-5">Company Name</h5>
+                                            <p> <?php print_r($view_enquiry->e_companyname); ?></p>
+                                        </div>
+
+                                        <div class="col-lg-3">
                                             <h5 class="font-600 m-b-5">Date</h5>
                                             <p> <?php print_r($view_enquiry->e_date_time); ?></p>
                                         </div>
@@ -163,8 +168,8 @@
                                         </div>
 
                                         <div class="col-lg-4">
-                                            <h5 class="font-600 m-b-5">Required Qty</h5>
-                                            <p> <?php print_r($view_enquiry->e_required_qty); ?></p>
+                                            <h5 class="font-600 m-b-5">Location</h5>
+                                            <p> <?php print_r($view_enquiry->e_location); ?></p>
                                         </div>
                                     </div>
 

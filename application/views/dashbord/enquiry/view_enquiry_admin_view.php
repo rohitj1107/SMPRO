@@ -133,15 +133,53 @@
                                           <!-- <input type="text" class="form-control" name="registration" > -->
                                       </div>
                                     </div>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label>Company</label>
+                                          <input type="text" name="company" class="form-control" value="">
+                                      </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                      <label for="">Location</label>
+
+                                        <?php //$name_data = [
+                                          // 'name' => 'country',
+                                          // 'value' => set_value('country'),
+                                          // 'placeholder' => 'Country',
+                                          // 'class' => 'form-control'
+                                        // ]; ?>
+
+                                        <?php //echo form_input($name_data); ?>
+
+                                        <select class="form-control" name="location">
+                                          <option value="Not Select">Select Country</option>
+                                          <?php foreach ($countries as $value) { ?>
+                                            <option value="<?php echo $value->country_name ?>"><?php echo $value->country_name ?></option>
+                                          <?php } ?>
+                                        </select>
+
+                                        <!-- <input type="text" class="form-control" id="email" placeholder="Country" name="country"> -->
+                                    </div>
                                     <div class="col-md-3">
                                       <div class="form-group">
-                                          <!-- <label>Under process</label>
-                                          <select class="form-control select" name="under_process">
-                                              <option value="">Select</option>
-                                              <option value="evaluation">Evaluation</option>
-                                              <option value="further_info_required">Further info required</option>
-                                              <option value="quotation_submitted">Quotation submitted</option>
-                                          </select> -->
+                                          <label>Quote Categ</label>
+                                          <p>
+                                            <select class="form-control select" name="quote_categ">
+                                                <option value="">Select</option>
+                                                <option value="Machinery And Equipment">Machinery And Equipment</option>
+                                                <option value="Engineering Parts">Engineering Parts</option>
+                                                <option value="Software Solutions">Software Solutions</option>
+                                                <option value="Automation solution">Automation solution</option>
+                                                <option value="IOT Solution">IOT Solution</option>
+                                                <option value="Project Services">Project Services</option>
+                                                <option value="Consulting Services">Consulting Services</option>
+                                                <option value="Training">Training</option>
+                                                <option value="Commodity">Commodity</option>
+                                                <option value="Consumables">Consumables</option>
+                                                <option value="COMMISSION">COMMISSION</option>
+                                                <option value="Others">Others</option>
+                                            </select>
+                                          </p>
                                       </div>
                                     </div>
                                     <div class="col-md-3">
@@ -154,29 +192,85 @@
                                                 <option value="received">Received</option>
                                                 <option value="cancelled">cancelled</option>
                                                 <option value="Quote expired">Quote expired</option>
-
                                             </select>
                                           </p>
                                       </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
+                                      <div class="form-group">
+                                          <label> Industry </label>
+                                          <input type="text" name="industry" class="form-control" value="">
+                                      </div>
+                                    </div>
+                                    <div class="col-md-3">
                                       <div class="form-group">
                                           <label>Customer ID</label>
                                           <p><?php echo $view_enquiry->e_customerID; ?></p>
                                           <input type="hidden" name="customer_ID" value="<?php echo $view_enquiry->e_customerID; ?>">
                                       </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                       <div class="form-group">
                                           <label>Enquiry ID</label>
                                           <p><?php echo $view_enquiry->e_enquiryId; ?></p>
                                           <input type="hidden" name="enquiry_ID" value="<?php echo $view_enquiry->e_enquiryId; ?>">
                                       </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                       <div class="form-group">
                                           <label>Market Segment</label>
                                           <input type="text" class="form-control" name="market_segment" value="">
+                                      </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                      <div class="form-group">
+                                          <label> Currency </label>
+                                          <select class="form-control" name="currency">
+                                              <option value="">Select Currency</option>
+                                              <option value="INR">INR</option>
+                                              <option value="USD">USD</option>
+                                              <option value="EURO">EURO</option>
+                                          </select>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                      <div class="form-group">
+                                          <label>  Quote Class </label>
+                                          <select class="form-control" name="quote_class">
+                                              <option value="">Select Currency</option>
+                                              <option value="A">A</option>
+                                              <option value="B">B</option>
+                                              <option value="C">C</option>
+                                          </select>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                      <div class="form-group">
+                                          <label>  Sales Channel </label>
+                                          <select class="form-control" name="sales_channel">
+                                              <option value="">Select Currency</option>
+                                              <option value="s1">s1</option>
+                                              <option value="s2">s2</option>
+                                              <option value="s3">s3</option>
+                                              <option value="s4">s4</option>
+                                              <option value="s5">s5</option>
+                                          </select>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                      <div class="form-group">
+                                          <label> Sales Engineer </label>
+                                          <select class="form-control" name="sales_engineer">
+                                              <option value="">Sales Engineer</option>
+                                              <option value="1">1</option>
+                                              <option value="2">2</option>
+                                              <option value="3">3</option>
+                                              <option value="4">4</option>
+                                              <option value="5">5</option>
+                                              <option value="6">6</option>
+                                              <option value="7">7</option>
+
+                                          </select>
                                       </div>
                                     </div>
                                     <div class="col-md-4">
@@ -220,11 +314,8 @@
                                     <div class="col-md-6">
                                       <div class="form-group">
                                           <label>Payment terms</label>
-                                          <select class="form-control select" name="payment_terms">
-                                              <option value="">Select Metho</option>
-                                              <option value="online">Online</option>
-                                              <option value="off_line">Off Line</option>
-                                          </select>
+                                          <input type="text" name="payment_terms" class="form-control" value="">
+                                        
                                       </div>
                                     </div>
 

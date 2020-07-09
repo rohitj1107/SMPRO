@@ -221,6 +221,10 @@
                                               } ?>
                                               </p>
                                             </div>
+                                            <div class="col-lg-4">
+                                              <h5>Designatiom</h5>
+                                              <p><?php print_r($user_view->u_designatiom); ?></p>
+                                            </div>
                                             <div class="col-md-2">
                                                   <label>Customer Status</label>
                                                   <p><?php //echo $q_value->q_order_status; ?>
