@@ -104,20 +104,26 @@ class Home extends CI_Controller{
 
       $data = [
         'u_companyName' => $this->security->xss_clean($this->input->post('companyName')),
+        'u_industry' => $this->security->xss_clean($this->input->post('industry')),
+        'u_companyType' => $this->security->xss_clean($this->input->post('companyType')),
+        'u_company_category' => $this->security->xss_clean($this->input->post('company_category')),
         'u_websiteUrl' => $this->security->xss_clean($this->input->post('websiteUrl')),
         'u_country' => $this->security->xss_clean($this->input->post('country')),
+        'u_location' => $this->security->xss_clean($this->input->post('location')),
         'u_postalCode' => $this->security->xss_clean($this->input->post('postalCode')),
-        'u_companyType' => $this->security->xss_clean($this->input->post('companyType')),
-        'u_eou' => $this->security->xss_clean($this->input->post('eou')),
-        'u_emailId' => $this->security->xss_clean($this->input->post('emailId')),
-        'u_contactNumber' => $this->security->xss_clean($this->input->post('contactNumber')),
-        'u_contactNumber_one' => $this->security->xss_clean($this->input->post('contactNumber_one')),
-        'u_mobileNumber' => $this->security->xss_clean($this->input->post('mobileNumber')),
+        'u_contact_person_name' => $this->security->xss_clean($this->input->post('contact_person_name')),
+        'u_designation' => $this->security->xss_clean($this->input->post('designation')),
+        'u_company_identity' => $this->security->xss_clean($this->input->post('company_identity')),
         'u_gst' => $this->security->xss_clean($this->input->post('gst')),
-        'u_industry' => $this->security->xss_clean($this->input->post('industry')),
-        'u_comment' => $this->security->xss_clean($this->input->post('comment')),
-        'u_customerId' => 'CU-'.time(),
+        'u_emailId' => $this->security->xss_clean($this->input->post('emailId')),
         'u_password' => $this->security->xss_clean($this->input->post('password')),
+        'u_contactNumber' => $this->security->xss_clean($this->input->post('contactNumber')),
+        'u_mobileNumber' => $this->security->xss_clean($this->input->post('mobileNumber')),
+        'u_remark' => $this->security->xss_clean($this->input->post('remark')),
+
+        // 'u_eou' => $this->security->xss_clean($this->input->post('eou')),
+        // 'u_contactNumber_one' => $this->security->xss_clean($this->input->post('contactNumber_one')),
+        'u_customerId' => 'CU-'.time(),
         'u_otp' => rand('1000','5000')
       ];
 

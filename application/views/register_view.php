@@ -99,12 +99,11 @@
                 </div>
               <?php } ?>
 
-                <p class="font-weight-bold m-0">Lorem Ipsum</p>
+                <p class="font-weight-bold text-danger m-0">CUSTOMER REGISTRATION</p>
             </div>
             <?php echo validation_errors(); ?>
-            <div class="col-md-6 pt-4">
+            <div class="col-md-3 pt-4">
               <label for="">Company Name</label>
-
                 <?php $name_data = [
                   'name' => 'companyName',
                   'value' => set_value('companyName'),
@@ -116,61 +115,20 @@
                 <!-- <input type="text" class="form-control" id="email" placeholder="Company Name" name="companyName"> -->
             </div>
 
-            <div class="col-md-6 pt-4">
-              <label for="">Website Url</label>
+            <div class="col-md-3 pt-4">
+              <label for="">Industry</label>
 
                 <?php $name_data = [
-                  'name' => 'websiteUrl',
-                  'value' => set_value('websiteUrl'),
-                  'placeholder' => 'Website URL',
+                  'name' => 'industry',
+                  'value' => set_value('industry'),
+                  'placeholder' => 'Industry',
                   'class' => 'form-control'
                 ]; ?>
 
                 <?php echo form_input($name_data); ?>
-                <!-- <input type="text" class="form-control" id="email" placeholder="Website URL" name="websiteUrl"> -->
+                <!-- <input type="text" class="form-control" id="email" placeholder="Industry" name="industry"> -->
             </div>
-
-            <div class="col-md-6 pt-4">
-              <label for="">Country</label>
-
-                <?php //$name_data = [
-                  // 'name' => 'country',
-                  // 'value' => set_value('country'),
-                  // 'placeholder' => 'Country',
-                  // 'class' => 'form-control'
-                // ]; ?>
-
-                <?php //echo form_input($name_data); ?>
-                <select class="selectpicker countrypicker form-control" name="country" data-flag="true" ></select>
-
-                <!-- <select class="form-control" name="country">
-                  <option value="Not Select">Select Country</option>
-
-                  <?php foreach ($countries as $value) { ?>
-
-                    <option value="<?php echo $value->country_name ?>"><?php echo $value->country_name ?></option>
-
-                  <?php } ?>
-                </select> -->
-
-                <!-- <input type="text" class="form-control" id="email" placeholder="Country" name="country"> -->
-            </div>
-
-            <div class="col-md-6 pt-4">
-              <label for="">Postal Code</label>
-
-                <?php $name_data = [
-                  'name' => 'postalCode',
-                  'value' => set_value('postalCode'),
-                  'placeholder' => 'Postal Code',
-                  'class' => 'form-control'
-                ]; ?>
-
-                <?php echo form_input($name_data); ?>
-                <!-- <input type="text" class="form-control" id="email" placeholder="Postal Code" name="postalCode"> -->
-            </div>
-
-            <div class="col-md-6 pt-4">
+            <div class="col-md-3 pt-4">
               <label for="">Company Type</label>
 
                 <?php $name_data = [
@@ -189,28 +147,102 @@
                 <?php //echo form_input($name_data); ?>
                 <!-- <input type="text" class="form-control" id="email" placeholder="Company Type" name="companyType"> -->
             </div>
+            <div class="col-md-3 pt-4">
+              <label for="">Company Category</label>
 
-            <div class="col-md-6 pt-4">
-              <label for="">EOU</label>
+                <select class="form-control" name="company_category">
+                    <option value="0">Select Company Category</option>
+                    <option value="EOU">EOU</option>
+                    <option value="SEZ">SEZ</option>
+                    <option value="General">General</option>
+                    <option value="Others">Others</option>
+                </select>
+                <?php //echo form_input($name_data); ?>
+                <!-- <input type="text" class="form-control" id="email" placeholder="Company Type" name="companyType"> -->
+            </div>
+            <div class="col-md-3 pt-4">
+              <label for="">Website Url</label>
 
                 <?php $name_data = [
-                  'name' => 'eou',
-                  'value' => set_value('eou'),
-                  'placeholder' => 'EOU / SEZ / General',
+                  'name' => 'websiteUrl',
+                  'value' => set_value('websiteUrl'),
+                  'placeholder' => 'Website URL',
                   'class' => 'form-control'
                 ]; ?>
 
+                <?php echo form_input($name_data); ?>
+                <!-- <input type="text" class="form-control" id="email" placeholder="Website URL" name="websiteUrl"> -->
+            </div>
+
+            <div class="col-md-3 pt-4">
+              <label for="">Country</label>
+
+                <?php //echo form_input($name_data); ?>
+                <select class="selectpicker countrypicker form-control" name="country" data-flag="true" ></select>
+
+                <!-- <select class="form-control" name="country">
+                  <option value="Not Select">Select Country</option>
+
+                  <?php foreach ($countries as $value) { ?>
+
+                    <option value="<?php echo $value->country_name ?>"><?php echo $value->country_name ?></option>
+
+                  <?php } ?>
+                </select> -->
+
+                <!-- <input type="text" class="form-control" id="email" placeholder="Country" name="country"> -->
+            </div>
+            <div class="col-md-3 pt-4">
+              <label for="">Location</label>
+              <input type="text" class="form-control" placeholder="Enter Your Location" name="location" value="">
+            </div>
+            <div class="col-md-3 pt-4">
+              <label for="">Postal Code</label>
+
+                <?php $name_data = [
+                  'name' => 'postalCode',
+                  'value' => set_value('postalCode'),
+                  'placeholder' => 'Postal Code',
+                  'class' => 'form-control'
+                ]; ?>
+
+                <?php echo form_input($name_data); ?>
+                <!-- <input type="text" class="form-control" id="email" placeholder="Postal Code" name="postalCode"> -->
+            </div>
+
+            <div class="col-md-3 pt-4">
+              <label for="">Contact Person Name</label>
+              <input type="text" class="form-control" placeholder="Contact Person Name" name="contact_person_name" value="">
+            </div>
+
+            <div class="col-md-3 pt-4">
+              <label for="">Designation</label>
+              <input type="text" class="form-control" placeholder="Designation" name="designation" value="">
+            </div>
+
+            <div class="col-md-3 pt-4">
+              <label for="">Company Identity</label>
+              <input type="text" class="form-control" placeholder="Company Identity" name="company_identity" value="">
+            </div>
+
+            <div class="col-md-3 pt-4">
+              <label for=""> &nbsp </label>
+              <input type="text" class="form-control" placeholder="Enter Your GST Number" name="company_identity" value="">
+            </div>
+
+            <!-- <div class="col-md-3 pt-4">
+              <label for="">EOU</label>
                 <select class="form-control" name="eou">
                     <option value="0">Select EOU</option>
                     <option value="EOU">EOU</option>
                     <option value="SEZ">SEZ</option>
                     <option value="General">General</option>
-                </select>
+                </select> -->
                 <?php //echo form_input($name_data); ?>
                 <!-- <input type="text" class="form-control" id="email" placeholder="EOU / SEZ / General" name="eou"> -->
-            </div>
+            <!-- </div> -->
 
-            <div class="col-md-6 pt-4">
+            <div class="col-md-3 pt-4">
               <label for="">Email ID</label>
 
               <?php echo form_error('emailId'); ?>
@@ -225,7 +257,7 @@
                 <!-- <input type="text" class="form-control" id="email" placeholder="Official Contact Email ID" name="emailId"> -->
             </div>
 
-            <div class="col-md-6 pt-4">
+            <div class="col-md-3 pt-4">
               <label for="">Password</label>
 
               <?php echo form_error('password'); ?>
@@ -240,7 +272,7 @@
                 <?php echo form_input($name_data); ?>
             </div>
 
-            <div class="col-md-6 pt-4">
+            <div class="col-md-3 pt-4">
               <label for="">Contact Number</label>
 
                 <?php $name_data = [
@@ -254,21 +286,7 @@
                 <!-- <input type="text" class="form-control" id="email" placeholder="Contact Number" name="contactNumber"> -->
             </div>
 
-            <div class="col-md-6 pt-4">
-              <label for="">Contact Number</label>
-
-                <?php $name_data = [
-                  'name' => 'contactNumber_one',
-                  'value' => set_value('contactNumber_one'),
-                  'placeholder' => 'Contact Number',
-                  'class' => 'form-control'
-                ]; ?>
-
-                <?php echo form_input($name_data); ?>
-                <!-- <input type="text" class="form-control" id="email" placeholder="Contact Number" name="contactNumber"> -->
-            </div>
-
-            <div class="col-md-6 pt-4">
+            <div class="col-md-3 pt-4">
               <label for="">Mobile Number</label>
 
                 <?php $name_data = [
@@ -282,44 +300,12 @@
                 <!-- <input type="text" class="form-control" id="email" placeholder="+1 Mobile Number" name="mobileNumber"> -->
             </div>
 
-            <div class="col-md-6 pt-4">
-
-            </div>
-
-            <div class="col-md-6 pt-4">
-              <label for="">GST</label>
-
-                <?php $name_data = [
-                  'name' => 'gst',
-                  'value' => set_value('gst'),
-                  'placeholder' => 'Company GST / VAT Number',
-                  'class' => 'form-control'
-                ]; ?>
-
-                <?php echo form_input($name_data); ?>
-                <!-- <input type="text" class="form-control" id="email" placeholder="Company GST / VAT Number" name="gst"> -->
-            </div>
-
-            <div class="col-md-6 pt-4">
-              <label for="">Industry</label>
-
-                <?php $name_data = [
-                  'name' => 'industry',
-                  'value' => set_value('industry'),
-                  'placeholder' => 'Industry',
-                  'class' => 'form-control'
-                ]; ?>
-
-                <?php echo form_input($name_data); ?>
-                <!-- <input type="text" class="form-control" id="email" placeholder="Industry" name="industry"> -->
-            </div>
-
             <div class="col-md-12 pt-4">
               <label for="">Remarks</label>
 
                 <?php $name_data = [
-                  'name' => 'comment',
-                  'value' => set_value('comment'),
+                  'name' => 'remark',
+                  'value' => set_value('remark'),
                   'placeholder' => 'Remarks / Additional Info',
                   'class' => 'form-control',
                   'rows' => '3'
@@ -355,7 +341,7 @@
                 </label>
             </div>
 
-            <div class="col-md-6 mt-4">
+            <div class="col-md-3 mt-4">
               <?php echo form_submit(['name'=>'mysubmit','value'=>'SUBMIT','class'=>'w-100 btn btn-danger']); ?>
               <?php echo form_close(); ?>
             </div>
