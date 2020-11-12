@@ -132,9 +132,11 @@ class Dashbord extends CI_Controller{
         'e_customerID'=>$this->input->post('customerId'),
         'e_emailID' => $this->session->userdata('emailId'),
         'e_appliction'=>$this->input->post('application'),
-        'e_machine_model'=>$this->input->post('machine_model'),
-        'e_machine_make'=>$this->input->post('machine_make'),
-        'e_required_qty'=>$this->input->post('required_qty'),
+        // 'e_machine_model'=>$this->input->post('machine_model'),
+        // 'e_machine_make'=>$this->input->post('machine_make'),
+        // 'e_required_qty'=>$this->input->post('required_qty'),
+        'e_your_industry'=>$this->input->post('your_industry'),
+        'e_requirement_category'=>$this->input->post('requirement_category'),
         'e_required_description'=>$this->input->post('required_description'),
         'e_photo_of_the_parts_path'=>$img_path1,
         'e_photo_of_the_parts_name'=>$img_name1,
@@ -246,6 +248,45 @@ class Dashbord extends CI_Controller{
       $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
       $result = $this->Home_model->select_user_agent();
       $this->load->view('dashbord/user_agent',['data'=>$data,'type'=>$type,'user'=>$user,'result'=>$result]);
+  }
+
+  public function my_account(){
+      $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
+      $this->load->view('dashbord/my_account_view',['user'=>$user]);
+  }
+
+  public function edit_profile_user(){
+      $countries = $this->Home_model->select_countri();
+      $user = $this->Admin_model->select_user($this->session->userdata('emailId'));
+      $this->load->view('dashbord/my_account_edit_view',['user'=>$user,'countries'=>$countries]);
+  }
+
+  public function my_account_update(){
+      $data = [
+        'u_companyName' => $this->input->post('Company_Name'),
+        'u_industry' => $this->input->post('industry'),
+        'u_companyType' => $this->input->post('companyType'),
+        'u_company_category' => $this->input->post('company_category'),
+        'u_websiteUrl' => $this->input->post('websiteUrl'),
+        'u_country' => $this->input->post('country'),
+        'u_location' => $this->input->post('location'),
+        'u_postalCode' => $this->input->post('postalCode'),
+        'u_contact_person_name' => $this->input->post('contact_person_name'),
+        'u_designation' => $this->input->post('designation'),
+        'u_company_identity' => $this->input->post('company_identity'),
+        'u_gst' => $this->input->post('gst'),
+        'u_contactNumber' => $this->input->post('contactNumber'),
+        'u_mobileNumber' => $this->input->post('mobileNumber'),
+        'u_remark' => $this->input->post('remark'),
+      ];
+      $result = $this->Home_model->my_account_update($data,$this->session->userdata('emailId'));
+      if ($result) {
+          $this->session->set_flashdata('account_success','Update Account success fully !');
+          return redirect('edit_profile_user');
+      } else {
+          $this->session->set_flashdata('account_faile','Not Update Account !');
+          return redirect('edit_profile_user');
+      }
   }
 
 }

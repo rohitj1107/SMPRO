@@ -71,6 +71,9 @@ $route['customer_follow_up'] = 'Home/customer_follow_up';
 // Dashbord
 
 $route['Dashbord'] = 'Dashbord';
+$route['my_account'] = 'Dashbord/my_account';
+$route['edit_profile_user'] = 'Dashbord/edit_profile_user';
+$route['my_account_update'] = 'Dashbord/my_account_update';
 $route['do_upload'] = 'Dashbord/do_upload';
 $route['enquiry_show'] = 'Dashbord/enquiry_show';
 $route['view_enquiry/(:any)/(:any)'] = 'Dashbord/view_enquiry/$1/$2';

@@ -148,102 +148,104 @@
                                     <?php } elseif($user->u_action == 1) { ?>
                                       <!-- <div class="container-fluid"> -->
                                           <!-- <div class="row"> -->
-                                              <!-- <div class="col-md-12 d-flex justify-content-center align-items-center coverpic-headline"> -->
-                                                  <!-- <p class="font-weight-bold">Enquiry</p> -->
-                                              <!-- </div> -->
+                                              <div class="col-md-12 d-flex justify-content-center align-items-center coverpic-headline">
+                                                  <p class="font-weight-bold">My Account</p>
+                                              </div>
                                           <!-- </div> -->
                                       <!-- </div> -->
 
                                       <div class="enquiry-custom-div">
                                           <div class="container-fluid enquiry">
                                               <div class="row">
-                                                  <div class="col-md-12 pt-4">
-                                                      <?php if ($this->session->flashdata('enquiry_success')) { ?>
-                                                        <div class="alert alert-success alert-dismissable">
-                                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                                        <?php echo $this->session->flashdata('enquiry_success'); ?>
-                                                      </div>
-                                                      <?php } ?>
+                                                  <div class="col-md-10">
+                                                      <!-- <button type="button" class="btn btn-danger" name="button">Edit Profile</button> -->
+                                                  </div>
+                                                  <div class="col-md-2">
+                                                      <a href="<?php echo base_url('edit_profile_user'); ?>" class="btn btn-danger">Edit Profile</a>
+                                                  </div>
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-md-3 pt-4">
+                                                  <label for="">Company Name</label>
+                                                  <p><?php echo $user->u_companyName;?></p>
+                                                </div>
+                                                <div class="col-md-3 pt-4">
+                                                  <label for="">Industry</label>
+                                                  <p><?php echo $user->u_industry;?></p>
+                                                </div>
+                                                <div class="col-md-3 pt-4">
+                                                  <label for="">Company Type</label>
+                                                  <p><?php echo $user->u_companyType;?></p>
 
-                                                      <?php if ($this->session->flashdata('enquiry_faile')) { ?>
-                                                        <div class="alert alert-danger alert-dismissable">
-                                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                                        <?php echo $this->session->flashdata('enquiry_faile'); ?>
-                                                      </div>
-                                                      <?php } ?>
+                                                </div>
+                                                <div class="col-md-3 pt-4">
+                                                  <label for="">Company Category</label>
+                                                  <p><?php echo $user->u_company_category;?></p>
 
-                                                  </div>
-                                                  <div class="col-md-6">
-                                                    <?php echo form_open_multipart('Dashbord/do_upload');?>
-                                                      <!-- <label for="customerId">CUSTOMER ID</label> -->
-                                                      <input type="hidden" readonly class="form-control" value="<?php echo $user->u_customerId; ?>" name="customerId">
-                                                  </div>
-                                                  <div class="col-md-12">
-                                                      <label for="">Application</label>
-                                                      <textarea class="form-control" name="application" placeholder="Application"></textarea>
-                                                  </div>
-                                                  <div class="col-md-12 pt-4">
-                                                      <label for="">Your Industry</label>
-                                                      <input type="text" name="your_industry" class="form-control" value="">
-                                                      <!-- <textarea class="form-control" rows="3" name="machine_model" placeholder="Machine Model / Specs"></textarea> -->
-                                                  </div>
-                                                  <div class="col-md-12 pt-4">
-                                                      <label for="">Requirement Category</label>
-                                                      <select class="form-control" name="requirement_category">
-                                                          <option value="Select Requirement Category">Select Requirement Category</option>
-                                                          <option value="EngineeringParts">EngineeringParts</option>
-                                                          <option value="Software Solutions">Software Solutions</option>
-                                                          <option value="Automation solution">Automation solution</option>
-                                                          <option value="IOT Solution">IOT Solution</option>
-                                                          <option value="Project Services">Project Services</option>
-                                                          <option value="Consulting Services">Consulting Services</option>
-                                                          <option value="Training">Training</option>
-                                                          <option value="Commodity">Commodity</option>
-                                                          <option value="Consumables / Others">Consumables / Others</option>
-                                                      </select>
-                                                      <!-- <input type="text" class="form-control" name="machine_make" placeholder="Machine Make"> -->
-                                                  </div>
-                                                  <!-- <div class="col-md-6 pt-4"> -->
-                                                      <!-- <input type="text" class="form-control" name="required_qty" placeholder="Required Qty"> -->
-                                                  <!-- </div> -->
-                                                  <div class="col-md-12 pt-4">
-                                                      <label for="">Required Description</label>
-                                                      <textarea class="form-control" rows="4" name="required_description" placeholder="Required Description"></textarea>
-                                                  </div>
-                                                  <div class="col-md-6 pt-4">
-                                                      <div class="row">
-                                                          <div class="col-md-12">
-                                                              <label for="">Requirement Document / Data Sheet</label>
-                                                              <input type="file" class="form-control" multiple name="Photo_Of_The_Parts[]">
-                                                          </div>
-                                                          <!-- <div class="col-md-12">
-                                                              <button class="btn btn-info w-100">Browse</button>
-                                                          </div> -->
-                                                      </div>
-                                                  </div>
-                                                  <div class="col-md-6 pt-4">
-                                                      <div class="row">
-                                                          <div class="col-md-12">
-                                                              <label for="">Photo / Drawing / Specification Sheet</label>
-                                                              <input type="file" class="form-control" multiple name="Drawing_Of_The_Parts[]">
-                                                          </div>
-                                                          <!-- <div class="col-md-6">
-                                                              <button class="btn btn-info w-100">Browse</button>
-                                                          </div> -->
-                                                      </div>
-                                                  </div>
-                                                  <div class="col-md-12 pt-4">
-                                                      <label for="">Special Remarks</label>
-                                                      <input type="text" class="form-control" name="special_remarks" value="" placeholder="Special Remarks">
-                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-md-3 pt-4">
+                                                  <label for="">Website URL</label>
+                                                  <p><?php echo $user->u_websiteUrl;?></p>
 
-                                                  <div class="col-md-6 mt-4">
-                                                      <button class="w-100 btn btn-danger">
-                                                          SUBMIT
-                                                      </button>
-                                                  </div>
-                                                  <?php echo "</form>"?>
+                                                </div>
+                                                <div class="col-md-3 pt-4">
+                                                  <label for="">Country</label>
+                                                  <p><?php echo $user->u_country;?></p>
 
+                                                </div>
+                                                <div class="col-md-3 pt-4">
+                                                  <label for="">Location</label>
+                                                  <p><?php echo $user->u_location;?></p>
+
+                                                </div>
+                                                <div class="col-md-3 pt-4">
+                                                  <label for="">Postal Code</label>
+                                                  <p><?php echo $user->u_postalCode;?></p>
+
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-md-3 pt-4">
+                                                  <label for="">Contact Person Name</label>
+                                                  <p><?php echo $user->u_contact_person_name;?></p>
+
+                                                </div>
+                                                <div class="col-md-3 pt-4">
+                                                  <label for="">Designation</label>
+                                                  <p><?php echo $user->u_designation;?></p>
+
+                                                </div>
+                                                <div class="col-md-3 pt-4">
+                                                  <label for="">Company identity</label>
+                                                  <p><?php echo $user->u_company_identity;?></p>
+
+                                                </div>
+                                                <div class="col-md-3 pt-4">
+                                                  <label for="">Email ID</label>
+                                                  <p><?php echo $user->u_emailId;?></p>
+
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-md-3 pt-4">
+                                                  <label for="">Contact Number</label>
+                                                  <p><?php echo $user->u_contactNumber;?></p>
+
+                                                </div>
+                                                <div class="col-md-3 pt-4">
+                                                  <label for="">Mobile Number</label>
+                                                  <p><?php echo $user->u_mobileNumber;?></p>
+
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-md-3 pt-4">
+                                                  <label for="">Contact Number</label>
+                                                  <p><?php echo $user->u_remark;?></p>
+
+                                                </div>
                                               </div>
                                           </div>
                                       </div>

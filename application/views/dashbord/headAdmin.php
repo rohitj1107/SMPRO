@@ -53,7 +53,7 @@
                               </span>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                              <a href="javascript:void(0);" class="dropdown-item notify-item">
+                              <a href="<?php echo base_url('my_account'); ?>" class="dropdown-item notify-item">
                                   <i class="fe-user"></i>
                                   <span>My Account</span>
                               </a>

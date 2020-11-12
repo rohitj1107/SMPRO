@@ -151,6 +151,16 @@ class Home_model extends CI_Model{
         return false;
     }
  }
+
+ public function my_account_update($data,$emailID){
+     $sql = $this->db->where('u_emailId',$emailID)->get('s_user');
+     if ($sql->num_rows() > 0) {
+         $sql = $this->db->where('u_emailId',$emailID)->update('s_user',$data);
+         return TRUE;
+     } else {
+         return FALSE;
+     }
+ }
 }
 
 ?>
