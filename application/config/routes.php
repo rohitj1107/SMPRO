@@ -53,6 +53,8 @@ $route['default_controller'] = 'Home';
 $route['about'] = 'Home/about';
 $route['enquiry'] = 'Home/enquiry';
 $route['products'] = 'Home/products';
+$route['contact'] = 'Home/contact';
+$route['focus_industry'] = 'Home/focus_industry';
 
 $route['new_password_type'] = 'Home/new_password_type';
 $route['forgot_password_email/(:any)'] = 'Home/forgot_password_email/$1';

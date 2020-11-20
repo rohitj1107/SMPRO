@@ -34,7 +34,9 @@
                 <a href="<?php echo base_url('about'); ?>">About Us</a>
                 <a href="<?php echo base_url('products'); ?>">Product & Services</a>
                 <a href="#">Partners</a>
-                <a href="">Contact Us</a>
+                <a href="<?php echo base_url('contact'); ?>">Contact Us</a>
+                <a href="<?php echo base_url('focus_industry'); ?>">Focus Industry</a>
+
             </div>
             <div class="login">
                 <a href="<?php echo base_url('login'); ?>"> <button>LOGIN</button> </a>

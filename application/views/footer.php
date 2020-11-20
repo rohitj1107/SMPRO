@@ -59,9 +59,9 @@
             <p>&#169; 2020 All rights reserved.</p>
         </div>
         <div class="sub-menu">
-            <div><a href="#">Home</a></div>
-            <div><a href="#">About</a></div>
-            <div><a href="#">Services</a></div>
+            <div><a href="<?php echo base_url('Home'); ?>">Home</a></div>
+            <div><a href="<?php echo base_url('about'); ?>">About</a></div>
+            <div><a href="<?php echo base_url('products'); ?>">Services</a></div>
             <div><a href="#">Privacy Policy</a></div>
             <div><a href="#">Terms&Conditions</a></div>
         </div>

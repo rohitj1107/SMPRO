@@ -59,6 +59,14 @@ class Home extends CI_Controller{
     $this->load->view('products_view');
   }
 
+  public function contact(){
+    $this->load->view('contact_view');
+  }
+
+  public function focus_industry(){
+    $this->load->view('focus_industry_view');
+  }
+
   public function register(){
     $data = $this->Home_model->select_countri();
     $this->load->view('register_view',['countries'=>$data]);
